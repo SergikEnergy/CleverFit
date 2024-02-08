@@ -3,14 +3,23 @@
     margin: 0 auto;
     text-align: center;
     box-sizing: border-box;
-}
-
-.main-page {
     min-height: 1024px;
     background: center / cover url(/images/mainBG.png) no-repeat;
     width: 100%;
 }
 
+.main-page {
+}
+
+.main-content {
+    background: transparent;
+}
+
 .navigation {
     width: 14.4%;
+    position: relative;
+}
+
+.header .without-bg {
+    background: transparent;
 }

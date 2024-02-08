@@ -1,14 +1,18 @@
 import { FC } from 'react';
 import { Logo } from '@components/logo';
+import { MenuLinks } from '@components/menuLink';
+import { ExitUser } from '@components/exitUser';
 
 import classes from './sidebar.module.css';
-import { MenuLinks } from '@components/menuLink';
 
 export const SideBar: FC = () => {
     return (
         <div className={classes.sidebar}>
             <Logo />
-            <MenuLinks />
+            <div className={classes['sidebar__menu']}>
+                <MenuLinks />
+                <ExitUser />
+            </div>
         </div>
     );
 };

@@ -1,0 +1,18 @@
+.switcher {
+    width: 20px;
+    height: 66px;
+    position: absolute;
+    top: 50%;
+    left: 99%;
+    transform: translateY(-40%);
+    z-index: 99;
+    background-color: var(--character-light-primary-inverse);
+    clip-path: polygon(100% 20%, 100% 80%, 0 100%, 0 0);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.collapsed {
+    left: 174%;
+}
