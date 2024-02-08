@@ -1,0 +1,27 @@
+.menu {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin-left: 1rem;
+    gap: 1.6rem;
+    font-size: 1.6rem;
+}
+
+.menu__item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.menu__item_text {
+    font-family: var(--font-family);
+    font-weight: 400;
+    font-size: 1.4rem;
+    line-height: 130%;
+    color: var(--character-light-title-85);
+    display: inline-block;
+}
+
+.menu__item_icon {
+    display: inline-block;
+}

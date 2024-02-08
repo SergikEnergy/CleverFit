@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Layout } from 'antd';
+import { Layout as AntLayout } from 'antd';
 
 import './main-page.css';
 import { SideBar } from '@components/sidebar';
@@ -8,15 +8,15 @@ import { Header } from '@components/header';
 import { MainContent } from '@components/mainContent';
 import { Footer } from '@components/footer';
 
-const { Header: AntHeader, Footer: AntFooter, Sider, Content } = Layout;
+const { Header: AntHeader, Footer: AntFooter, Sider, Content } = AntLayout;
 
 export const MainPage: React.FC = () => {
     return (
-        <Layout className='main-page'>
+        <AntLayout className='main-page'>
             <Sider className='navigation'>
                 <SideBar />
             </Sider>
-            <Layout>
+            <AntLayout>
                 <AntHeader>
                     <Header />
                 </AntHeader>
@@ -26,7 +26,7 @@ export const MainPage: React.FC = () => {
                 <AntFooter>
                     <Footer />
                 </AntFooter>
-            </Layout>
-        </Layout>
+            </AntLayout>
+        </AntLayout>
     );
 };

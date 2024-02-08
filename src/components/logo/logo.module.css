@@ -1,7 +1,14 @@
 .logo {
-    font-family: Inter;
-    font-weight: bold;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    margin-left: 2.9rem;
+    /* margin-top: 1.4rem; - why it doesn't work? - bg changes */
+    padding: 1.4rem 0 1.7rem 0;
 }
 
-.logo__icon {
+.logo__icon img {
+}
+
+.logo__text img {
 }
