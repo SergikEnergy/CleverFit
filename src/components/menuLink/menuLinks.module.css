@@ -8,21 +8,19 @@
     flex-grow: 1;
 }
 
-.menu__item {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-}
-
 .menu__item_text {
     font-family: var(--font-family);
     font-weight: 400;
     font-size: 1.4rem;
     line-height: 130%;
     color: var(--character-light-title-85);
-    display: inline-block;
 }
 
-.menu__item_icon {
-    display: inline-block;
+.hidden {
+    font-size: 0;
+}
+
+.collapsed {
+    width: 64px;
+    margin-left: 0;
 }

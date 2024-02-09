@@ -2,9 +2,23 @@
     display: flex;
     align-items: flex-end;
     justify-content: center;
-    margin-left: 2.9rem;
     /* margin-top: 1.4rem; - why it doesn't work? - bg changes */
-    padding: 1.4rem 0 1.7rem 0;
+    padding-top: 4.6rem;
+    margin-bottom: 5rem;
+    flex-grow: 0;
+}
+
+.logo__menu .ant-menu-item-icon {
+    display: inline-block;
+    order: -1;
+}
+.logo__menu .ant-menu-title-content {
+    display: inline-block;
+    order: 1;
+}
+
+.collapsed {
+    width: 64px;
 }
 
 .hidden {

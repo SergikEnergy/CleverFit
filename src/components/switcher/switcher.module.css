@@ -3,7 +3,7 @@
     height: 66px;
     position: absolute;
     top: 50%;
-    left: 99%;
+    right: -9%;
     transform: translateY(-40%);
     z-index: 99;
     background-color: var(--character-light-primary-inverse);
@@ -11,8 +11,9 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    transition: all easy 0.1s;
 }
 
 .collapsed {
-    left: 174%;
+    right: -29%;
 }

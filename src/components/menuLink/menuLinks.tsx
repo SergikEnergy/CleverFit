@@ -8,23 +8,20 @@ import { CustomIcon } from '../../customIcon/customIcon';
 import { primaryLight } from '../../data/colors';
 import classes from './menuLinks.module.css';
 
+import { useAppSelector } from '@hooks/typed-react-redux-hooks';
+
 const ProfileIconComponent = (props: Partial<CustomIconComponentProps>) => (
     <Icon component={CustomIcon} {...props} />
 );
 
 export const MenuLinks: FC = () => {
-    const [collapsed, setCollapsed] = useState(false);
+    const collapsed = useAppSelector((state) => state.collapse.collapsed);
 
-    const toggleCollapsed = () => {
-        setCollapsed(!collapsed);
-    };
     return (
         <Menu
-            className={classes.menu}
-            defaultSelectedKeys={['calendar']}
+            className={!collapsed ? classes.menu : `${classes.menu} ${classes.collapsed}`}
+            style={collapsed ? { width: '64px' } : { width: '100%' }}
             mode='inline'
-            // theme='light'
-            inlineCollapsed={collapsed}
         >
             <Menu.Item
                 className={classes['menu__item']}
@@ -36,7 +33,11 @@ export const MenuLinks: FC = () => {
                     />
                 }
             >
-                <Typography.Text className={classes['menu__item_text']}>Календарь</Typography.Text>
+                <Typography.Text
+                    className={!collapsed ? classes['menu__item_text'] : classes.hidden}
+                >
+                    Календарь
+                </Typography.Text>
             </Menu.Item>
             <Menu.Item
                 className={classes['menu__item']}

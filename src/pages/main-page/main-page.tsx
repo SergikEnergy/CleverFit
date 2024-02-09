@@ -1,4 +1,4 @@
-import { FC, useState } from 'react';
+import { FC } from 'react';
 
 import { Layout as AntLayout } from 'antd';
 
@@ -19,6 +19,8 @@ export const MainPage: FC = () => {
         <AntLayout className='main-page'>
             <Sider
                 className='navigation'
+                collapsible
+                trigger={null}
                 theme='light'
                 collapsed={collapsed}
                 width={!collapsed ? 208 : 64}
