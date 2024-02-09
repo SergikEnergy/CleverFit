@@ -5,12 +5,7 @@
     box-sizing: border-box;
     min-height: 1024px;
     width: 100%;
-    background: center / cover url(/images/mainBG.png) no-repeat;
     height: 100%;
-}
-
-.main-content {
-    background: transparent;
 }
 
 .navigation {
@@ -21,4 +16,8 @@
 .wrapper {
     width: 96%;
     margin: auto;
+}
+
+.footer {
+    margin-top: 18rem;
 }

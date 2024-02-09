@@ -11,13 +11,17 @@ import { Switcher } from '@components/switcher/switcher';
 import { useAppSelector } from '@hooks/typed-react-redux-hooks';
 
 const { Header: AntHeader, Footer: AntFooter, Sider, Content } = AntLayout;
-import { primaryLight } from '../../data/colors';
+import { primaryLight } from '../../utils/constants/colors';
+import BgImg from '/images/mainBG.jpg';
 
 export const MainPage: FC = () => {
     const collapsed = useAppSelector((state) => state.collapse.collapsed);
 
     return (
-        <AntLayout className='main-page'>
+        <AntLayout
+            className='main-page'
+            style={{ background: `center / cover url(${BgImg}) no-repeat` }}
+        >
             <Sider
                 className='navigation'
                 collapsible
@@ -30,7 +34,12 @@ export const MainPage: FC = () => {
                 <SideBar />
                 <Switcher collapsed={collapsed} />
             </Sider>
-            <AntLayout className='main-content'>
+            <AntLayout
+                className='main-content'
+                style={{
+                    background: 'transparent',
+                }}
+            >
                 <AntHeader
                     className='header'
                     style={{
@@ -41,12 +50,12 @@ export const MainPage: FC = () => {
                 >
                     <Header />
                 </AntHeader>
-                <Content>
+                <Content style={{ background: 'transparent' }}>
                     <MainContent />
+                    <AntFooter className='footer' style={{ padding: 0, background: 'transparent' }}>
+                        <Footer />
+                    </AntFooter>
                 </Content>
-                <AntFooter>
-                    <Footer />
-                </AntFooter>
             </AntLayout>
         </AntLayout>
     );

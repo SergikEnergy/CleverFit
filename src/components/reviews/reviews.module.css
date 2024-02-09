@@ -1,0 +1,21 @@
+.reviews {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.reviews > button {
+    display: inline-block;
+    width: 100%;
+    margin: 9.5px 15px;
+    padding: 0;
+}
+
+.reviews > button > span {
+    font-family: var(--font-family);
+    font-weight: 400;
+    font-size: 1.6rem;
+    line-height: 130%;
+    text-align: center;
+    color: var(--primary-light-6);
+}

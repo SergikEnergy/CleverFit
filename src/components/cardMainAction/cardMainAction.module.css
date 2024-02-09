@@ -1,0 +1,36 @@
+.body {
+    font-family: var(--font-family);
+    font-weight: 400;
+    font-size: 1.6rem;
+    line-height: 130%;
+    color: var(--character-light-title-85);
+    padding: 1.2rem 0;
+}
+
+.action {
+    box-shadow: inset 0 1px 0 0 var(--character-light-dividers);
+    width: 100%;
+}
+
+.action button {
+    font-family: var(--font-family);
+    font-weight: 400;
+    font-size: 1.4rem;
+    line-height: 130%;
+    text-align: center;
+    color: var(--primary-light-6);
+    margin: 1.2rem 0;
+    display: inline-block;
+    border-radius: 2px;
+    padding: 0 15px;
+    width: 100%;
+}
+
+.card {
+    background: var(--character-light-primary-inverse);
+    border-radius: 2px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}

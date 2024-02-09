@@ -1,18 +1,13 @@
-import { FC, useState } from 'react';
+import { FC } from 'react';
 
 import { Menu, Typography } from 'antd';
-import type { CustomIconComponentProps } from '@ant-design/icons/lib/components/Icon';
-import Icon, { CalendarTwoTone, HeartFilled, TrophyFilled } from '@ant-design/icons';
-import { CustomIcon } from '../../customIcon/customIcon';
+import { CalendarTwoTone, HeartFilled, TrophyFilled } from '@ant-design/icons';
+import { ProfileIconComponent } from '@components/customIcon/profileIcon';
 
-import { primaryLight } from '../../data/colors';
+import { primaryLight } from '../../utils/constants/colors';
 import classes from './menuLinks.module.css';
 
 import { useAppSelector } from '@hooks/typed-react-redux-hooks';
-
-const ProfileIconComponent = (props: Partial<CustomIconComponentProps>) => (
-    <Icon component={CustomIcon} {...props} />
-);
 
 export const MenuLinks: FC = () => {
     const collapsed = useAppSelector((state) => state.collapse.collapsed);

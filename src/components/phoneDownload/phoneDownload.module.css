@@ -1,0 +1,45 @@
+.download {
+    box-shadow: 0 2px 0 0 rgba(0, 0, 0, 0.02);
+    background: var(--character-light-primary-inverse);
+    border-radius: 2px;
+}
+
+.description {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: space-between;
+    padding: 1.2rem 2.4rem;
+    font-family: var(--font-family);
+    font-weight: 400;
+    line-height: 130%;
+    gap: 8px;
+}
+
+.title {
+    font-size: 1.6rem;
+    color: var(--primary-light-6);
+}
+.text {
+    font-size: 14px;
+    color: var(--character-light-secondary-45);
+}
+
+.actions {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: 12px 0;
+}
+.button {
+    font-family: var(--font-family);
+    font-weight: 400;
+    font-size: 1.4rem;
+    line-height: 130%;
+    text-align: center;
+    color: var(--character-light-title-85);
+}
+.button > button {
+    padding: 7px 11px;
+    border: none;
+}
