@@ -11,6 +11,7 @@ import { Switcher } from '@components/switcher/switcher';
 import { useAppSelector } from '@hooks/typed-react-redux-hooks';
 
 const { Header: AntHeader, Footer: AntFooter, Sider, Content } = AntLayout;
+import { primaryLight } from '../../data/colors';
 
 export const MainPage: FC = () => {
     const collapsed = useAppSelector((state) => state.collapse.collapsed);
@@ -30,7 +31,14 @@ export const MainPage: FC = () => {
                 <Switcher collapsed={collapsed} />
             </Sider>
             <AntLayout className='main-content'>
-                <AntHeader className='header without-bg'>
+                <AntHeader
+                    className='header'
+                    style={{
+                        padding: 0,
+                        minHeight: '168px',
+                        background: `${primaryLight.primaryLight1}`,
+                    }}
+                >
                     <Header />
                 </AntHeader>
                 <Content>
