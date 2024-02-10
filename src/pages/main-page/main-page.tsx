@@ -1,4 +1,5 @@
 import { FC } from 'react';
+import { useState } from 'react';
 
 import { Layout as AntLayout } from 'antd';
 
@@ -16,6 +17,7 @@ import BgImg from '/images/mainBG.jpg';
 
 export const MainPage: FC = () => {
     const collapsed = useAppSelector((state) => state.collapse.collapsed);
+    const [width, setWidth] = useState(208);
 
     return (
         <AntLayout
@@ -28,7 +30,13 @@ export const MainPage: FC = () => {
                 trigger={null}
                 theme='light'
                 collapsed={collapsed}
-                width={!collapsed ? 208 : 64}
+                width={!collapsed ? width : 64}
+                breakpoint={'xl'}
+                onBreakpoint={(broken) => {
+                    if (broken && !collapsed) {
+                        setWidth(208);
+                    }
+                }}
                 collapsedWidth={64}
             >
                 <SideBar />
@@ -41,10 +49,9 @@ export const MainPage: FC = () => {
                 }}
             >
                 <AntHeader
-                    className='header'
+                    className={!collapsed ? 'header' : 'header collapsed'}
                     style={{
                         padding: 0,
-                        minHeight: '168px',
                         background: `${primaryLight.primaryLight1}`,
                     }}
                 >
@@ -52,7 +59,10 @@ export const MainPage: FC = () => {
                 </AntHeader>
                 <Content style={{ background: 'transparent' }}>
                     <MainContent />
-                    <AntFooter className='footer' style={{ padding: 0, background: 'transparent' }}>
+                    <AntFooter
+                        className={!collapsed ? 'footer' : 'footer collapsed'}
+                        style={{ padding: 0, background: 'transparent' }}
+                    >
                         <Footer />
                     </AntFooter>
                 </Content>

@@ -29,3 +29,19 @@
 .space {
     white-space: nowrap;
 }
+
+@media screen and (max-width: 1100px) {
+    .about {
+        width: 96%;
+    }
+}
+
+@media screen and (max-width: 836px) {
+    .about {
+        padding-right: 2rem;
+        margin-left: 1.2rem;
+    }
+    .about.collapsed {
+        width: 97%;
+    }
+}

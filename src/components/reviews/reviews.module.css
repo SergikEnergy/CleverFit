@@ -19,3 +19,12 @@
     text-align: center;
     color: var(--primary-light-6);
 }
+
+@media screen and (max-width: 834px) {
+    .reviews {
+        margin-left: 1.4rem;
+    }
+    .reviews.collapsed {
+        margin-bottom: 3px;
+    }
+}

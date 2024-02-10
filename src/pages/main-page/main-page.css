@@ -20,4 +20,26 @@
 
 .footer {
     margin-top: 18rem;
+    margin-bottom: 4rem;
+}
+
+header.header {
+    min-height: 168px;
+}
+
+@media screen and (max-width: 834px) {
+    header.header {
+        height: 194px;
+    }
+    header.header.collapsed {
+        height: 132px;
+        min-height: 100px;
+    }
+    .footer {
+        margin-top: 26rem;
+    }
+    .footer.collapsed {
+        margin-top: 38.6rem;
+        margin-bottom: 2rem;
+    }
 }

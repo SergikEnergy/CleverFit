@@ -34,3 +34,15 @@
     justify-content: center;
     flex-direction: column;
 }
+
+@media screen and (max-width: 834px) {
+    .body {
+        margin-left: 2.5rem;
+        margin-right: 0.5rem;
+        text-align: left;
+    }
+    .body.collapsed {
+        margin-left: 0;
+        margin-right: 1rem;
+    }
+}

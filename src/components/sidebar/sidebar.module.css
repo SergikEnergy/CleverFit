@@ -6,3 +6,9 @@
     flex-direction: column;
     flex-grow: 1;
 }
+
+@media screen and(max-width:834px) {
+}
+.sidebar {
+    min-height: 1194px;
+}

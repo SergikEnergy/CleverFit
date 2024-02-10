@@ -20,17 +20,36 @@ export const Header: FC = () => {
                         collapsed ? `${classes.collapsed}` : ''
                     }`}
                 >
-                    Приветствуем тебя в CleverFit — приложении, которое поможет тебе добиться своей
-                    мечты!
+                    Приветствуем тебя в CleverFit — приложении,
+                    <pre
+                        className={`${classes.xlWidth} ${collapsed ? `${classes.collapsed}` : ''}`}
+                    >
+                        {'                   '}
+                    </pre>{' '}
+                    которое поможет тебе добиться своей мечты!
                 </div>
-                <div className={classes['greeting__settings']}>
+                <div
+                    className={
+                        !collapsed
+                            ? classes['greeting__settings']
+                            : `${classes['greeting__settings']} ${classes.collapsed}`
+                    }
+                >
                     <Button
                         className={classes['settings__button']}
                         block
                         type='text'
                         icon={<SettingOutlined />}
                     >
-                        Настройки
+                        <span
+                            className={
+                                !collapsed
+                                    ? classes['button__text']
+                                    : `${classes['button__text']} ${classes.collapsed}`
+                            }
+                        >
+                            Настройки
+                        </span>
                     </Button>
                 </div>
             </div>

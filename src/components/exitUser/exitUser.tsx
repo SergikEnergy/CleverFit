@@ -19,7 +19,7 @@ export const ExitUser: FC = () => {
             <Divider style={{ margin: 0 }} />
             <Menu
                 className={classes.exit}
-                style={!collapsed ? { width: '208px' } : { width: '64px' }}
+                style={!collapsed ? { width: '100%' } : { width: '64px' }}
             >
                 <Menu.Item
                     className={

@@ -10,7 +10,7 @@ export const AboutApp: FC = () => {
         <div className={`${classes.about} ${collapsed ? `${classes.collapsed}` : ''}`}>
             <Typography.Text className={classes.line}>C CleverFit ты сможешь:</Typography.Text>
             <Typography.Text className={classes.line}>
-                — планировать свои тренировки на календаре, выбирая тип и уровень нагрузки;
+                — планировать свои тренировки на календаре, выбирая тип и&nbsp;уровень нагрузки;
             </Typography.Text>
             <Typography.Text className={classes.line}>
                 — отслеживать свои достижения в разделе статистики, сравнивая свои результаты c

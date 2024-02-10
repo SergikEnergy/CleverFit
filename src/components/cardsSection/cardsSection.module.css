@@ -32,3 +32,29 @@
 .cards.collapsed {
     width: 57.9%;
 }
+
+@media screen and (max-width: 1100px) {
+    .title {
+        width: 96%;
+    }
+    .cards {
+        width: 99%;
+    }
+}
+
+@media screen and (max-width: 834px) {
+    .title {
+        padding-right: 3.5rem;
+        margin-left: 1.1rem;
+    }
+    .cards {
+        margin-left: 0.4rem !important;
+    }
+    .title.collapsed {
+        width: 97%;
+        padding-right: 2rem;
+    }
+    .cards.collapsed {
+        width: 99%;
+    }
+}

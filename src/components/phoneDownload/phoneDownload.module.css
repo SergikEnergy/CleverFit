@@ -51,3 +51,15 @@
     display: inline-block;
     border: none;
 }
+
+@media screen and (max-width: 834px) {
+    .download {
+        margin-right: 1.3rem;
+    }
+    .description {
+        padding-bottom: 1.3rem;
+    }
+    .actions {
+        margin-top: 0.8rem;
+    }
+}
