@@ -15,8 +15,8 @@ export const AboutApp: FC = () => {
                 нормами и рекордами;
             </Typography.Text>
             <Typography.Text className={classes.line}>
-                — создавать свой профиль, где ты можешь загружать свои фото, видео и отзывы o
-                тренировках;
+                — создавать свой профиль, где ты можешь загружать свои фото, видео и отзывы{' '}
+                <span className={classes.space}>o тренировках</span>;
             </Typography.Text>
             <Typography.Text className={classes.line}>
                 — выполнять расписанные тренировки для разных частей тела, следуя подробным

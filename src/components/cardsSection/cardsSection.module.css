@@ -1,13 +1,12 @@
 .title {
-    width: 64%;
+    width: 63.5%;
     box-shadow: 0 2px 0 0 rgba(0, 0, 0, 0.04);
     background: var(--character-light-primary-inverse);
     border-radius: 2px;
-    padding: 2.4rem;
-    display: flex;
-    flex-direction: column;
+    padding: 2.6rem 6.5rem 2.3rem 2.1rem;
     align-items: flex-start;
     justify-content: center;
+    margin-top: 0.8rem;
 }
 
 .title__text {
@@ -22,5 +21,5 @@
 }
 
 .cards {
-    width: 65.5%;
+    width: 65%;
 }

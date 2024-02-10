@@ -1,10 +1,10 @@
 .about {
     margin-top: 2.4rem;
-    width: 64%;
+    width: 63.5%;
     box-shadow: 0 2px 0 0 rgba(0, 0, 0, 0.04);
     background: var(--character-light-primary-inverse);
     border-radius: 2px;
-    padding: 2.4rem;
+    padding: 2.4rem 4.1rem 2.4rem 2.4rem;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
@@ -19,4 +19,8 @@
     color: var(--primary-light-9);
     display: inline-block;
     text-align: start;
+}
+
+.space {
+    white-space: nowrap;
 }

@@ -3,7 +3,6 @@ import { FC } from 'react';
 import classes from './logo.module.css';
 import LogoIcon from '/images/LogoFit.svg';
 import LogoText from '/images/LogoText.svg';
-import { Menu } from 'antd';
 import { useAppSelector } from '@hooks/typed-react-redux-hooks';
 
 export const Logo: FC = () => {

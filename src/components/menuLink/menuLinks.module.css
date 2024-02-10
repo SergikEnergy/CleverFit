@@ -2,10 +2,15 @@
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    margin-left: 1rem;
-    gap: 1.6rem;
+    margin-bottom: 1.6rem;
     font-size: 1.6rem;
     flex-grow: 1;
+}
+.menu__item {
+    padding-left: 17px !important;
+}
+.menu__item:not(:last-child) {
+    margin-bottom: 13px !important;
 }
 
 .menu__item_text {

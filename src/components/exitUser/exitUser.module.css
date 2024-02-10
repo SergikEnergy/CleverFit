@@ -13,11 +13,12 @@
     font-size: 1.4rem;
     line-height: 130%;
     color: var(--character-light-title-85);
-    margin-left: 1rem;
+    margin-left: 1.3rem;
 }
 
 .exit__item {
     width: 100%;
+    padding-top: 0.3rem !important;
 }
 
 .correct_left {

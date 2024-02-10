@@ -9,7 +9,7 @@
     flex-direction: column;
     align-items: flex-start;
     justify-content: center;
-    margin-top: 1.6rem;
+    margin-top: 1.4rem;
 }
 
 .navigation {
@@ -29,17 +29,19 @@
 }
 
 .greeting__text {
+    padding-top: 1.4rem;
     font-family: var(--font-family);
     font-weight: 700;
     font-size: 38px;
     line-height: 130%;
     color: var(--character-light-title-85);
     text-align: start;
-    width: 90%;
+    width: 89%;
 }
 
 .greeting__settings {
-    margin-top: 8px;
+    margin-top: 6px;
+    margin-left: 5px;
     height: 32px;
     padding: 0;
     width: 10%;
@@ -48,7 +50,7 @@
     justify-content: center;
 }
 
-.greeting__settings > button {
+.settings__button {
     width: 100%;
     display: inline-block;
     padding: 0;

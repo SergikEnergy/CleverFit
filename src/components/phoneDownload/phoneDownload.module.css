@@ -9,11 +9,11 @@
     flex-direction: column;
     align-items: flex-start;
     justify-content: space-between;
-    padding: 1.2rem 2.4rem;
+    padding: 1.2rem 1rem 1.2rem 2.2rem;
     font-family: var(--font-family);
     font-weight: 400;
     line-height: 130%;
-    gap: 8px;
+    gap: 10px;
 }
 
 .title {
@@ -29,7 +29,8 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    margin: 12px 0;
+    margin: 10px 0;
+    margin-bottom: 17px;
 }
 .button {
     font-family: var(--font-family);
@@ -39,7 +40,12 @@
     text-align: center;
     color: var(--character-light-title-85);
 }
+
+.button:not(:last-child) {
+    margin-right: 12px;
+}
 .button > button {
     padding: 7px 11px;
+    display: inline-block;
     border: none;
 }

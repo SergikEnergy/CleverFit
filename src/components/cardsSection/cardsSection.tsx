@@ -13,8 +13,8 @@ export const CardsSection: FC = () => {
             <Row className={classes.title}>
                 <Col>
                     <Typography.Title className={classes['title__text']}>
-                        CleverFit — это не просто приложение, а твой личный помощник в мире фитнеса.
-                        Не откладывай на завтра — начни тренироваться уже сегодня!
+                        CleverFit — это не просто приложение, а твой личный помощник в&nbsp;мире
+                        фитнеса. Не откладывай на завтра — начни тренироваться уже сегодня!
                     </Typography.Title>
                 </Col>
             </Row>

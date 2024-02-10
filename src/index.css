@@ -119,3 +119,7 @@ html,
     border: none;
     outline: none;
 }
+
+img {
+    overflow: visible;
+}
