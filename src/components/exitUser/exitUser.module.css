@@ -25,7 +25,7 @@
     padding-left: 1.3rem !important;
 }
 
-@media screen and (max-width: 834px) {
+@media screen and (max-width: 780px) {
     .exit__icon {
         display: none !important;
     }

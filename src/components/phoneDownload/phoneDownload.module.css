@@ -63,7 +63,7 @@
         margin-top: 0.8rem;
     }
 }
-@media screen and (max-width: 834px) {
+@media screen and (max-width: 710px) {
     .description,
     .description.collapsed {
         align-items: center;

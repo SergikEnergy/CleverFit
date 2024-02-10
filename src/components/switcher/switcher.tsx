@@ -16,11 +16,14 @@ export const Switcher: FC<SwitcherProps> = ({ collapsed }) => {
     };
 
     return (
-        <div className={`${classes.switcher} ${collapsed && classes.collapsed}`}>
+        <div
+            data-test-id='sider-switch'
+            className={`${classes.switcher} ${collapsed && classes.collapsed}`}
+        >
             {!collapsed ? (
-                <MenuFoldOutlined onClick={toggleSider} />
+                <MenuFoldOutlined data-test-id='sider-switch-mobile' onClick={toggleSider} />
             ) : (
-                <MenuUnfoldOutlined onClick={toggleSider} />
+                <MenuUnfoldOutlined data-test-id='sider-switch-mobile' onClick={toggleSider} />
             )}
         </div>
     );

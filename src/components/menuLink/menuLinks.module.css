@@ -34,7 +34,7 @@
     margin-left: 0;
 }
 
-@media screen and (max-width: 834px) {
+@media screen and (max-width: 780px) {
     .menu__item_icon {
         display: none !important;
     }
@@ -42,7 +42,7 @@
         padding: 0 !important;
     }
 }
-@media screen and (max-width: 834px) {
+@media screen and (max-width: 600px) {
     .menu__item:not(:last-child) {
         margin-bottom: 6px !important;
     }
@@ -51,7 +51,7 @@
     }
 }
 
-@media screen and (max-width: 834px) {
+@media screen and (max-width: 400px) {
     .menu__item {
         margin-left: -3px !important;
     }

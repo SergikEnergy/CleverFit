@@ -25,7 +25,7 @@ export const CardsSection: FC = () => {
                 gutter={16}
                 className={`${classes.cards} ${collapsed ? `${classes.collapsed}` : ''}`}
             >
-                <Col lg={8} md={24} xs={24} sm={24}>
+                <Col lg={8} md={8} xs={24} sm={24}>
                     <CardMainAction
                         body={'Расписать тренировки'}
                         action={
@@ -43,7 +43,7 @@ export const CardsSection: FC = () => {
                         }
                     />
                 </Col>
-                <Col lg={8} md={24} xs={24} sm={24}>
+                <Col lg={8} md={8} xs={24} sm={24}>
                     <CardMainAction
                         body={'Назначить календарь'}
                         action={
@@ -61,7 +61,7 @@ export const CardsSection: FC = () => {
                         }
                     />
                 </Col>
-                <Col lg={8} md={24} xs={24} sm={24}>
+                <Col lg={8} md={8} xs={24} sm={24}>
                     <CardMainAction
                         body={'Заполнить профиль'}
                         action={
