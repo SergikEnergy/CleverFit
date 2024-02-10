@@ -14,7 +14,7 @@ export const AboutApp: FC = () => {
             </Typography.Text>
             <Typography.Text className={classes.line}>
                 — отслеживать свои достижения в разделе статистики, сравнивая свои результаты c
-                нормами и рекордами;
+                нормами и&nbsp;рекордами;
             </Typography.Text>
             <Typography.Text className={classes.line}>
                 — создавать свой профиль, где ты можешь загружать свои фото, видео и отзывы
@@ -22,7 +22,7 @@ export const AboutApp: FC = () => {
             </Typography.Text>
             <Typography.Text className={classes.line}>
                 — выполнять расписанные тренировки для разных частей тела, следуя подробным
-                инструкциям и советам профессиональных тренеров.
+                инструкциям и&nbsp;советам профессиональных тренеров.
             </Typography.Text>
         </div>
     );

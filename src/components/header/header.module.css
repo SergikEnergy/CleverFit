@@ -19,6 +19,9 @@
     font-size: 1.4rem;
     line-height: 130%;
     color: var(--character-light-title-85);
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
 }
 
 .greeting {
@@ -68,6 +71,10 @@ button.settings__button {
     display: none;
 }
 
+button.mobile__button {
+    display: none;
+}
+
 @media screen and (max-width: 1290px) {
     .greeting__text {
         font-size: 2.8rem;
@@ -107,5 +114,52 @@ button.settings__button {
     button.settings__button {
         padding-left: 2px;
         padding-right: 2px;
+    }
+}
+
+@media screen and (max-width: 800px) {
+    .xlWidth {
+        display: none;
+    }
+    .greeting__text {
+        font-size: 2rem;
+    }
+}
+
+@media screen and (max-width: 680px) {
+    .mobile__button {
+        display: inline-block;
+        padding: 0;
+    }
+    button.mobile__button {
+        width: 32px !important;
+        background: var(--neutral-gray-1);
+    }
+    .greeting__settings {
+        width: 32px;
+        height: 32px;
+        border-radius: 50%;
+    }
+
+    .settings__button {
+        display: none !important;
+    }
+}
+@media screen and (max-width: 680px) {
+    .header {
+        margin-left: 4px;
+    }
+    .greeting,
+    .navigation {
+        margin-left: 1.4rem;
+    }
+    .greeting__text,
+    .greeting__text.collapsed {
+        padding-top: 0.4rem;
+    }
+    .greeting__settings,
+    .greeting__settings.collapsed {
+        margin-top: 0;
+        margin-left: 0;
     }
 }

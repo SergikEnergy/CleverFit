@@ -33,3 +33,26 @@
     width: 64px;
     margin-left: 0;
 }
+
+@media screen and (max-width: 834px) {
+    .menu__item_icon {
+        display: none !important;
+    }
+    .menu__item {
+        padding: 0 !important;
+    }
+}
+@media screen and (max-width: 834px) {
+    .menu__item:not(:last-child) {
+        margin-bottom: 6px !important;
+    }
+    .menu__item {
+        margin-left: 3px;
+    }
+}
+
+@media screen and (max-width: 834px) {
+    .menu__item {
+        margin-left: -3px !important;
+    }
+}

@@ -8,6 +8,10 @@
     height: 100%;
 }
 
+.main-page {
+    position: relative;
+}
+
 .navigation {
     width: 14.4%;
     position: relative;
@@ -41,5 +45,35 @@ header.header {
     .footer.collapsed {
         margin-top: 38.6rem;
         margin-bottom: 2rem;
+    }
+}
+
+@media screen and (max-width: 550px) {
+    .mobile__overlay {
+        position: fixed !important;
+        top: 0;
+        left: 0;
+        height: 640px;
+        width: 106px;
+        z-index: 100;
+    }
+}
+
+@media screen and (max-width: 550px) {
+    header.header {
+        min-height: 166px;
+        height: 166px;
+    }
+    header.header.collapsed {
+        min-height: 166px;
+        height: 166px;
+    }
+}
+
+@media screen and (max-width: 400px) {
+    .footer,
+    .footer.collapsed {
+        margin-top: 1.9rem;
+        margin-bottom: 5.1rem;
     }
 }

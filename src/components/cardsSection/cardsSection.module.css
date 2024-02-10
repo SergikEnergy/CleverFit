@@ -58,3 +58,23 @@
         width: 99%;
     }
 }
+
+@media screen and (max-width: 750px) {
+    .cards {
+        gap: 16px;
+    }
+}
+@media screen and (max-width: 400px) {
+    .title.collapsed,
+    .title {
+        width: 95%;
+        margin-left: 1rem;
+        padding: 1.3rem 1.5rem 1.5rem 1.5rem;
+    }
+
+    .cards.collapsed,
+    .cards {
+        width: 98.5%;
+        gap: 8px;
+    }
+}

@@ -7,8 +7,19 @@
     flex-grow: 1;
 }
 
-@media screen and(max-width:834px) {
+@media screen and (max-width: 834px) {
+    .sidebar {
+        min-height: 1194px;
+    }
 }
-.sidebar {
-    min-height: 1194px;
+
+@media screen and (max-width: 680px) {
+    .sidebar {
+        min-height: 1300px;
+    }
+}
+@media screen and (max-width: 680px) {
+    .sidebar {
+        min-height: 644px;
+    }
 }

@@ -63,3 +63,22 @@
         margin-top: 0.8rem;
     }
 }
+@media screen and (max-width: 834px) {
+    .description,
+    .description.collapsed {
+        align-items: center;
+    }
+}
+
+@media screen and (max-width: 400px) {
+    .button,
+    .button.collapsed {
+        width: 48%;
+    }
+    .actions {
+        margin-left: 0.8rem;
+    }
+    .download {
+        margin-top: 7px;
+    }
+}

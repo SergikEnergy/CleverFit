@@ -20,7 +20,7 @@ export const Header: FC = () => {
                         collapsed ? `${classes.collapsed}` : ''
                     }`}
                 >
-                    Приветствуем тебя в CleverFit — приложении,
+                    Приветствуем тебя в&nbsp;CleverFit — приложении,
                     <pre
                         className={`${classes.xlWidth} ${collapsed ? `${classes.collapsed}` : ''}`}
                     >
@@ -35,6 +35,14 @@ export const Header: FC = () => {
                             : `${classes['greeting__settings']} ${classes.collapsed}`
                     }
                 >
+                    <Button
+                        className={classes['mobile__button']}
+                        block
+                        type='text'
+                        shape='circle'
+                        icon={<SettingOutlined />}
+                    />
+
                     <Button
                         className={classes['settings__button']}
                         block

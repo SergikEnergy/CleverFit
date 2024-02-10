@@ -46,3 +46,12 @@
         margin-right: 1rem;
     }
 }
+
+@media screen and (max-width: 400px) {
+    .body,
+    .body.collapsed {
+        margin-left: 0rem;
+        margin-right: 0rem;
+        text-align: center;
+    }
+}

@@ -1,5 +1,5 @@
 import { FC } from 'react';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 import { Layout as AntLayout } from 'antd';
 
@@ -17,7 +17,17 @@ import BgImg from '/images/mainBG.jpg';
 
 export const MainPage: FC = () => {
     const collapsed = useAppSelector((state) => state.collapse.collapsed);
+
     const [width, setWidth] = useState(208);
+    const [collapseWidth, setCollapseWidth] = useState(64);
+
+    useEffect(() => {
+        if (window.innerWidth < 590) {
+            setCollapseWidth(0);
+        } else {
+            setCollapseWidth(64);
+        }
+    }, []);
 
     return (
         <AntLayout
@@ -25,19 +35,25 @@ export const MainPage: FC = () => {
             style={{ background: `center / cover url(${BgImg}) no-repeat` }}
         >
             <Sider
-                className='navigation'
+                className='navigation mobile__overlay'
                 collapsible
                 trigger={null}
                 theme='light'
                 collapsed={collapsed}
-                width={!collapsed ? width : 64}
-                breakpoint={'xl'}
+                width={!collapsed ? width : collapseWidth}
+                breakpoint={'md'}
                 onBreakpoint={(broken) => {
-                    if (broken && !collapsed) {
+                    if (broken) {
+                        setCollapseWidth(0);
+                        if (!collapsed) {
+                            setWidth(106);
+                        }
+                    } else {
                         setWidth(208);
+                        setCollapseWidth(64);
                     }
                 }}
-                collapsedWidth={64}
+                collapsedWidth={collapseWidth}
             >
                 <SideBar />
                 <Switcher collapsed={collapsed} />

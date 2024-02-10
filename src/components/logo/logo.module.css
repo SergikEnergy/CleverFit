@@ -26,6 +26,25 @@
     width: 64px;
 }
 
-.hidden {
+.hidden,
+.mobile {
     display: none;
+}
+
+@media screen and (max-width: 768px) {
+    .logo__text,
+    .logo__icon {
+        display: none;
+    }
+    .mobile {
+        display: block;
+    }
+}
+
+@media screen and (max-width: 400px) {
+    .logo {
+        padding-top: 1.3rem;
+        margin-left: 0;
+        margin-bottom: 2.8rem;
+    }
 }
