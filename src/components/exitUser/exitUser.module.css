@@ -21,6 +21,6 @@
     padding-top: 0.3rem !important;
 }
 
-.correct_left {
-    margin-left: 0;
+.collapsed {
+    padding-left: 1.3rem !important;
 }

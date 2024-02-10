@@ -9,6 +9,10 @@
 .menu__item {
     padding-left: 17px !important;
 }
+
+.menu__item.collapsed {
+    padding-left: 24px !important;
+}
 .menu__item:not(:last-child) {
     margin-bottom: 13px !important;
 }

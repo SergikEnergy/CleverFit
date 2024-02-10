@@ -9,6 +9,10 @@
     margin-left: -15px;
 }
 
+.logo.collapsed {
+    margin-left: 0px;
+}
+
 .logo__menu .ant-menu-item-icon {
     display: inline-block;
     order: -1;

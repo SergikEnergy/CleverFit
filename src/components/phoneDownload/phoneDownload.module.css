@@ -2,6 +2,7 @@
     box-shadow: 0 2px 0 0 rgba(0, 0, 0, 0.02);
     background: var(--character-light-primary-inverse);
     border-radius: 2px;
+    padding: 0.5rem;
 }
 
 .description {
@@ -9,11 +10,11 @@
     flex-direction: column;
     align-items: flex-start;
     justify-content: space-between;
-    padding: 1.2rem 1rem 1.2rem 2.2rem;
     font-family: var(--font-family);
     font-weight: 400;
     line-height: 130%;
     gap: 10px;
+    padding: 0.7rem 0 1.8rem 1.9rem;
 }
 
 .title {
@@ -29,8 +30,7 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    margin: 10px 0;
-    margin-bottom: 17px;
+    margin-bottom: 9px;
 }
 .button {
     font-family: var(--font-family);
@@ -39,13 +39,15 @@
     line-height: 130%;
     text-align: center;
     color: var(--character-light-title-85);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0;
+    padding: 0;
 }
 
-.button:not(:last-child) {
-    margin-right: 12px;
-}
 .button > button {
-    padding: 7px 11px;
+    padding: 8px 11px;
     display: inline-block;
     border: none;
 }

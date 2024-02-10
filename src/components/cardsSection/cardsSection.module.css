@@ -9,6 +9,11 @@
     margin-top: 0.8rem;
 }
 
+.title.collapsed {
+    width: 56.5%;
+    padding-right: 6rem;
+}
+
 .title__text {
     font-family: var(--font-family);
     margin-bottom: 0 !important;
@@ -22,4 +27,8 @@
 
 .cards {
     width: 65%;
+}
+
+.cards.collapsed {
+    width: 57.9%;
 }

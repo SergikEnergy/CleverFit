@@ -21,7 +21,15 @@ export const ExitUser: FC = () => {
                 className={classes.exit}
                 style={!collapsed ? { width: '208px' } : { width: '64px' }}
             >
-                <Menu.Item className={classes['exit__item']} key='exit' icon={<CustomExitIcon />}>
+                <Menu.Item
+                    className={
+                        !collapsed
+                            ? classes['exit__item']
+                            : `${classes['exit__item']} ${classes.collapsed}`
+                    }
+                    key='exit'
+                    icon={<CustomExitIcon />}
+                >
                     <Typography.Text className={classes['exit__text']}>Выход</Typography.Text>
                 </Menu.Item>
             </Menu>

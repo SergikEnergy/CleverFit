@@ -6,11 +6,13 @@ import { ProfileIconComponent } from '@components/customIcon/profileIcon';
 import { primaryLight } from '@utils/constants/colors';
 
 import classes from './cardsSection.module.css';
+import { useAppSelector } from '@hooks/typed-react-redux-hooks';
 
 export const CardsSection: FC = () => {
+    const collapsed = useAppSelector((state) => state.collapse.collapsed);
     return (
         <>
-            <Row className={classes.title}>
+            <Row className={`${classes.title} ${collapsed ? `${classes.collapsed}` : ''}`}>
                 <Col>
                     <Typography.Title className={classes['title__text']}>
                         CleverFit — это не просто приложение, а твой личный помощник в&nbsp;мире
@@ -18,7 +20,11 @@ export const CardsSection: FC = () => {
                     </Typography.Title>
                 </Col>
             </Row>
-            <Row justify='space-between' gutter={16} className={classes.cards}>
+            <Row
+                justify='space-between'
+                gutter={16}
+                className={`${classes.cards} ${collapsed ? `${classes.collapsed}` : ''}`}
+            >
                 <Col span={8}>
                     <CardMainAction
                         body={'Расписать тренировки'}
@@ -68,7 +74,7 @@ export const CardsSection: FC = () => {
                                     />
                                 }
                             >
-                                Календарь
+                                Профиль
                             </Button>
                         }
                     />

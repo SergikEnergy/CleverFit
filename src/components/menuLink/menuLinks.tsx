@@ -19,7 +19,11 @@ export const MenuLinks: FC = () => {
             mode='inline'
         >
             <Menu.Item
-                className={classes['menu__item']}
+                className={
+                    !collapsed
+                        ? classes['menu__item']
+                        : `${classes['menu__item']} ${classes.collapsed}`
+                }
                 key='calendar'
                 icon={
                     <CalendarTwoTone
@@ -35,7 +39,11 @@ export const MenuLinks: FC = () => {
                 </Typography.Text>
             </Menu.Item>
             <Menu.Item
-                className={classes['menu__item']}
+                className={
+                    !collapsed
+                        ? classes['menu__item']
+                        : `${classes['menu__item']} ${classes.collapsed}`
+                }
                 key='trains'
                 icon={
                     <HeartFilled
@@ -47,7 +55,11 @@ export const MenuLinks: FC = () => {
                 <Typography.Text className={classes['menu__item_text']}>Тренировки</Typography.Text>
             </Menu.Item>
             <Menu.Item
-                className={classes['menu__item']}
+                className={
+                    !collapsed
+                        ? classes['menu__item']
+                        : `${classes['menu__item']} ${classes.collapsed}`
+                }
                 key='trophy'
                 icon={
                     <TrophyFilled
@@ -59,7 +71,11 @@ export const MenuLinks: FC = () => {
                 <Typography.Text className={classes['menu__item_text']}>Достижения</Typography.Text>
             </Menu.Item>
             <Menu.Item
-                className={classes['menu__item']}
+                className={
+                    !collapsed
+                        ? classes['menu__item']
+                        : `${classes['menu__item']} ${classes.collapsed}`
+                }
                 key='profile'
                 icon={
                     <ProfileIconComponent

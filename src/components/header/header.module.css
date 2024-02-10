@@ -28,6 +28,10 @@
     flex: 1;
 }
 
+.greeting.collapsed {
+    justify-content: space-between;
+}
+
 .greeting__text {
     padding-top: 1.4rem;
     font-family: var(--font-family);
@@ -37,6 +41,10 @@
     color: var(--character-light-title-85);
     text-align: start;
     width: 89%;
+}
+
+.greeting__text.collapsed {
+    width: 80%;
 }
 
 .greeting__settings {

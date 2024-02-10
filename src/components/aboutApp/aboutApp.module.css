@@ -11,6 +11,11 @@
     justify-content: center;
 }
 
+.about.collapsed {
+    width: 56.5%;
+    padding-left: 2rem;
+}
+
 .line {
     font-family: var(--font-family);
     font-weight: 400;
