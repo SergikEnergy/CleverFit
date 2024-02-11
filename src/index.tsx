@@ -3,7 +3,8 @@ import { createRoot } from 'react-dom/client';
 import { Provider } from 'react-redux';
 
 import { store } from '@redux/configure-store';
-import App from './App';
+import { CollapsedContextProvider } from './reactContexts/collapseContextProvider';
+import { App } from './App';
 
 import 'normalize.css';
 import 'antd/dist/antd.css';
@@ -15,7 +16,9 @@ const root = createRoot(domNode);
 root.render(
     <React.StrictMode>
         <Provider store={store}>
-            <App />
+            <CollapsedContextProvider>
+                <App />
+            </CollapsedContextProvider>
         </Provider>
     </React.StrictMode>,
 );

@@ -1,6 +1,4 @@
-type CharacterColor = {
-    [key: string]: string | number;
-};
+type CharacterColor = Record<string, string | number>;
 
 export const charactersLightColors: CharacterColor = {
     characterLightTitle85: '#262626',

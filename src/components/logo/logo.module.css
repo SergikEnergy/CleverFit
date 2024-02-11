@@ -2,7 +2,6 @@
     display: flex;
     align-items: flex-end;
     justify-content: center;
-    /* margin-top: 1.4rem; - why it doesn't work? - bg changes */
     padding-top: 4.6rem;
     margin-bottom: 6.5rem;
     flex-grow: 0;
