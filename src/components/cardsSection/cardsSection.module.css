@@ -3,7 +3,7 @@
     box-shadow: 0 2px 0 0 rgba(0, 0, 0, 0.04);
     background: var(--character-light-primary-inverse);
     border-radius: 2px;
-    padding: 2.6rem 6.5rem 2.3rem 2.1rem;
+    padding: 2.4rem 6.4rem 2.4rem 2.5rem;
     align-items: flex-start;
     justify-content: center;
     margin-top: 0.8rem;
@@ -14,15 +14,16 @@
     padding-right: 6rem;
 }
 
+h1.title__text.antFixed,
 .title__text {
     font-family: var(--font-family);
-    margin-bottom: 0 !important;
-    font-weight: 500 !important;
-    font-style: normal !important;
-    font-size: 2rem !important;
-    line-height: 130% !important;
-    color: var(--character-light-title-85) !important;
-    text-align: start;
+    margin-bottom: 0;
+    font-weight: 500;
+    font-style: normal;
+    text-align: left;
+    font-size: 2rem;
+    line-height: 130%;
+    color: var(--character-light-title-85);
 }
 
 .cards {
@@ -38,7 +39,7 @@
         width: 96%;
     }
     .cards {
-        width: 99%;
+        width: 98.5%;
     }
 }
 
@@ -47,7 +48,8 @@
         padding-right: 3.5rem;
         margin-left: 1.1rem;
     }
-    .cards {
+    .cards,
+    .cards.antFixed {
         margin-left: 0.4rem !important;
     }
     .title.collapsed {

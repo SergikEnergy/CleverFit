@@ -7,8 +7,9 @@
 .reviews > button {
     display: inline-block;
     width: 100%;
-    margin: 4px 10px 0px 10px;
+    margin: 4px 10px 3px 17px;
     padding: 0;
+    border: none;
 }
 
 .reviews > button > span {
@@ -25,11 +26,12 @@
         margin-left: 1.4rem;
     }
     .reviews.collapsed {
-        margin-bottom: 3px;
+        margin-bottom: 2px;
+        margin-left: 0.8rem;
     }
 }
 @media screen and (max-width: 400px) {
-    .reviews {
-        margin: 7px 10px 0px 10px;
+    .reviews > button {
+        margin: 7px 16px 0px 7px;
     }
 }

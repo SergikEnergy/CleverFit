@@ -15,7 +15,11 @@ export const CardMainAction: FC<CardMainActionProps> = ({ body, action }) => {
 
     return (
         <div className={classnames(classes.card, { [classes.collapsed]: collapsed })}>
-            <div className={classnames(classes.body, { [classes.collapsed]: collapsed })}>
+            <div
+                className={classnames(classes.body, classes.antFixed, {
+                    [classes.collapsed]: collapsed,
+                })}
+            >
                 {body}
             </div>
             <div className={classes.action}>{action}</div>

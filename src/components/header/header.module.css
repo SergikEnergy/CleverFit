@@ -13,26 +13,25 @@
 }
 
 .navigation {
-    display: inline-block;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    margin-top: 1.3rem;
+}
+
+.navigation span.antFixed {
     font-family: var(--font-family);
     font-weight: 400;
     font-size: 1.4rem;
     line-height: 130%;
     color: var(--character-light-title-85);
-    display: flex;
-    align-items: center;
-    justify-content: flex-start;
 }
 
 .greeting {
     display: flex;
     align-items: flex-start;
-    justify-content: flex-start;
-    flex: 1;
-}
-
-.greeting.collapsed {
     justify-content: space-between;
+    flex: 1;
 }
 
 .greeting__text {
@@ -43,16 +42,16 @@
     line-height: 130%;
     color: var(--character-light-title-85);
     text-align: start;
-    width: 89%;
+    width: 88.5%;
 }
 
 .greeting__text.collapsed {
-    width: 80%;
+    width: 78%;
 }
 
 .greeting__settings {
-    margin-top: 6px;
-    margin-left: 5px;
+    margin-top: 7px;
+    margin-left: 3px;
     height: 32px;
     padding: 0;
     width: 10%;
@@ -60,6 +59,18 @@
     align-items: center;
     justify-content: center;
     flex-grow: 1;
+}
+
+.greeting__settings.collapsed {
+    justify-content: flex-end;
+}
+.button__text,
+span.button__text {
+    font-family: var(--font-family);
+    font-weight: 400;
+    font-size: 1.4rem;
+    line-height: 130%;
+    color: var(--character-light-title-85);
 }
 
 button.settings__button {
@@ -73,6 +84,7 @@ button.settings__button {
 
 button.mobile__button {
     display: none;
+    flex-grow: 0;
 }
 
 @media screen and (max-width: 1290px) {
@@ -94,22 +106,27 @@ button.mobile__button {
         font-size: 2.4rem;
         padding-bottom: 2rem;
     }
-    .greeting,
+    .greeting {
+        margin-left: 1.2rem;
+    }
     .navigation {
-        margin-left: 1rem;
+        margin-top: 1.4rem;
+        margin-left: 1.2rem;
     }
     .xlWidth {
         display: inline;
     }
     .greeting__settings {
-        margin-left: 0;
+        margin-left: -18px;
+        margin-top: 6px;
     }
     .greeting__settings.collapsed {
-        margin-left: 2rem;
+        margin-left: 5rem;
+        justify-content: flex-start;
     }
 
-    .button__text {
-        margin-left: 0 !important;
+    button > span.button__text {
+        margin-left: 0;
     }
     button.settings__button {
         padding-left: 2px;
@@ -127,12 +144,12 @@ button.mobile__button {
 }
 
 @media screen and (max-width: 680px) {
-    .mobile__button {
+    button.mobile__button {
         display: inline-block;
         padding: 0;
     }
-    button.mobile__button {
-        width: 32px !important;
+    button.mobile__button.antFixed {
+        width: 32px;
         background: var(--neutral-gray-1);
     }
     .greeting__settings {
@@ -141,8 +158,8 @@ button.mobile__button {
         border-radius: 50%;
     }
 
-    .settings__button {
-        display: none !important;
+    button.settings__button {
+        display: none;
     }
 }
 @media screen and (max-width: 680px) {
@@ -161,5 +178,13 @@ button.mobile__button {
     .greeting__settings.collapsed {
         margin-top: 0;
         margin-left: 0;
+    }
+}
+@media screen and (max-width: 360px) {
+    .greeting {
+        margin-left: 1.8rem;
+    }
+    .greeting__text.collapsed {
+        width: 85%;
     }
 }

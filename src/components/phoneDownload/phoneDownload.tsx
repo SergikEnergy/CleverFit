@@ -10,7 +10,7 @@ import classnames from 'classnames';
 export const PhoneDownload: FC = () => {
     const { collapsed } = useContext(CollapsedContext);
     return (
-        <div className={classes.download}>
+        <div className={classnames(classes.download, { [classes.collapsed]: collapsed })}>
             <div className={classnames(classes.description, { [classes.collapsed]: collapsed })}>
                 <div className={classes.title}>Скачать на телефон </div>
                 <div className={classes.text}>Доступно в PRO-тарифе</div>

@@ -13,7 +13,9 @@ export const Header: FC = () => {
         <div className={`${classes['header__wrapper']} wrapper`}>
             <div className={classes.navigation}>
                 <Breadcrumb>
-                    <Breadcrumb.Item>Главная</Breadcrumb.Item>
+                    <Breadcrumb.Item>
+                        <span className={classes.antFixed}>Главная</span>
+                    </Breadcrumb.Item>
                 </Breadcrumb>
             </div>
             <div className={classnames(classes.greeting, { [classes.collapsed]: collapsed })}>
@@ -36,8 +38,7 @@ export const Header: FC = () => {
                     })}
                 >
                     <Button
-                        className={classes['mobile__button']}
-                        block
+                        className={classnames(classes['mobile__button'], classes.antFixed)}
                         type='text'
                         shape='circle'
                         icon={<SettingOutlined />}
@@ -45,7 +46,6 @@ export const Header: FC = () => {
 
                     <Button
                         className={classes['settings__button']}
-                        block
                         type='text'
                         icon={<SettingOutlined />}
                     >

@@ -14,53 +14,70 @@ export const MenuLinks: FC = () => {
 
     return (
         <Menu
-            className={classnames(classes.menu, { [classes.collapsed]: collapsed })}
+            className={classnames(classes.menu, classes.antFixed, {
+                [classes.collapsed]: collapsed,
+            })}
             style={collapsed ? { width: '64px' } : { width: '100%' }}
             mode='inline'
         >
             <Menu.Item
-                className={classnames(classes['menu__item'], { [classes.collapsed]: collapsed })}
+                className={classnames(classes['menu__item'], {
+                    [classes.collapsed]: collapsed,
+                })}
+                style={{ paddingLeft: `${collapsed ? '24px' : '17px'}` }}
                 key='calendar'
                 icon={
                     <CalendarTwoTone
-                        twoToneColor={`${primaryLight.primaryLight9}`}
-                        className={classes['menu__item_icon']}
+                        twoToneColor={[
+                            `${primaryLight.primaryLight9}`,
+                            `${primaryLight.primaryLight9}`,
+                        ]}
+                        className={classnames(classes['menu__item_icon'], classes.antFixed)}
                     />
                 }
             >
                 <Typography.Text className={classes['menu__item_text']}>Календарь</Typography.Text>
             </Menu.Item>
             <Menu.Item
-                className={classnames(classes['menu__item'], { [classes.collapsed]: collapsed })}
+                style={{ paddingLeft: `${collapsed ? '24px' : '17px'}` }}
+                className={classnames(classes['menu__item'], {
+                    [classes.collapsed]: collapsed,
+                })}
                 key='trains'
                 icon={
                     <HeartFilled
                         style={{ color: `${primaryLight.primaryLight9}` }}
-                        className={classes['menu__item_icon']}
+                        className={classnames(classes['menu__item_icon'], classes.antFixed)}
                     />
                 }
             >
                 <Typography.Text className={classes['menu__item_text']}>Тренировки</Typography.Text>
             </Menu.Item>
             <Menu.Item
-                className={classnames(classes['menu__item'], { [classes.collapsed]: collapsed })}
+                style={{ paddingLeft: `${collapsed ? '24px' : '17px'}` }}
+                className={classnames(classes['menu__item'], {
+                    [classes.collapsed]: collapsed,
+                })}
                 key='trophy'
                 icon={
                     <TrophyFilled
                         style={{ color: `${primaryLight.primaryLight9}` }}
-                        className={classes['menu__item_icon']}
+                        className={classnames(classes['menu__item_icon'], classes.antFixed)}
                     />
                 }
             >
                 <Typography.Text className={classes['menu__item_text']}>Достижения</Typography.Text>
             </Menu.Item>
             <Menu.Item
-                className={classnames(classes['menu__item'], { [classes.collapsed]: collapsed })}
+                style={{ paddingLeft: `${collapsed ? '24px' : '17px'}` }}
+                className={classnames(classes['menu__item'], {
+                    [classes.collapsed]: collapsed,
+                })}
                 key='profile'
                 icon={
                     <ProfileIconComponent
                         style={{ color: `${primaryLight.primaryLight9}` }}
-                        className={classes['menu__item_icon']}
+                        className={classnames(classes['menu__item_icon'], classes.antFixed)}
                     />
                 }
             >

@@ -1,5 +1,6 @@
 import { FC, useContext } from 'react';
 import { CollapsedContext } from '../../reactContexts/collapse-context';
+
 import { Col, Row, Typography, Button } from 'antd';
 import { HeartFilled, CalendarTwoTone } from '@ant-design/icons';
 import { CardMainAction } from '@components/cardMainAction';
@@ -13,9 +14,15 @@ export const CardsSection: FC = () => {
     const { collapsed } = useContext(CollapsedContext);
     return (
         <>
-            <Row className={classnames(classes.title, { [classes.collapsed]: collapsed })}>
+            <Row
+                className={classnames(classes.title, {
+                    [classes.collapsed]: collapsed,
+                })}
+            >
                 <Col>
-                    <Typography.Title className={classes['title__text']}>
+                    <Typography.Title
+                        className={classnames(classes['title__text'], classes.antFixed)}
+                    >
                         CleverFit — это не просто приложение, а твой личный помощник в&nbsp;мире
                         фитнеса. Не откладывай на завтра — начни тренироваться уже сегодня!
                     </Typography.Title>
@@ -24,7 +31,9 @@ export const CardsSection: FC = () => {
             <Row
                 justify='space-between'
                 gutter={16}
-                className={classnames(classes.cards, { [classes.collapsed]: collapsed })}
+                className={classnames(classes.cards, classes.antFixed, {
+                    [classes.collapsed]: collapsed,
+                })}
             >
                 <Col lg={8} md={8} xs={24} sm={24}>
                     <CardMainAction

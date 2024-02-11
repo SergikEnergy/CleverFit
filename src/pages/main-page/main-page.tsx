@@ -24,6 +24,7 @@ export const MainPage: FC = () => {
     useEffect(() => {
         if (window.innerWidth < 590) {
             setCollapseWidth(0);
+            setWidth(106);
         } else {
             setCollapseWidth(64);
         }
@@ -35,7 +36,7 @@ export const MainPage: FC = () => {
             style={{ background: `center / cover url(${BgImg}) no-repeat` }}
         >
             <Sider
-                className='navigation mobile__overlay'
+                className='navigation mobile__overlay antFixed'
                 collapsible
                 trigger={null}
                 theme='light'
