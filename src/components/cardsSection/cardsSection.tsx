@@ -7,12 +7,13 @@ import { ProfileIconComponent } from '@components/customIcon/profileIcon';
 import { primaryLight } from '@utils/constants/colors';
 
 import classes from './cardsSection.module.css';
+import classnames from 'classnames';
 
 export const CardsSection: FC = () => {
     const { collapsed } = useContext(CollapsedContext);
     return (
         <>
-            <Row className={`${classes.title} ${collapsed ? `${classes.collapsed}` : ''}`}>
+            <Row className={classnames(classes.title, { [classes.collapsed]: collapsed })}>
                 <Col>
                     <Typography.Title className={classes['title__text']}>
                         CleverFit — это не просто приложение, а твой личный помощник в&nbsp;мире
@@ -23,7 +24,7 @@ export const CardsSection: FC = () => {
             <Row
                 justify='space-between'
                 gutter={16}
-                className={`${classes.cards} ${collapsed ? `${classes.collapsed}` : ''}`}
+                className={classnames(classes.cards, { [classes.collapsed]: collapsed })}
             >
                 <Col lg={8} md={8} xs={24} sm={24}>
                     <CardMainAction

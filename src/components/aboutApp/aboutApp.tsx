@@ -3,11 +3,12 @@ import { FC, useContext } from 'react';
 import { CollapsedContext } from '../../reactContexts/collapse-context';
 import { Typography } from 'antd';
 import classes from './aboutApp.module.css';
+import classnames from 'classnames';
 
 export const AboutApp: FC = () => {
     const { collapsed } = useContext(CollapsedContext);
     return (
-        <div className={`${classes.about} ${collapsed ? `${classes.collapsed}` : ''}`}>
+        <div className={classnames(classes.about, { [classes.collapsed]: collapsed })}>
             <Typography.Text className={classes.line}>C CleverFit ты сможешь:</Typography.Text>
             <Typography.Text className={classes.line}>
                 — планировать свои тренировки на календаре, выбирая тип и&nbsp;уровень нагрузки;

@@ -2,14 +2,14 @@ import { FC } from 'react';
 import { useState, useEffect, useContext } from 'react';
 import { CollapsedContext } from '../../reactContexts/collapse-context';
 
-import { Layout as AntLayout } from 'antd';
-
-import './main-page.css';
 import { SideBar } from '@components/sidebar';
 import { Header } from '@components/header';
 import { MainContent } from '@components/mainContent';
 import { Footer } from '@components/footer';
 import { Switcher } from '@components/switcher/switcher';
+
+import { Layout as AntLayout } from 'antd';
+import './main-page.css';
 
 const { Header: AntHeader, Footer: AntFooter, Sider, Content } = AntLayout;
 import { primaryLight } from '../../utils/constants/colors';

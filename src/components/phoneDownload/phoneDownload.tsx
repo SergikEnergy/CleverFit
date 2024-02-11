@@ -5,18 +5,13 @@ import { Button, Divider } from 'antd';
 import { AppleFilled, AndroidFilled } from '@ant-design/icons';
 
 import classes from './phoneDownload.module.css';
+import classnames from 'classnames';
 
 export const PhoneDownload: FC = () => {
     const { collapsed } = useContext(CollapsedContext);
     return (
         <div className={classes.download}>
-            <div
-                className={
-                    !collapsed
-                        ? `${classes.description}`
-                        : `${classes.description} ${classes.collapsed}`
-                }
-            >
+            <div className={classnames(classes.description, { [classes.collapsed]: collapsed })}>
                 <div className={classes.title}>Скачать на телефон </div>
                 <div className={classes.text}>Доступно в PRO-тарифе</div>
             </div>

@@ -7,6 +7,7 @@ import Icon from '@ant-design/icons';
 import { ExitIcon } from '../customIcon/exitIcon';
 
 import classes from './exitUser.module.css';
+import classnames from 'classnames';
 
 const CustomExitIcon = (props: Partial<CustomIconComponentProps>) => (
     <Icon component={ExitIcon} {...props} />
@@ -22,11 +23,9 @@ export const ExitUser: FC = () => {
                 style={!collapsed ? { width: '100%' } : { width: '64px' }}
             >
                 <Menu.Item
-                    className={
-                        !collapsed
-                            ? classes['exit__item']
-                            : `${classes['exit__item']} ${classes.collapsed}`
-                    }
+                    className={classnames(classes['exit__item'], {
+                        [classes.collapsed]: collapsed,
+                    })}
                     key='exit'
                     icon={<CustomExitIcon className={classes['exit__icon']} />}
                 >

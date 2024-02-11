@@ -5,6 +5,7 @@ import { Button, Breadcrumb } from 'antd';
 import { SettingOutlined } from '@ant-design/icons';
 
 import classes from './header.module.css';
+import classnames from 'classnames';
 
 export const Header: FC = () => {
     const { collapsed } = useContext(CollapsedContext);
@@ -15,26 +16,24 @@ export const Header: FC = () => {
                     <Breadcrumb.Item>Главная</Breadcrumb.Item>
                 </Breadcrumb>
             </div>
-            <div className={`${classes.greeting} ${collapsed ? `${classes.collapsed}` : ''}`}>
+            <div className={classnames(classes.greeting, { [classes.collapsed]: collapsed })}>
                 <div
-                    className={`${classes['greeting__text']} ${
-                        collapsed ? `${classes.collapsed}` : ''
-                    }`}
+                    className={classnames(classes['greeting__text'], {
+                        [classes.collapsed]: collapsed,
+                    })}
                 >
                     Приветствуем тебя в&nbsp;CleverFit — приложении,
                     <pre
-                        className={`${classes.xlWidth} ${collapsed ? `${classes.collapsed}` : ''}`}
+                        className={classnames(classes.xlWidth, { [classes.collapsed]: collapsed })}
                     >
                         {'                   '}
                     </pre>{' '}
                     которое поможет тебе добиться своей мечты!
                 </div>
                 <div
-                    className={
-                        !collapsed
-                            ? classes['greeting__settings']
-                            : `${classes['greeting__settings']} ${classes.collapsed}`
-                    }
+                    className={classnames(classes['greeting__settings'], {
+                        [classes.collapsed]: collapsed,
+                    })}
                 >
                     <Button
                         className={classes['mobile__button']}
@@ -51,11 +50,9 @@ export const Header: FC = () => {
                         icon={<SettingOutlined />}
                     >
                         <span
-                            className={
-                                !collapsed
-                                    ? classes['button__text']
-                                    : `${classes['button__text']} ${classes.collapsed}`
-                            }
+                            className={classnames(classes['button__text'], {
+                                [classes.collapsed]: collapsed,
+                            })}
                         >
                             Настройки
                         </span>

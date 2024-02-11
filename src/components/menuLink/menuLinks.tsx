@@ -7,22 +7,19 @@ import { ProfileIconComponent } from '@components/customIcon/profileIcon';
 
 import { primaryLight } from '../../utils/constants/colors';
 import classes from './menuLinks.module.css';
+import classnames from 'classnames';
 
 export const MenuLinks: FC = () => {
     const { collapsed } = useContext(CollapsedContext);
 
     return (
         <Menu
-            className={!collapsed ? classes.menu : `${classes.menu} ${classes.collapsed}`}
+            className={classnames(classes.menu, { [classes.collapsed]: collapsed })}
             style={collapsed ? { width: '64px' } : { width: '100%' }}
             mode='inline'
         >
             <Menu.Item
-                className={
-                    !collapsed
-                        ? classes['menu__item']
-                        : `${classes['menu__item']} ${classes.collapsed}`
-                }
+                className={classnames(classes['menu__item'], { [classes.collapsed]: collapsed })}
                 key='calendar'
                 icon={
                     <CalendarTwoTone
@@ -31,18 +28,10 @@ export const MenuLinks: FC = () => {
                     />
                 }
             >
-                <Typography.Text
-                    className={!collapsed ? classes['menu__item_text'] : classes.hidden}
-                >
-                    Календарь
-                </Typography.Text>
+                <Typography.Text className={classes['menu__item_text']}>Календарь</Typography.Text>
             </Menu.Item>
             <Menu.Item
-                className={
-                    !collapsed
-                        ? classes['menu__item']
-                        : `${classes['menu__item']} ${classes.collapsed}`
-                }
+                className={classnames(classes['menu__item'], { [classes.collapsed]: collapsed })}
                 key='trains'
                 icon={
                     <HeartFilled
@@ -54,11 +43,7 @@ export const MenuLinks: FC = () => {
                 <Typography.Text className={classes['menu__item_text']}>Тренировки</Typography.Text>
             </Menu.Item>
             <Menu.Item
-                className={
-                    !collapsed
-                        ? classes['menu__item']
-                        : `${classes['menu__item']} ${classes.collapsed}`
-                }
+                className={classnames(classes['menu__item'], { [classes.collapsed]: collapsed })}
                 key='trophy'
                 icon={
                     <TrophyFilled
@@ -70,11 +55,7 @@ export const MenuLinks: FC = () => {
                 <Typography.Text className={classes['menu__item_text']}>Достижения</Typography.Text>
             </Menu.Item>
             <Menu.Item
-                className={
-                    !collapsed
-                        ? classes['menu__item']
-                        : `${classes['menu__item']} ${classes.collapsed}`
-                }
+                className={classnames(classes['menu__item'], { [classes.collapsed]: collapsed })}
                 key='profile'
                 icon={
                     <ProfileIconComponent

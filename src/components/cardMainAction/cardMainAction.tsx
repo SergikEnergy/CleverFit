@@ -3,6 +3,7 @@ import { FC, ReactNode, useContext } from 'react';
 import { CollapsedContext } from '../../reactContexts/collapse-context';
 
 import classes from './cardMainAction.module.css';
+import classnames from 'classnames';
 
 type CardMainActionProps = {
     body: string;
@@ -13,8 +14,8 @@ export const CardMainAction: FC<CardMainActionProps> = ({ body, action }) => {
     const { collapsed } = useContext(CollapsedContext);
 
     return (
-        <div className={!collapsed ? classes.card : `${classes.card} ${classes.collapsed}`}>
-            <div className={!collapsed ? classes.body : `${classes.body} ${classes.collapsed}`}>
+        <div className={classnames(classes.card, { [classes.collapsed]: collapsed })}>
+            <div className={classnames(classes.body, { [classes.collapsed]: collapsed })}>
                 {body}
             </div>
             <div className={classes.action}>{action}</div>
