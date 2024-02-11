@@ -1,5 +1,6 @@
 import { FC } from 'react';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
+import { CollapsedContext } from '../../reactContexts/collapse-context';
 
 import { Layout as AntLayout } from 'antd';
 
@@ -9,14 +10,13 @@ import { Header } from '@components/header';
 import { MainContent } from '@components/mainContent';
 import { Footer } from '@components/footer';
 import { Switcher } from '@components/switcher/switcher';
-import { useAppSelector } from '@hooks/typed-react-redux-hooks';
 
 const { Header: AntHeader, Footer: AntFooter, Sider, Content } = AntLayout;
 import { primaryLight } from '../../utils/constants/colors';
 import BgImg from '/images/mainBG.jpg';
 
 export const MainPage: FC = () => {
-    const collapsed = useAppSelector((state) => state.collapse.collapsed);
+    const { collapsed } = useContext(CollapsedContext);
 
     const [width, setWidth] = useState(208);
     const [collapseWidth, setCollapseWidth] = useState(64);

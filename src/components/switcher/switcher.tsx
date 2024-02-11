@@ -1,18 +1,18 @@
-import { FC } from 'react';
+import { FC, useContext } from 'react';
 
-import classes from './switcher.module.css';
+import { CollapsedContext } from '../../reactContexts/collapse-context';
 import { MenuFoldOutlined, MenuUnfoldOutlined } from '@ant-design/icons';
-import { useAppDispatch } from '@hooks/typed-react-redux-hooks';
-import { toggleCollapse } from '@redux/reducers/collapseMenu';
+import classes from './switcher.module.css';
 
 type SwitcherProps = {
     collapsed: boolean;
 };
 
 export const Switcher: FC<SwitcherProps> = ({ collapsed }) => {
-    const dispatch = useAppDispatch();
+    const { toggleCollapsed } = useContext(CollapsedContext);
+
     const toggleSider = () => {
-        dispatch(toggleCollapse());
+        toggleCollapsed();
     };
 
     return (

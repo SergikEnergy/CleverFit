@@ -1,12 +1,11 @@
-import { FC } from 'react';
+import { FC, useContext } from 'react';
 
-import { useAppSelector } from '@hooks/typed-react-redux-hooks';
-
+import { CollapsedContext } from '../../reactContexts/collapse-context';
 import classes from './reviews.module.css';
 import { Button } from 'antd';
 
 export const Reviews: FC = () => {
-    const collapsed = useAppSelector((state) => state.collapse.collapsed);
+    const { collapsed } = useContext(CollapsedContext);
     return (
         <div className={!collapsed ? classes.reviews : `${classes.reviews} ${classes.collapsed}`}>
             <Button className='' type='text' block>

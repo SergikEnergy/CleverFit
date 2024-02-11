@@ -1,4 +1,5 @@
-import { FC } from 'react';
+import { FC, useContext } from 'react';
+import { CollapsedContext } from '../../reactContexts/collapse-context';
 import { Col, Row, Typography, Button } from 'antd';
 import { HeartFilled, CalendarTwoTone } from '@ant-design/icons';
 import { CardMainAction } from '@components/cardMainAction';
@@ -6,10 +7,9 @@ import { ProfileIconComponent } from '@components/customIcon/profileIcon';
 import { primaryLight } from '@utils/constants/colors';
 
 import classes from './cardsSection.module.css';
-import { useAppSelector } from '@hooks/typed-react-redux-hooks';
 
 export const CardsSection: FC = () => {
-    const collapsed = useAppSelector((state) => state.collapse.collapsed);
+    const { collapsed } = useContext(CollapsedContext);
     return (
         <>
             <Row className={`${classes.title} ${collapsed ? `${classes.collapsed}` : ''}`}>

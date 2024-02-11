@@ -1,13 +1,13 @@
-import { FC } from 'react';
+import { FC, useContext } from 'react';
 
-import classes from './logo.module.css';
+import { CollapsedContext } from '../../reactContexts/collapse-context';
 import LogoIcon from '/images/LogoFit.svg';
 import LogoText from '/images/LogoText.svg';
 import LogoMobile from '/images/LogoMobile.svg';
-import { useAppSelector } from '@hooks/typed-react-redux-hooks';
+import classes from './logo.module.css';
 
 export const Logo: FC = () => {
-    const collapsed = useAppSelector((state) => state.collapse.collapsed);
+    const { collapsed } = useContext(CollapsedContext);
     return (
         <div className={!collapsed ? `${classes.logo}` : `${classes.logo} ${classes.collapsed}`}>
             <div className={classes.mobile}>

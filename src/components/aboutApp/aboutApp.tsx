@@ -1,11 +1,11 @@
-import { FC } from 'react';
+import { FC, useContext } from 'react';
 
-import { useAppSelector } from '@hooks/typed-react-redux-hooks';
+import { CollapsedContext } from '../../reactContexts/collapse-context';
 import { Typography } from 'antd';
 import classes from './aboutApp.module.css';
 
 export const AboutApp: FC = () => {
-    const collapsed = useAppSelector((state) => state.collapse.collapsed);
+    const { collapsed } = useContext(CollapsedContext);
     return (
         <div className={`${classes.about} ${collapsed ? `${classes.collapsed}` : ''}`}>
             <Typography.Text className={classes.line}>C CleverFit ты сможешь:</Typography.Text>

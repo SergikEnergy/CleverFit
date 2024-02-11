@@ -1,13 +1,13 @@
-import { FC } from 'react';
+import { FC, useContext } from 'react';
 
+import { CollapsedContext } from '../../reactContexts/collapse-context';
 import { Button, Divider } from 'antd';
 import { AppleFilled, AndroidFilled } from '@ant-design/icons';
 
 import classes from './phoneDownload.module.css';
-import { useAppSelector } from '@hooks/typed-react-redux-hooks';
 
 export const PhoneDownload: FC = () => {
-    const collapsed = useAppSelector((state) => state.collapse.collapsed);
+    const { collapsed } = useContext(CollapsedContext);
     return (
         <div className={classes.download}>
             <div

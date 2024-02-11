@@ -1,6 +1,6 @@
-import { FC, ReactNode } from 'react';
+import { FC, ReactNode, useContext } from 'react';
 
-import { useAppSelector } from '@hooks/typed-react-redux-hooks';
+import { CollapsedContext } from '../../reactContexts/collapse-context';
 
 import classes from './cardMainAction.module.css';
 
@@ -10,7 +10,7 @@ type CardMainActionProps = {
 };
 
 export const CardMainAction: FC<CardMainActionProps> = ({ body, action }) => {
-    const collapsed = useAppSelector((state) => state.collapse.collapsed);
+    const { collapsed } = useContext(CollapsedContext);
 
     return (
         <div className={!collapsed ? classes.card : `${classes.card} ${classes.collapsed}`}>

@@ -1,6 +1,6 @@
 import { createContext } from 'react';
 
-type CollapseContextType = {
+export type CollapseContextType = {
     collapsed: boolean;
     toggleCollapsed: () => void;
 };

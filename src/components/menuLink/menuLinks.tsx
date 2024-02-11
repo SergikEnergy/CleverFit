@@ -1,5 +1,6 @@
-import { FC } from 'react';
+import { FC, useContext } from 'react';
 
+import { CollapsedContext } from '../../reactContexts/collapse-context';
 import { Menu, Typography } from 'antd';
 import { CalendarTwoTone, HeartFilled, TrophyFilled } from '@ant-design/icons';
 import { ProfileIconComponent } from '@components/customIcon/profileIcon';
@@ -7,10 +8,8 @@ import { ProfileIconComponent } from '@components/customIcon/profileIcon';
 import { primaryLight } from '../../utils/constants/colors';
 import classes from './menuLinks.module.css';
 
-import { useAppSelector } from '@hooks/typed-react-redux-hooks';
-
 export const MenuLinks: FC = () => {
-    const collapsed = useAppSelector((state) => state.collapse.collapsed);
+    const { collapsed } = useContext(CollapsedContext);
 
     return (
         <Menu

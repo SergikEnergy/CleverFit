@@ -1,12 +1,13 @@
-import { FC } from 'react';
+import { FC, useContext } from 'react';
+
+import { CollapsedContext } from '../../reactContexts/collapse-context';
 import { Button, Breadcrumb } from 'antd';
 import { SettingOutlined } from '@ant-design/icons';
-import { useAppSelector } from '@hooks/typed-react-redux-hooks';
 
 import classes from './header.module.css';
 
 export const Header: FC = () => {
-    const collapsed = useAppSelector((state) => state.collapse.collapsed);
+    const { collapsed } = useContext(CollapsedContext);
     return (
         <div className={`${classes['header__wrapper']} wrapper`}>
             <div className={classes.navigation}>

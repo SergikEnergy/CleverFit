@@ -1,19 +1,19 @@
-import { FC } from 'react';
+import { FC, useContext } from 'react';
 
+import { CollapsedContext } from '../../reactContexts/collapse-context';
 import type { CustomIconComponentProps } from '@ant-design/icons/lib/components/Icon';
 import { Menu, Typography, Divider } from 'antd';
 import Icon from '@ant-design/icons';
 import { ExitIcon } from '../customIcon/exitIcon';
 
 import classes from './exitUser.module.css';
-import { useAppSelector } from '@hooks/typed-react-redux-hooks';
 
 const CustomExitIcon = (props: Partial<CustomIconComponentProps>) => (
     <Icon component={ExitIcon} {...props} />
 );
 
 export const ExitUser: FC = () => {
-    const collapsed = useAppSelector((state) => state.collapse.collapsed);
+    const { collapsed } = useContext(CollapsedContext);
     return (
         <>
             <Divider style={{ margin: 0 }} />

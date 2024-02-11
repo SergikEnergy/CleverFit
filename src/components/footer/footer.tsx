@@ -5,11 +5,9 @@ import { PhoneDownload } from '@components/phoneDownload';
 
 import classes from './footer.module.css';
 
-export const Footer: FC = () => {
-    return (
-        <div className={`${classes['footer__wrapper']} wrapper`}>
-            <Reviews />
-            <PhoneDownload />
-        </div>
-    );
-};
+export const Footer: FC = () => (
+    <div className={`${classes['footer__wrapper']} wrapper`}>
+        <Reviews />
+        <PhoneDownload />
+    </div>
+);
