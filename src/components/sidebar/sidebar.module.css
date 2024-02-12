@@ -1,0 +1,25 @@
+.sidebar {
+    min-height: 1024px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    flex-grow: 1;
+}
+
+@media screen and (max-width: 834px) {
+    .sidebar {
+        min-height: 1194px;
+    }
+}
+
+@media screen and (max-width: 680px) {
+    .sidebar {
+        min-height: 1300px;
+    }
+}
+@media screen and (max-width: 400px) {
+    .sidebar {
+        min-height: 100vh;
+    }
+}

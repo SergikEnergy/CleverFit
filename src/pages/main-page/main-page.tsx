@@ -1,34 +1,89 @@
-import React, { useState } from 'react';
+import { FC } from 'react';
+import { useState, useEffect, useContext } from 'react';
+import { CollapsedContext } from '../../reactContexts/collapse-context';
 
-import reactLogo from '/react.svg';
-import viteLogo from '/vite.svg';
-import tsLogo from '/ts.svg';
+import { SideBar } from '@components/sidebar';
+import { Header } from '@components/header';
+import { MainContent } from '@components/mainContent';
+import { Footer } from '@components/footer';
+import { Switcher } from '@components/switcher/switcher';
+
+import { Layout as AntLayout } from 'antd';
 import './main-page.css';
 
-export const MainPage: React.FC = () => {
-    const [count, setCount] = useState(0);
+const { Header: AntHeader, Footer: AntFooter, Sider, Content } = AntLayout;
+import { primaryLight } from '../../utils/constants/colors';
+import BgImg from '/images/mainBG.jpg';
+
+export const MainPage: FC = () => {
+    const { collapsed } = useContext(CollapsedContext);
+
+    const [width, setWidth] = useState(208);
+    const [collapseWidth, setCollapseWidth] = useState(64);
+
+    useEffect(() => {
+        if (window.innerWidth < 590) {
+            setCollapseWidth(0);
+            setWidth(106);
+        } else {
+            setCollapseWidth(64);
+        }
+    }, []);
 
     return (
-        <>
-            <div>
-                <a href='https://vitejs.dev' target='_blank'>
-                    <img src={viteLogo} className='logo' alt='Vite logo' />
-                </a>
-                <a href='https://react.dev' target='_blank'>
-                    <img src={reactLogo} className='logo react' alt='React logo' />
-                </a>
-                <a href='https://www.typescriptlang.org/' target='_blank'>
-                    <img src={tsLogo} className='logo' alt='TS logo' />
-                </a>
-            </div>
-            <h1>Vite + React + TS</h1>
-            <div className='card'>
-                <button onClick={() => setCount((count) => count + 1)}>count is {count}</button>
-                <p>
-                    Edit <code>src/pages/main-page.tsx</code> and save to test HMR
-                </p>
-            </div>
-            <p className='read-the-docs'>Click on the Vite and React logos to learn more</p>
-        </>
+        <AntLayout
+            className='main-page'
+            style={{ background: `center / cover url(${BgImg}) no-repeat` }}
+        >
+            <Sider
+                className='navigation mobile__overlay antFixed'
+                collapsible
+                trigger={null}
+                theme='light'
+                collapsed={collapsed}
+                width={!collapsed ? width : collapseWidth}
+                breakpoint={'md'}
+                onBreakpoint={(broken) => {
+                    if (broken) {
+                        setCollapseWidth(0);
+                        if (!collapsed) {
+                            setWidth(106);
+                        }
+                    } else {
+                        setWidth(208);
+                        setCollapseWidth(64);
+                    }
+                }}
+                collapsedWidth={collapseWidth}
+            >
+                <SideBar />
+                <Switcher collapsed={collapsed} />
+            </Sider>
+            <AntLayout
+                className='main-content'
+                style={{
+                    background: 'transparent',
+                }}
+            >
+                <AntHeader
+                    className={!collapsed ? 'header' : 'header collapsed'}
+                    style={{
+                        padding: 0,
+                        background: `${primaryLight.primaryLight1}`,
+                    }}
+                >
+                    <Header />
+                </AntHeader>
+                <Content style={{ background: 'transparent' }}>
+                    <MainContent />
+                    <AntFooter
+                        className={!collapsed ? 'footer' : 'footer collapsed'}
+                        style={{ padding: 0, background: 'transparent' }}
+                    >
+                        <Footer />
+                    </AntFooter>
+                </Content>
+            </AntLayout>
+        </AntLayout>
     );
 };

@@ -1,0 +1,40 @@
+.switcher {
+    width: 20px;
+    height: 66px;
+    position: absolute;
+    top: 50%;
+    right: -9%;
+    transform: translateY(-50%);
+    z-index: 99;
+    background-color: var(--character-light-primary-inverse);
+    clip-path: polygon(100% 10%, 100% 90%, 0 100%, 0 0);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all easy 0.1s;
+}
+
+.collapsed {
+    right: -29%;
+}
+
+@media screen and (max-width: 710px) {
+    .switcher {
+        right: -18%;
+    }
+    .collapsed {
+        right: -20px;
+    }
+}
+
+@media screen and (max-width: 400px) {
+    .switcher {
+        width: 32px;
+        height: 48px;
+        right: -29%;
+        top: 7.5%;
+    }
+    .collapsed {
+        right: -33px;
+    }
+}

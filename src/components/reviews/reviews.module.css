@@ -1,0 +1,37 @@
+.reviews {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.reviews > button {
+    display: inline-block;
+    width: 100%;
+    margin: 4px 10px 3px 17px;
+    padding: 0;
+    border: none;
+}
+
+.reviews > button > span {
+    font-family: var(--font-family);
+    font-weight: 400;
+    font-size: 1.6rem;
+    line-height: 130%;
+    text-align: center;
+    color: var(--primary-light-6);
+}
+
+@media screen and (max-width: 834px) {
+    .reviews {
+        margin-left: 1.4rem;
+    }
+    .reviews.collapsed {
+        margin-bottom: 2px;
+        margin-left: 0.8rem;
+    }
+}
+@media screen and (max-width: 400px) {
+    .reviews > button {
+        margin: 7px 16px 0px 7px;
+    }
+}
