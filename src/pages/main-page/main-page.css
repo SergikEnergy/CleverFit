@@ -53,13 +53,10 @@ header.header {
         position: fixed;
         top: 0;
         left: 0;
-        height: 640px;
         width: 106px;
         z-index: 100;
     }
-}
 
-@media screen and (max-width: 550px) {
     header.header {
         min-height: 166px;
         height: 166px;

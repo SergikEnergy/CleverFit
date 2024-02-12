@@ -18,8 +18,8 @@
         min-height: 1300px;
     }
 }
-@media screen and (max-width: 680px) {
+@media screen and (max-width: 400px) {
     .sidebar {
-        min-height: 644px;
+        min-height: 100vh;
     }
 }

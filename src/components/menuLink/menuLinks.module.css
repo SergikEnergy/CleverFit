@@ -1,4 +1,5 @@
-.menu {
+.menu,
+.menu.antFixed {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
