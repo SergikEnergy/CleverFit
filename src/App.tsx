@@ -1,12 +1,6 @@
 import { FC } from 'react';
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { HistoryRouter } from 'redux-first-history/rr6';
+import { history } from '@redux/configure-store';
+import { routes } from './routes/routes';
 
-import { MainPage } from './pages';
-
-export const App: FC = () => (
-    <BrowserRouter>
-        <Routes>
-            <Route path='/' element={<MainPage />} />
-        </Routes>
-    </BrowserRouter>
-);
+export const App: FC = () => <HistoryRouter history={history}>{routes}</HistoryRouter>;
