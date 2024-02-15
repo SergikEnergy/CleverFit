@@ -8,7 +8,6 @@ import './entry-page.css';
 
 export const EntryPage: FC = () => {
     const { isLoading } = useContext(LoaderStateContext);
-    console.log(isLoading);
     return (
         <LoaderContextProvider>
             <div className='entry-page'>Welcome to the Entry page</div>

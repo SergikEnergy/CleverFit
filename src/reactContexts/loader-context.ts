@@ -6,7 +6,7 @@ export type LoaderContextType = {
     stopLoader: () => void;
 };
 
-export const LoaderStateContext = createContext<LoaderContextType>({
+const initialContext: LoaderContextType = {
     isLoading: false,
     startLoader: () => {
         return;
@@ -14,4 +14,6 @@ export const LoaderStateContext = createContext<LoaderContextType>({
     stopLoader: () => {
         return;
     },
-});
+};
+
+export const LoaderStateContext = createContext<LoaderContextType>(initialContext);

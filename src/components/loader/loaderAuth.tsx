@@ -1,6 +1,8 @@
-import { FC, useContext } from 'react';
+import { FC, ReactNode, useContext } from 'react';
 
 import { LoaderStateContext } from '../../reactContexts/loader-context';
+import { LottieAuthSlider } from './lotties/lottieSliderAuth';
+
 import { Modal } from 'antd';
 import classes from './loaderAuth.module.css';
 import classnames from 'classnames';
@@ -26,7 +28,9 @@ export const LoaderAuth: FC = () => {
             closable={false}
             centered
         >
-            <div className={classes.loader}>Loading...</div>
+            <div className={classes.loader}>
+                <LottieAuthSlider />
+            </div>
         </Modal>
     );
 };
