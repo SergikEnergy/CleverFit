@@ -1,0 +1,25 @@
+.modal.antFixed,
+.modal {
+    background: transparent;
+    filter: blur(1);
+    width: 150px;
+    height: 150px;
+}
+
+.modal.antFixed div,
+.modal div {
+    background: transparent;
+}
+
+:global(.ant-modal).antFixed div {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.loader {
+    width: 150px;
+    height: 150px;
+    margin: auto;
+    text-align: center;
+}

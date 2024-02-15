@@ -1,12 +1,18 @@
-import { FC } from 'react';
-import { FormTypeContextProvider } from '../../reactContexts/formTypeContextProvider';
+import { FC, useContext } from 'react';
+import { LoaderContextProvider } from '../../reactContexts/loaderStateContextProvider';
+import { LoaderStateContext } from '../../reactContexts/loader-context';
+
+import { LoaderAuth } from '@components/loader';
 
 import './entry-page.css';
 
 export const EntryPage: FC = () => {
+    const { isLoading } = useContext(LoaderStateContext);
+    console.log(isLoading);
     return (
-        <FormTypeContextProvider>
+        <LoaderContextProvider>
             <div className='entry-page'>Welcome to the Entry page</div>
-        </FormTypeContextProvider>
+            {isLoading && <LoaderAuth />}
+        </LoaderContextProvider>
     );
 };
