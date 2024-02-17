@@ -1,9 +1,8 @@
-.register {
+.login {
     width: 539px;
     background-color: var(--neutral-gray-1, #fff);
     border-radius: 2px;
     min-height: 742px;
-    margin: 0 auto;
 }
 
 .wrapper {
@@ -13,4 +12,28 @@
     flex-direction: column;
     align-items: center;
     justify-content: flex-start;
+}
+
+@media screen and (max-width: 834px) {
+    .login {
+        margin-top: 2rem;
+    }
+}
+
+@media screen and (max-width: 590px) {
+    .login {
+        width: 328px;
+        min-height: 564px;
+        margin-top: 0px;
+    }
+    .wrapper {
+        max-width: 91%;
+    }
+}
+
+@media screen and (max-width: 360px) {
+    .login {
+        margin-top: 9rem;
+        min-height: 612px;
+    }
 }

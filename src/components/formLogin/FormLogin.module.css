@@ -15,8 +15,8 @@
     line-height: 130%;
 }
 
-form > div:not(:first-child) {
-    margin-bottom: 40px;
+div.password-wrapper.antFixed {
+    margin-bottom: 48px;
 }
 
 .input.antFixed,
@@ -29,22 +29,22 @@ form > div:not(:first-child) {
     background: var(--character-light-table-header);
 }
 
-:global(#registrationForm_password_help > div) {
+:global(#loginForm_password_help > div) {
     font-size: 12px;
     text-align: start;
     color: var(--character-light-secondary-45);
 }
 
-:global(#registrationForm_userEmail.ant-input-status-error) {
+:global(#loginForm_userEmail.ant-input-status-error) {
     border-left-color: var(--character-light-border);
     box-shadow: none;
 }
-:global(#registrationForm_userEmail.ant-input-status-success) {
+:global(#loginForm_userEmail.ant-input-status-success) {
     box-shadow: none;
     border-color: var(--character-light-border);
 }
 
-:global(#registrationForm_password_help > div.ant-form-item-explain-error) {
+:global(#loginForm_password_help > div.ant-form-item-explain-error) {
     font-size: 12px;
     color: var(--character-light-error);
 }
@@ -53,7 +53,7 @@ div.checkbox-wrapper {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    margin-bottom: 24px;
+    margin-bottom: 20px;
 }
 
 .checkbox-text {
@@ -67,7 +67,7 @@ div.checkbox-wrapper {
 }
 
 .submit-block.antFixed {
-    margin-bottom: 16px;
+    margin-bottom: 8px;
 }
 
 .submit-button.antFixed {
@@ -78,4 +78,31 @@ div.checkbox-wrapper {
 .google-button.antFixed {
     font-size: 16px;
     color: var(--character-light-title-85);
+}
+
+@media screen and (max-width: 360px) {
+    .submit-button.antFixed {
+        font-size: 14px;
+    }
+
+    .google-button.antFixed {
+        font-size: 14px;
+    }
+    .google-icon.antFixed {
+        display: none;
+    }
+    .form:global(.ant-form) {
+        margin-top: 9px;
+    }
+    div.checkbox-wrapper {
+        font-size: 14px;
+        margin-bottom: 15px;
+    }
+    .forgot-link {
+        font-size: 14px;
+        margin-right: 8px;
+    }
+    div.password-wrapper.antFixed {
+        margin-bottom: 45px;
+    }
 }

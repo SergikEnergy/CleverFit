@@ -21,6 +21,9 @@
     .blur-background {
         min-height: 1194px;
     }
+    .blur-background {
+        align-items: flex-start;
+    }
 }
 
 @media screen and (max-width: 360px) {

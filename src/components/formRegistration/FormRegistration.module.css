@@ -15,7 +15,7 @@
     margin-bottom: 24px;
 }
 
-form > div:not(:first-child) {
+.form > div:not(:first-child) {
     margin-bottom: 47px;
 }
 
@@ -71,10 +71,17 @@ span.input input {
     color: var(--character-light-title-85);
 }
 
-@media screen and (max-width: 360px) {
-    form > div:not(:first-child) {
-        padding-bottom: 5px;
+@media screen and (max-width: 834px) {
+    div.confirm-field.antFixed {
+        margin-bottom: 6rem;
     }
+
+    div.submit-block.antFixed {
+        margin-bottom: 1.8rem;
+    }
+}
+
+@media screen and (max-width: 360px) {
     .confirm-field.antFixed {
         margin-bottom: 5rem;
     }
@@ -88,7 +95,7 @@ span.input input {
     .submit-block.antFixed {
         margin-bottom: 13px;
     }
-    form > div:not(:first-child) {
+    .form > div:not(:first-child) {
         margin-bottom: 25px;
     }
 }

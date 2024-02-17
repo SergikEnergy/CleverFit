@@ -46,7 +46,7 @@ export const FormLogin: FC = () => {
         <Form
             onFieldsChange={handleFormChanged}
             form={form}
-            name='registrationForm'
+            name='loginForm'
             style={{ width: '100%' }}
             autoComplete='off'
             onFinish={handleSubmit}
@@ -73,6 +73,7 @@ export const FormLogin: FC = () => {
             </Form.Item>
             <Form.Item<FieldType>
                 help={isPasswordHelperVisible ? passwordErrorMessage : ''}
+                className={classnames(classes['password-wrapper'], classes.antFixed)}
                 name='password'
                 rules={[
                     {
@@ -120,7 +121,11 @@ export const FormLogin: FC = () => {
                 <Button
                     type='default'
                     block
-                    icon={<GooglePlusOutlined />}
+                    icon={
+                        <GooglePlusOutlined
+                            className={classnames(classes['google-icon'], classes.antFixed)}
+                        />
+                    }
                     size='large'
                     className={classnames(classes['google-button'], classes.antFixed)}
                 >
