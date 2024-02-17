@@ -1,0 +1,44 @@
+.logo {
+    margin-top: 6.4rem;
+    margin-bottom: 4.8rem;
+}
+
+.logo > img {
+    display: inline-block;
+    width: 309px;
+    height: 76px;
+}
+
+.buttons {
+    display: flex;
+    width: 100%;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 24px;
+}
+
+.buttons button {
+    font-family: var(--font-family);
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 130%;
+    color: var(--character-light-title-85);
+    width: 50%;
+    border: none;
+    outline: none;
+    border-bottom: 1px solid var(--character-light-dividers);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-top: 16px;
+    padding-bottom: 16px;
+    height: 46px;
+}
+button > span {
+    display: inline-block;
+}
+
+.buttons button.active {
+    color: var(--primary-light-6);
+    border-bottom: 2px solid var(--primary-light-6);
+}

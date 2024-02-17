@@ -17,11 +17,10 @@ export const LoaderAuth: FC = () => {
     return (
         <Modal
             open={isLoading}
-            style={{ width: '150px', height: '150px' }}
+            style={{ width: '150px', height: '150px', backdropFilter: 'blur(3px)' }}
             className={classnames(classes.modal, classes.antFixed)}
             maskStyle={{
                 background: 'var(--primary-light-8), rgba(0, 0, 0, 0.65)',
-                backdropFilter: 'blur(3px)',
             }}
             bodyStyle={{ padding: 0, background: 'transparent' }}
             footer={null}

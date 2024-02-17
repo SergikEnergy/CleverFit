@@ -1,1 +1,1 @@
-export { EntryPage } from './entry-page';
+export { EntryPageLayout } from './entryPageLayout';

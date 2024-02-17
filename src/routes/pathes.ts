@@ -1,8 +1,7 @@
 export const enum Paths {
-    AUTH = '/auth',
-    AUTH_GOOGLE = '/auth/google',
-    AUTH_LOGIN = '/auth/login',
-    AUTH_REGISTRATION = '/auth/registration',
-
+    AUTH = '/',
+    AUTH_GOOGLE = '/google',
+    AUTH_LOGIN = '/login',
+    AUTH_REGISTRATION = '/registration',
     MAIN_PAGE = '/main',
 }

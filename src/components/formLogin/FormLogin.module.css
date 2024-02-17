@@ -1,0 +1,81 @@
+.form {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 8px;
+}
+
+.form > div {
+    width: 100%;
+    font-family: var(--font-family);
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 130%;
+}
+
+form > div:not(:first-child) {
+    margin-bottom: 40px;
+}
+
+.input.antFixed,
+.wrapper__email :global(span.ant-input-group-addon) {
+    color: var(--character-light-title-85);
+}
+
+.input :global(span.ant-input-group-addon) {
+    border-right: none;
+    background: var(--character-light-table-header);
+}
+
+:global(#registrationForm_password_help > div) {
+    font-size: 12px;
+    text-align: start;
+    color: var(--character-light-secondary-45);
+}
+
+:global(#registrationForm_userEmail.ant-input-status-error) {
+    border-left-color: var(--character-light-border);
+    box-shadow: none;
+}
+:global(#registrationForm_userEmail.ant-input-status-success) {
+    box-shadow: none;
+    border-color: var(--character-light-border);
+}
+
+:global(#registrationForm_password_help > div.ant-form-item-explain-error) {
+    font-size: 12px;
+    color: var(--character-light-error);
+}
+
+div.checkbox-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 24px;
+}
+
+.checkbox-text {
+    color: rgba(0, 0, 0, 0.85);
+}
+
+.forgot-link {
+    font-size: 16px;
+    text-align: center;
+    color: var(--primary-light-6);
+}
+
+.submit-block.antFixed {
+    margin-bottom: 16px;
+}
+
+.submit-button.antFixed {
+    font-size: 16px;
+    color: var(--character-light-primary-inverse);
+}
+
+.google-button.antFixed {
+    font-size: 16px;
+    color: var(--character-light-title-85);
+}
