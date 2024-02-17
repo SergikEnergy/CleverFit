@@ -16,6 +16,8 @@ type FieldType = {
 
 export const FormRegistration: FC = () => {
     const [isPasswordHelperVisible, setIsPasswordHelperVisible] = useState(false);
+    const [passPlaceholderVisible, setPassPlaceholderVisible] = useState(true);
+    const [confirmPlaceholderVisible, setConfirmPlaceholderVisible] = useState(true);
     const [disabledSubmit, setDisabledSubmit] = useState(false);
     const [form] = Form.useForm();
 
@@ -75,6 +77,10 @@ export const FormRegistration: FC = () => {
                 ]}
             >
                 <Input.Password
+                    placeholder={passPlaceholderVisible ? 'Пароль' : ''}
+                    onChange={() => {
+                        setPassPlaceholderVisible(false);
+                    }}
                     style={{ outline: 'none' }}
                     className={classnames(classes.input, classes.antFixed)}
                     onFocus={() => {
@@ -85,7 +91,7 @@ export const FormRegistration: FC = () => {
             </Form.Item>
             <Form.Item<FieldType>
                 name='confirmPassword'
-                style={{ marginBottom: '62px' }}
+                className={classnames(classes.antFixed, classes['confirm-field'])}
                 rules={[
                     {
                         required: true,
@@ -102,7 +108,11 @@ export const FormRegistration: FC = () => {
                 ]}
             >
                 <Input.Password
+                    placeholder={confirmPlaceholderVisible ? 'Повторите пароль' : ''}
                     style={{ outline: 'none' }}
+                    onChange={() => {
+                        setConfirmPlaceholderVisible(false);
+                    }}
                     className={classnames(classes.input, classes.antFixed)}
                     iconRender={(visible) => (visible ? <EyeTwoTone /> : <EyeInvisibleOutlined />)}
                 />
@@ -123,11 +133,15 @@ export const FormRegistration: FC = () => {
                 <Button
                     type='default'
                     block
-                    icon={<GooglePlusOutlined />}
+                    icon={
+                        <GooglePlusOutlined
+                            className={classnames(classes['google-icon'], classes.antFixed)}
+                        />
+                    }
                     size='large'
                     className={classnames(classes['google-button'], classes.antFixed)}
                 >
-                    Войти через Google
+                    Регистрация через Google
                 </Button>
             </Form.Item>
         </Form>

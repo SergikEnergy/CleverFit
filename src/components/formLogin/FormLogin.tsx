@@ -16,6 +16,7 @@ type FieldType = {
 
 export const FormLogin: FC = () => {
     const [isPasswordHelperVisible, setIsPasswordHelperVisible] = useState(false);
+    const [passPlaceholderVisible, setPassPlaceholderVisible] = useState(true);
     const [disabledSubmit, setDisabledSubmit] = useState(false);
     const [form] = Form.useForm();
 
@@ -82,6 +83,7 @@ export const FormLogin: FC = () => {
                 ]}
             >
                 <Input.Password
+                    placeholder={passPlaceholderVisible ? 'Пароль' : ''}
                     size='large'
                     style={{ outline: 'none' }}
                     className={classnames(classes.input, classes.antFixed)}

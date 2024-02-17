@@ -2,8 +2,7 @@
     width: 539px;
     background-color: var(--neutral-gray-1, #fff);
     border-radius: 2px;
-    min-height: 742px;
-    margin: 0 auto;
+    min-height: 686px;
 }
 
 .wrapper {
@@ -13,4 +12,27 @@
     flex-direction: column;
     align-items: center;
     justify-content: flex-start;
+}
+
+@media screen and (max-width: 834px) {
+    .register {
+        margin-top: 120px;
+    }
+}
+
+@media screen and (max-width: 590px) {
+    .register {
+        width: 328px;
+        min-height: 564px;
+        margin-top: 0px;
+    }
+    .wrapper {
+        max-width: 91%;
+    }
+}
+
+@media screen and (max-width: 360px) {
+    .register {
+        margin-top: 11.5rem;
+    }
 }

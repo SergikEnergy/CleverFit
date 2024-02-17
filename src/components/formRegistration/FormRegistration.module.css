@@ -4,7 +4,6 @@
     flex-direction: column;
     align-items: center;
     justify-content: flex-start;
-    gap: 8px;
 }
 
 .form > div {
@@ -13,10 +12,11 @@
     font-weight: 400;
     font-size: 14px;
     line-height: 130%;
+    margin-bottom: 24px;
 }
 
 form > div:not(:first-child) {
-    margin-bottom: 40px;
+    margin-bottom: 47px;
 }
 
 .input.antFixed,
@@ -26,13 +26,16 @@ form > div:not(:first-child) {
 
 .input.antFixed,
 span.input input {
-    padding-top: 11px;
-    padding-bottom: 11px;
+    padding-top: 8px;
+    padding-bottom: 8px;
 }
 
 .input :global(span.ant-input-group-addon) {
     border-right: none;
     background: var(--character-light-table-header);
+}
+.confirm-field.antFixed {
+    margin-bottom: 62px;
 }
 
 :global(#registrationForm_password_help > div),
@@ -59,9 +62,6 @@ span.input input {
 
 .submit-block.antFixed {
     margin-bottom: 16px;
-}
-
-.submit-button.antFixed {
     font-size: 16px;
     color: var(--character-light-primary-inverse);
 }
@@ -69,4 +69,26 @@ span.input input {
 .google-button.antFixed {
     font-size: 16px;
     color: var(--character-light-title-85);
+}
+
+@media screen and (max-width: 360px) {
+    form > div:not(:first-child) {
+        padding-bottom: 5px;
+    }
+    .confirm-field.antFixed {
+        margin-bottom: 5rem;
+    }
+    .google-icon.antFixed {
+        display: none;
+    }
+    .submit-block.antFixed,
+    .google-button.antFixed {
+        font-size: 14px;
+    }
+    .submit-block.antFixed {
+        margin-bottom: 13px;
+    }
+    form > div:not(:first-child) {
+        margin-bottom: 25px;
+    }
 }

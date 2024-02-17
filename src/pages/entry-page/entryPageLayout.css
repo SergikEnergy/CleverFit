@@ -12,6 +12,23 @@
     height: 100%;
     min-height: 1024px;
     display: flex;
-    align-items: center;
     justify-content: center;
+    align-items: center;
+}
+
+@media screen and (max-width: 834px) {
+    .entry-page,
+    .blur-background {
+        min-height: 1194px;
+    }
+}
+
+@media screen and (max-width: 360px) {
+    .blur-background {
+        align-items: flex-start;
+        min-height: 800px;
+    }
+    .entry-page {
+        min-height: 800px;
+    }
 }

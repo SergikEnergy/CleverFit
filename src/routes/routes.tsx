@@ -9,7 +9,7 @@ import { LoginPage } from '@pages/entry-page/login';
 export const routes = (
     <Routes>
         <Route path={Paths.AUTH} element={<EntryPageLayout />}>
-            <Route index element={<RegisterPage />} />
+            <Route index element={<LoginPage />} />
             <Route path={Paths.AUTH_REGISTRATION} element={<RegisterPage />} />
             <Route path={Paths.AUTH_LOGIN} element={<LoginPage />} />
             <Route />
