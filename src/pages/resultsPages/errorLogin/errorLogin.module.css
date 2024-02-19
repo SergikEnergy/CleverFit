@@ -1,0 +1,54 @@
+.errorsLogin {
+    border-radius: 2px;
+    padding: 64px 32px;
+    width: 539px;
+    height: 345px;
+    box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.15);
+    background: var(--character-light-primary-inverse);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.errorsLogin :global(.ant-result) {
+    padding: 0;
+    width: 368px;
+    font-family: var(--font-family);
+    color: var(--character-light-title-85);
+}
+
+.errorsLogin :global(.ant-result-title) {
+    font-weight: 500;
+    font-size: 2.4rem;
+    line-height: 130%;
+}
+
+.errorsLogin :global(.ant-result-icon) {
+    margin-bottom: 35px;
+}
+
+.errorsLogin :global(.ant-result-subtitle) {
+    font-weight: 400;
+    font-size: 1.4rem;
+    line-height: 130%;
+    color: var(--character-light-secondary-45);
+}
+
+.errorsLogin :global(.ant-result-extra) > button > span {
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 130%;
+}
+
+@media screen and (max-width: 550px) {
+    .errorsLogin {
+        width: 328px;
+        height: 281px;
+    }
+    .errorsLogin :global(.ant-result) {
+        width: 296px;
+    }
+    .errorsLogin :global(.ant-result-subtitle) {
+        white-space: nowrap;
+    }
+}

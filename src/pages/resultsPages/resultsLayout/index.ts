@@ -1,0 +1,1 @@
+export { ResultsPageLayout } from './resultsLayout';
