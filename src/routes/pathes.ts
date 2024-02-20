@@ -9,7 +9,7 @@ export const enum Paths {
     ERROR_LOGIN = '/result/error-login',
     SUCCESS_REGISTRATION = '/result/success',
     SUCCESS_CHANGE_PASSWORD = '/result/success-change-password',
-    ERROR_NO_DATA_409 = '/result/error-user-exist',
+    ERROR_NO_USER_409 = '/result/error-user-exist',
     ERROR_OTHERS = '/result/error',
     ERROR_NO_EMAIL_AND_404 = '/result/error-check-email-no-exist',
     ERROR_CHECK_EMAIL = '/result/error-check-email',

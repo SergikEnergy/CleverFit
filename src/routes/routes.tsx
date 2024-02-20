@@ -8,6 +8,7 @@ import { LoginPage } from '@pages/entry-page/login';
 import { ResultsPageLayout } from '@pages/resultsPages/resultsLayout';
 import { ErrorLoginPage } from '@pages/resultsPages/errorLogin';
 import { SuccessRegisterPage } from '@pages/resultsPages/successRegister';
+import { ErrorUserExistPage } from '@pages/resultsPages/errorUserExist';
 
 export const routes = (
     <Routes>
@@ -20,6 +21,7 @@ export const routes = (
         <Route path={Paths.RESULT} element={<ResultsPageLayout />}>
             <Route path={Paths.ERROR_LOGIN} element={<ErrorLoginPage />} />
             <Route path={Paths.SUCCESS_REGISTRATION} element={<SuccessRegisterPage />} />
+            <Route path={Paths.ERROR_NO_USER_409} element={<ErrorUserExistPage />} />
         </Route>
     </Routes>
 );
