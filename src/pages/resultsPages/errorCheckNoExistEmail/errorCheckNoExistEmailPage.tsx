@@ -4,12 +4,11 @@ import { ResultsWrapper } from '@view/resultsWrapper';
 import { Button, Result } from 'antd';
 
 export const ErrorCheckNoExistEmailPage: FC = () => {
-    const title = 'Данные не сохранились';
-    const subTitle =
-        'Такой e-mail уже записан в системе. Попробуйте зарегистрироваться по другому e-mail.';
-    const buttonText = 'Назад к регистрации';
+    const title = 'Такой e-mail не зарегистрирован';
+    const subTitle = 'Мы не нашли в базе вашего e-mail. Попробуйте войти с\u00A0другим e-mail.';
+    const buttonText = 'Попробовать снова';
     const status = 'error';
-    const buttonKey = 'user already exist auth';
+    const buttonKey = 'e-mail not found auth';
     return (
         <ResultsWrapper>
             <Result

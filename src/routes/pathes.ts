@@ -2,7 +2,7 @@ export const enum Paths {
     AUTH = '/auth',
     AUTH_GOOGLE = '/google',
     AUTH_REGISTRATION = '/auth/registration',
-    AUTH_REBOOT_PASS = '/auth/confirm-email',
+    AUTH_CONFIRM_PASS = '/auth/confirm-email',
     AUTH_CHANGE_PASS = '/auth/change-password',
     MAIN_PAGE = '/main',
     RESULT = '/result',

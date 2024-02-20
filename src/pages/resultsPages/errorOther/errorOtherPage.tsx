@@ -3,7 +3,7 @@ import { FC } from 'react';
 import { ResultsWrapper } from '@view/resultsWrapper';
 import { Button, Result } from 'antd';
 
-export const errorOtherPage: FC = () => {
+export const ErrorOtherPage: FC = () => {
     const title = 'Данные не сохранились';
     const subTitle =
         'Что-то пошло не так и ваша регистрация не\u00A0завершилась. Попробуйте ещё раз.';

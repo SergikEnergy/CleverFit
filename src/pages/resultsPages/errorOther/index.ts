@@ -1,1 +1,1 @@
-export { errorOtherPage } from './errorOtherPage';
+export { ErrorOtherPage } from './errorOtherPage';
