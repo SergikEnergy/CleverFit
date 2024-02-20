@@ -22,7 +22,7 @@ export const FormRegistration: FC = () => {
     const [form] = Form.useForm();
 
     const passwordErrorMessage = 'Пароль не менее 8 символов, с заглавной буквой и цифрой';
-    const matchedErrorMessage = 'Пароль не совпадают';
+    const matchedErrorMessage = 'Пароли не совпадают';
 
     const handleSubmit = (values: any) => {
         console.log(values);
