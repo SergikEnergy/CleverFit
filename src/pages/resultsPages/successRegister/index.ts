@@ -1,0 +1,1 @@
+export { SuccessRegisterPage } from './successRegisterPage';

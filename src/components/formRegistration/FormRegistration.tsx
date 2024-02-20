@@ -71,7 +71,7 @@ export const FormRegistration: FC = () => {
                 rules={[
                     {
                         required: true,
-                        pattern: new RegExp(/^(?=.*[A-Z])(?=.*\d).{8,}$/),
+                        pattern: new RegExp(/^(?=.*[A-Z])(?=.*\d)[A-Za-z\d]{8,}$/),
                         message: passwordErrorMessage,
                     },
                 ]}

@@ -1,7 +1,7 @@
 import { FC } from 'react';
 
 import { Button, Result } from 'antd';
-import classes from './errorLogin.module.css';
+import classes from './errorLoginPage.module.css';
 
 export const ErrorLoginPage: FC = () => {
     const title = 'Вход не выполнен';
@@ -14,7 +14,7 @@ export const ErrorLoginPage: FC = () => {
                 title={title}
                 subTitle={subTitle}
                 extra={
-                    <Button size='large' type='primary' block key='failed auth'>
+                    <Button size='large' type='primary' block key='failed auth' htmlType='button'>
                         Повторить
                     </Button>
                 }

@@ -1,8 +1,8 @@
-.errorsLogin {
+.successLogin {
     border-radius: 2px;
     padding: 64px 32px;
     width: 539px;
-    height: 345px;
+    height: 363px;
     box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.15);
     background: var(--character-light-primary-inverse);
     display: flex;
@@ -10,45 +10,53 @@
     justify-content: center;
 }
 
-.errorsLogin :global(.ant-result) {
+.successLogin :global(.ant-result) {
     padding: 0;
     width: 368px;
     font-family: var(--font-family);
     color: var(--character-light-title-85);
 }
 
-.errorsLogin :global(.ant-result-title) {
+.successLogin :global(.ant-result-title) {
     font-weight: 500;
     font-size: 2.4rem;
     line-height: 130%;
+    font-family: var(--font-family);
 }
 
-.errorsLogin :global(.ant-result-icon) {
+.successLogin :global(.ant-result-icon) {
     margin-bottom: 35px;
 }
 
-.errorsLogin :global(.ant-result-subtitle) {
+.successLogin :global(.ant-result-subtitle) {
     font-weight: 400;
     font-size: 1.4rem;
     line-height: 130%;
     color: var(--character-light-secondary-45);
 }
 
-.errorsLogin :global(.ant-result-extra) > button > span {
+.successLogin :global(.ant-result-extra) > button > span {
     font-weight: 400;
     font-size: 14px;
     line-height: 130%;
 }
+.successLogin :global(.ant-btn-primary) {
+    box-shadow: 0 2px 0 0 rgba(0, 0, 0, 0.04);
+    background: var(--primary-light-6);
+    border: 1px solid var(--primary-light-6);
+    border-radius: 2px;
+}
 
 @media screen and (max-width: 550px) {
-    .errorsLogin {
+    .successLogin {
         width: 328px;
-        height: 281px;
+        height: 317px;
+        padding: 64px 10px;
     }
-    .errorsLogin :global(.ant-result) {
+    .successLogin :global(.ant-result) {
         width: 296px;
     }
-    .errorsLogin :global(.ant-result-subtitle) {
-        white-space: nowrap;
+    .successLogin :global(.ant-result-icon) {
+        margin-bottom: 32px;
     }
 }

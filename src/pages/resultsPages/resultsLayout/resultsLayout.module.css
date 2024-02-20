@@ -16,7 +16,7 @@
     align-items: center;
 }
 
-@media screen and (max-width: 833px) {
+@media screen and (max-width: 834px) {
     .blur-background,
     .results-page {
         min-height: 1194px;

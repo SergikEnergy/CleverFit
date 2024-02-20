@@ -7,6 +7,7 @@ import { RegisterPage } from '@pages/entry-page/register';
 import { LoginPage } from '@pages/entry-page/login';
 import { ResultsPageLayout } from '@pages/resultsPages/resultsLayout';
 import { ErrorLoginPage } from '@pages/resultsPages/errorLogin';
+import { SuccessRegisterPage } from '@pages/resultsPages/successRegister';
 
 export const routes = (
     <Routes>
@@ -18,6 +19,7 @@ export const routes = (
         <Route path={Paths.MAIN_PAGE} element={<MainPage />} />
         <Route path={Paths.RESULT} element={<ResultsPageLayout />}>
             <Route path={Paths.ERROR_LOGIN} element={<ErrorLoginPage />} />
+            <Route path={Paths.SUCCESS_REGISTRATION} element={<SuccessRegisterPage />} />
         </Route>
     </Routes>
 );
