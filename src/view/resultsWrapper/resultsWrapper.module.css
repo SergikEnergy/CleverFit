@@ -1,4 +1,4 @@
-.errorsUserExist {
+.statuses {
     border-radius: 2px;
     padding: 64px 32px;
     width: 539px;
@@ -10,37 +10,37 @@
     justify-content: center;
 }
 
-.errorsUserExist :global(.ant-result) {
+.statuses :global(.ant-result) {
     padding: 0;
     width: 368px;
     font-family: var(--font-family);
     color: var(--character-light-title-85);
 }
 
-.errorsUserExist :global(.ant-result-title) {
+.statuses :global(.ant-result-title) {
     font-weight: 500;
     font-size: 2.4rem;
     line-height: 130%;
     font-family: var(--font-family);
 }
 
-.errorsUserExist :global(.ant-result-icon) {
+.statuses :global(.ant-result-icon) {
     margin-bottom: 35px;
 }
 
-.errorsUserExist :global(.ant-result-subtitle) {
+.statuses :global(.ant-result-subtitle) {
     font-weight: 400;
     font-size: 1.4rem;
     line-height: 130%;
     color: var(--character-light-secondary-45);
 }
 
-.errorsUserExist :global(.ant-result-extra) > button > span {
+.statuses :global(.ant-result-extra) > button > span {
     font-weight: 400;
     font-size: 14px;
     line-height: 130%;
 }
-.errorsUserExist :global(.ant-btn-primary) {
+.statuses :global(.ant-btn-primary) {
     box-shadow: 0 2px 0 0 rgba(0, 0, 0, 0.04);
     background: var(--primary-light-6);
     border: 1px solid var(--primary-light-6);
@@ -48,15 +48,15 @@
 }
 
 @media screen and (max-width: 550px) {
-    .errorsUserExist {
+    .statuses {
         width: 328px;
         height: 317px;
         padding: 64px 10px;
     }
-    .errorsUserExist :global(.ant-result) {
+    .statuses :global(.ant-result) {
         width: 296px;
     }
-    .errorsUserExist :global(.ant-result-icon) {
+    .statuses :global(.ant-result-icon) {
         margin-bottom: 32px;
     }
 }

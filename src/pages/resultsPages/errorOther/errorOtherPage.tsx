@@ -3,13 +3,13 @@ import { FC } from 'react';
 import { ResultsWrapper } from '@view/resultsWrapper';
 import { Button, Result } from 'antd';
 
-export const ErrorUserExistPage: FC = () => {
+export const errorOtherPage: FC = () => {
     const title = 'Данные не сохранились';
     const subTitle =
-        'Такой e-mail уже записан в системе. Попробуйте зарегистрироваться по другому e-mail.';
-    const buttonText = 'Назад к регистрации';
+        'Что-то пошло не так и ваша регистрация не\u00A0завершилась. Попробуйте ещё раз.';
+    const buttonText = 'Повторить';
     const status = 'error';
-    const buttonKey = 'user already exist auth';
+    const buttonKey = 'get other error auth';
     return (
         <ResultsWrapper>
             <Result

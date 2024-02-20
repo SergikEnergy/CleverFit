@@ -3,7 +3,7 @@ import { FC } from 'react';
 import { ResultsWrapper } from '@view/resultsWrapper';
 import { Button, Result } from 'antd';
 
-export const ErrorUserExistPage: FC = () => {
+export const ErrorCheckNoExistEmailPage: FC = () => {
     const title = 'Данные не сохранились';
     const subTitle =
         'Такой e-mail уже записан в системе. Попробуйте зарегистрироваться по другому e-mail.';
