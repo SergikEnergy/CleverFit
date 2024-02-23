@@ -60,9 +60,12 @@ div.checkbox-wrapper {
     color: rgba(0, 0, 0, 0.85);
 }
 
-.forgot-link {
+:global(.ant-btn.ant-btn-text).forgot-link {
     font-size: 16px;
+    padding: 0;
     text-align: center;
+}
+:global(.ant-btn:not(:disabled).ant-btn-text).forgot-link {
     color: var(--primary-light-6);
 }
 

@@ -14,10 +14,13 @@ type FieldType = {
     remember?: string;
 };
 
+type MouseEventOnClick = React.MouseEvent<HTMLButtonElement>;
+
 export const FormLogin: FC = () => {
     const [isPasswordHelperVisible, setIsPasswordHelperVisible] = useState(false);
     const [passPlaceholderVisible, setPassPlaceholderVisible] = useState(true);
     const [disabledSubmit, setDisabledSubmit] = useState(false);
+    const [disableForgot, setDisableForgot] = useState(false);
     const [form] = Form.useForm();
 
     const passwordErrorMessage = 'Пароль не менее 8 символов, с заглавной буквой и цифрой';
@@ -30,8 +33,6 @@ export const FormLogin: FC = () => {
         console.log(errorInfo);
     };
 
-    type MouseEventOnClick = React.MouseEvent<HTMLAnchorElement>;
-
     const handleForgotPassword = (event: MouseEventOnClick) => {
         event.preventDefault();
         console.log(event);
@@ -39,7 +40,10 @@ export const FormLogin: FC = () => {
 
     const handleFormChanged: () => void = () => {
         const hasErrors = form.getFieldsError().some(({ errors }) => errors.length);
-        setDisabledSubmit(hasErrors);
+        setDisabledSubmit(!!hasErrors);
+        const hasErrorEmail = form.getFieldError('userEmail')[0] ? true : false;
+        setDisableForgot(hasErrorEmail);
+        console.log(disableForgot);
     };
 
     return (
@@ -59,12 +63,15 @@ export const FormLogin: FC = () => {
                 rules={[
                     {
                         required: true,
-                        message: '',
+                        message: '   ',
                         pattern: new RegExp(/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/),
                     },
                 ]}
             >
                 <Input
+                    onError={(error: any) => {
+                        console.log(error);
+                    }}
                     size='large'
                     style={{ outline: 'none' }}
                     className={classnames(classes.email, classes.input, classes.antFixed)}
@@ -88,6 +95,9 @@ export const FormLogin: FC = () => {
                     size='large'
                     style={{ outline: 'none' }}
                     className={classnames(classes.input, classes.antFixed)}
+                    onChange={() => {
+                        setPassPlaceholderVisible(false);
+                    }}
                     onFocus={() => {
                         setIsPasswordHelperVisible(true);
                     }}
@@ -100,9 +110,15 @@ export const FormLogin: FC = () => {
                 </Form.Item>
 
                 <div>
-                    <a className={classes['forgot-link']} href='#' onClick={handleForgotPassword}>
+                    <Button
+                        htmlType='button'
+                        disabled={disableForgot}
+                        type='text'
+                        className={classes['forgot-link']}
+                        onClick={handleForgotPassword}
+                    >
                         Забыли пароль?
-                    </a>
+                    </Button>
                 </div>
             </div>
             <Form.Item className={classnames(classes.antFixed, classes['submit-block'])}>

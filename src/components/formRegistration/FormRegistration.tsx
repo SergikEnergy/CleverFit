@@ -1,4 +1,7 @@
-import { FC, useState } from 'react';
+import { FC, useState, useContext } from 'react';
+import { useRegisterUserMutation } from '@redux/API/authAPI';
+
+import { LoaderStateContext } from './../../reactContexts/loader-context';
 
 import { GooglePlusOutlined } from '@ant-design/icons';
 import { Button, Form, Input } from 'antd';
@@ -20,12 +23,33 @@ export const FormRegistration: FC = () => {
     const [confirmPlaceholderVisible, setConfirmPlaceholderVisible] = useState(true);
     const [disabledSubmit, setDisabledSubmit] = useState(false);
     const [form] = Form.useForm();
+    const [registerUser, { error, isLoading: isRTKLoading }] = useRegisterUserMutation();
+    const { startLoader, stopLoader } = useContext(LoaderStateContext);
+    if (isRTKLoading) {
+        startLoader();
+    } else {
+        stopLoader();
+    }
 
     const passwordErrorMessage = 'Пароль не менее 8 символов, с заглавной буквой и цифрой';
     const matchedErrorMessage = 'Пароли не совпадают';
 
-    const handleSubmit = (values: any) => {
-        console.log(values);
+    const handleSubmit = async (values: FieldType) => {
+        const registrationData = {
+            email: values.userEmail,
+            password: values.password,
+        };
+
+        try {
+            const result = await registerUser(registrationData);
+            if (error) {
+                console.log(error);
+            } else {
+                console.log(result);
+            }
+        } catch (e) {
+            console.log(e);
+        }
     };
 
     const handleFailed = (errorInfo: any) => {

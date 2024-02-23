@@ -1,5 +1,5 @@
-import { FC } from 'react';
-import { useState, useEffect, useContext } from 'react';
+import { FC, useState, useEffect, useContext } from 'react';
+import { useLocation } from 'react-router-dom';
 import { CollapsedContext } from '../../reactContexts/collapse-context';
 
 import { SideBar } from '@components/sidebar';
@@ -16,6 +16,8 @@ import { primaryLight } from '../../utils/constants/colors';
 import BgImg from '/images/mainBG.jpg';
 
 export const MainPage: FC = () => {
+    const location = useLocation();
+    console.log(location);
     const { collapsed } = useContext(CollapsedContext);
 
     const [width, setWidth] = useState(208);

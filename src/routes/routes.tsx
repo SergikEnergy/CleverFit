@@ -1,4 +1,4 @@
-import { Routes, Route } from 'react-router-dom';
+import { Routes, Route, Navigate } from 'react-router-dom';
 
 import { Paths } from './pathes';
 import { MainPage } from '@pages/main-page';
@@ -19,6 +19,7 @@ import { ErrorChangePasswordPage } from '@pages/resultsPages/errorChangePassword
 
 export const routes = (
     <Routes>
+        <Route path={Paths.ROOT} element={<Navigate to={Paths.MAIN_PAGE} replace />} />
         <Route path={Paths.AUTH} element={<EntryPageLayout />}>
             <Route index element={<LoginPage />} />
             <Route path={Paths.AUTH_REGISTRATION} element={<RegisterPage />} />

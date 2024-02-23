@@ -1,4 +1,5 @@
 export const enum Paths {
+    ROOT = '/',
     AUTH = '/auth',
     AUTH_GOOGLE = '/google',
     AUTH_REGISTRATION = '/auth/registration',
