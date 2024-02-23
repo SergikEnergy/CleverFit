@@ -1,5 +1,6 @@
 import { Routes, Route, Navigate } from 'react-router-dom';
 
+import { ProtectedRoute } from '../hoc/ProtectedRoute';
 import { Paths } from './pathes';
 import { MainPage } from '@pages/main-page';
 import { EntryPageLayout } from '@pages/entry-page';
@@ -27,15 +28,79 @@ export const routes = (
             <Route path={Paths.AUTH_CHANGE_PASS} element={<ChangePasswordPage />} />
         </Route>
         <Route path={Paths.MAIN_PAGE} element={<MainPage />} />
-        <Route path={Paths.RESULT} element={<ResultsPageLayout />}>
-            <Route path={Paths.ERROR_LOGIN} element={<ErrorLoginPage />} />
-            <Route path={Paths.SUCCESS_REGISTRATION} element={<SuccessRegisterPage />} />
-            <Route path={Paths.SUCCESS_CHANGE_PASSWORD} element={<SuccessChangePasswordPage />} />
-            <Route path={Paths.ERROR_NO_USER_409} element={<ErrorUserExistPage />} />
-            <Route path={Paths.ERROR_CHECK_EMAIL} element={<ErrorCheckEmailPage />} />
-            <Route path={Paths.ERROR_NO_EMAIL_AND_404} element={<ErrorCheckNoExistEmailPage />} />
-            <Route path={Paths.ERROR_OTHERS} element={<ErrorOtherPage />} />
-            <Route path={Paths.ERROR_CHANGE_PASSWORD} element={<ErrorChangePasswordPage />} />
+
+        <Route
+            path={Paths.RESULT}
+            element={
+                <ProtectedRoute>
+                    <ResultsPageLayout />
+                </ProtectedRoute>
+            }
+        >
+            <Route
+                path={Paths.ERROR_LOGIN}
+                element={
+                    <ProtectedRoute>
+                        <ErrorLoginPage />
+                    </ProtectedRoute>
+                }
+            />
+            <Route
+                path={Paths.SUCCESS_REGISTRATION}
+                element={
+                    <ProtectedRoute>
+                        <SuccessRegisterPage />
+                    </ProtectedRoute>
+                }
+            />
+            <Route
+                path={Paths.SUCCESS_CHANGE_PASSWORD}
+                element={
+                    <ProtectedRoute>
+                        <SuccessChangePasswordPage />
+                    </ProtectedRoute>
+                }
+            />
+            <Route
+                path={Paths.ERROR_NO_USER_409}
+                element={
+                    <ProtectedRoute>
+                        <ErrorUserExistPage />
+                    </ProtectedRoute>
+                }
+            />
+            <Route
+                path={Paths.ERROR_CHECK_EMAIL}
+                element={
+                    <ProtectedRoute>
+                        <ErrorCheckEmailPage />
+                    </ProtectedRoute>
+                }
+            />
+            <Route
+                path={Paths.ERROR_NO_EMAIL_AND_404}
+                element={
+                    <ProtectedRoute>
+                        <ErrorCheckNoExistEmailPage />
+                    </ProtectedRoute>
+                }
+            />
+            <Route
+                path={Paths.ERROR_OTHERS}
+                element={
+                    <ProtectedRoute>
+                        <ErrorOtherPage />
+                    </ProtectedRoute>
+                }
+            />
+            <Route
+                path={Paths.ERROR_CHANGE_PASSWORD}
+                element={
+                    <ProtectedRoute>
+                        <ErrorChangePasswordPage />
+                    </ProtectedRoute>
+                }
+            />
         </Route>
     </Routes>
 );

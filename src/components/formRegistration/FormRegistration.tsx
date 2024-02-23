@@ -1,7 +1,13 @@
-import { FC, useState, useContext } from 'react';
+import { FC, useState, useContext, useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
 import { useRegisterUserMutation } from '@redux/API/authAPI';
-
-import { LoaderStateContext } from './../../reactContexts/loader-context';
+import { history } from '@redux/configure-store';
+import { LoaderStateContext } from '../../reactContexts/loader-context';
+import { Paths } from '../../routes/pathes';
+import { isFetchBaseQueryError } from '@redux/API/errorsCatching';
+import { useAppDispatch } from '@hooks/typed-react-redux-hooks';
+import { useAppSelector } from '@hooks/typed-react-redux-hooks';
+import { saveRegistrationData } from '@redux/reducers/userSlice';
 
 import { GooglePlusOutlined } from '@ant-design/icons';
 import { Button, Form, Input } from 'antd';
@@ -23,37 +29,49 @@ export const FormRegistration: FC = () => {
     const [confirmPlaceholderVisible, setConfirmPlaceholderVisible] = useState(true);
     const [disabledSubmit, setDisabledSubmit] = useState(false);
     const [form] = Form.useForm();
-    const [registerUser, { error, isLoading: isRTKLoading }] = useRegisterUserMutation();
+    const [registerUser, { isLoading: isRTKLoading }] = useRegisterUserMutation();
     const { startLoader, stopLoader } = useContext(LoaderStateContext);
+    const location = useLocation();
+    const dispatch = useAppDispatch();
+    const userData = useAppSelector((state) => state.user);
+
     if (isRTKLoading) {
         startLoader();
     } else {
         stopLoader();
     }
+    useEffect(() => {
+        if (location.state?.fromPath && location.state.fromPath === Paths.ERROR_OTHERS) {
+            startLoader();
+            sendRegisterData(userData).finally(() => stopLoader());
+        }
+    }, []);
 
     const passwordErrorMessage = 'Пароль не менее 8 символов, с заглавной буквой и цифрой';
     const matchedErrorMessage = 'Пароли не совпадают';
 
-    const handleSubmit = async (values: FieldType) => {
-        const registrationData = {
-            email: values.userEmail,
-            password: values.password,
-        };
-
+    const sendRegisterData = async ({ email, password }: { email: string; password: string }) => {
         try {
-            const result = await registerUser(registrationData);
-            if (error) {
-                console.log(error);
-            } else {
-                console.log(result);
+            await registerUser({ email, password }).unwrap();
+            history.push(Paths.SUCCESS_REGISTRATION, { fromPath: location.pathname });
+        } catch (error) {
+            if (isFetchBaseQueryError(error)) {
+                if (error.status === 409) {
+                    history.push(Paths.ERROR_NO_USER_409, { fromPath: location.pathname });
+                } else {
+                    dispatch(saveRegistrationData({ email, password }));
+                    history.push(Paths.ERROR_OTHERS, { fromPath: location.pathname });
+                }
             }
-        } catch (e) {
-            console.log(e);
         }
     };
 
-    const handleFailed = (errorInfo: any) => {
-        console.log(errorInfo);
+    const handleSubmit = async (values: FieldType) => {
+        const registrationData = {
+            email: values.userEmail as string,
+            password: values.password as string,
+        };
+        await sendRegisterData(registrationData);
     };
 
     const handleFormChanged: () => void = () => {
@@ -69,7 +87,6 @@ export const FormRegistration: FC = () => {
             style={{ width: '100%' }}
             autoComplete='off'
             onFinish={handleSubmit}
-            onFinishFailed={handleFailed}
             className={classes.form}
         >
             <Form.Item<FieldType>

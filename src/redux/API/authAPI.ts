@@ -1,6 +1,6 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import { RootState } from '@redux/configure-store';
-import { IRequest, IRegistrationResponse, IGetToken } from './api-types';
+import { IRequest, IRegistrationResponse } from './api-types';
 
 const API_BASE_URL = 'https://marathon-api.clevertec.ru/';
 

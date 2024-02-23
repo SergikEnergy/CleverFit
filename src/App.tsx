@@ -6,7 +6,6 @@ import { LoaderAuth } from '@components/loader';
 import { LoaderStateContext } from './reactContexts/loader-context';
 
 export const App: FC = () => {
-    console.log(history);
     const { isLoading } = useContext(LoaderStateContext);
     return (
         <>
