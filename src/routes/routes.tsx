@@ -13,7 +13,7 @@ import { ErrorUserExistPage } from '@pages/resultsPages/errorUserExist';
 import { ErrorCheckEmailPage } from '@pages/resultsPages/errorCheckEmail';
 import { ErrorCheckNoExistEmailPage } from '@pages/resultsPages/errorCheckNoExistEmail';
 import { ErrorOtherPage } from '@pages/resultsPages/errorOther';
-import { ConfirmEmailPage } from '@pages/passwordPages/confirmPassword';
+import { ConfirmEmailPage } from '@pages/passwordPages/confirmEmail';
 import { ChangePasswordPage } from '@pages/passwordPages/changePassword';
 import { SuccessChangePasswordPage } from '@pages/resultsPages/successChangePassword';
 import { ErrorChangePasswordPage } from '@pages/resultsPages/errorChangePassword';
@@ -27,7 +27,7 @@ export const routes = (
             <Route
                 path={Paths.AUTH_CONFIRM_EMAIL}
                 element={
-                    <ProtectedRoute forPassword={true}>
+                    <ProtectedRoute>
                         <ConfirmEmailPage />
                     </ProtectedRoute>
                 }
@@ -35,7 +35,7 @@ export const routes = (
             <Route
                 path={Paths.AUTH_CHANGE_PASS}
                 element={
-                    <ProtectedRoute forPassword={true}>
+                    <ProtectedRoute>
                         <ChangePasswordPage />
                     </ProtectedRoute>
                 }

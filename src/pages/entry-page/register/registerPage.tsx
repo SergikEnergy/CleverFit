@@ -14,7 +14,6 @@ export const RegisterPage: FC = () => {
         if (token) {
             navigate(Paths.MAIN_PAGE, { replace: true });
         }
-        console.log(token);
     }, []);
 
     return (

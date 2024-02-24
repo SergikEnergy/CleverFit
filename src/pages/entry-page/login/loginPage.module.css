@@ -24,7 +24,7 @@
     .login {
         width: 328px;
         min-height: 564px;
-        margin-top: 0px;
+        margin-top: 0;
     }
     .wrapper {
         max-width: 91%;

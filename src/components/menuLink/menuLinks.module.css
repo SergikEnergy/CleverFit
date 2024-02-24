@@ -31,7 +31,7 @@
 
 @media screen and (max-width: 780px) {
     .menu__item_icon.antFixed {
-        display: none; /*important;*/
+        display: none;
     }
     .antFixed li.menu__item {
         padding: 0;

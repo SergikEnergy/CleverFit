@@ -1,9 +1,8 @@
 import { FC, useState, useEffect, useContext } from 'react';
 import { useNavigate, Navigate } from 'react-router-dom';
 import { CollapsedContext } from '../../reactContexts/collapse-context';
-import { useAppSelector, useAppDispatch } from '@hooks/typed-react-redux-hooks';
+import { useAppSelector } from '@hooks/typed-react-redux-hooks';
 import { Paths } from '../../routes/pathes';
-import { resetCredentials } from '@redux/reducers/authSlice';
 
 import { SideBar } from '@components/sidebar';
 import { Header } from '@components/header';
@@ -20,7 +19,6 @@ const { Header: AntHeader, Footer: AntFooter, Sider, Content } = AntLayout;
 
 export const MainPage: FC = () => {
     const navigate = useNavigate();
-    const dispatch = useAppDispatch();
     const token = useAppSelector((state) => state.auth.token);
     const { collapsed } = useContext(CollapsedContext);
     const [width, setWidth] = useState(208);

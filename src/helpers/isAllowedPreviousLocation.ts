@@ -1,26 +1,28 @@
 import { Location } from 'react-router-dom';
 import { Paths } from '../routes/pathes';
 
-const passwordRebootFlowPaths: Record<string, string | undefined> = {
-    [Paths.AUTH]: Paths.AUTH_CONFIRM_EMAIL,
-    [Paths.AUTH_CONFIRM_EMAIL]: Paths.AUTH_CHANGE_PASS,
-    [Paths.AUTH_CHANGE_PASS]: Paths.ERROR_CHANGE_PASSWORD,
-    [Paths.AUTH_CHANGE_PASS]: Paths.SUCCESS_CHANGE_PASSWORD,
-};
+type allowedPathsType = { pathFrom: string; pathTo: string };
 
-export const isAllowedPreviousLocation = (location: Location, isRebootPasswordFlow = false) => {
-    if (!isRebootPasswordFlow) {
-        switch (location.state?.fromPath) {
-            case Paths.AUTH:
-                return true;
-            case Paths.AUTH_REGISTRATION:
-                return true;
-            default:
-                return false;
-        }
-    } else {
-        if (passwordRebootFlowPaths[location.state?.fromPath] === location.pathname) {
+const allowedPaths: allowedPathsType[] = [
+    { pathFrom: Paths.AUTH, pathTo: Paths.AUTH_CONFIRM_EMAIL },
+    { pathFrom: Paths.AUTH_CONFIRM_EMAIL, pathTo: Paths.AUTH_CHANGE_PASS },
+    { pathFrom: Paths.AUTH_CHANGE_PASS, pathTo: Paths.ERROR_CHANGE_PASSWORD },
+    { pathFrom: Paths.AUTH_CHANGE_PASS, pathTo: Paths.SUCCESS_CHANGE_PASSWORD },
+    { pathFrom: Paths.ERROR_CHANGE_PASSWORD, pathTo: Paths.AUTH_CHANGE_PASS },
+    { pathFrom: Paths.AUTH, pathTo: Paths.ERROR_LOGIN },
+    { pathFrom: Paths.AUTH_REGISTRATION, pathTo: Paths.SUCCESS_REGISTRATION },
+    { pathFrom: Paths.AUTH_REGISTRATION, pathTo: Paths.ERROR_NO_USER_409 },
+    { pathFrom: Paths.AUTH_REGISTRATION, pathTo: Paths.ERROR_OTHERS },
+];
+
+export const isAllowedPreviousLocation = (location: Location) => {
+    for (let i = 0; i < allowedPaths.length; i++) {
+        if (
+            location.state?.fromPath === allowedPaths[i].pathFrom &&
+            location.pathname === allowedPaths[i].pathTo
+        ) {
             return true;
-        } else return false;
+        }
     }
+    return false;
 };

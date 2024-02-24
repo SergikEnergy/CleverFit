@@ -51,8 +51,8 @@
 @media screen and (max-width: 400px) {
     .body,
     .body.collapsed {
-        margin-left: 0rem;
-        margin-right: 0rem;
+        margin-left: 0;
+        margin-right: 0;
         text-align: center;
     }
 }

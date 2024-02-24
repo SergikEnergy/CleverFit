@@ -27,7 +27,6 @@ export const ConfirmEmailPage: FC = () => {
 
     const handleCodeChange = (value: string) => {
         setValue(value);
-        setIsCorrect(true);
     };
 
     const title = isCorrect
@@ -50,7 +49,6 @@ export const ConfirmEmailPage: FC = () => {
     };
 
     const handleCompleteInput = async (value: string) => {
-        console.log(userEmail, value);
         sendVerificationCode(userEmail, value);
     };
 

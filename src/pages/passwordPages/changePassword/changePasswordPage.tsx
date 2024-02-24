@@ -63,9 +63,9 @@ export const ChangePasswordPage: FC = () => {
     const sendChangePasswordRequest = async (password: string, confirmPassword: string) => {
         try {
             const response = await changeUserPassword({ password, confirmPassword }).unwrap();
-            dispatch(removeRegistrationData());
             if (response) {
                 history.push(Paths.SUCCESS_CHANGE_PASSWORD, { fromPath: location.pathname });
+                dispatch(removeRegistrationData());
             }
         } catch (error) {
             dispatch(saveRegistrationData({ email: userEmail, password, confirmPassword }));

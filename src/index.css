@@ -16,6 +16,7 @@
     padding: 0;
 
     /* variables from design */
+
     /* characters color light scheme */
     --character-light-title-85: #262626;
     --character-light-primary-85: #262626;
@@ -33,7 +34,8 @@
     --character-light-primary-inverse: #fff;
     --character-light-sider-background: #fff;
 
-    /* colors light scheme*/
+    /* colors light scheme */
+
     --primary-light-1: #f0f5ff;
     --primary-light-2: #d6e4ff;
     --primary-light-3: #adc6ff;
@@ -56,6 +58,7 @@
     --blue-light-10: #002766;
 
     /* dark colors */
+
     --neutral-gray-1: #fff;
     --neutral-gray-2: #fafafa;
     --neutral-gray-3: #f5f5f5;
@@ -91,6 +94,7 @@
     --blue-dark-10: #b7e3fa;
 
     /* characters color dark */
+
     --character-dark-title-85: #dbdbdb;
     --character-dark-primary-85: #dbdbdb;
     --character-dark-secondary-45: #7c7c7c;
@@ -107,6 +111,7 @@
     --character-dark-sider-background: #111d2c;
 
     /* fonts styling */
+
     --font-family: 'Inter', Verdana, sans-serif;
     --second-family: 'Roboto', Verdana, sans-serif;
 }

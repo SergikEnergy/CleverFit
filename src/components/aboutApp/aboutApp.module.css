@@ -50,7 +50,7 @@
     .about.collapsed,
     .about {
         width: 94%;
-        padding: 1.5rem 0rem 2rem 1.4rem;
+        padding: 1.5rem 0 2rem 1.4rem;
     }
     .about.collapsed > span:not(:last-child),
     .about > span:not(:last-child) {

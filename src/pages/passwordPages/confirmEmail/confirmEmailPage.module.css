@@ -1,7 +1,7 @@
 .confirm {
     border-radius: 2px;
     border-radius: 2px;
-    padding: 64px 32px 56px 32px;
+    padding: 64px 32px 56px;
     width: 539px;
     height: 428px;
     box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.15);
@@ -85,7 +85,7 @@
     border: 1px solid var(--primary-light-5);
 }
 
-.character__selected:not(.character--filled)::after {
+.character__selected:not(.character--filled):after {
     content: '';
     width: 1px;
     height: 18px;
