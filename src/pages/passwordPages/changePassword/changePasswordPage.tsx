@@ -1,9 +1,11 @@
-import { FC, useState, useContext } from 'react';
+import { FC, useState, useContext, useEffect } from 'react';
 import { LoaderStateContext } from '../../../reactContexts/loader-context';
 import { useChangePasswordMutation } from '@redux/API/authAPI';
 import { useLocation } from 'react-router-dom';
 import { history } from '@redux/configure-store';
 import { Paths } from '../../../routes/pathes';
+import { useAppDispatch, useAppSelector } from '@hooks/typed-react-redux-hooks';
+import { saveRegistrationData, removeRegistrationData } from '@redux/reducers/userSlice';
 
 import { Form, Input, Button } from 'antd';
 import { EyeTwoTone, EyeInvisibleOutlined } from '@ant-design/icons';
@@ -16,7 +18,13 @@ type RebootPassFieldType = {
 };
 
 export const ChangePasswordPage: FC = () => {
+    const dispatch = useAppDispatch();
     const location = useLocation();
+    const {
+        email: userEmail,
+        password: userPassword,
+        confirmPassword: userConfirmPassword,
+    } = useAppSelector((state) => state.user);
     const { startLoader, stopLoader } = useContext(LoaderStateContext);
     const [changeUserPassword, { isLoading }] = useChangePasswordMutation();
     const [isPasswordHelperVisible, setIsPasswordHelperVisible] = useState(false);
@@ -34,20 +42,35 @@ export const ChangePasswordPage: FC = () => {
         stopLoader();
     }
 
-    const handleSubmit = (values: RebootPassFieldType) => {
+    useEffect(() => {
+        if (location.state?.fromPath && location.state.fromPath === Paths.ERROR_CHANGE_PASSWORD) {
+            startLoader();
+            sendChangePasswordRequest(userPassword, userConfirmPassword as string).finally(() =>
+                stopLoader(),
+            );
+        }
+    }, []);
+
+    const handleSubmit = async (values: RebootPassFieldType) => {
         const dataForRequest = {
-            password: values.password,
-            confirmPassword: values.confirmPassword,
+            password: values.password as string,
+            confirmPassword: values.confirmPassword as string,
         };
+
+        await sendChangePasswordRequest(dataForRequest.password, dataForRequest.confirmPassword);
     };
 
     const sendChangePasswordRequest = async (password: string, confirmPassword: string) => {
         try {
             const response = await changeUserPassword({ password, confirmPassword }).unwrap();
+            dispatch(removeRegistrationData());
             if (response) {
-                history.push(Paths.AUTH_CHANGE_PASS, { fromPath: location.pathname });
+                history.push(Paths.SUCCESS_CHANGE_PASSWORD, { fromPath: location.pathname });
             }
-        } catch (error) {}
+        } catch (error) {
+            dispatch(saveRegistrationData({ email: userEmail, password, confirmPassword }));
+            history.push(Paths.ERROR_CHANGE_PASSWORD, { fromPath: location.pathname });
+        }
     };
 
     const handleFormChanged: () => void = () => {

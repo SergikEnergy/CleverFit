@@ -4,6 +4,8 @@ import { Paths } from '../routes/pathes';
 const passwordRebootFlowPaths: Record<string, string | undefined> = {
     [Paths.AUTH]: Paths.AUTH_CONFIRM_EMAIL,
     [Paths.AUTH_CONFIRM_EMAIL]: Paths.AUTH_CHANGE_PASS,
+    [Paths.AUTH_CHANGE_PASS]: Paths.ERROR_CHANGE_PASSWORD,
+    [Paths.AUTH_CHANGE_PASS]: Paths.SUCCESS_CHANGE_PASSWORD,
 };
 
 export const isAllowedPreviousLocation = (location: Location, isRebootPasswordFlow = false) => {

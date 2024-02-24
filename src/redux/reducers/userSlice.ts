@@ -4,11 +4,13 @@ import type { PayloadAction } from '@reduxjs/toolkit';
 interface IUserData {
     email: string;
     password: string;
+    confirmPassword?: string;
 }
 
 const initialUserState: IUserData = {
     email: '',
     password: '',
+    confirmPassword: '',
 };
 
 const slice = createSlice({
@@ -17,14 +19,26 @@ const slice = createSlice({
     reducers: {
         saveRegistrationData: (
             state,
-            { payload: { email, password } }: PayloadAction<{ email: string; password: string }>,
+            {
+                payload: { email, password, confirmPassword },
+            }: PayloadAction<{
+                email: string;
+                password: string;
+                confirmPassword: string | undefined;
+            }>,
         ) => {
             state.email = email;
             state.password = password;
+            if (confirmPassword) {
+                state.confirmPassword = confirmPassword;
+            }
         },
         removeRegistrationData: (state) => {
             state.email = '';
             state.password = '';
+            if (state.confirmPassword) {
+                state.confirmPassword = '';
+            }
         },
         saveEmail: (state, { payload: { email } }: PayloadAction<{ email: string }>) => {
             state.email = email;
