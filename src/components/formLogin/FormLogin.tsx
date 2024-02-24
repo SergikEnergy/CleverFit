@@ -1,4 +1,12 @@
-import { FC, useState } from 'react';
+import { FC, useState, useContext } from 'react';
+import { useLocation } from 'react-router-dom';
+import { history } from '@redux/configure-store';
+import { useLoginUserMutation } from '@redux/API/authAPI';
+import { LoaderStateContext } from '../../reactContexts/loader-context';
+import { useAppDispatch } from '@hooks/typed-react-redux-hooks';
+import { Paths } from '../../routes/pathes';
+import { isFetchBaseQueryError } from '@redux/API/errorsCatching';
+import { setCredentials, saveCredentialsToStorage } from '@redux/reducers/authSlice';
 
 import { Button, Checkbox, Form, Input } from 'antd';
 import { GooglePlusOutlined } from '@ant-design/icons';
@@ -11,7 +19,7 @@ type FieldType = {
     userEmail?: string;
     password?: string;
     confirmPassword?: string;
-    remember?: string;
+    remember?: boolean;
 };
 
 type MouseEventOnClick = React.MouseEvent<HTMLButtonElement>;
@@ -22,28 +30,79 @@ export const FormLogin: FC = () => {
     const [disabledSubmit, setDisabledSubmit] = useState(false);
     const [disableForgot, setDisableForgot] = useState(false);
     const [form] = Form.useForm();
+    const emailValue = Form.useWatch('userEmail', form);
+    const [loginUser, { isLoading: isRTKLoading }] = useLoginUserMutation();
+    const { startLoader, stopLoader } = useContext(LoaderStateContext);
+    const location = useLocation();
+    const dispatch = useAppDispatch();
+
+    if (isRTKLoading) {
+        startLoader();
+    } else {
+        stopLoader();
+    }
 
     const passwordErrorMessage = 'Пароль не менее 8 символов, с заглавной буквой и цифрой';
 
-    const handleSubmit = (values: any) => {
-        console.log(values);
+    const sendLoginData = async ({
+        email,
+        password,
+        rememberMe,
+    }: {
+        email: string;
+        password: string;
+        rememberMe: boolean;
+    }) => {
+        try {
+            const dataWithToken = await loginUser({ email, password }).unwrap();
+            if (dataWithToken) {
+                const { accessToken } = dataWithToken;
+                dispatch(
+                    setCredentials({
+                        email,
+                        password,
+                        rememberMe,
+                        token: accessToken,
+                    }),
+                );
+                dispatch(saveCredentialsToStorage());
+                history.push(Paths.MAIN_PAGE, { fromPath: location.pathname });
+            }
+        } catch (error) {
+            if (isFetchBaseQueryError(error)) {
+                history.push(Paths.ERROR_LOGIN, { fromPath: location.pathname });
+            }
+        }
     };
 
-    const handleFailed = (errorInfo: any) => {
-        console.log(errorInfo);
+    const handleSubmit = async (values: FieldType) => {
+        const isRememberToken = Boolean(values.remember);
+        const loginData = {
+            email: values.userEmail as string,
+            password: values.password as string,
+            rememberMe: isRememberToken,
+        };
+        console.log(loginData);
+        sendLoginData(loginData).finally(() => {
+            stopLoader();
+        });
     };
 
     const handleForgotPassword = (event: MouseEventOnClick) => {
         event.preventDefault();
-        console.log(event);
+        if (!emailValue) {
+            setDisableForgot(true);
+        } else {
+            console.log(event);
+        }
     };
 
     const handleFormChanged: () => void = () => {
         const hasErrors = form.getFieldsError().some(({ errors }) => errors.length);
         setDisabledSubmit(!!hasErrors);
+
         const hasErrorEmail = form.getFieldError('userEmail')[0] ? true : false;
         setDisableForgot(hasErrorEmail);
-        console.log(disableForgot);
     };
 
     return (
@@ -54,7 +113,6 @@ export const FormLogin: FC = () => {
             style={{ width: '100%' }}
             autoComplete='off'
             onFinish={handleSubmit}
-            onFinishFailed={handleFailed}
             className={classes.form}
         >
             <Form.Item<FieldType>
@@ -69,9 +127,6 @@ export const FormLogin: FC = () => {
                 ]}
             >
                 <Input
-                    onError={(error: any) => {
-                        console.log(error);
-                    }}
                     size='large'
                     style={{ outline: 'none' }}
                     className={classnames(classes.email, classes.input, classes.antFixed)}

@@ -7,6 +7,7 @@ import { LoaderStateContext } from './reactContexts/loader-context';
 
 export const App: FC = () => {
     const { isLoading } = useContext(LoaderStateContext);
+
     return (
         <>
             <HistoryRouter history={history}>{routes}</HistoryRouter>

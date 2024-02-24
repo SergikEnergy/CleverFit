@@ -4,7 +4,6 @@ import type { PayloadAction } from '@reduxjs/toolkit';
 interface IUserData {
     email: string;
     password: string;
-    checkForgot?: boolean;
 }
 
 const initialUserState: IUserData = {
@@ -23,12 +22,12 @@ const slice = createSlice({
             state.email = email;
             state.password = password;
         },
-        deleteRegistrationData: (state) => {
+        removeRegistrationData: (state) => {
             state.email = '';
             state.password = '';
         },
     },
 });
 
-export const { saveRegistrationData, deleteRegistrationData } = slice.actions;
+export const { saveRegistrationData, removeRegistrationData } = slice.actions;
 export const userReducer = slice.reducer;

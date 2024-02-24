@@ -1,6 +1,6 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import { RootState } from '@redux/configure-store';
-import { IRequest, IRegistrationResponse } from './api-types';
+import { IRequest, IRegistrationResponse, ILoginResponse } from './api-types';
 
 const API_BASE_URL = 'https://marathon-api.clevertec.ru/';
 
@@ -27,7 +27,15 @@ export const authApi = createApi({
                 credentials: 'include',
             }),
         }),
+        loginUser: build.mutation<ILoginResponse, IRequest>({
+            query: (body) => ({
+                url: 'auth/login',
+                body,
+                method: 'POST',
+                credentials: 'include',
+            }),
+        }),
     }),
 });
 
-export const { useRegisterUserMutation } = authApi;
+export const { useRegisterUserMutation, useLoginUserMutation } = authApi;

@@ -7,7 +7,7 @@ import { Paths } from '../../routes/pathes';
 import { isFetchBaseQueryError } from '@redux/API/errorsCatching';
 import { useAppDispatch } from '@hooks/typed-react-redux-hooks';
 import { useAppSelector } from '@hooks/typed-react-redux-hooks';
-import { saveRegistrationData } from '@redux/reducers/userSlice';
+import { saveRegistrationData, removeRegistrationData } from '@redux/reducers/userSlice';
 
 import { GooglePlusOutlined } from '@ant-design/icons';
 import { Button, Form, Input } from 'antd';
@@ -53,6 +53,7 @@ export const FormRegistration: FC = () => {
     const sendRegisterData = async ({ email, password }: { email: string; password: string }) => {
         try {
             await registerUser({ email, password }).unwrap();
+            dispatch(removeRegistrationData());
             history.push(Paths.SUCCESS_REGISTRATION, { fromPath: location.pathname });
         } catch (error) {
             if (isFetchBaseQueryError(error)) {

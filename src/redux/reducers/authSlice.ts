@@ -1,20 +1,22 @@
 import { createSlice } from '@reduxjs/toolkit';
 import type { PayloadAction } from '@reduxjs/toolkit';
-
-interface IUser {
-    email: string;
-    password: string;
-    checkForgot?: boolean;
-}
+import { getParamFromStorage } from './authSlice.utils';
 
 type AuthUserState = {
-    user: IUser | null;
+    email: string;
+    password: string;
     token: string | null;
+    rememberMe: boolean;
 };
 
+const initialToken = getParamFromStorage('userCleverFit', 'token', null);
+const initialEmail = getParamFromStorage('userCleverFit', 'email', '') as string;
+
 const initialUserAuthState: AuthUserState = {
-    user: null,
-    token: null,
+    email: initialEmail,
+    password: '',
+    token: initialToken,
+    rememberMe: false,
 };
 
 const slice = createSlice({
@@ -23,13 +25,35 @@ const slice = createSlice({
     reducers: {
         setCredentials: (
             state,
-            { payload: { user, token } }: PayloadAction<{ user: IUser; token: string }>,
+            {
+                payload: { email, token, password, rememberMe },
+            }: PayloadAction<{
+                email: string;
+                password: string;
+                token: string;
+                rememberMe: boolean;
+            }>,
         ) => {
-            state.user = user;
+            state.email = email;
+            state.password = password;
             state.token = token;
+            state.rememberMe = rememberMe;
+        },
+        saveCredentialsToStorage: (state) => {
+            const userData = { email: state.email, token: state.token };
+            if (state.rememberMe) {
+                localStorage.setItem('userCleverFit', JSON.stringify(userData));
+            }
+        },
+        resetCredentials: (state) => {
+            state.email = '';
+            state.password = '';
+            state.token = null;
+            state.rememberMe = false;
         },
     },
 });
 
-export const { setCredentials } = slice.actions;
+export const { setCredentials, resetCredentials, saveCredentialsToStorage } = slice.actions;
+
 export const authReducer = slice.reducer;
