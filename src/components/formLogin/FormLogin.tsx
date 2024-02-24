@@ -1,12 +1,14 @@
-import { FC, useState, useContext } from 'react';
+import { FC, useState, useContext, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import { history } from '@redux/configure-store';
-import { useLoginUserMutation } from '@redux/API/authAPI';
+import { useLoginUserMutation, useCheckEmailMutation } from '@redux/API/authAPI';
 import { LoaderStateContext } from '../../reactContexts/loader-context';
-import { useAppDispatch } from '@hooks/typed-react-redux-hooks';
+import { useAppDispatch, useAppSelector } from '@hooks/typed-react-redux-hooks';
 import { Paths } from '../../routes/pathes';
 import { isFetchBaseQueryError } from '@redux/API/errorsCatching';
+import { IErrorData } from '@redux/API/api-types';
 import { setCredentials, saveCredentialsToStorage } from '@redux/reducers/authSlice';
+import { saveEmail } from '@redux/reducers/userSlice';
 
 import { Button, Checkbox, Form, Input } from 'antd';
 import { GooglePlusOutlined } from '@ant-design/icons';
@@ -32,15 +34,24 @@ export const FormLogin: FC = () => {
     const [form] = Form.useForm();
     const emailValue = Form.useWatch('userEmail', form);
     const [loginUser, { isLoading: isRTKLoading }] = useLoginUserMutation();
+    const [checkEmailRequest, { isLoading: isCheckEmailLoading }] = useCheckEmailMutation();
     const { startLoader, stopLoader } = useContext(LoaderStateContext);
     const location = useLocation();
     const dispatch = useAppDispatch();
+    const emailFromState = useAppSelector((state) => state.user.email);
 
-    if (isRTKLoading) {
+    if (isRTKLoading || isCheckEmailLoading) {
         startLoader();
     } else {
         stopLoader();
     }
+
+    useEffect(() => {
+        if (location.state?.fromPath && location.state.fromPath === Paths.ERROR_CHECK_EMAIL) {
+            startLoader();
+            sendCheckEmailRequest({ email: emailFromState }).finally(() => stopLoader());
+        }
+    }, []);
 
     const passwordErrorMessage = 'Пароль не менее 8 символов, с заглавной буквой и цифрой';
 
@@ -75,6 +86,25 @@ export const FormLogin: FC = () => {
         }
     };
 
+    const sendCheckEmailRequest = async ({ email }: { email: string }) => {
+        try {
+            const response = await checkEmailRequest({ email }).unwrap();
+            if (response) {
+                dispatch(saveEmail({ email }));
+                history.push(Paths.AUTH_CONFIRM_EMAIL, { fromPath: location.pathname });
+            }
+        } catch (error) {
+            if (isFetchBaseQueryError(error)) {
+                const errorData = error.data as IErrorData;
+                if (error.status === 404 && errorData && errorData.message === 'Email не найден') {
+                    history.push(Paths.ERROR_NO_EMAIL_AND_404, { fromPath: location.pathname });
+                } else {
+                    history.push(Paths.ERROR_CHECK_EMAIL, { fromPath: location.pathname });
+                }
+            }
+        }
+    };
+
     const handleSubmit = async (values: FieldType) => {
         const isRememberToken = Boolean(values.remember);
         const loginData = {
@@ -93,7 +123,9 @@ export const FormLogin: FC = () => {
         if (!emailValue) {
             setDisableForgot(true);
         } else {
-            console.log(event);
+            sendCheckEmailRequest({ email: emailValue }).finally(() => {
+                stopLoader();
+            });
         }
     };
 

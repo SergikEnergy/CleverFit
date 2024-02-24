@@ -24,8 +24,22 @@ export const routes = (
         <Route path={Paths.AUTH} element={<EntryPageLayout />}>
             <Route index element={<LoginPage />} />
             <Route path={Paths.AUTH_REGISTRATION} element={<RegisterPage />} />
-            <Route path={Paths.AUTH_CONFIRM_PASS} element={<ConfirmEmailPage />} />
-            <Route path={Paths.AUTH_CHANGE_PASS} element={<ChangePasswordPage />} />
+            <Route
+                path={Paths.AUTH_CONFIRM_EMAIL}
+                element={
+                    <ProtectedRoute forPassword={true}>
+                        <ConfirmEmailPage />
+                    </ProtectedRoute>
+                }
+            />
+            <Route
+                path={Paths.AUTH_CHANGE_PASS}
+                element={
+                    <ProtectedRoute forPassword={true}>
+                        <ChangePasswordPage />
+                    </ProtectedRoute>
+                }
+            />
         </Route>
         <Route path={Paths.MAIN_PAGE} element={<MainPage />} />
 

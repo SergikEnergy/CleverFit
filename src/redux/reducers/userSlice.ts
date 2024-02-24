@@ -26,8 +26,11 @@ const slice = createSlice({
             state.email = '';
             state.password = '';
         },
+        saveEmail: (state, { payload: { email } }: PayloadAction<{ email: string }>) => {
+            state.email = email;
+        },
     },
 });
 
-export const { saveRegistrationData, removeRegistrationData } = slice.actions;
+export const { saveRegistrationData, removeRegistrationData, saveEmail } = slice.actions;
 export const userReducer = slice.reducer;

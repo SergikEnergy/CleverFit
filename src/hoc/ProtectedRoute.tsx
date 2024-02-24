@@ -5,11 +5,12 @@ import { Paths } from '../routes/pathes';
 
 interface ProtectedRouteProps {
     children: ReactNode;
+    forPassword?: boolean;
 }
 
-export const ProtectedRoute: FC<ProtectedRouteProps> = ({ children }) => {
+export const ProtectedRoute: FC<ProtectedRouteProps> = ({ children, forPassword }) => {
     const location = useLocation();
-    const isRightPath = isAllowedPreviousLocation(location);
+    const isRightPath = isAllowedPreviousLocation(location, forPassword);
 
     if (isRightPath) {
         return children;

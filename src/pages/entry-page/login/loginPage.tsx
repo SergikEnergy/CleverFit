@@ -10,11 +10,11 @@ import { FormLogin } from '@components/formLogin';
 export const LoginPage: FC = () => {
     const navigate = useNavigate();
     const token = useAppSelector((state) => state.auth.token);
+
     useEffect(() => {
         if (token) {
             navigate(Paths.MAIN_PAGE, { replace: true });
         }
-        console.log(token);
     }, [token, navigate]);
 
     return (

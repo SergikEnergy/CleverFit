@@ -1,4 +1,9 @@
-import { FC, useState } from 'react';
+import { FC, useState, useContext } from 'react';
+import { LoaderStateContext } from '../../../reactContexts/loader-context';
+import { useChangePasswordMutation } from '@redux/API/authAPI';
+import { useLocation } from 'react-router-dom';
+import { history } from '@redux/configure-store';
+import { Paths } from '../../../routes/pathes';
 
 import { Form, Input, Button } from 'antd';
 import { EyeTwoTone, EyeInvisibleOutlined } from '@ant-design/icons';
@@ -11,6 +16,9 @@ type RebootPassFieldType = {
 };
 
 export const ChangePasswordPage: FC = () => {
+    const location = useLocation();
+    const { startLoader, stopLoader } = useContext(LoaderStateContext);
+    const [changeUserPassword, { isLoading }] = useChangePasswordMutation();
     const [isPasswordHelperVisible, setIsPasswordHelperVisible] = useState(false);
     const [passPlaceholderVisible, setPassPlaceholderVisible] = useState(true);
     const [confirmPlaceholderVisible, setConfirmPlaceholderVisible] = useState(true);
@@ -20,12 +28,26 @@ export const ChangePasswordPage: FC = () => {
     const passwordErrorMessage = 'Пароль не менее 8 символов, с заглавной буквой и цифрой';
     const matchedErrorMessage = 'Пароли не совпадают';
 
-    const handleSubmit = (values: any) => {
-        console.log(values);
+    if (isLoading) {
+        startLoader();
+    } else {
+        stopLoader();
+    }
+
+    const handleSubmit = (values: RebootPassFieldType) => {
+        const dataForRequest = {
+            password: values.password,
+            confirmPassword: values.confirmPassword,
+        };
     };
 
-    const handleFailed = (errorInfo: any) => {
-        console.log(errorInfo);
+    const sendChangePasswordRequest = async (password: string, confirmPassword: string) => {
+        try {
+            const response = await changeUserPassword({ password, confirmPassword }).unwrap();
+            if (response) {
+                history.push(Paths.AUTH_CHANGE_PASS, { fromPath: location.pathname });
+            }
+        } catch (error) {}
     };
 
     const handleFormChanged: () => void = () => {
@@ -42,7 +64,6 @@ export const ChangePasswordPage: FC = () => {
                 name='setNewPassForm'
                 autoComplete='off'
                 onFinish={handleSubmit}
-                onFinishFailed={handleFailed}
                 className={classes.formPassReset}
             >
                 <Form.Item<RebootPassFieldType>

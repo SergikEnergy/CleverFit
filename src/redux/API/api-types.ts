@@ -20,3 +20,26 @@ export interface IRegistrationResponse {
 export interface ILoginResponse {
     accessToken: string;
 }
+export interface ICheckEmailResponse {
+    email: string;
+    message: string;
+}
+
+export interface IConfirmRequest {
+    email: string;
+    code: string;
+}
+
+export interface IConfirmResponse {
+    email: string;
+    message: string;
+}
+
+export interface IChangePasswordRequest {
+    password: string;
+    confirmPassword: string;
+}
+
+export interface IChangePasswordResponse {
+    message: string;
+}

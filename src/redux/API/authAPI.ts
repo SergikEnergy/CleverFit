@@ -1,6 +1,15 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import { RootState } from '@redux/configure-store';
-import { IRequest, IRegistrationResponse, ILoginResponse } from './api-types';
+import {
+    IRequest,
+    IRegistrationResponse,
+    ILoginResponse,
+    ICheckEmailResponse,
+    IConfirmRequest,
+    IConfirmResponse,
+    IChangePasswordResponse,
+    IChangePasswordRequest,
+} from './api-types';
 
 const API_BASE_URL = 'https://marathon-api.clevertec.ru/';
 
@@ -35,7 +44,37 @@ export const authApi = createApi({
                 credentials: 'include',
             }),
         }),
+        checkEmail: build.mutation<ICheckEmailResponse, IRequest>({
+            query: (body) => ({
+                url: 'auth/check-email',
+                body,
+                method: 'POST',
+                credentials: 'include',
+            }),
+        }),
+        confirmEmail: build.mutation<IConfirmResponse, IConfirmRequest>({
+            query: (body) => ({
+                url: 'auth/confirm-email',
+                body,
+                method: 'POST',
+                credentials: 'include',
+            }),
+        }),
+        changePassword: build.mutation<IChangePasswordResponse, IChangePasswordRequest>({
+            query: (body) => ({
+                url: 'auth/change-password',
+                body,
+                method: 'POST',
+                credentials: 'include',
+            }),
+        }),
     }),
 });
 
-export const { useRegisterUserMutation, useLoginUserMutation } = authApi;
+export const {
+    useRegisterUserMutation,
+    useLoginUserMutation,
+    useCheckEmailMutation,
+    useConfirmEmailMutation,
+    useChangePasswordMutation,
+} = authApi;
