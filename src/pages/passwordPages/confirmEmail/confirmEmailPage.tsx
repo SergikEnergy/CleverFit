@@ -36,10 +36,8 @@ export const ConfirmEmailPage: FC = () => {
 
     const sendVerificationCode = async (email: string, code: string) => {
         try {
-            const response = await confirmEmailRequest({ email, code }).unwrap();
-            if (response) {
-                history.push(Paths.AUTH_CHANGE_PASS, { fromPath: location.pathname });
-            }
+            await confirmEmailRequest({ email, code }).unwrap();
+            history.push(Paths.AUTH_CHANGE_PASS, { fromPath: location.pathname });
         } catch (error) {
             if (isFetchBaseQueryError(error)) {
                 setIsCorrect(false);
@@ -67,7 +65,7 @@ export const ConfirmEmailPage: FC = () => {
                 data-test-id='verification-input'
                 placeholder=''
                 validChars='0-9'
-                inputProps={{ inputMode: 'numeric' }}
+                inputProps={{ inputMode: 'numeric', ['data-test-id']: 'verification-input' }}
                 onComplete={handleCompleteInput}
                 classNames={{
                     container: classes.container,

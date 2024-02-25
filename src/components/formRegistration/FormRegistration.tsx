@@ -60,7 +60,7 @@ export const FormRegistration: FC = () => {
                 if (error.status === 409) {
                     history.push(Paths.ERROR_NO_USER_409, { fromPath: location.pathname });
                 } else {
-                    dispatch(saveRegistrationData({ email, password }));
+                    dispatch(saveRegistrationData({ email, password, confirmPassword: '' }));
                     history.push(Paths.ERROR_OTHERS, { fromPath: location.pathname });
                 }
             }
@@ -110,7 +110,6 @@ export const FormRegistration: FC = () => {
             </Form.Item>
             <Form.Item<FieldType>
                 help={isPasswordHelperVisible ? passwordErrorMessage : ''}
-                data-test-id='registration-password'
                 name='password'
                 rules={[
                     {
@@ -121,6 +120,7 @@ export const FormRegistration: FC = () => {
                 ]}
             >
                 <Input.Password
+                    data-test-id='registration-password'
                     placeholder={passPlaceholderVisible ? 'Пароль' : ''}
                     onChange={() => {
                         setPassPlaceholderVisible(false);

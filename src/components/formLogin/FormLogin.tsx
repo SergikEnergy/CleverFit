@@ -29,7 +29,6 @@ type MouseEventOnClick = React.MouseEvent<HTMLButtonElement>;
 export const FormLogin: FC = () => {
     const [isPasswordHelperVisible, setIsPasswordHelperVisible] = useState(false);
     const [passPlaceholderVisible, setPassPlaceholderVisible] = useState(true);
-    const [disabledSubmit, setDisabledSubmit] = useState(false);
     const [disableForgot, setDisableForgot] = useState(false);
     const [form] = Form.useForm();
     const emailValue = Form.useWatch('userEmail', form);
@@ -88,11 +87,9 @@ export const FormLogin: FC = () => {
 
     const sendCheckEmailRequest = async ({ email }: { email: string }) => {
         try {
-            const response = await checkEmailRequest({ email }).unwrap();
-            if (response) {
-                dispatch(saveEmail({ email }));
-                history.push(Paths.AUTH_CONFIRM_EMAIL, { fromPath: location.pathname });
-            }
+            await checkEmailRequest({ email }).unwrap();
+            dispatch(saveEmail({ email }));
+            history.push(Paths.AUTH_CONFIRM_EMAIL, { fromPath: location.pathname });
         } catch (error) {
             if (isFetchBaseQueryError(error)) {
                 const errorData = error.data as IErrorData;
@@ -129,9 +126,6 @@ export const FormLogin: FC = () => {
     };
 
     const handleFormChanged: () => void = () => {
-        const hasErrors = form.getFieldsError().some(({ errors }) => errors.length);
-        setDisabledSubmit(!!hasErrors);
-
         const hasErrorEmail = form.getFieldError('userEmail')[0] ? true : false;
         setDisableForgot(hasErrorEmail);
     };
@@ -220,7 +214,6 @@ export const FormLogin: FC = () => {
                     type='primary'
                     htmlType='submit'
                     block
-                    disabled={disabledSubmit}
                 >
                     Войти
                 </Button>
