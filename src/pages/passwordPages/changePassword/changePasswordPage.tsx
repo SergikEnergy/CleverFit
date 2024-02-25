@@ -102,6 +102,7 @@ export const ChangePasswordPage: FC = () => {
                     ]}
                 >
                     <Input.Password
+                        data-test-id='change-password'
                         size='large'
                         placeholder={passPlaceholderVisible ? 'Новый пароль' : ''}
                         onChange={() => {
@@ -135,6 +136,7 @@ export const ChangePasswordPage: FC = () => {
                     ]}
                 >
                     <Input.Password
+                        data-test-id='change-confirm-password'
                         size='large'
                         placeholder={confirmPlaceholderVisible ? 'Повторите пароль' : ''}
                         style={{ outline: 'none' }}
@@ -148,6 +150,7 @@ export const ChangePasswordPage: FC = () => {
                 </Form.Item>
                 <Form.Item className={classnames(classes.antFixed, classes['submit-block'])}>
                     <Button
+                        data-test-id='change-submit-button'
                         size='large'
                         className={classnames(classes['submit-button'], classes.antFixed)}
                         type='primary'

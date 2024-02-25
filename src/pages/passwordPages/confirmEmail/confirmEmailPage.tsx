@@ -64,6 +64,7 @@ export const ConfirmEmailPage: FC = () => {
             <VerificationInput
                 onChange={handleCodeChange}
                 value={value}
+                data-test-id='verification-input'
                 placeholder=''
                 validChars='0-9'
                 inputProps={{ inputMode: 'numeric' }}

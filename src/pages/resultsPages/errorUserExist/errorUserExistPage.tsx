@@ -24,6 +24,7 @@ export const ErrorUserExistPage: FC = () => {
                 subTitle={subTitle}
                 extra={
                     <Button
+                        data-test-id='registration-back-button'
                         size='large'
                         type='primary'
                         block

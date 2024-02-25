@@ -26,6 +26,7 @@ export const ErrorOtherPage: FC = () => {
                 subTitle={subTitle}
                 extra={
                     <Button
+                        data-test-id='registration-retry-button'
                         onClick={handleClickButton}
                         size='large'
                         type='primary'

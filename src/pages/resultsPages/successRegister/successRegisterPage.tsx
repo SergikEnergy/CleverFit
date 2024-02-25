@@ -24,6 +24,7 @@ export const SuccessRegisterPage: FC = () => {
                 subTitle={subTitle}
                 extra={
                     <Button
+                        data-test-id='registration-enter-button'
                         onClick={handleClickButton}
                         size='large'
                         type='primary'

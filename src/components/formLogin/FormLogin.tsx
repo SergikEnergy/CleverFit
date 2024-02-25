@@ -161,6 +161,7 @@ export const FormLogin: FC = () => {
                     size='large'
                     style={{ outline: 'none' }}
                     className={classnames(classes.email, classes.input, classes.antFixed)}
+                    data-test-id='login-email'
                     addonBefore='e-mail:'
                 />
             </Form.Item>
@@ -177,6 +178,7 @@ export const FormLogin: FC = () => {
                 ]}
             >
                 <Input.Password
+                    data-test-id='login-password'
                     placeholder={passPlaceholderVisible ? 'Пароль' : ''}
                     size='large'
                     style={{ outline: 'none' }}
@@ -192,11 +194,14 @@ export const FormLogin: FC = () => {
             </Form.Item>
             <div className={classes['checkbox-wrapper']}>
                 <Form.Item name='remember' valuePropName='checked' noStyle>
-                    <Checkbox className={classes['checkbox-text']}>Запомнить меня</Checkbox>
+                    <Checkbox className={classes['checkbox-text']} data-test-id='login-remember'>
+                        Запомнить меня
+                    </Checkbox>
                 </Form.Item>
 
                 <div>
                     <Button
+                        data-test-id='login-forgot-button'
                         htmlType='button'
                         disabled={disableForgot}
                         type='text'
@@ -211,6 +216,7 @@ export const FormLogin: FC = () => {
                 <Button
                     size='large'
                     className={classnames(classes['submit-button'], classes.antFixed)}
+                    data-test-id='login-submit-button'
                     type='primary'
                     htmlType='submit'
                     block

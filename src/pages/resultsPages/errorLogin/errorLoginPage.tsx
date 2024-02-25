@@ -26,6 +26,7 @@ export const ErrorLoginPage: FC = () => {
                 subTitle={subTitle}
                 extra={
                     <Button
+                        data-test-id='login-retry-button'
                         onClick={handleClickButton}
                         size='large'
                         type='primary'

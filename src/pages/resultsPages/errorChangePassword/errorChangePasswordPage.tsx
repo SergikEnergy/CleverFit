@@ -25,6 +25,7 @@ export const ErrorChangePasswordPage: FC = () => {
                 subTitle={subTitle}
                 extra={
                     <Button
+                        data-test-id='change-retry-button'
                         onClick={handleClickButton}
                         size='large'
                         type='primary'

@@ -102,6 +102,7 @@ export const FormRegistration: FC = () => {
                 ]}
             >
                 <Input
+                    data-test-id='registration-email'
                     style={{ outline: 'none' }}
                     className={classnames(classes.email, classes.input, classes.antFixed)}
                     addonBefore='e-mail:'
@@ -109,6 +110,7 @@ export const FormRegistration: FC = () => {
             </Form.Item>
             <Form.Item<FieldType>
                 help={isPasswordHelperVisible ? passwordErrorMessage : ''}
+                data-test-id='registration-password'
                 name='password'
                 rules={[
                     {
@@ -150,6 +152,7 @@ export const FormRegistration: FC = () => {
                 ]}
             >
                 <Input.Password
+                    data-test-id='registration-confirm-password'
                     placeholder={confirmPlaceholderVisible ? 'Повторите пароль' : ''}
                     style={{ outline: 'none' }}
                     onChange={() => {
@@ -167,6 +170,7 @@ export const FormRegistration: FC = () => {
                     htmlType='submit'
                     block
                     disabled={disabledSubmit}
+                    data-test-id='registration-submit-button'
                 >
                     Войти
                 </Button>

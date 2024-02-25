@@ -5,6 +5,7 @@ type allowedPathsType = { pathFrom: string; pathTo: string };
 
 const allowedPaths: allowedPathsType[] = [
     { pathFrom: Paths.AUTH, pathTo: Paths.AUTH_CONFIRM_EMAIL },
+    { pathFrom: Paths.AUTH, pathTo: Paths.ERROR_CHECK_EMAIL },
     { pathFrom: Paths.AUTH_CONFIRM_EMAIL, pathTo: Paths.AUTH_CHANGE_PASS },
     { pathFrom: Paths.AUTH_CHANGE_PASS, pathTo: Paths.ERROR_CHANGE_PASSWORD },
     { pathFrom: Paths.AUTH_CHANGE_PASS, pathTo: Paths.SUCCESS_CHANGE_PASSWORD },

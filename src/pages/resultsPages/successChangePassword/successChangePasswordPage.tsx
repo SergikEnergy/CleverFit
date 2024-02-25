@@ -23,6 +23,7 @@ export const SuccessChangePasswordPage: FC = () => {
                 subTitle={subTitle}
                 extra={
                     <Button
+                        data-test-id='change-entry-button'
                         onClick={handleClickButton}
                         size='large'
                         type='primary'

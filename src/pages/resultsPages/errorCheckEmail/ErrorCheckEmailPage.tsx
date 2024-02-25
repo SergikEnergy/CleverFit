@@ -25,6 +25,7 @@ export const ErrorCheckEmailPage: FC = () => {
                 subTitle={subTitle}
                 extra={
                     <Button
+                        data-test-id='check-back-button'
                         onClick={handleClickButton}
                         size='large'
                         type='primary'

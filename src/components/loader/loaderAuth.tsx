@@ -24,7 +24,7 @@ export const LoaderAuth: FC = () => {
             closable={false}
             centered
         >
-            <div className={classes.loader}>
+            <div className={classes.loader} data-test-id='loader'>
                 <LottieAuthSlider />
             </div>
         </Modal>

@@ -25,6 +25,7 @@ export const ErrorCheckNoExistEmailPage: FC = () => {
                 subTitle={subTitle}
                 extra={
                     <Button
+                        data-test-id='check-retry-button'
                         onClick={handleClickButton}
                         size='large'
                         type='primary'
