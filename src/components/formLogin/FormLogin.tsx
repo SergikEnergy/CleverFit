@@ -109,6 +109,7 @@ export const FormLogin: FC = () => {
             password: values.password as string,
             rememberMe: isRememberToken,
         };
+        startLoader();
         sendLoginData(loginData).finally(() => {
             stopLoader();
         });
