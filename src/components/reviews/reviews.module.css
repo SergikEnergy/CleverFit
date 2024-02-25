@@ -32,6 +32,6 @@
 }
 @media screen and (max-width: 400px) {
     .reviews > button {
-        margin: 7px 16px 0px 7px;
+        margin: 7px 16px 0 7px;
     }
 }

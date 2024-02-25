@@ -1,12 +1,17 @@
-import { FC } from 'react';
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { FC, useContext } from 'react';
+import { HistoryRouter } from 'redux-first-history/rr6';
+import { history } from '@redux/configure-store';
+import { routes } from './routes/routes';
+import { LoaderAuth } from '@components/loader';
+import { LoaderStateContext } from './reactContexts/loader-context';
 
-import { MainPage } from './pages';
+export const App: FC = () => {
+    const { isLoading } = useContext(LoaderStateContext);
 
-export const App: FC = () => (
-    <BrowserRouter>
-        <Routes>
-            <Route path='/' element={<MainPage />} />
-        </Routes>
-    </BrowserRouter>
-);
+    return (
+        <>
+            <HistoryRouter history={history}>{routes}</HistoryRouter>
+            {isLoading && <LoaderAuth />}
+        </>
+    );
+};

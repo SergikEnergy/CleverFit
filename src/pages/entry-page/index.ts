@@ -1,0 +1,1 @@
+export { EntryPageLayout } from './entryPageLayout';

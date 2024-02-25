@@ -1,4 +1,6 @@
 import { FC, useContext } from 'react';
+import { useAppDispatch } from '@hooks/typed-react-redux-hooks';
+import { resetCredentials } from '@redux/reducers/authSlice';
 
 import { CollapsedContext } from '../../reactContexts/collapse-context';
 import type { CustomIconComponentProps } from '@ant-design/icons/lib/components/Icon';
@@ -14,7 +16,13 @@ const CustomExitIcon = (props: Partial<CustomIconComponentProps>) => (
 );
 
 export const ExitUser: FC = () => {
+    const dispatch = useAppDispatch();
     const { collapsed } = useContext(CollapsedContext);
+
+    const handleExitUser = () => {
+        localStorage.removeItem('userCleverFit');
+        dispatch(resetCredentials());
+    };
     return (
         <>
             <Divider style={{ margin: 0 }} />
@@ -23,6 +31,7 @@ export const ExitUser: FC = () => {
                 style={!collapsed ? { width: '100%' } : { width: '64px' }}
             >
                 <Menu.Item
+                    onClick={handleExitUser}
                     className={classnames(classes['exit__item'], classes.antFixed, {
                         [classes.collapsed]: collapsed,
                     })}

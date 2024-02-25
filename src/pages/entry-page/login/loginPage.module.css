@@ -1,0 +1,39 @@
+.login {
+    width: 539px;
+    background-color: var(--neutral-gray-1, #fff);
+    border-radius: 2px;
+    min-height: 742px;
+}
+
+.wrapper {
+    margin: 0 auto;
+    max-width: 68.3%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+@media screen and (max-width: 834px) {
+    .login {
+        margin-top: 2rem;
+    }
+}
+
+@media screen and (max-width: 590px) {
+    .login {
+        width: 328px;
+        min-height: 564px;
+        margin-top: 0;
+    }
+    .wrapper {
+        max-width: 91%;
+    }
+}
+
+@media screen and (max-width: 360px) {
+    .login {
+        margin-top: 9rem;
+        min-height: 612px;
+    }
+}

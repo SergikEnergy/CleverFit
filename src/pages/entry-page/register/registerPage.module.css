@@ -1,0 +1,38 @@
+.register {
+    width: 539px;
+    background-color: var(--neutral-gray-1, #fff);
+    border-radius: 2px;
+    min-height: 686px;
+}
+
+.wrapper {
+    margin: 0 auto;
+    max-width: 68.3%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+@media screen and (max-width: 834px) {
+    .register {
+        margin-top: 2.3rem;
+    }
+}
+
+@media screen and (max-width: 590px) {
+    .register {
+        width: 328px;
+        min-height: 564px;
+        margin-top: 0;
+    }
+    .wrapper {
+        max-width: 91%;
+    }
+}
+
+@media screen and (max-width: 360px) {
+    .register {
+        margin-top: 11.5rem;
+    }
+}

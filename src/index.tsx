@@ -4,6 +4,7 @@ import { Provider } from 'react-redux';
 
 import { store } from '@redux/configure-store';
 import { CollapsedContextProvider } from './reactContexts/collapseContextProvider';
+import { LoaderContextProvider } from './reactContexts/loaderStateContextProvider';
 import { App } from './App';
 
 import 'normalize.css';
@@ -17,7 +18,9 @@ root.render(
     <React.StrictMode>
         <Provider store={store}>
             <CollapsedContextProvider>
-                <App />
+                <LoaderContextProvider>
+                    <App />
+                </LoaderContextProvider>
             </CollapsedContextProvider>
         </Provider>
     </React.StrictMode>,
