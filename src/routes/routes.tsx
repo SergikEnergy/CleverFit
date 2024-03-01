@@ -3,6 +3,7 @@ import { Routes, Route, Navigate } from 'react-router-dom';
 import { ProtectedRoute } from '../hoc/ProtectedRoute';
 import { Paths } from './pathes';
 import { MainPage } from '@pages/main-page';
+import { FeedbacksPage } from '@pages/feedbacks-page';
 import { EntryPageLayout } from '@pages/entry-page';
 import { RegisterPage } from '@pages/entry-page/register';
 import { LoginPage } from '@pages/entry-page/login';
@@ -21,6 +22,8 @@ import { ErrorChangePasswordPage } from '@pages/resultsPages/errorChangePassword
 export const routes = (
     <Routes>
         <Route path={Paths.ROOT} element={<Navigate to={Paths.MAIN_PAGE} replace />} />
+        <Route path={Paths.MAIN_PAGE} element={<MainPage />} />
+        <Route path={Paths.FEEDBACKS_PAGE} element={<FeedbacksPage />} />
         <Route path={Paths.AUTH} element={<EntryPageLayout />}>
             <Route index element={<LoginPage />} />
             <Route path={Paths.AUTH_REGISTRATION} element={<RegisterPage />} />
@@ -41,7 +44,6 @@ export const routes = (
                 }
             />
         </Route>
-        <Route path={Paths.MAIN_PAGE} element={<MainPage />} />
 
         <Route
             path={Paths.RESULT}

@@ -1,0 +1,1 @@
+export { BaseMainFeedbacksLayout } from './baseMainFeedbacksLayout';
