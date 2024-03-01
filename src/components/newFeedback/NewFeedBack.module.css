@@ -1,0 +1,86 @@
+.wrapper {
+    width: 91%;
+}
+
+.title {
+    font-family: var(--font-family);
+    font-weight: 500;
+    font-size: 1.6rem;
+    line-height: 130%;
+    color: var(--character-light-title-85);
+}
+
+.close {
+    padding: 4px;
+    border-radius: 5px;
+    transition: transform ease-in 0.3s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.close:hover,
+.close:target,
+.close:focus {
+    cursor: pointer;
+    color: rgb(51, 50, 50);
+    transform: scale(1.03);
+    background-color: rgba(151, 151, 151, 0.8);
+}
+
+.header .wrapper {
+    margin: auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 16px 0;
+}
+
+form.form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: start;
+}
+
+.rating,
+.rating.antFixed {
+    padding-left: 24px;
+    padding-right: 24px;
+    align-self: flex-start;
+    margin-top: 24px;
+    margin-bottom: 16px;
+}
+
+:global(#ratingForm_comment::placeholder) {
+    font-family: var(--font-family);
+    font-weight: 400;
+    font-size: 1.4rem;
+    line-height: 130%;
+    color: var(--character-light-disable-25);
+}
+
+.comment,
+.comment.antFixed {
+    padding-left: 24px;
+    padding-right: 24px;
+    width: 100%;
+}
+
+.button,
+.button.antFixed {
+    padding-left: 24px;
+    padding-right: 24px;
+    align-self: flex-end;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.button button,
+.button.antFixed button {
+    box-shadow: 0 2px 0 0 rgba(0, 0, 0, 0.04);
+    border-radius: 2px;
+    font-family: var(--font-family);
+    font-weight: 400;
+    font-size: 1.4rem;
+    line-height: 130%;
+}

@@ -1,0 +1,1 @@
+export { NewFeedback } from './NewFeedback';
