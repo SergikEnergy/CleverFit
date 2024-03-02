@@ -1,6 +1,6 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import { RootState } from '@redux/configure-store';
-import { IFeedbackResponse } from './api-types';
+import { IFeedbackResponse, IPostFeedbackRequest } from './api-types';
 
 const API_BASE_URL = 'https://marathon-api.clevertec.ru/';
 
@@ -25,7 +25,15 @@ export const feedbackApi = createApi({
                 credentials: 'include',
             }),
         }),
+        addNewFeedback: build.mutation<void, IPostFeedbackRequest>({
+            query: (body) => ({
+                url: 'feedback',
+                body,
+                method: 'POST',
+                credentials: 'include',
+            }),
+        }),
     }),
 });
 
-export const { useGetAllFeedbacksQuery } = feedbackApi;
+export const { useGetAllFeedbacksQuery, useAddNewFeedbackMutation } = feedbackApi;

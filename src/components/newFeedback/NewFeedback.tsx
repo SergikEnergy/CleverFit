@@ -1,10 +1,14 @@
 import { FC, useContext, useState } from 'react';
 import { ModalFeedbackContext } from '../../reactContexts/modalFeedback-context';
+import { LoaderStateContext } from '../../reactContexts/loader-context';
 import { useAppSelector, useAppDispatch } from '@hooks/typed-react-redux-hooks';
-import { setFeedback } from '@redux/reducers/feedbackSlice';
+import { setFeedback, resetFeedback } from '@redux/reducers/feedbackSlice';
+import { useAddNewFeedbackMutation } from '@redux/API/feedbacksAPI';
+import { isFetchBaseQueryError } from '@redux/API/errorsCatching';
+import { AddFeedbackSuccess, AddFeedbackError } from '@components/addFeedbackResults';
 
 import { Divider, Form, Input, Rate, Button } from 'antd';
-import { CloseOutlined } from '@ant-design/icons';
+import { CloseOutlined, StarFilled, StarOutlined } from '@ant-design/icons';
 import classes from './NewFeedBack.module.css';
 import classnames from 'classnames';
 
@@ -15,32 +19,67 @@ type FieldType = {
 const { TextArea } = Input;
 
 export const NewFeedback: FC = () => {
-    const dispatch = useAppDispatch();
-    const [form] = Form.useForm();
-    const [submitDisabled, setSubmitDisabled] = useState(true);
-    const [rateValue, setRateValue] = useState(0);
-    const { closeModal } = useContext(ModalFeedbackContext);
     const { comment: commentFromState, rating: ratingFromState } = useAppSelector(
         (state) => state.feedback,
     );
+    const [postComment, { isLoading: isQueryLoading }] = useAddNewFeedbackMutation();
+    const dispatch = useAppDispatch();
+    const [form] = Form.useForm();
+    const [submitDisabled, setSubmitDisabled] = useState(true);
+    const [rateValue, setRateValue] = useState(ratingFromState ?? 0);
+    const [textValue, setTextValue] = useState(commentFromState || '');
+    const { closeModal, setNode, setWidthModal, openModal } = useContext(ModalFeedbackContext);
+    const { startLoader, stopLoader } = useContext(LoaderStateContext);
+    if (isQueryLoading) {
+        startLoader();
+    } else {
+        stopLoader();
+    }
+
+    const [activeIndex, setActiveIndex] = useState<number | null>(null);
+
+    const postNewFeedback = async (message: string, rating: number) => {
+        try {
+            await postComment({ message, rating }).unwrap();
+            closeModal();
+            setWidthModal('clamp(328px, 100%, 539px)');
+            setNode(<AddFeedbackSuccess />);
+            openModal();
+            dispatch(resetFeedback());
+        } catch (error) {
+            if (isFetchBaseQueryError(error)) {
+                closeModal();
+                setWidthModal('clamp(328px, 100%, 539px)');
+                setNode(<AddFeedbackError />);
+                openModal();
+            }
+        }
+    };
+
     const handleCloseModal = () => {
         closeModal();
     };
 
     const handleChangeRate = (value: number) => {
-        setRateValue(Number(value));
+        setRateValue(value);
+        setActiveIndex(value - 1);
+    };
+
+    const handleChangeComment = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
+        setTextValue(event.target.value);
     };
 
     const handleSubmit = ({ rating, comment }: FieldType) => {
         dispatch(setFeedback({ rating, comment }));
-        form.resetFields();
         setSubmitDisabled(true);
-        closeModal();
+        postNewFeedback(comment, rating);
     };
 
     const handleFormChanged = () => {
-        setSubmitDisabled(false);
+        const hasErrors = form.getFieldsError().some(({ errors }) => errors.length);
+        setSubmitDisabled(hasErrors);
     };
+
     return (
         <div className={classes.feedback}>
             <div className={classes.header}>
@@ -71,13 +110,30 @@ export const NewFeedback: FC = () => {
                         },
                     ]}
                 >
-                    <Rate value={rateValue} onChange={handleChangeRate} />
+                    <Rate
+                        className={classes.rateStars}
+                        value={rateValue}
+                        onChange={handleChangeRate}
+                        character={({ index }) => {
+                            if (
+                                index !== undefined &&
+                                activeIndex !== null &&
+                                index <= activeIndex
+                            ) {
+                                return <StarFilled style={{ color: '#d89614' }} />;
+                            }
+
+                            return <StarOutlined style={{ color: '#d89614' }} />;
+                        }}
+                    />
                 </Form.Item>
                 <Form.Item<FieldType>
                     name='comment'
                     className={classnames(classes.comment, classes.antFixed)}
                 >
                     <TextArea
+                        value={textValue}
+                        onChange={handleChangeComment}
                         autoSize={{ minRows: 2 }}
                         placeholder='Autosize height based on content lines'
                     />

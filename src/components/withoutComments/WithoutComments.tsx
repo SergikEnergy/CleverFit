@@ -6,7 +6,7 @@ import { Button } from 'antd';
 import classes from './WithoutComments.module.css';
 
 export const WithoutComments: FC = () => {
-    const { openModal, closeModal, setNode, setWidthModal } = useContext(ModalFeedbackContext);
+    const { openModal, setNode, setWidthModal } = useContext(ModalFeedbackContext);
     const handleAddFeedback = () => {
         setNode(<NewFeedback />);
         setWidthModal('clamp(328px, 100%, 539px)');

@@ -2,12 +2,12 @@ import { createSlice } from '@reduxjs/toolkit';
 import type { PayloadAction } from '@reduxjs/toolkit';
 
 interface IFeedbackData {
-    rating: number;
+    rating: number | null;
     comment: string;
 }
 
 const initialFeedbackState: IFeedbackData = {
-    rating: 0,
+    rating: null,
     comment: '',
 };
 
@@ -27,8 +27,12 @@ const slice = createSlice({
             state.comment = comment;
             state.rating = rating;
         },
+        resetFeedback: (state) => {
+            state.comment = '';
+            state.rating = null;
+        },
     },
 });
 
-export const { setFeedback } = slice.actions;
+export const { setFeedback, resetFeedback } = slice.actions;
 export const feedbackReducer = slice.reducer;

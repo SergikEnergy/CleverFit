@@ -52,3 +52,8 @@ export interface IFeedbackResponse {
     rating: number;
     createdAt: string;
 }
+
+export interface IPostFeedbackRequest {
+    message: string;
+    rating: number;
+}

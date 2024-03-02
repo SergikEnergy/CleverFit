@@ -59,6 +59,10 @@ form.form {
     color: var(--character-light-disable-25);
 }
 
+:global(#ratingForm_rating .ant-rate-star.ant-rate-star-zero .ant-rate-star-second) {
+    color: #d89614;
+}
+
 .comment,
 .comment.antFixed {
     padding-left: 24px;
