@@ -33,3 +33,26 @@ button.button_text {
     align-self: start;
     margin-bottom: 48px;
 }
+
+@media screen and (max-width: 550px) {
+    .feedbacks {
+        margin-left: 1.2rem;
+        margin-right: 1.2rem;
+        gap: 48px;
+    }
+    .navigation {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        margin-bottom: 42px;
+        width: 100%;
+    }
+    .navigation > button {
+        display: block;
+    }
+    .navigation > button.button_filled {
+        width: 100%;
+        margin-bottom: 16px;
+    }
+}

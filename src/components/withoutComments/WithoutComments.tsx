@@ -27,7 +27,13 @@ export const WithoutComments: FC = () => {
                     </div>
                 </div>
                 <div className={classes.button}>
-                    <Button block htmlType='button' type='primary' onClick={handleAddFeedback}>
+                    <Button
+                        data-test-id='write-review'
+                        block
+                        htmlType='button'
+                        type='primary'
+                        onClick={handleAddFeedback}
+                    >
                         Написать отзыв
                     </Button>
                 </div>

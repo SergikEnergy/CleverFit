@@ -15,7 +15,7 @@ const initialContext: ModalFeedbackType = {
     widthModal: '',
     node: null,
     setWidthModal: (width) => {
-        //
+        console.log(width);
     },
     openModal: () => {
         //
@@ -25,7 +25,7 @@ const initialContext: ModalFeedbackType = {
         //
     },
     setNode: (node) => {
-        //
+        console.log(node);
     },
 };
 

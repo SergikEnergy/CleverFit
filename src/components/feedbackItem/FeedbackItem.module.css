@@ -48,7 +48,7 @@
     flex-direction: column;
     justify-content: flex-start;
     gap: 12px;
-    width: 95%;
+    width: 85%;
 }
 
 .title {
@@ -74,4 +74,36 @@
     text-align: start;
     color: var(--character-light-secondary-45);
     word-break: break-all;
+}
+
+@media screen and (max-width: 1000px) {
+    .user {
+        width: 30%;
+    }
+    .description {
+        width: 70%;
+    }
+}
+
+@media screen and (max-width: 550px) {
+    .feedback {
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: space-between;
+    }
+    .user {
+        flex-direction: row;
+        width: 95%;
+        align-items: center;
+        justify-content: flex-start;
+        gap: 16px;
+    }
+    .name {
+        width: 30%;
+        text-align: left;
+    }
+    .description {
+        width: 97%;
+        text-align: left;
+    }
 }

@@ -142,6 +142,7 @@ export const NewFeedback: FC = () => {
                 <Divider style={{ margin: 0, height: '2px' }} />
                 <Form.Item className={classnames(classes.button, classes.antFixed)}>
                     <Button
+                        data-test-id='new-review-submit-button'
                         disabled={submitDisabled}
                         htmlType='submit'
                         block

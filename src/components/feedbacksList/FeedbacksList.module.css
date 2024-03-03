@@ -3,9 +3,7 @@
     min-height: 572px;
     max-height: 720px;
     overflow-y: auto;
-    /* overflow-x: hidden; */
     width: 99.5%;
-
     max-width: 100%;
     flex-grow: 1;
     flex-shrink: 1;
@@ -26,4 +24,11 @@
 }
 .feedbacks-list::-webkit-scrollbar-thumb {
     display: none;
+}
+
+@media screen and (max-width: 550px) {
+    .feedbacks-list {
+        margin-top: 24px;
+        max-height: 770px;
+    }
 }

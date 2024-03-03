@@ -19,7 +19,14 @@ export const Reviews: FC = () => {
 
     return (
         <div className={classnames(classes.reviews, { [classes.collapsed]: collapsed })}>
-            <Button className='' type='text' block htmlType='button' onClick={handleClick}>
+            <Button
+                data-test-id='see-reviews'
+                className=''
+                type='text'
+                block
+                htmlType='button'
+                onClick={handleClick}
+            >
                 Смотреть отзывы
             </Button>
         </div>

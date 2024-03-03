@@ -44,6 +44,7 @@ export const Feedbacks: FC<IFeedbacksProps> = ({ feedbacks }) => {
             <FeedbacksList feedbacks={sortedFeedbacks} limit={limit} />
             <div className={classes.navigation}>
                 <Button
+                    data-test-id='write-review'
                     onClick={handleCreateButtonClick}
                     htmlType='button'
                     type='primary'
@@ -53,6 +54,7 @@ export const Feedbacks: FC<IFeedbacksProps> = ({ feedbacks }) => {
                     Написать отзыв
                 </Button>
                 <Button
+                    data-test-id='all-reviews-button'
                     htmlType='button'
                     className={classes['button_text']}
                     type='text'

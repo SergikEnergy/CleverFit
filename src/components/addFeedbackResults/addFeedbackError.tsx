@@ -34,6 +34,7 @@ export const AddFeedbackError: FC = () => {
                 subTitle={subtitle}
                 extra={[
                     <Button
+                        data-test-id='write-review-not-saved-modal'
                         className={classes.writeButton}
                         color='#2f54eb'
                         onClick={handleClickButtonWrite}
