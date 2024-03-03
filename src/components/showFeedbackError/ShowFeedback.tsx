@@ -1,14 +1,18 @@
 import { FC, useContext } from 'react';
 import { Button, Result } from 'antd';
 import { ModalFeedbackContext } from '../../reactContexts/modalFeedback-context';
+import { useNavigate } from 'react-router-dom';
+import { Paths } from '../../routes/pathes';
 
 import classes from './ShowFeedback.module.css';
 
 export const ShowFeedbackError: FC = () => {
+    const navigate = useNavigate();
     const { closeModal, setNode } = useContext(ModalFeedbackContext);
     const handleClickButton = () => {
         closeModal();
         setNode(null);
+        navigate(Paths.MAIN_PAGE, { replace: true });
     };
 
     const title = 'Что-то пошло не так';

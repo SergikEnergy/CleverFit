@@ -1,0 +1,35 @@
+.feedbacks {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 132px;
+    margin-left: 2.4rem;
+    margin-right: 2.4rem;
+}
+
+button.button_filled {
+    box-shadow: 0 2px 0 0 rgba(0, 0, 0, 0.04);
+    border-radius: 2px;
+    width: 142px;
+    margin-right: 5px;
+}
+
+button.button_text {
+    font-family: var(--font-family);
+    font-weight: 400;
+    font-size: 1.6rem;
+    line-height: 130%;
+    text-align: center;
+    color: var(--primary-light-6);
+}
+.navigation :global(.ant-btn-primary) {
+    background: var(--primary-light-6);
+    border-color: var(--primary-light-6);
+    color: var(--character-light-primary-inverse);
+}
+
+.navigation {
+    align-self: start;
+    margin-bottom: 48px;
+}

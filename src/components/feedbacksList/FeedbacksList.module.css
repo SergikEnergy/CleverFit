@@ -1,0 +1,13 @@
+.feedbacks-list {
+    margin-top: 20px;
+    min-height: 572px;
+    max-height: 800px;
+    overflow-y: auto;
+    width: 100%;
+    flex-grow: 1;
+    display: flex;
+    align-items: stretch;
+    flex-direction: column;
+    justify-content: flex-start;
+    gap: 20px;
+}
