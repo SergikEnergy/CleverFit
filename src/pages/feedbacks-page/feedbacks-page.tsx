@@ -1,7 +1,7 @@
 import { FC, useContext, useEffect, useLayoutEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Paths } from '../../routes/pathes';
-import { useAppDispatch } from '@hooks/typed-react-redux-hooks';
+import { useAppDispatch, useAppSelector } from '@hooks/typed-react-redux-hooks';
 import { resetCredentials } from '@redux/reducers/authSlice';
 import { BaseMainFeedbacksLayout } from '@pages/baseMainFeedbacks';
 import { WithoutComments } from '@components/withoutComments';
@@ -15,17 +15,10 @@ import { isFetchBaseQueryError } from '@redux/API/errorsCatching';
 export const FeedbacksPage: FC = () => {
     const dispatch = useAppDispatch();
     const navigate = useNavigate();
+    const token = useAppSelector((state) => state.auth.token);
     const { setNode, openModal, setWidthModal } = useContext(ModalFeedbackContext);
     const { startLoader, stopLoader } = useContext(LoaderStateContext);
     const { data, isLoading: isQueryLoading, error, isError } = useGetAllFeedbacksQuery();
-
-    useEffect(() => {
-        if (isQueryLoading) {
-            startLoader();
-        } else {
-            stopLoader();
-        }
-    }, [isQueryLoading]);
 
     useLayoutEffect(() => {
         if (isFetchBaseQueryError(error) && error.status === 403) {
@@ -38,6 +31,20 @@ export const FeedbacksPage: FC = () => {
             openModal();
         }
     }, []);
+
+    useEffect(() => {
+        if (!token) {
+            navigate(Paths.AUTH, { replace: true });
+        }
+    }, [token, navigate]);
+
+    useEffect(() => {
+        if (isQueryLoading) {
+            startLoader();
+        } else {
+            stopLoader();
+        }
+    }, [isQueryLoading]);
 
     return (
         <BaseMainFeedbacksLayout isFeedbackPage={true}>

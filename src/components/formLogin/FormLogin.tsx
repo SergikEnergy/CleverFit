@@ -131,6 +131,10 @@ export const FormLogin: FC = () => {
         setDisableForgot(hasErrorEmail);
     };
 
+    const handleGoogleRegister = async () => {
+        window.location.href = 'https://marathon-api.clevertec.ru/auth/google';
+    };
+
     return (
         <Form
             onFieldsChange={handleFormChanged}
@@ -221,6 +225,7 @@ export const FormLogin: FC = () => {
             </Form.Item>
             <Form.Item>
                 <Button
+                    onClick={handleGoogleRegister}
                     type='default'
                     block
                     icon={

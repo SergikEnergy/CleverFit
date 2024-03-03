@@ -1,4 +1,4 @@
-import { Routes, Route, Navigate } from 'react-router-dom';
+import { Routes, Route } from 'react-router-dom';
 
 import { ProtectedRoute } from '../hoc/ProtectedRoute';
 import { Paths } from './pathes';
@@ -18,10 +18,11 @@ import { ConfirmEmailPage } from '@pages/passwordPages/confirmEmail';
 import { ChangePasswordPage } from '@pages/passwordPages/changePassword';
 import { SuccessChangePasswordPage } from '@pages/resultsPages/successChangePassword';
 import { ErrorChangePasswordPage } from '@pages/resultsPages/errorChangePassword';
+import { DummyRootElement } from '@components/dummyRoot/dummyRoot';
 
 export const routes = (
     <Routes>
-        <Route path={Paths.ROOT} element={<Navigate to={Paths.MAIN_PAGE} replace />} />
+        <Route path={Paths.ROOT} element={<DummyRootElement />} />
         <Route path={Paths.MAIN_PAGE} element={<MainPage />} />
         <Route path={Paths.FEEDBACKS_PAGE} element={<FeedbacksPage />} />
         <Route path={Paths.AUTH} element={<EntryPageLayout />}>

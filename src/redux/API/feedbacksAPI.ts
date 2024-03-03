@@ -6,6 +6,7 @@ const API_BASE_URL = 'https://marathon-api.clevertec.ru/';
 
 export const feedbackApi = createApi({
     reducerPath: 'feedbackAPI',
+    tagTypes: ['Feedbacks'],
     baseQuery: fetchBaseQuery({
         baseUrl: API_BASE_URL,
         prepareHeaders: (headers, { getState }) => {
@@ -19,11 +20,15 @@ export const feedbackApi = createApi({
     }),
 
     endpoints: (build) => ({
-        getAllFeedbacks: build.query<IFeedbackResponse, void>({
+        getAllFeedbacks: build.query<IFeedbackResponse[], void>({
             query: () => ({
                 url: 'feedback',
                 credentials: 'include',
             }),
+            providesTags: (result) =>
+                result
+                    ? [...result.map(({ id }) => ({ type: 'Feedbacks' as const, id })), 'Feedbacks']
+                    : ['Feedbacks'],
         }),
         addNewFeedback: build.mutation<void, IPostFeedbackRequest>({
             query: (body) => ({
@@ -32,6 +37,7 @@ export const feedbackApi = createApi({
                 method: 'POST',
                 credentials: 'include',
             }),
+            invalidatesTags: ['Feedbacks'],
         }),
     }),
 });

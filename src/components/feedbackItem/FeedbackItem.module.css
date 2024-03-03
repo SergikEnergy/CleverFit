@@ -73,4 +73,5 @@
     line-height: 130%;
     text-align: start;
     color: var(--character-light-secondary-45);
+    word-break: break-all;
 }

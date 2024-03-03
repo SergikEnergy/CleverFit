@@ -12,9 +12,12 @@ interface IFeedbacksProps {
 }
 
 export const Feedbacks: FC<IFeedbacksProps> = ({ feedbacks }) => {
+    const hiddenCommentText = 'Свернуть все отзывы';
+    const spreadCommentText = 'Развернуть все отзывы';
     const { setNode, setWidthModal, openModal } = useContext(ModalFeedbackContext);
+    const [textButton, setTextButton] = useState<string>(spreadCommentText);
     const [limit, setLimit] = useState(4);
-    console.log(feedbacks);
+
     const sortedFeedbacks = Array.isArray(feedbacks)
         ? feedbacks.toSorted((item1: IFeedbackResponse, item2: IFeedbackResponse) => {
               const dataItem1 = new Date(item1.createdAt);
@@ -29,8 +32,11 @@ export const Feedbacks: FC<IFeedbacksProps> = ({ feedbacks }) => {
         openModal();
     };
 
-    const handleShowAllButton = () => {
+    const toggleAllComment = () => {
         setLimit((prev) => (prev === 4 && Array.isArray(feedbacks) ? feedbacks.length : 4));
+        setTextButton((prev) =>
+            prev === spreadCommentText ? hiddenCommentText : spreadCommentText,
+        );
     };
 
     return (
@@ -50,9 +56,9 @@ export const Feedbacks: FC<IFeedbacksProps> = ({ feedbacks }) => {
                     htmlType='button'
                     className={classes['button_text']}
                     type='text'
-                    onClick={handleShowAllButton}
+                    onClick={toggleAllComment}
                 >
-                    Развернуть все отзывы
+                    {textButton}
                 </Button>
             </div>
         </div>
