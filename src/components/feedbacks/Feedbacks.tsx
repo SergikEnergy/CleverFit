@@ -25,7 +25,7 @@ export const Feedbacks: FC<IFeedbacksProps> = ({ feedbacks }) => {
         return data.sort((item1: IFeedbackResponse, item2: IFeedbackResponse) => {
             const dataItem1 = new Date(item1.createdAt);
             const dataItem2 = new Date(item2.createdAt);
-            return dataItem1.getTime() - dataItem2.getTime();
+            return -dataItem1.getTime() + dataItem2.getTime();
         });
     };
 

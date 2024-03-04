@@ -13,7 +13,7 @@ export const FeedbacksList: FC<IFeedbacksListProps> = ({ feedbacks, limit }) => 
     <div className={classes['feedbacks-list']}>
         {feedbacks &&
             feedbacks
-                .filter((_, index) => index >= feedbacks.length - limit)
+                .filter((_, index) => index < limit)
                 .map((elem) => {
                     return <FeedbackItem key={elem.id} feedbackContent={elem} />;
                 })}
