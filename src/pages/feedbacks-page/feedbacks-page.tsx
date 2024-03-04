@@ -40,7 +40,7 @@ export const FeedbacksPage: FC = () => {
                 openModal();
             }
         }
-    }, [error, isError, data]);
+    }, [error, isError]);
 
     useEffect(() => {
         if (!token) {

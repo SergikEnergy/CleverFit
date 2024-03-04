@@ -11,10 +11,11 @@ interface IFeedbacksListProps {
 
 export const FeedbacksList: FC<IFeedbacksListProps> = ({ feedbacks, limit }) => (
     <div className={classes['feedbacks-list']}>
-        {feedbacks
-            .filter((_, index) => index >= feedbacks.length - limit)
-            .map((elem) => {
-                return <FeedbackItem key={elem.id} feedbackContent={elem} />;
-            })}
+        {feedbacks &&
+            feedbacks
+                .filter((_, index) => index >= feedbacks.length - limit)
+                .map((elem) => {
+                    return <FeedbackItem key={elem.id} feedbackContent={elem} />;
+                })}
     </div>
 );

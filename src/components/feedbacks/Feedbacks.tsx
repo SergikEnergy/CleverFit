@@ -8,7 +8,7 @@ import { Button } from 'antd';
 import classes from './Feedbacks.module.css';
 
 interface IFeedbacksProps {
-    feedbacks: IFeedbackResponse[] | undefined;
+    feedbacks: IFeedbackResponse[];
 }
 
 export const Feedbacks: FC<IFeedbacksProps> = ({ feedbacks }) => {
@@ -18,13 +18,16 @@ export const Feedbacks: FC<IFeedbacksProps> = ({ feedbacks }) => {
     const [textButton, setTextButton] = useState<string>(spreadCommentText);
     const [limit, setLimit] = useState(4);
 
-    if (Array.isArray(feedbacks) && feedbacks.length > 1) {
-        feedbacks.sort((item1: IFeedbackResponse, item2: IFeedbackResponse) => {
+    const sortFeedbacksByDateAscend = (data: IFeedbackResponse[]) => {
+        if (data.length === 1) {
+            return data;
+        }
+        return data.sort((item1: IFeedbackResponse, item2: IFeedbackResponse) => {
             const dataItem1 = new Date(item1.createdAt);
             const dataItem2 = new Date(item2.createdAt);
             return dataItem1.getTime() - dataItem2.getTime();
         });
-    }
+    };
 
     const handleCreateButtonClick = () => {
         setNode(<NewFeedback />);
@@ -41,7 +44,7 @@ export const Feedbacks: FC<IFeedbacksProps> = ({ feedbacks }) => {
 
     return (
         <div className={classes.feedbacks}>
-            <FeedbacksList feedbacks={feedbacks} limit={limit} />
+            <FeedbacksList feedbacks={sortFeedbacksByDateAscend([...feedbacks])} limit={limit} />
             <div className={classes.navigation}>
                 <Button
                     data-test-id='write-review'
