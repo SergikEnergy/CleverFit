@@ -61,6 +61,7 @@ export const Feedbacks: FC<IFeedbacksProps> = ({ feedbacks }) => {
                     htmlType='button'
                     className={classes['button_text']}
                     type='text'
+                    size='large'
                     onClick={toggleAllComment}
                 >
                     {textButton}
