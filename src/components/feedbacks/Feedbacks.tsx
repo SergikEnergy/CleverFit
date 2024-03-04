@@ -18,7 +18,7 @@ export const Feedbacks: FC<IFeedbacksProps> = ({ feedbacks }) => {
     const [textButton, setTextButton] = useState<string>(spreadCommentText);
     const [limit, setLimit] = useState(4);
 
-    if (Array.isArray(feedbacks)) {
+    if (Array.isArray(feedbacks) && feedbacks.length > 1) {
         feedbacks.sort((item1: IFeedbackResponse, item2: IFeedbackResponse) => {
             const dataItem1 = new Date(item1.createdAt);
             const dataItem2 = new Date(item2.createdAt);
@@ -41,7 +41,7 @@ export const Feedbacks: FC<IFeedbacksProps> = ({ feedbacks }) => {
 
     return (
         <div className={classes.feedbacks}>
-            <FeedbacksList feedbacks={feedbacks ?? []} limit={limit} />
+            <FeedbacksList feedbacks={feedbacks} limit={limit} />
             <div className={classes.navigation}>
                 <Button
                     data-test-id='write-review'
