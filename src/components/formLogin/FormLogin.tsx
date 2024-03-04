@@ -39,11 +39,13 @@ export const FormLogin: FC = () => {
     const dispatch = useAppDispatch();
     const emailFromState = useAppSelector((state) => state.user.email);
 
-    if (isRTKLoading || isCheckEmailLoading) {
-        startLoader();
-    } else {
-        stopLoader();
-    }
+    useEffect(() => {
+        if (isRTKLoading || isCheckEmailLoading) {
+            startLoader();
+        } else {
+            stopLoader();
+        }
+    }, []);
 
     useEffect(() => {
         if (location.state?.fromPath && location.state.fromPath === Paths.ERROR_CHECK_EMAIL) {
@@ -129,6 +131,10 @@ export const FormLogin: FC = () => {
     const handleFormChanged: () => void = () => {
         const hasErrorEmail = form.getFieldError('userEmail')[0] ? true : false;
         setDisableForgot(hasErrorEmail);
+    };
+
+    const handleGoogleRegister = async () => {
+        window.location.href = 'https://marathon-api.clevertec.ru/auth/google';
     };
 
     return (
@@ -221,6 +227,7 @@ export const FormLogin: FC = () => {
             </Form.Item>
             <Form.Item>
                 <Button
+                    onClick={handleGoogleRegister}
                     type='default'
                     block
                     icon={

@@ -1,11 +1,12 @@
 export const enum Paths {
     ROOT = '/',
+    MAIN_PAGE = '/main',
+    FEEDBACKS_PAGE = '/feedbacks',
     AUTH = '/auth',
     AUTH_GOOGLE = '/google',
     AUTH_REGISTRATION = '/auth/registration',
     AUTH_CONFIRM_EMAIL = '/auth/confirm-email',
     AUTH_CHANGE_PASS = '/auth/change-password',
-    MAIN_PAGE = '/main',
     RESULT = '/result',
     ERROR_LOGIN = '/result/error-login',
     SUCCESS_REGISTRATION = '/result/success',

@@ -1,0 +1,10 @@
+.wrapper {
+    backdrop-filter: blur(3px);
+    background: rgba(121, 156, 212, 0.5);
+}
+
+@media screen and (max-width: 450px) {
+    .wrapper :global(.ant-modal) {
+        max-width: 328px;
+    }
+}

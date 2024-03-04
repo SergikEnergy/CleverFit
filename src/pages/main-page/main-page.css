@@ -1,44 +1,9 @@
-#root {
-    max-width: 1440px;
-    margin: 0 auto;
-    text-align: center;
-    box-sizing: border-box;
-    min-height: 1024px;
-    width: 100%;
-    height: 100%;
-}
-
-.main-page {
-    position: relative;
-}
-
-.navigation {
-    width: 14.4%;
-    position: relative;
-}
-
-.wrapper {
-    width: 96.5%;
-    margin: auto;
-}
-
 .footer {
     margin-top: 18rem;
     margin-bottom: 4rem;
 }
 
-header.header {
-    min-height: 168px;
-}
-
 @media screen and (max-width: 834px) {
-    header.header {
-        height: 194px;
-    }
-    header.header.collapsed {
-        height: 132px;
-        min-height: 100px;
-    }
     .footer {
         margin-top: 26rem;
     }
@@ -48,32 +13,10 @@ header.header {
     }
 }
 
-@media screen and (max-width: 550px) {
-    .mobile__overlay.antFixed {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 106px;
-        z-index: 100;
-    }
-
-    header.header {
-        min-height: 166px;
-        height: 166px;
-    }
-    header.header.collapsed {
-        min-height: 166px;
-        height: 166px;
-    }
-}
-
 @media screen and (max-width: 400px) {
     .footer,
     .footer.collapsed {
         margin-top: 1.9rem;
         margin-bottom: 4.5rem;
-    }
-    #root {
-        min-height: 800px;
     }
 }

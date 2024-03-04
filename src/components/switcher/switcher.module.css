@@ -27,14 +27,24 @@
     }
 }
 
-@media screen and (max-width: 400px) {
+@media screen and (max-width: 550px) {
     .switcher {
         width: 32px;
         height: 48px;
         right: -29%;
-        top: 7.5%;
+        top: 9.5%;
     }
     .collapsed {
-        right: -33px;
+        right: -30px;
+    }
+}
+
+@media screen and (max-width: 400px) {
+    .switcher {
+        right: -29%;
+        top: 9.5%;
+    }
+    .collapsed {
+        right: -30px;
     }
 }

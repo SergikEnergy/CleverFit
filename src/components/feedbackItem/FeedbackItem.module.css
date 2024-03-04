@@ -1,0 +1,109 @@
+.feedback {
+    padding: 16px;
+    gap: 12px;
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    width: 100%;
+    border-radius: 2px;
+    box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.15);
+    background: var(--character-light-primary-inverse);
+}
+
+.user {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: flex-start;
+    width: 13%;
+    gap: 12px;
+}
+
+.avatar {
+    border-radius: 50%;
+    background: var(--character-light-background);
+    width: 42px;
+    height: 42px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.avatar :global(.anticon) {
+    display: inline-block;
+}
+
+.name {
+    font-family: var(--font-family);
+    font-weight: 400;
+    font-size: 1.6rem;
+    line-height: 130%;
+    white-space: pre-wrap;
+    color: var(--character-light-title-85);
+}
+
+.description {
+    display: flex;
+    align-items: flex-start;
+    flex-direction: column;
+    justify-content: flex-start;
+    gap: 12px;
+    width: 85%;
+}
+
+.title {
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-end;
+    gap: 16px;
+}
+
+.date {
+    font-family: var(--font-family);
+    font-weight: 400;
+    font-size: 1.4rem;
+    line-height: 130%;
+    color: var(--character-light-disable-25);
+}
+
+.comment {
+    font-family: var(--font-family);
+    font-weight: 400;
+    font-size: 1.4rem;
+    line-height: 130%;
+    text-align: start;
+    color: var(--character-light-secondary-45);
+    word-break: break-all;
+}
+
+@media screen and (max-width: 1000px) {
+    .user {
+        width: 30%;
+    }
+    .description {
+        width: 70%;
+    }
+}
+
+@media screen and (max-width: 550px) {
+    .feedback {
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: space-between;
+    }
+    .user {
+        flex-direction: row;
+        width: 95%;
+        align-items: center;
+        justify-content: flex-start;
+        gap: 16px;
+    }
+    .name {
+        width: 30%;
+        text-align: left;
+    }
+    .description {
+        width: 97%;
+        text-align: left;
+    }
+}

@@ -43,3 +43,17 @@ export interface IChangePasswordRequest {
 export interface IChangePasswordResponse {
     message: string;
 }
+
+export interface IFeedbackResponse {
+    id: string;
+    fullName: string | null;
+    imageSrc: string | null;
+    message: string | null;
+    rating: number;
+    createdAt: string;
+}
+
+export interface IPostFeedbackRequest {
+    message: string;
+    rating: number;
+}
