@@ -1,4 +1,4 @@
-import { FC, useContext, useEffect, useLayoutEffect } from 'react';
+import { FC, useContext, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Paths } from '../../routes/pathes';
 import { useAppDispatch, useAppSelector } from '@hooks/typed-react-redux-hooks';
@@ -20,24 +20,6 @@ export const FeedbacksPage: FC = () => {
     const { startLoader, stopLoader } = useContext(LoaderStateContext);
     const { data, isLoading: isQueryLoading, error, isError } = useGetAllFeedbacksQuery();
 
-    useLayoutEffect(() => {
-        if (isFetchBaseQueryError(error) && error.status === 403) {
-            localStorage.removeItem('userCleverFit');
-            dispatch(resetCredentials());
-            navigate(Paths.AUTH, { replace: true });
-        } else if (isError) {
-            setNode(<ShowFeedbackError />);
-            setWidthModal('clamp(328px, 100%, 539px)');
-            openModal();
-        }
-    }, []);
-
-    useEffect(() => {
-        if (!token) {
-            navigate(Paths.AUTH, { replace: true });
-        }
-    }, [token, navigate]);
-
     useEffect(() => {
         if (isQueryLoading) {
             startLoader();
@@ -45,6 +27,26 @@ export const FeedbacksPage: FC = () => {
             stopLoader();
         }
     }, [isQueryLoading]);
+
+    useEffect(() => {
+        if (isFetchBaseQueryError(error)) {
+            if (error.status === 403) {
+                localStorage.removeItem('userCleverFit');
+                dispatch(resetCredentials());
+                navigate(Paths.AUTH, { replace: true });
+            } else {
+                setNode(<ShowFeedbackError />);
+                setWidthModal('clamp(328px, 100%, 539px)');
+                openModal();
+            }
+        }
+    }, [error, isError, data]);
+
+    useEffect(() => {
+        if (!token) {
+            navigate(Paths.AUTH, { replace: true });
+        }
+    }, [token, navigate]);
 
     return (
         <BaseMainFeedbacksLayout isFeedbackPage={true}>

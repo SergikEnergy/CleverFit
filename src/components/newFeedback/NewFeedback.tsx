@@ -1,4 +1,4 @@
-import { FC, useContext, useState } from 'react';
+import { FC, useContext, useState, useEffect } from 'react';
 import { ModalFeedbackContext } from '../../reactContexts/modalFeedback-context';
 import { LoaderStateContext } from '../../reactContexts/loader-context';
 import { useAppSelector, useAppDispatch } from '@hooks/typed-react-redux-hooks';
@@ -25,16 +25,19 @@ export const NewFeedback: FC = () => {
     const [postComment, { isLoading: isQueryLoading }] = useAddNewFeedbackMutation();
     const dispatch = useAppDispatch();
     const [form] = Form.useForm();
-    const [submitDisabled, setSubmitDisabled] = useState(true);
+    const [submitDisabled, setSubmitDisabled] = useState(ratingFromState ? false : true);
     const [rateValue, setRateValue] = useState(ratingFromState ?? 0);
     const [textValue, setTextValue] = useState(commentFromState || '');
     const { closeModal, setNode, setWidthModal, openModal } = useContext(ModalFeedbackContext);
     const { startLoader, stopLoader } = useContext(LoaderStateContext);
-    if (isQueryLoading) {
-        startLoader();
-    } else {
-        stopLoader();
-    }
+
+    useEffect(() => {
+        if (isQueryLoading) {
+            startLoader();
+        } else {
+            stopLoader();
+        }
+    }, [isQueryLoading]);
 
     const [activeIndex, setActiveIndex] = useState<number | null>(null);
 
@@ -49,6 +52,7 @@ export const NewFeedback: FC = () => {
         } catch (error) {
             if (isFetchBaseQueryError(error)) {
                 closeModal();
+                stopLoader();
                 setWidthModal('clamp(328px, 100%, 539px)');
                 setNode(<AddFeedbackError />);
                 openModal();
@@ -103,12 +107,6 @@ export const NewFeedback: FC = () => {
                 <Form.Item<FieldType>
                     name='rating'
                     className={classnames(classes.rating, classes.antFixed)}
-                    rules={[
-                        {
-                            required: true,
-                            message: '',
-                        },
-                    ]}
                 >
                     <Rate
                         className={classes.rateStars}

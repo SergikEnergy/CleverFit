@@ -39,11 +39,13 @@ export const FormLogin: FC = () => {
     const dispatch = useAppDispatch();
     const emailFromState = useAppSelector((state) => state.user.email);
 
-    if (isRTKLoading || isCheckEmailLoading) {
-        startLoader();
-    } else {
-        stopLoader();
-    }
+    useEffect(() => {
+        if (isRTKLoading || isCheckEmailLoading) {
+            startLoader();
+        } else {
+            stopLoader();
+        }
+    }, []);
 
     useEffect(() => {
         if (location.state?.fromPath && location.state.fromPath === Paths.ERROR_CHECK_EMAIL) {

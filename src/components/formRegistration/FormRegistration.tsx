@@ -35,11 +35,14 @@ export const FormRegistration: FC = () => {
     const dispatch = useAppDispatch();
     const userData = useAppSelector((state) => state.user);
 
-    if (isRTKLoading) {
-        startLoader();
-    } else {
-        stopLoader();
-    }
+    useEffect(() => {
+        if (isRTKLoading) {
+            startLoader();
+        } else {
+            stopLoader();
+        }
+    }, []);
+
     useEffect(() => {
         if (location.state?.fromPath && location.state.fromPath === Paths.ERROR_OTHERS) {
             startLoader();

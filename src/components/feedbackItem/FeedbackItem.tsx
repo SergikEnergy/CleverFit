@@ -17,7 +17,7 @@ export const FeedbackItem: FC<IFeedbackItemProps> = ({ feedbackContent }) => {
         <div className={classes.feedback}>
             <div className={classes.user}>
                 <div className={classes.avatar}>
-                    {feedbackContent.imageSrc === null ? (
+                    {!feedbackContent.imageSrc ? (
                         <UserOutlined style={{ fontSize: '20px' }} />
                     ) : (
                         <CustomAvatar url={feedbackContent.imageSrc} />

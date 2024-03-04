@@ -1,7 +1,6 @@
 import { FC, useState, useEffect, useContext, ReactNode } from 'react';
 import { CollapsedContext } from '../../reactContexts/collapse-context';
 import { ModalPopUp } from '@components/modalPopup';
-import { ModalFeedbackContextProvider } from '../../reactContexts/modalFeedbackContextProvider';
 
 import { SideBar } from '@components/sidebar';
 import { Header } from '@components/header';
@@ -38,7 +37,7 @@ export const BaseMainFeedbacksLayout: FC<BaseMainFeedbacksLayoutProps> = ({
     }, []);
 
     return (
-        <ModalFeedbackContextProvider>
+        <>
             <ModalPopUp />
             <AntLayout
                 className={classnames('base-page', { ['feedback-page']: isFeedbackPage })}
@@ -89,6 +88,6 @@ export const BaseMainFeedbacksLayout: FC<BaseMainFeedbacksLayoutProps> = ({
                     <Content style={{ background: 'transparent' }}>{children}</Content>
                 </AntLayout>
             </AntLayout>
-        </ModalFeedbackContextProvider>
+        </>
     );
 };
