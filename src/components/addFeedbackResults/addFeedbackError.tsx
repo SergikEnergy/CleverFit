@@ -18,7 +18,6 @@ export const AddFeedbackError: FC = () => {
         closeModal();
         setNode(null);
     };
-
     const title = 'Данные не сохранились';
     const subtitle = 'Что-то пошло не так. Попробуйте ещё раз.';
     const buttonTexts = ['Написать отзыв', 'Закрыть'];
