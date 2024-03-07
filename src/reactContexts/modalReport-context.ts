@@ -1,6 +1,6 @@
 import { createContext, ReactNode } from 'react';
 
-export type ModalFeedbackType = {
+export type ModalReportType = {
     isOpenModal: boolean;
     node: ReactNode | null;
     widthModal: string;
@@ -10,7 +10,7 @@ export type ModalFeedbackType = {
     closeModal: () => void;
 };
 
-const initialContext: ModalFeedbackType = {
+const initialContext: ModalReportType = {
     isOpenModal: false,
     widthModal: '',
     node: null,
@@ -29,4 +29,4 @@ const initialContext: ModalFeedbackType = {
     },
 };
 
-export const ModalFeedbackContext = createContext<ModalFeedbackType>(initialContext);
+export const ModalReportContext = createContext<ModalReportType>(initialContext);

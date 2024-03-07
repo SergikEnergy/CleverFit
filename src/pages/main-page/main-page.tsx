@@ -6,7 +6,7 @@ import { Paths } from '../../routes/pathes';
 
 import { Footer } from '@components/footer';
 import { MainContent } from '@components/mainContent';
-import { BaseMainFeedbacksLayout } from '@pages/baseMainFeedbacks';
+import { BasePagesLayout } from '@pages/basePagesLayout';
 import { Layout as AntLayout } from 'antd';
 import './main-page.css';
 
@@ -27,7 +27,7 @@ export const MainPage: FC = () => {
         return <Navigate to={Paths.AUTH} replace />;
     } else {
         return (
-            <BaseMainFeedbacksLayout>
+            <BasePagesLayout>
                 <MainContent />
                 <AntFooter
                     className={!collapsed ? 'footer' : 'footer collapsed'}
@@ -35,7 +35,7 @@ export const MainPage: FC = () => {
                 >
                     <Footer />
                 </AntFooter>
-            </BaseMainFeedbacksLayout>
+            </BasePagesLayout>
         );
     }
 };

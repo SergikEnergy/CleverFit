@@ -3,10 +3,10 @@ import { useNavigate } from 'react-router-dom';
 import { Paths } from '../../routes/pathes';
 import { useAppDispatch, useAppSelector } from '@hooks/typed-react-redux-hooks';
 import { resetCredentials } from '@redux/reducers/authSlice';
-import { BaseMainFeedbacksLayout } from '@pages/baseMainFeedbacks';
+import { BasePagesLayout } from '@pages/basePagesLayout';
 import { WithoutComments } from '@components/withoutComments';
 import { Feedbacks } from '@components/feedbacks';
-import { ModalFeedbackContext } from '../../reactContexts/modalFeedback-context';
+import { ModalReportContext } from '../../reactContexts/modalReport-context';
 import { LoaderStateContext } from '../../reactContexts/loader-context';
 import { useGetAllFeedbacksQuery } from '@redux/API/feedbacksAPI';
 import { ShowFeedbackError } from '@components/showFeedbackError';
@@ -16,7 +16,7 @@ export const FeedbacksPage: FC = () => {
     const dispatch = useAppDispatch();
     const navigate = useNavigate();
     const token = useAppSelector((state) => state.auth.token);
-    const { setNode, openModal, setWidthModal } = useContext(ModalFeedbackContext);
+    const { setNode, openModal, setWidthModal } = useContext(ModalReportContext);
     const { startLoader, stopLoader } = useContext(LoaderStateContext);
     const { data, isLoading: isQueryLoading, error, isError } = useGetAllFeedbacksQuery();
 
@@ -49,9 +49,9 @@ export const FeedbacksPage: FC = () => {
     }, [token, navigate]);
 
     return (
-        <BaseMainFeedbacksLayout isFeedbackPage={true}>
+        <BasePagesLayout isFeedbackPage={true}>
             {(!data || (Array.isArray(data) && data.length === 0)) && <WithoutComments />}
             {data && Array.isArray(data) && data.length > 0 && <Feedbacks feedbacks={data} />}
-        </BaseMainFeedbacksLayout>
+        </BasePagesLayout>
     );
 };

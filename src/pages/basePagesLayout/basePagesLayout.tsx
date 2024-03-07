@@ -9,19 +9,21 @@ import { Switcher } from '@components/switcher/switcher';
 import { Layout as AntLayout } from 'antd';
 import { primaryLight } from '../../utils/constants/colors';
 import BgImg from '/images/mainBG.jpg';
-import './baseMainFeedbacksLayout.css';
+import './basePagesLayout.css';
 import classnames from 'classnames';
 
 const { Header: AntHeader, Sider, Content } = AntLayout;
 
-interface BaseMainFeedbacksLayoutProps {
+interface BasePagesLayoutProps {
     children: ReactNode;
     isFeedbackPage?: boolean;
+    isCalendarPage?: boolean;
 }
 
-export const BaseMainFeedbacksLayout: FC<BaseMainFeedbacksLayoutProps> = ({
+export const BasePagesLayout: FC<BasePagesLayoutProps> = ({
     children,
     isFeedbackPage,
+    isCalendarPage,
 }) => {
     const { collapsed } = useContext(CollapsedContext);
     const [width, setWidth] = useState(208);
@@ -40,7 +42,10 @@ export const BaseMainFeedbacksLayout: FC<BaseMainFeedbacksLayoutProps> = ({
         <>
             <ModalPopUp />
             <AntLayout
-                className={classnames('base-page', { ['feedback-page']: isFeedbackPage })}
+                className={classnames('base-page', {
+                    ['feedback-page']: isFeedbackPage,
+                    ['calendar-page']: isCalendarPage,
+                })}
                 style={{ background: `center / cover url(${BgImg}) no-repeat` }}
             >
                 <Sider
@@ -83,7 +88,7 @@ export const BaseMainFeedbacksLayout: FC<BaseMainFeedbacksLayoutProps> = ({
                             background: `${primaryLight.primaryLight1}`,
                         }}
                     >
-                        <Header hideElement={isFeedbackPage} />
+                        <Header hideElement={isFeedbackPage} hideForCalendar={isCalendarPage} />
                     </AntHeader>
                     <Content style={{ background: 'transparent' }}>{children}</Content>
                 </AntLayout>

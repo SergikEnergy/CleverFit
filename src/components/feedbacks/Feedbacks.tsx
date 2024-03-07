@@ -1,7 +1,7 @@
 import { FC, useState, useContext } from 'react';
 import { IFeedbackResponse } from '@redux/API/api-types';
 import { FeedbacksList } from '@components/feedbacksList';
-import { ModalFeedbackContext } from '../../reactContexts/modalFeedback-context';
+import { ModalReportContext } from '../../reactContexts/modalReport-context';
 import { NewFeedback } from '@components/newFeedback';
 
 import { Button } from 'antd';
@@ -14,7 +14,7 @@ interface IFeedbacksProps {
 export const Feedbacks: FC<IFeedbacksProps> = ({ feedbacks }) => {
     const hiddenCommentText = 'Свернуть все отзывы';
     const spreadCommentText = 'Развернуть все отзывы';
-    const { setNode, setWidthModal, openModal } = useContext(ModalFeedbackContext);
+    const { setNode, setWidthModal, openModal } = useContext(ModalReportContext);
     const [textButton, setTextButton] = useState<string>(spreadCommentText);
     const [limit, setLimit] = useState(4);
 

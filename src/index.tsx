@@ -5,7 +5,7 @@ import { Provider } from 'react-redux';
 import { store } from '@redux/configure-store';
 import { CollapsedContextProvider } from './reactContexts/collapseContextProvider';
 import { LoaderContextProvider } from './reactContexts/loaderStateContextProvider';
-import { ModalFeedbackContextProvider } from './reactContexts/modalFeedbackContextProvider';
+import { ModalReportContextProvider } from './reactContexts/modalReportContextProvider';
 import { App } from './App';
 
 import 'normalize.css';
@@ -20,9 +20,9 @@ root.render(
         <Provider store={store}>
             <CollapsedContextProvider>
                 <LoaderContextProvider>
-                    <ModalFeedbackContextProvider>
+                    <ModalReportContextProvider>
                         <App />
-                    </ModalFeedbackContextProvider>
+                    </ModalReportContextProvider>
                 </LoaderContextProvider>
             </CollapsedContextProvider>
         </Provider>

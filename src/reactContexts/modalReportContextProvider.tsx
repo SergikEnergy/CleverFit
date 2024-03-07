@@ -1,11 +1,11 @@
 import { FC, useState, ReactNode } from 'react';
-import { ModalFeedbackContext } from './modalFeedback-context';
+import { ModalReportContext } from './modalReport-context';
 
-interface ModalFeedBackProviderProps {
+interface ModalReportProviderProps {
     children: ReactNode;
 }
 
-export const ModalFeedbackContextProvider: FC<ModalFeedBackProviderProps> = ({ children }) => {
+export const ModalReportContextProvider: FC<ModalReportProviderProps> = ({ children }) => {
     const [isOpen, setIsOpen] = useState(false);
     const [width, setWidth] = useState<string>('');
     const [nodeForModal, setNodeForModal] = useState<ReactNode | null>(null);
@@ -27,7 +27,7 @@ export const ModalFeedbackContextProvider: FC<ModalFeedBackProviderProps> = ({ c
     };
 
     return (
-        <ModalFeedbackContext.Provider
+        <ModalReportContext.Provider
             value={{
                 isOpenModal: isOpen,
                 closeModal,
@@ -39,6 +39,6 @@ export const ModalFeedbackContextProvider: FC<ModalFeedBackProviderProps> = ({ c
             }}
         >
             {children}
-        </ModalFeedbackContext.Provider>
+        </ModalReportContext.Provider>
     );
 };

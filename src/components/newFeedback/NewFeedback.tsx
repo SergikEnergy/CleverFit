@@ -1,5 +1,5 @@
 import { FC, useContext, useState, useEffect } from 'react';
-import { ModalFeedbackContext } from '../../reactContexts/modalFeedback-context';
+import { ModalReportContext } from '../../reactContexts/modalReport-context';
 import { LoaderStateContext } from '../../reactContexts/loader-context';
 import { useAppSelector, useAppDispatch } from '@hooks/typed-react-redux-hooks';
 import { setFeedback, resetFeedback } from '@redux/reducers/feedbackSlice';
@@ -28,7 +28,7 @@ export const NewFeedback: FC = () => {
     const [submitDisabled, setSubmitDisabled] = useState(ratingFromState ? false : true);
     const [rateValue, setRateValue] = useState(ratingFromState ?? 0);
     const [textValue, setTextValue] = useState(commentFromState || '');
-    const { closeModal, setNode, setWidthModal, openModal } = useContext(ModalFeedbackContext);
+    const { closeModal, setNode, setWidthModal, openModal } = useContext(ModalReportContext);
     const { startLoader, stopLoader } = useContext(LoaderStateContext);
 
     useEffect(() => {

@@ -1,6 +1,6 @@
 import { FC, useContext } from 'react';
 import { Button, Result } from 'antd';
-import { ModalFeedbackContext } from '../../reactContexts/modalFeedback-context';
+import { ModalReportContext } from '../../reactContexts/modalReport-context';
 import { useNavigate } from 'react-router-dom';
 import { Paths } from '../../routes/pathes';
 
@@ -8,7 +8,7 @@ import classes from './ShowFeedback.module.css';
 
 export const ShowFeedbackError: FC = () => {
     const navigate = useNavigate();
-    const { closeModal, setNode } = useContext(ModalFeedbackContext);
+    const { closeModal, setNode } = useContext(ModalReportContext);
     const handleClickButton = () => {
         closeModal();
         setNode(null);
