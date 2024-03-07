@@ -12,6 +12,7 @@ export const CalendarPage: FC = () => {
     const dispatch = useAppDispatch();
     const token = useAppSelector((state) => state.auth.token);
     const { setNode, openModal, setWidthModal } = useContext(ModalReportContext);
+
     useEffect(() => {
         if (!token) {
             navigate(Paths.AUTH, { replace: true });

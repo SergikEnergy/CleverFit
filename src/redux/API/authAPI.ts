@@ -9,9 +9,8 @@ import {
     IConfirmResponse,
     IChangePasswordResponse,
     IChangePasswordRequest,
-} from './api-types';
-
-const API_BASE_URL = 'https://marathon-api.clevertec.ru/';
+} from './api-types.ts';
+import { API_BASE_URL } from './api-data.ts';
 
 export const authApi = createApi({
     reducerPath: 'authAPI',

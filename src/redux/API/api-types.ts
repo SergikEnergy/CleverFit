@@ -57,3 +57,29 @@ export interface IPostFeedbackRequest {
     message: string;
     rating: number;
 }
+
+export interface ITrainingsResponse {
+    _id: string;
+    name: string;
+    date: string;
+    isImplementation: boolean;
+    userId: string;
+    parameters: IParametersTraining;
+    exercises: IExercise[];
+}
+
+export interface IParametersTraining {
+    repeat: boolean;
+    period: number;
+    jointTraining: boolean;
+    participants: string[];
+}
+
+export interface IExercise {
+    _id: string;
+    name: string;
+    replays: number;
+    weight: number;
+    approaches: number;
+    isImplementation: boolean;
+}

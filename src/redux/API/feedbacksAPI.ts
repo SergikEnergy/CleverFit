@@ -1,8 +1,7 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import { RootState } from '@redux/configure-store';
-import { IFeedbackResponse, IPostFeedbackRequest } from './api-types';
-
-const API_BASE_URL = 'https://marathon-api.clevertec.ru/';
+import { IFeedbackResponse, IPostFeedbackRequest } from './api-types.ts';
+import { API_BASE_URL } from './api-data.ts';
 
 export const feedbackApi = createApi({
     reducerPath: 'feedbackAPI',
