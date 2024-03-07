@@ -9,7 +9,7 @@ import { Feedbacks } from '@components/feedbacks';
 import { ModalReportContext } from '../../reactContexts/modalReport-context';
 import { LoaderStateContext } from '../../reactContexts/loader-context';
 import { useGetAllFeedbacksQuery } from '@redux/API/feedbacksAPI';
-import { ShowFeedbackError } from '@components/showFeedbackError';
+import { ShowFetchDataError } from '@components/showFetchDataError';
 import { isFetchBaseQueryError } from '@redux/API/errorsCatching';
 
 export const FeedbacksPage: FC = () => {
@@ -35,7 +35,7 @@ export const FeedbacksPage: FC = () => {
                 dispatch(resetCredentials());
                 navigate(Paths.AUTH, { replace: true });
             } else {
-                setNode(<ShowFeedbackError />);
+                setNode(<ShowFetchDataError forPage='feedback' />);
                 setWidthModal('clamp(328px, 100%, 539px)');
                 openModal();
             }

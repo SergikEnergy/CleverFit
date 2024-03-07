@@ -1,4 +1,6 @@
 import { FC, useContext } from 'react';
+import { history } from '@redux/configure-store';
+import { Paths } from '../../routes/pathes';
 
 import { CollapsedContext } from '../../reactContexts/collapse-context';
 import { Menu, Typography } from 'antd';
@@ -11,6 +13,10 @@ import classnames from 'classnames';
 
 export const MenuLinks: FC = () => {
     const { collapsed } = useContext(CollapsedContext);
+
+    const handleMoveToCalendarPage = () => {
+        history.push(Paths.CALENDAR_PAGE, { allowRequest: true });
+    };
 
     return (
         <Menu
@@ -26,6 +32,7 @@ export const MenuLinks: FC = () => {
                 })}
                 style={{ paddingLeft: `${collapsed ? '24px' : '17px'}` }}
                 key='calendar'
+                onClick={handleMoveToCalendarPage}
                 icon={
                     <CalendarTwoTone
                         twoToneColor={[

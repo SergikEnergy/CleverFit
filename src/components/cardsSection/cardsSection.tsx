@@ -1,5 +1,7 @@
 import { FC, useContext } from 'react';
 import { CollapsedContext } from '../../reactContexts/collapse-context';
+import { history } from '@redux/configure-store';
+import { Paths } from '../../routes/pathes';
 
 import { Col, Row, Typography, Button } from 'antd';
 import { HeartFilled, CalendarTwoTone } from '@ant-design/icons';
@@ -12,6 +14,11 @@ import classnames from 'classnames';
 
 export const CardsSection: FC = () => {
     const { collapsed } = useContext(CollapsedContext);
+
+    const handleMoveToCalendarPage = () => {
+        history.push(Paths.CALENDAR_PAGE, { allowRequest: true });
+    };
+
     return (
         <>
             <Row
@@ -58,6 +65,7 @@ export const CardsSection: FC = () => {
                         body={'Назначить календарь'}
                         action={
                             <Button
+                                onClick={handleMoveToCalendarPage}
                                 type='text'
                                 block
                                 icon={

@@ -1,7 +1,7 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import { RootState } from '@redux/configure-store';
 import { API_BASE_URL } from './api-data';
-import { ITrainingsResponse } from './api-types';
+import { ITrainingsResponse, IAllowedTrainResponse } from './api-types';
 
 export const calendarAPI = createApi({
     reducerPath: 'calendarAPI',
@@ -24,7 +24,13 @@ export const calendarAPI = createApi({
                 credentials: 'include',
             }),
         }),
+        getAllowedTrainsList: build.query<IAllowedTrainResponse[], void>({
+            query: () => ({
+                url: 'catalogs/training-list',
+                credentials: 'include',
+            }),
+        }),
     }),
 });
 
-export const { useGetAllTrainingsQuery } = calendarAPI;
+export const { useLazyGetAllTrainingsQuery, useLazyGetAllowedTrainsListQuery } = calendarAPI;

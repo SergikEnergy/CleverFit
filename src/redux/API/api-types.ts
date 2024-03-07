@@ -83,3 +83,8 @@ export interface IExercise {
     approaches: number;
     isImplementation: boolean;
 }
+
+export interface IAllowedTrainResponse {
+    name: 'string';
+    key: 'string';
+}
