@@ -13,6 +13,7 @@ import { isFetchBaseQueryError } from '@redux/API/errorsCatching';
 import { resetCredentials } from '@redux/reducers/authSlice';
 import { ShowFetchDataError } from '@components/showFetchDataError';
 import { ErrorShowAllowedTrainsList } from '@components/errorShowAllowedTrainsList';
+import { Calendar } from 'antd';
 
 import classes from './CalendarPage.module.css';
 
@@ -133,5 +134,20 @@ export const CalendarPage: FC = () => {
         getAllowedTrainsError,
     ]);
 
-    return <BasePagesLayout isCalendarPage={true}>calendar-page</BasePagesLayout>;
+    return (
+        <BasePagesLayout isCalendarPage={true}>
+            <div className={classes.wrapper}>
+                <Calendar
+                    locale={{
+                        lang: {
+                            locale: 'en',
+                            dayFormat: moment.updateLocale('en', {
+                                weekdaysMin: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
+                            }),
+                        },
+                    }}
+                />
+            </div>
+        </BasePagesLayout>
+    );
 };

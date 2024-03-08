@@ -82,6 +82,7 @@ export const BasePagesLayout: FC<BasePagesLayoutProps> = ({
                         className={classnames('header', {
                             ['collapsed']: collapsed,
                             ['feedback-header']: isFeedbackPage,
+                            ['calendar-header']: isCalendarPage,
                         })}
                         style={{
                             padding: 0,

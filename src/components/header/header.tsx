@@ -26,7 +26,7 @@ export const Header: FC<HeaderProps> = ({ hideElement, hideForCalendar }) => {
     }, []);
 
     return (
-        <div className={`${classes['header__wrapper']} wrapper`}>
+        <div className={classnames(classes['header__wrapper'], 'wrapper')}>
             <div className={classes.navigation}>
                 <Breadcrumb>
                     {breadCrumbsItems.map((breadcrumb) => (

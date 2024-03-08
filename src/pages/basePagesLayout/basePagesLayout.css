@@ -34,6 +34,11 @@ header.feedback-header {
     height: 50px;
 }
 
+header.calendar-header {
+    min-height: 80px;
+    height: 80px;
+}
+
 @media screen and (max-width: 834px) {
     header.header {
         height: 194px;
