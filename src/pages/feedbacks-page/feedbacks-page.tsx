@@ -49,7 +49,7 @@ export const FeedbacksPage: FC = () => {
     }, [token, navigate]);
 
     return (
-        <BasePagesLayout isFeedbackPage={true}>
+        <BasePagesLayout isFeedbackPage>
             {(!data || (Array.isArray(data) && data.length === 0)) && <WithoutComments />}
             {data && Array.isArray(data) && data.length > 0 && <Feedbacks feedbacks={data} />}
         </BasePagesLayout>

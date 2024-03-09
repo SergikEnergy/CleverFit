@@ -12,12 +12,8 @@ import { BasePagesLayout } from '@pages/basePagesLayout';
 import { isFetchBaseQueryError } from '@redux/API/errorsCatching';
 import { resetCredentials } from '@redux/reducers/authSlice';
 import { ShowFetchDataError } from '@components/showFetchDataError';
+import { CalenDarWithData } from '@components/calendarWithData';
 import { ErrorShowAllowedTrainsList } from '@components/errorShowAllowedTrainsList';
-import { Calendar } from 'antd';
-import { ruLocale } from './CalendarPage.data';
-import moment from 'moment';
-import 'moment/dist/locale/ru';
-moment.locale('ru');
 
 import classes from './CalendarPage.module.css';
 
@@ -139,14 +135,11 @@ export const CalendarPage: FC = () => {
     ]);
 
     return (
-        <BasePagesLayout isCalendarPage={true}>
+        <BasePagesLayout isCalendarPage>
             <div className={classes.wrapper}>
-                <Calendar
-                    locale={ruLocale}
-                    defaultValue={moment()}
-                    onChange={(date) => {
-                        console.log('date', date);
-                    }}
+                <CalenDarWithData
+                    dataForRender={userTrainsData && allowedTrainsList ? userTrainsData : []}
+                    allowedTrainsList={allowedTrainsList ? allowedTrainsList : []}
                 />
             </div>
         </BasePagesLayout>
