@@ -14,6 +14,10 @@ import { resetCredentials } from '@redux/reducers/authSlice';
 import { ShowFetchDataError } from '@components/showFetchDataError';
 import { ErrorShowAllowedTrainsList } from '@components/errorShowAllowedTrainsList';
 import { Calendar } from 'antd';
+import { ruLocale } from './CalendarPage.data';
+import moment from 'moment';
+import 'moment/dist/locale/ru';
+moment.locale('ru');
 
 import classes from './CalendarPage.module.css';
 
@@ -138,13 +142,10 @@ export const CalendarPage: FC = () => {
         <BasePagesLayout isCalendarPage={true}>
             <div className={classes.wrapper}>
                 <Calendar
-                    locale={{
-                        lang: {
-                            locale: 'en',
-                            dayFormat: moment.updateLocale('en', {
-                                weekdaysMin: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
-                            }),
-                        },
+                    locale={ruLocale}
+                    defaultValue={moment()}
+                    onChange={(date) => {
+                        console.log('date', date);
                     }}
                 />
             </div>
