@@ -56,7 +56,7 @@
     border: none;
 }
 
-@media screen and (max-width: 834px) {
+@media screen and (max-width: var(--TABLET_WIDTH)) {
     .download {
         margin-right: 1.3rem;
         padding-left: 0;
@@ -75,14 +75,14 @@
         margin-top: 0.8rem;
     }
 }
-@media screen and (max-width: 710px) {
+@media screen and (max-width: var(--TABLET_TO_MOBILE_POINT2)) {
     .description,
     .description.collapsed {
         align-items: center;
     }
 }
 
-@media screen and (max-width: 400px) {
+@media screen and (max-width: var(--TABLET_TO_MOBILE_POINT5)) {
     .button,
     .button.collapsed {
         width: 48%;

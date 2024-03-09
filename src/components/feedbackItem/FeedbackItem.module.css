@@ -76,7 +76,7 @@
     word-break: break-all;
 }
 
-@media screen and (max-width: 1000px) {
+@media screen and (max-width: var(--FULL_TO_TABLET_POINT2)) {
     .user {
         width: 30%;
     }
@@ -85,7 +85,7 @@
     }
 }
 
-@media screen and (max-width: 550px) {
+@media screen and (max-width: var(--TABLET_TO_MOBILE_POINT3)) {
     .feedback {
         flex-direction: column;
         align-items: flex-start;

@@ -7,3 +7,6 @@
     padding: 10px 24px 93px;
     background: var(--primary-light-1);
 }
+
+@media screen and (max-width: var(--TABLET_WIDTH)) {
+}

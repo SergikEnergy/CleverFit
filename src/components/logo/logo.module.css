@@ -30,7 +30,7 @@
     display: none;
 }
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: var(--TABLET_TO_MOBILE_POINT2)) {
     .logo__text,
     .logo__icon {
         display: none;
@@ -40,7 +40,7 @@
     }
 }
 
-@media screen and (max-width: 400px) {
+@media screen and (max-width: var(--TABLET_TO_MOBILE_POINT5)) {
     .logo {
         padding-top: 1.3rem;
         margin-left: 0;

@@ -34,7 +34,7 @@ h1.title__text.antFixed,
     width: 57.9%;
 }
 
-@media screen and (max-width: 1100px) {
+@media screen and (max-width: var(--FULL_TO_TABLET_POINT2)) {
     .title {
         width: 96%;
     }
@@ -43,7 +43,7 @@ h1.title__text.antFixed,
     }
 }
 
-@media screen and (max-width: 834px) {
+@media screen and (max-width: var(--TABLET_WIDTH)) {
     .title {
         padding-right: 3.5rem;
         margin-left: 1.1rem;
@@ -61,12 +61,12 @@ h1.title__text.antFixed,
     }
 }
 
-@media screen and (max-width: 750px) {
+@media screen and (max-width: var(--TABLET_TO_MOBILE_POINT2)) {
     .cards {
         gap: 16px;
     }
 }
-@media screen and (max-width: 400px) {
+@media screen and (max-width: var(--TABLET_TO_MOBILE_POINT5)) {
     .title.collapsed,
     .title {
         width: 95%;

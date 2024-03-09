@@ -14,13 +14,13 @@
     justify-content: flex-start;
 }
 
-@media screen and (max-width: 834px) {
+@media screen and (max-width: var(--TABLET_WIDTH)) {
     .register {
         margin-top: 2.3rem;
     }
 }
 
-@media screen and (max-width: 590px) {
+@media screen and (max-width: var(--TABLET_TO_MOBILE_POINT2)) {
     .register {
         width: 328px;
         min-height: 564px;
@@ -31,7 +31,7 @@
     }
 }
 
-@media screen and (max-width: 360px) {
+@media screen and (max-width: var(--MOBILE_WIDTH)) {
     .register {
         margin-top: 11.5rem;
     }

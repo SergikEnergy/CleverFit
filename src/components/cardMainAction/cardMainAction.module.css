@@ -36,7 +36,7 @@
     flex-direction: column;
 }
 
-@media screen and (max-width: 834px) {
+@media screen and (max-width: var(--TABLET_WIDTH)) {
     .body {
         margin-left: 2.5rem;
         margin-right: 0.5rem;
@@ -48,7 +48,7 @@
     }
 }
 
-@media screen and (max-width: 400px) {
+@media screen and (max-width: var(--TABLET_TO_MOBILE_POINT5)) {
     .body,
     .body.collapsed {
         margin-left: 0;

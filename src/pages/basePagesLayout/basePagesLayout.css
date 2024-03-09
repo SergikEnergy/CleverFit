@@ -39,7 +39,7 @@ header.calendar-header {
     height: 80px;
 }
 
-@media screen and (max-width: 834px) {
+@media screen and (max-width: var(--TABLET_WIDTH)) {
     header.header {
         height: 194px;
     }
@@ -54,7 +54,7 @@ header.calendar-header {
     }
 }
 
-@media screen and (max-width: 550px) {
+@media screen and (max-width: var(--TABLET_TO_MOBILE_POINT3)) {
     .mobile__overlay.antFixed {
         position: fixed;
         top: 0;
@@ -64,7 +64,7 @@ header.calendar-header {
     }
 }
 
-@media screen and (max-width: 400px) {
+@media screen and (max-width: var(--TABLET_TO_MOBILE_POINT5)) {
     #root {
         min-height: 800px;
     }

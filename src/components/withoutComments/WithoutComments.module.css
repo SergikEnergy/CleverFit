@@ -48,7 +48,7 @@
     width: 142px;
 }
 
-@media screen and (max-width: 550px) {
+@media screen and (max-width: var(--TABLET_TO_MOBILE_POINT3)) {
     .wrapper {
         width: 91%;
         gap: 48px;

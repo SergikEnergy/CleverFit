@@ -16,14 +16,14 @@
     align-items: center;
 }
 
-@media screen and (max-width: 834px) {
+@media screen and (max-width: var(--TABLET_WIDTH)) {
     .blur-background,
     .results-page {
         min-height: 1194px;
     }
 }
 
-@media screen and (max-width: 360px) {
+@media screen and (max-width: var(--MOBILE_WIDTH)) {
     .blur-background,
     .results-page {
         min-height: 800px;

@@ -3,7 +3,7 @@
     margin-bottom: 4rem;
 }
 
-@media screen and (max-width: 834px) {
+@media screen and (max-width: var(--TABLET_WIDTH)) {
     .footer {
         margin-top: 26rem;
     }
@@ -13,7 +13,7 @@
     }
 }
 
-@media screen and (max-width: 400px) {
+@media screen and (max-width: var(--TABLET_TO_MOBILE_POINT5)) {
     .footer,
     .footer.collapsed {
         margin-top: 1.9rem;

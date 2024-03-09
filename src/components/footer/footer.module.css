@@ -4,7 +4,7 @@
     justify-content: space-between;
 }
 
-@media screen and (max-width: 680px) {
+@media screen and (max-width: var(--TABLET_TO_MOBILE_POINT2)) {
     .footer__wrapper {
         flex-direction: column-reverse;
         gap: 16px;
