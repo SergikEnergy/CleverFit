@@ -83,7 +83,7 @@ div.checkbox-wrapper {
     color: var(--character-light-title-85);
 }
 
-@media screen and (max-width: var(--MOBILE_WIDTH)) {
+@media screen and (max-width: 360px) {
     .submit-button.antFixed {
         font-size: 14px;
     }

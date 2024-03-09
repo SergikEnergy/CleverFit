@@ -54,7 +54,7 @@ button.button_text:focus {
     color: var(--character-light-primary-inverse);
 }
 
-@media screen and (max-width: var(--TABLET_TO_MOBILE_POINT3)) {
+@media screen and (max-width: 550px) {
     .feedbacks {
         margin-left: 1.2rem;
         margin-right: 1.2rem;

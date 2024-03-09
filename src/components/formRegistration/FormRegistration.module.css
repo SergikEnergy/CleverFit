@@ -71,7 +71,7 @@ span.input input {
     color: var(--character-light-title-85);
 }
 
-@media screen and (max-width: var(--TABLET_WIDTH)) {
+@media screen and (max-width: 834px) {
     div.confirm-field.antFixed {
         margin-bottom: 6rem;
     }
@@ -81,7 +81,7 @@ span.input input {
     }
 }
 
-@media screen and (max-width: var(--MOBILE_WIDTH)) {
+@media screen and (max-width: 360px) {
     .confirm-field.antFixed {
         margin-bottom: 5rem;
     }

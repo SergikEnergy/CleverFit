@@ -21,7 +21,7 @@
     color: var(--primary-light-6);
 }
 
-@media screen and (max-width: var(--TABLET_WIDTH)) {
+@media screen and (max-width: 834px) {
     .reviews {
         margin-left: 1.4rem;
     }
@@ -30,7 +30,7 @@
         margin-left: 0.8rem;
     }
 }
-@media screen and (max-width: var(--TABLET_TO_MOBILE_POINT5)) {
+@media screen and (max-width: 400px) {
     .reviews > button {
         margin: 7px 16px 0 7px;
     }

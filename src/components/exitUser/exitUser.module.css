@@ -31,7 +31,7 @@ li.exit__item.antFixed {
     padding-top: 4px;
 }
 
-@media screen and (max-width: var(--TABLET_TO_MOBILE_POINT2)) {
+@media screen and (max-width: 780px) {
     .exit__icon.antFixed,
     .exit__icon {
         display: none;
@@ -44,7 +44,7 @@ li.exit__item.antFixed {
     }
 }
 
-@media screen and (max-width: var(--TABLET_TO_MOBILE_POINT5)) {
+@media screen and (max-width: 400px) {
     .exit__text {
         margin-left: 2rem;
     }

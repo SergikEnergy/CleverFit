@@ -1,5 +1,19 @@
 @import './utils/fonts/font.css';
 
+body {
+    /* media query sizes */
+
+    --FULL_TO_TABLET_POINT1: 1290px;
+    --FULL_TO_TABLET_POINT2: 1100px;
+    --TABLET_WIDTH: 834px;
+    --TABLET_TO_MOBILE_POINT1: 780px;
+    --TABLET_TO_MOBILE_POINT2: 750px;
+    --TABLET_TO_MOBILE_POINT3: 550px;
+    --TABLET_TO_MOBILE_POINT4: 500px;
+    --TABLET_TO_MOBILE_POINT5: 400px;
+    --MOBILE_WIDTH: 360px;
+}
+
 :root {
     font-family: Inter, Verdana, Arial, sans-serif;
     line-height: 1.5;
@@ -14,18 +28,6 @@
     -moz-osx-font-smoothing: grayscale;
     margin: 0;
     padding: 0;
-
-    /* media query sizes */
-
-    --FULL_TO_TABLET_POINT1: 1290px;
-    --FULL_TO_TABLET_POINT2: 1100px;
-    --TABLET_WIDTH: 834px;
-    --TABLET_TO_MOBILE_POINT1: 780px;
-    --TABLET_TO_MOBILE_POINT2: 750px;
-    --TABLET_TO_MOBILE_POINT3: 550px;
-    --TABLET_TO_MOBILE_POINT4: 500px;
-    --TABLET_TO_MOBILE_POINT5: 400px;
-    --MOBILE_WIDTH: 360px;
 
     /* variables from design */
 

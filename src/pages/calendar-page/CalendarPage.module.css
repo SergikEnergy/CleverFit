@@ -8,5 +8,5 @@
     background: var(--primary-light-1);
 }
 
-@media screen and (max-width: var(--TABLET_WIDTH)) {
+@media screen and (max-width: 834px) {
 }

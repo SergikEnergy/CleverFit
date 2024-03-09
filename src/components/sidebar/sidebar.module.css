@@ -7,18 +7,18 @@
     flex-grow: 1;
 }
 
-@media screen and (max-width: var(--TABLET_WIDTH)) {
+@media screen and (max-width: 834px) {
     .sidebar {
         min-height: 1194px;
     }
 }
 
-@media screen and (max-width: var(--TABLET_TO_MOBILE_POINT2)) {
+@media screen and (max-width: 680px) {
     .sidebar {
         min-height: 1300px;
     }
 }
-@media screen and (max-width: var(--TABLET_TO_MOBILE_POINT5)) {
+@media screen and (max-width: 400px) {
     .sidebar {
         min-height: 100vh;
     }

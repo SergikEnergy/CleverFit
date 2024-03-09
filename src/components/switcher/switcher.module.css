@@ -18,7 +18,7 @@
     right: -29%;
 }
 
-@media screen and (max-width: var(--TABLET_TO_MOBILE_POINT2)) {
+@media screen and (max-width: 710px) {
     .switcher {
         right: -18%;
     }
@@ -27,7 +27,7 @@
     }
 }
 
-@media screen and (max-width: var(--TABLET_TO_MOBILE_POINT3)) {
+@media screen and (max-width: 550px) {
     .switcher {
         width: 32px;
         height: 48px;
@@ -39,7 +39,7 @@
     }
 }
 
-@media screen and (max-width: var(--TABLET_TO_MOBILE_POINT5)) {
+@media screen and (max-width: 400px) {
     .switcher {
         right: -29%;
         top: 9.5%;

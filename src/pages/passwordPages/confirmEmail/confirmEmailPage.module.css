@@ -120,7 +120,7 @@
     border: 1px solid var(--character-light-error);
 }
 
-@media screen and (max-width: var(--TABLET_TO_MOBILE_POINT3)) {
+@media screen and (max-width: 550px) {
     .confirm {
         margin: auto;
         padding: 32px 16px;

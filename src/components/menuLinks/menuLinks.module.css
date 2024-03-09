@@ -29,7 +29,7 @@
     margin-left: 0;
 }
 
-@media screen and (max-width: var(--TABLET_TO_MOBILE_POINT1)) {
+@media screen and (max-width: 780px) {
     .menu__item_icon.antFixed {
         display: none;
     }
@@ -37,7 +37,7 @@
         padding: 0;
     }
 }
-@media screen and (max-width: var(--TABLET_TO_MOBILE_POINT3)) {
+@media screen and (max-width: 600px) {
     .antFixed li.menu__item:not(:last-child) {
         margin-bottom: 6px;
     }
@@ -46,7 +46,7 @@
     }
 }
 
-@media screen and (max-width: var(--TABLET_TO_MOBILE_POINT4)) {
+@media screen and (max-width: 500px) {
     :global(li.ant-menu-item),
     .menu__item {
         margin-left: -3px !important;

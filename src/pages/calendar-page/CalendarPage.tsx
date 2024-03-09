@@ -121,7 +121,7 @@ export const CalendarPage: FC = () => {
     }, [token, navigate]);
 
     useEffect(() => {
-        if (location.state.allowRequest) {
+        if (location.state && location.state.allowRequest) {
             console.log('from main-page allow request');
             fetchAllTrainings().then(() => {
                 fetchAllowedTrainsList();

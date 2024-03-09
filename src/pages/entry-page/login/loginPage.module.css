@@ -14,13 +14,13 @@
     justify-content: flex-start;
 }
 
-@media screen and (max-width: var(--TABLET_WIDTH)) {
+@media screen and (max-width: 834px) {
     .login {
         margin-top: 2rem;
     }
 }
 
-@media screen and (max-width: var(--TABLET_TO_MOBILE_POINT2)) {
+@media screen and (max-width: 590px) {
     .login {
         width: 328px;
         min-height: 564px;
@@ -31,7 +31,7 @@
     }
 }
 
-@media screen and (max-width: var(--MOBILE_WIDTH)) {
+@media screen and (max-width: 360px) {
     .login {
         margin-top: 9rem;
         min-height: 612px;

@@ -47,7 +47,7 @@
     border-radius: 2px;
 }
 
-@media screen and (max-width: var(--TABLET_TO_MOBILE_POINT3)) {
+@media screen and (max-width: 550px) {
     .statuses {
         width: 328px;
         height: 317px;

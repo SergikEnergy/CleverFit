@@ -36,7 +36,7 @@
     border-radius: 2px;
 }
 
-@media screen and (max-width: var(--TABLET_TO_MOBILE_POINT4)) {
+@media screen and (max-width: 500px) {
     .error:global(.ant-result) {
         padding-top: 32px;
         padding-bottom: 32px;
