@@ -1,0 +1,9 @@
+.modal {
+    position: absolute;
+    width: 264px;
+    height: 200px;
+}
+
+.modal.hidden {
+    display: none;
+}

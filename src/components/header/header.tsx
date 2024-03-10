@@ -65,11 +65,12 @@ export const Header: FC<HeaderProps> = ({ hideElement, hideForCalendar }) => {
                     <div
                         className={classnames(classes['greeting__settings'], {
                             [classes.collapsed]: collapsed,
-                            [classes['settings__calendar']]: hideForCalendar,
                         })}
                     >
                         <Button
-                            className={classnames(classes['mobile__button'], classes.antFixed)}
+                            className={classnames(classes['mobile__button'], classes.antFixed, {
+                                [classes['calendar-mobile']]: hideForCalendar,
+                            })}
                             type='text'
                             shape='circle'
                             icon={<SettingOutlined />}

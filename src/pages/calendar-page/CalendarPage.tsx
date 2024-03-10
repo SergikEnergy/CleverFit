@@ -136,7 +136,7 @@ export const CalendarPage: FC = () => {
 
     return (
         <BasePagesLayout isCalendarPage>
-            <div className={classes.wrapper}>
+            <div className={classes.wrapper} id={'modalWrapperCalendar'}>
                 <CalenDarWithData
                     dataForRender={userTrainsData && allowedTrainsList ? userTrainsData : []}
                     allowedTrainsList={allowedTrainsList ? allowedTrainsList : []}

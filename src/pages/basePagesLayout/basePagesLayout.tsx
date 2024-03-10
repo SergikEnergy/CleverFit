@@ -69,7 +69,7 @@ export const BasePagesLayout: FC<BasePagesLayoutProps> = ({
                     }}
                     collapsedWidth={collapseWidth}
                 >
-                    <SideBar />
+                    <SideBar isCalendarPage={isCalendarPage} />
                     <Switcher collapsed={collapsed} />
                 </Sider>
                 <AntLayout

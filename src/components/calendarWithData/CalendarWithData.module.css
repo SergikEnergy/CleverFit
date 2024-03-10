@@ -1,0 +1,50 @@
+.calendar {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    flex: 1;
+}
+:global(.ant-picker-body) {
+    padding: 0;
+}
+
+.calendar :global(td) {
+    z-index: 3;
+}
+
+@media screen and (max-width: 500px) {
+    .calendar {
+        width: 312px;
+        height: 240px;
+    }
+    .calendar :global(.ant-picker-calendar-header) {
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+        width: 96%;
+        margin-left: 21px;
+    }
+    .calendar :global(.ant-picker-calendar-header .ant-picker-calendar-year-select) {
+        min-width: 60px;
+    }
+    .calendar :global(.ant-picker-calendar-header .ant-picker-calendar-mode-switch) {
+        margin-top: 0;
+        margin-left: 6px;
+    }
+    .calendar :global(.ant-picker-calendar-header .ant-picker-calendar-month-select) {
+        margin-left: 3px;
+    }
+    .calendar:global(.ant-picker-calendar) > :global(.ant-picker-panel .ant-picker-body) {
+        padding: 0;
+    }
+    .calendar:global(.ant-picker-calendar) > :global(.ant-picker-panel .ant-picker-content) {
+        flex: 1;
+        height: 196px;
+    }
+    :global(.ant-picker-content td div.ant-picker-cell-inner) {
+        width: 35px;
+    }
+}

@@ -151,9 +151,13 @@ button.mobile__button {
         display: inline-block;
         padding: 0;
     }
-    button.mobile__button.antFixed {
+    button.mobile__button.antFixed:not(.calendar-mobile) {
         width: 32px;
         background: var(--neutral-gray-1);
+    }
+    button.mobile__button.antFixed.calendar-mobile {
+        width: 32px;
+        background: transparent;
     }
     .header {
         margin-left: 4px;
@@ -184,11 +188,21 @@ button.mobile__button {
     }
 }
 
-@media screen and (max-width: 360px) {
+@media screen and (max-width: 500px) {
+    .calendar__settings_wrapper {
+        align-self: flex-end;
+        margin-right: 1rem;
+        margin-bottom: 6px;
+        border-top: 8px;
+    }
     .greeting {
         margin-left: 1.8rem;
     }
     .greeting__text.collapsed {
         width: 85%;
+    }
+
+    button.mobile__button.antFixed.calendar-mobile {
+        background: transparent;
     }
 }

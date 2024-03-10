@@ -1,12 +1,23 @@
 .wrapper {
     display: flex;
-    align-items: center;
+    align-items: flex-start;
     justify-content: center;
     width: 100%;
     height: calc(100% - 48px);
     padding: 10px 24px 93px;
     background: var(--primary-light-1);
+    position: relative;
 }
 
 @media screen and (max-width: 834px) {
+    .wrapper {
+        padding: 12px 24px 271px;
+        height: calc(100% - 42px);
+    }
+}
+@media screen and (max-width: 500px) {
+    .wrapper {
+        padding: 19px 24px 23px;
+        height: calc(100% - 292px);
+    }
 }

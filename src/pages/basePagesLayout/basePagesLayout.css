@@ -3,13 +3,12 @@
     margin: 0 auto;
     text-align: center;
     box-sizing: border-box;
-    min-height: 1024px;
     width: 100%;
-    height: 100%;
 }
 
 .base-page {
     position: relative;
+    min-height: 1024px;
 }
 .base-page.feedback-page {
     min-height: 100%;
@@ -62,11 +61,22 @@ header.calendar-header {
         width: 106px;
         z-index: 100;
     }
+    .base-page.calendar-page {
+        min-height: 640px;
+    }
+    header.calendar-header,
+    header.calendar-header.header.collapsed {
+        min-height: 66px;
+        height: 66px;
+    }
 }
 
 @media screen and (max-width: 400px) {
-    #root {
+    .base-page {
         min-height: 800px;
+    }
+    .base-page.calendar-page {
+        min-height: 640px;
     }
     header.header,
     header.header.collapsed {
@@ -76,5 +86,10 @@ header.calendar-header {
     header.feedback-header.header.collapsed {
         min-height: 50px;
         height: 50px;
+    }
+    header.calendar-header,
+    header.calendar-header.header.collapsed {
+        min-height: 66px;
+        height: 66px;
     }
 }
