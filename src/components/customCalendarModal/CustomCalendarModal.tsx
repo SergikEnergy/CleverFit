@@ -2,15 +2,16 @@ import { FC } from 'react';
 import { Moment } from 'moment';
 import { checkNarrowFramesDay } from './CustomCalendarModal.utils';
 import { IModalPosition } from '@components/calendarWithData/CalendarWithData';
+import { ITrainingsResponse } from '@redux/API/api-types';
 
 import classes from './CustomCalendarModal.module.css';
 import classnames from 'classnames';
 
 interface ICustomCalendarModalProps {
     widthModal: string;
-    height: string;
     modalPosition: IModalPosition;
     value: Moment;
+    trains: [] | ITrainingsResponse[];
     isCentered?: boolean;
     allowOpen: boolean;
     isModalVisible: boolean;
@@ -21,31 +22,31 @@ export const CustomCalendarModal: FC<ICustomCalendarModalProps> = ({
     modalPosition,
     value,
     widthModal,
-    height,
     isCentered,
     isModalVisible,
+    trains,
 }) => {
     const topPosition = modalPosition.top;
     const styleForCenteredPosition = {
         width: widthModal,
-        height,
         top: `${topPosition}px`,
         left: 0,
         right: 0,
+        zIndex: 11,
     };
     const styleForOtherPosition =
         checkNarrowFramesDay(value.day()).side === 'left'
             ? {
                   width: widthModal,
-                  height,
                   top: `${topPosition}px`,
                   left: `${modalPosition.left}px`,
+                  zIndex: 11,
               }
             : {
                   width: widthModal,
-                  height,
                   top: `${topPosition}px`,
                   right: `${modalPosition.right}px`,
+                  zIndex: 11,
               };
 
     return (
@@ -57,7 +58,7 @@ export const CustomCalendarModal: FC<ICustomCalendarModalProps> = ({
                     }
                     className={classnames(classes.modal, { [classes.hidden]: !isModalVisible })}
                 >
-                    Modal
+                    {trains.length > 0 ? 'here is a train' : 'without data'}
                 </div>
             )}
         </>

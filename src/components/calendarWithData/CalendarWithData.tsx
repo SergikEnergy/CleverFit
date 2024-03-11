@@ -1,13 +1,15 @@
 import { MouseEvent, FC, useState, useEffect } from 'react';
 import { ITrainingsResponse, IAllowedTrainResponse } from '@redux/API/api-types';
-import { Calendar } from 'antd';
+import { Calendar, Badge } from 'antd';
 import { ruLocale } from './CalendarWithData.data';
 import { CustomCalendarModal } from '@components/customCalendarModal';
+import { getCellData, filterDataByDaySortByDate } from './CalendarWithData.utils';
 import moment, { Moment } from 'moment';
 import 'moment/dist/locale/ru';
 moment.locale('ru');
 
 import classes from './CalendarWithData.module.css';
+import classnames from 'classnames';
 
 interface ICalenDarWithDataProps {
     dataForRender: ITrainingsResponse[] | [];
@@ -26,7 +28,7 @@ export const CalenDarWithData: FC<ICalenDarWithDataProps> = ({
     allowedTrainsList,
 }) => {
     const [isFullScreen, setIsFullScreen] = useState(true);
-    const [selectedCellData, setSelectedCellData] = useState<string | null>(null);
+    const [selectedCellData, setSelectedCellData] = useState<[] | ITrainingsResponse[]>([]);
     const [isModalVisible, setIsModalVisible] = useState(false);
     const [selectedDay, setSelectedDay] = useState<Moment>(moment());
     const [allowOpen, setAllowOpen] = useState(true);
@@ -53,7 +55,10 @@ export const CalenDarWithData: FC<ICalenDarWithDataProps> = ({
         };
     }, []);
 
-    const handleDateClick = (cellData: string, event: MouseEvent<HTMLDivElement>) => {
+    const handleDateClick = (
+        currentData: ITrainingsResponse[] | [],
+        event: MouseEvent<HTMLDivElement>,
+    ) => {
         event.stopPropagation();
         setIsModalVisible(false);
         const selectedCell = document.querySelector(`td[title="${event.currentTarget.id}"]`);
@@ -66,14 +71,12 @@ export const CalenDarWithData: FC<ICalenDarWithDataProps> = ({
                 right: rightModal,
                 width,
             } = selectedCell.getBoundingClientRect();
-            console.log(selectedCell.getBoundingClientRect(), 'cell');
             const {
                 top: topParent,
                 left: leftParent,
                 right: rightParent,
             } = modalParent.getBoundingClientRect();
-            console.log(modalParent.getBoundingClientRect(), 'parent');
-            setSelectedCellData(cellData);
+            setSelectedCellData(currentData);
             setModalPosition({
                 top: topModal - topParent,
                 left: leftModal - leftParent,
@@ -85,7 +88,9 @@ export const CalenDarWithData: FC<ICalenDarWithDataProps> = ({
     };
 
     const dateCellRender = (date: Moment) => {
-        const cellData = 'Data for ' + date.format('YYYY-MM-DD');
+        const currentData = filterDataByDaySortByDate(date, dataForRender);
+        const cellData = getCellData(currentData);
+        const isMobileData = !isFullScreen && cellData.length > 0;
 
         return (
             <div
@@ -95,11 +100,25 @@ export const CalenDarWithData: FC<ICalenDarWithDataProps> = ({
                     left: 0,
                     width: '100%',
                     height: '100%',
+                    zIndex: 10,
                 }}
+                className={classes.cell}
                 id={date.format('YYYY-MM-DD')}
-                onClick={(event: MouseEvent<HTMLDivElement>) => handleDateClick(cellData, event)}
+                onClick={(event: MouseEvent<HTMLDivElement>) => handleDateClick(currentData, event)}
             >
-                {cellData}
+                <ul
+                    className={classnames(classes.exercises, {
+                        [classes['exercises__mobile']]: isMobileData,
+                    })}
+                >
+                    {isFullScreen && cellData.length > 0
+                        ? cellData.map((train) => (
+                              <li className={classes.exercise} key={train.id}>
+                                  <Badge color={train.color} text={train.content} />
+                              </li>
+                          ))
+                        : ''}
+                </ul>
             </div>
         );
     };
@@ -111,29 +130,17 @@ export const CalenDarWithData: FC<ICalenDarWithDataProps> = ({
                 locale={ruLocale}
                 defaultValue={moment()}
                 fullscreen={isFullScreen}
-                onChange={(date) => {
-                    console.log('date', date);
-                }}
-                onSelect={(value) => {
-                    const target = document.querySelector(
-                        `td[title="${value.format('YYYY-MM-DD')}"]`,
-                    );
-                    if (target) {
-                        // handleDateClick(target);
-                    }
-                    console.log(value);
-                }}
             />
         );
     } else {
         return (
             <>
                 <CustomCalendarModal
-                    isModalVisible={isFullScreen}
+                    isModalVisible={isModalVisible}
                     value={selectedDay}
+                    trains={selectedCellData}
                     modalPosition={modalPosition}
                     widthModal='200px'
-                    height='120px'
                     allowOpen={allowOpen}
                 />
                 <Calendar

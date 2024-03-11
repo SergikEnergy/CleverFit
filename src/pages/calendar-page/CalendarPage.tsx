@@ -16,6 +16,7 @@ import { CalenDarWithData } from '@components/calendarWithData';
 import { ErrorShowAllowedTrainsList } from '@components/errorShowAllowedTrainsList';
 
 import classes from './CalendarPage.module.css';
+import { ITrainingsResponse } from '@redux/API/api-types';
 
 export const CalendarPage: FC = () => {
     const navigate = useNavigate();
@@ -133,12 +134,204 @@ export const CalendarPage: FC = () => {
         isGettingAllowedTrainsError,
         getAllowedTrainsError,
     ]);
+    const userTraining: ITrainingsResponse[] = [
+        {
+            _id: '1',
+            name: 'Ноги',
+            date: '2024-03-11T09:05:38.759Z',
+            isImplementation: false,
+            userId: '65b809899adc9e39e3660ae0',
+            exercises: [
+                {
+                    _id: '1',
+                    name: 'Присяд',
+                    replays: 3,
+                    weight: 50,
+                    approaches: 10,
+                },
+                {
+                    _id: '2',
+                    name: 'Толкание нагрузки',
+                    replays: 3,
+                    weight: 70,
+                    approaches: 10,
+                },
+            ],
+        },
+        {
+            _id: '2',
+            name: 'Руки',
+            date: '2024-03-11T09:05:38.759Z',
+            isImplementation: false,
+            userId: '65b809899adc9e39e3660ae0',
+            exercises: [
+                {
+                    _id: '2',
+                    name: 'Упражнение',
+                    replays: 1,
+                    weight: 0,
+                    approaches: 3,
+                },
+            ],
+        },
+        {
+            _id: '3',
+            name: 'Ноги',
+            date: '2024-03-12T09:05:38.759Z',
+            isImplementation: false,
+            userId: '65b809899adc9e39e3660ae0',
+            exercises: [
+                {
+                    _id: '1',
+                    name: 'Упражнение',
+                    replays: 1,
+                    weight: 0,
+                    approaches: 3,
+                },
+            ],
+        },
+        {
+            _id: '4',
+            name: 'Руки',
+            date: '2024-03-12T09:05:38.759Z',
+            isImplementation: false,
+            userId: '65b809899adc9e39e3660ae0',
+            exercises: [
+                {
+                    _id: '1',
+                    name: 'Упражнение',
+                    replays: 1,
+                    weight: 0,
+                    approaches: 3,
+                },
+            ],
+        },
+        {
+            _id: '5',
+            name: 'Силовая',
+            date: '2024-03-11T09:05:38.759Z',
+            isImplementation: false,
+            userId: '65b809899adc9e39e3660ae0',
+            exercises: [
+                {
+                    _id: '1',
+                    name: 'Упражнение',
+                    replays: 1,
+                    weight: 0,
+                    approaches: 3,
+                },
+            ],
+        },
+        {
+            _id: '6',
+            name: 'Спина',
+            date: '2024-03-11T09:05:38.759Z',
+            isImplementation: false,
+            userId: '65b809899adc9e39e3660ae0',
+            exercises: [
+                {
+                    _id: '1',
+                    name: 'Упражнение',
+                    replays: 1,
+                    weight: 0,
+                    approaches: 3,
+                },
+            ],
+        },
+        {
+            _id: '7',
+            name: 'Грудь',
+            date: '2024-03-11T09:05:38.759Z',
+            isImplementation: false,
+            userId: '65b809899adc9e39e3660ae0',
+            exercises: [
+                {
+                    _id: '1',
+                    name: 'Упражнение',
+                    replays: 1,
+                    weight: 0,
+                    approaches: 3,
+                },
+            ],
+        },
+        {
+            _id: '8',
+            name: 'Ноги',
+            date: '2024-03-13T09:05:38.759Z',
+            isImplementation: false,
+            userId: '65b809899adc9e39e3660ae0',
+            exercises: [
+                {
+                    _id: '1',
+                    name: 'Присяд',
+                    replays: 3,
+                    weight: 50,
+                    approaches: 10,
+                },
+                {
+                    _id: '2',
+                    name: 'Толкание нагрузки',
+                    replays: 3,
+                    weight: 70,
+                    approaches: 10,
+                },
+            ],
+        },
+        {
+            _id: '9',
+            name: 'Руки',
+            date: '2024-03-13T09:05:38.759Z',
+            isImplementation: false,
+            userId: '65b809899adc9e39e3660ae0',
+            exercises: [
+                {
+                    _id: '1',
+                    name: 'Упражнение',
+                    replays: 1,
+                    weight: 0,
+                    approaches: 3,
+                },
+            ],
+        },
+        {
+            _id: '10',
+            name: 'Силовая',
+            date: '2024-03-14T09:05:38.759Z',
+            isImplementation: false,
+            userId: '65b809899adc9e39e3660ae0',
+            exercises: [
+                {
+                    _id: '1',
+                    name: 'Упражнение',
+                    replays: 1,
+                    weight: 0,
+                    approaches: 3,
+                },
+            ],
+        },
+        {
+            _id: '11',
+            name: 'Грудь',
+            date: '2024-03-14T09:05:38.759Z',
+            isImplementation: false,
+            userId: '65b809899adc9e39e3660ae0',
+            exercises: [
+                {
+                    _id: '1',
+                    name: 'Упражнение',
+                    replays: 1,
+                    weight: 0,
+                    approaches: 3,
+                },
+            ],
+        },
+    ];
 
     return (
         <BasePagesLayout isCalendarPage>
             <div className={classes.wrapper} id={'modalWrapperCalendar'}>
                 <CalenDarWithData
-                    dataForRender={userTrainsData && allowedTrainsList ? userTrainsData : []}
+                    dataForRender={userTrainsData && allowedTrainsList ? userTraining : []}
                     allowedTrainsList={allowedTrainsList ? allowedTrainsList : []}
                 />
             </div>

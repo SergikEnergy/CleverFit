@@ -64,7 +64,7 @@ export interface ITrainingsResponse {
     date: string;
     isImplementation: boolean;
     userId: string;
-    parameters: IParametersTraining;
+    parameters?: IParametersTraining;
     exercises: IExercise[];
 }
 
@@ -81,7 +81,7 @@ export interface IExercise {
     replays: number;
     weight: number;
     approaches: number;
-    isImplementation: boolean;
+    isImplementation?: boolean;
 }
 
 export interface IAllowedTrainResponse {

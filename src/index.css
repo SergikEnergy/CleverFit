@@ -16,6 +16,7 @@ body {
 
 :root {
     font-family: Inter, Verdana, Arial, sans-serif;
+    --main-font-family: Inter, sans-serif;
     line-height: 1.5;
     font-weight: normal;
     font-size: 10px;
