@@ -40,7 +40,7 @@ export const CalenDarWithData: FC<ICalenDarWithDataProps> = ({
     });
 
     const listenChangeWidth = () => {
-        if (window.innerWidth < 590) {
+        if (window.innerWidth < 670) {
             setIsFullScreen(false);
         } else {
             setIsFullScreen(true);
@@ -91,6 +91,20 @@ export const CalenDarWithData: FC<ICalenDarWithDataProps> = ({
         const currentData = filterDataByDaySortByDate(date, dataForRender);
         const cellData = getCellData(currentData);
         const isMobileData = !isFullScreen && cellData.length > 0;
+        if (isMobileData) {
+            const cellWithTrains = document.querySelector(
+                `td[title="${date.format('YYYY-MM-DD')}"]`,
+            );
+            if (cellWithTrains) {
+                cellWithTrains.classList.add(classes['cell__mobile-data']);
+            }
+            const currentDayCell = document.querySelector(
+                `td[title="${moment().format('YYYY-MM-DD')}"]`,
+            );
+            if (currentDayCell) {
+                currentDayCell.classList.add(classes['cell__mobile-active']);
+            }
+        }
 
         return (
             <div
@@ -102,23 +116,21 @@ export const CalenDarWithData: FC<ICalenDarWithDataProps> = ({
                     height: '100%',
                     zIndex: 10,
                 }}
-                className={classes.cell}
+                className={classnames(classes.cell)}
                 id={date.format('YYYY-MM-DD')}
                 onClick={(event: MouseEvent<HTMLDivElement>) => handleDateClick(currentData, event)}
             >
-                <ul
-                    className={classnames(classes.exercises, {
-                        [classes['exercises__mobile']]: isMobileData,
-                    })}
-                >
-                    {isFullScreen && cellData.length > 0
-                        ? cellData.map((train) => (
-                              <li className={classes.exercise} key={train.id}>
-                                  <Badge color={train.color} text={train.content} />
-                              </li>
-                          ))
-                        : ''}
-                </ul>
+                {!isMobileData && (
+                    <ul className={classnames(classes.exercises)}>
+                        {isFullScreen && cellData.length > 0
+                            ? cellData.map((train) => (
+                                  <li className={classes.exercise} key={train.id}>
+                                      <Badge color={train.color} text={train.content} />
+                                  </li>
+                              ))
+                            : ''}
+                    </ul>
+                )}
             </div>
         );
     };
