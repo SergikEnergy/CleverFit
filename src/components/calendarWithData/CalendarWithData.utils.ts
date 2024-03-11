@@ -3,7 +3,7 @@ import moment, { Moment } from 'moment';
 import { CellDataType } from './CalendarWithData.types';
 import { ColorForTrain } from './CalendarWithData.data';
 
-const getColorTrainByName = (trainName: string) => {
+export const getColorTrainByName = (trainName: string) => {
     switch (trainName.toLowerCase()) {
         case 'ноги':
             return ColorForTrain.legs;

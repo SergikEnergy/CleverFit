@@ -181,7 +181,7 @@ export const CalenDarWithData: FC<ICalenDarWithDataProps> = ({
                     value={selectedDay}
                     trains={selectedCellData}
                     modalPosition={modalPosition}
-                    widthModal={isFullScreen ? '200px' : ''}
+                    widthModal={isFullScreen ? '264px' : ''}
                     allowOpen={allowOpen}
                 />
 

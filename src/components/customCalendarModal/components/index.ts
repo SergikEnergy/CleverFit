@@ -1,0 +1,1 @@
+export { TrainWithBadge } from './trainWithBadge';
