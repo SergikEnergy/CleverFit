@@ -1,7 +1,7 @@
-import { FC } from 'react';
+import { FC, useState, useEffect } from 'react';
 import { Moment } from 'moment';
-import { checkNarrowFramesDay } from './CustomCalendarModal.utils';
-import { IModalPosition } from '@components/calendarWithData/CalendarWithData';
+import { getStateForModalPosition, checkNarrowFramesDay } from './CustomCalendarModal.utils';
+import { IModalPosition } from '@components/calendarWithData/CalendarWithData.types';
 import { ITrainingsResponse } from '@redux/API/api-types';
 
 import classes from './CustomCalendarModal.module.css';
@@ -26,28 +26,34 @@ export const CustomCalendarModal: FC<ICustomCalendarModalProps> = ({
     isModalVisible,
     trains,
 }) => {
-    const topPosition = modalPosition.top;
+    const topPosition = isCentered
+        ? modalPosition.top + modalPosition.heightSelectedCell
+        : modalPosition.top;
+
     const styleForCenteredPosition = {
         width: widthModal,
-        top: `${topPosition}px`,
-        left: 0,
-        right: 0,
+        top: topPosition,
+        left: 24,
         zIndex: 11,
     };
     const styleForOtherPosition =
         checkNarrowFramesDay(value.day()).side === 'left'
             ? {
                   width: widthModal,
-                  top: `${topPosition}px`,
-                  left: `${modalPosition.left}px`,
+                  top: topPosition,
+                  left: modalPosition.left,
                   zIndex: 11,
               }
             : {
                   width: widthModal,
-                  top: `${topPosition}px`,
-                  right: `${modalPosition.right}px`,
+                  top: topPosition,
+                  right: modalPosition.right,
                   zIndex: 11,
               };
+
+    useEffect(() => {
+        console.log('mount');
+    }, []);
 
     return (
         <>

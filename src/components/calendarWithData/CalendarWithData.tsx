@@ -1,27 +1,16 @@
 import { MouseEvent, FC, useState, useEffect } from 'react';
-import { ITrainingsResponse, IAllowedTrainResponse } from '@redux/API/api-types';
+import { ITrainingsResponse } from '@redux/API/api-types';
 import { Calendar, Badge } from 'antd';
 import { ruLocale } from './CalendarWithData.data';
 import { CustomCalendarModal } from '@components/customCalendarModal';
 import { getCellData, filterDataByDaySortByDate } from './CalendarWithData.utils';
+import { ICalenDarWithDataProps, IModalPosition } from './CalendarWithData.types';
 import moment, { Moment } from 'moment';
 import 'moment/dist/locale/ru';
 moment.locale('ru');
 
 import classes from './CalendarWithData.module.css';
 import classnames from 'classnames';
-
-interface ICalenDarWithDataProps {
-    dataForRender: ITrainingsResponse[] | [];
-    allowedTrainsList: IAllowedTrainResponse[] | [];
-}
-
-export interface IModalPosition {
-    top: number;
-    left: number;
-    right: number;
-    width: number;
-}
 
 export const CalenDarWithData: FC<ICalenDarWithDataProps> = ({
     dataForRender,
@@ -37,6 +26,7 @@ export const CalenDarWithData: FC<ICalenDarWithDataProps> = ({
         left: 0,
         right: 0,
         width: 0,
+        heightSelectedCell: 0,
     });
 
     const listenChangeWidth = () => {
@@ -47,11 +37,60 @@ export const CalenDarWithData: FC<ICalenDarWithDataProps> = ({
         }
     };
 
+    const getModalDimensions = (id = selectedDay.format('YYYY-MM-DD'), setDay = false) => {
+        const selectedCell = document.querySelector(`td[title="${id}"]`);
+        const modalParent = document.querySelector('#modalWrapperCalendar');
+        if (selectedCell && modalParent) {
+            if (setDay) {
+                setSelectedDay(moment(id, 'YYYY-MM-DD'));
+            }
+
+            const {
+                top: topModal,
+                left: leftModal,
+                right: rightModal,
+                width,
+                height: heightSelectedCell,
+            } = selectedCell.getBoundingClientRect();
+            const {
+                top: topParent,
+                left: leftParent,
+                right: rightParent,
+            } = modalParent.getBoundingClientRect();
+            return {
+                topModal,
+                topParent,
+                leftModal,
+                leftParent,
+                rightModal,
+                rightParent,
+                width,
+                heightSelectedCell,
+            };
+        }
+    };
+
     useEffect(() => {
+        const correctModalPosition = () => {
+            if (isModalVisible) {
+                const modalSizes = getModalDimensions(selectedDay.format('YYYY-MM-DD'));
+                if (modalSizes) {
+                    setModalPosition({
+                        top: modalSizes.topModal - modalSizes.topParent,
+                        left: modalSizes.leftModal - modalSizes.leftParent,
+                        right: modalSizes.rightParent - modalSizes.rightModal,
+                        width: modalSizes.width,
+                        heightSelectedCell: modalSizes.heightSelectedCell,
+                    });
+                }
+            }
+        };
         listenChangeWidth();
         window.addEventListener('resize', listenChangeWidth);
+        window.addEventListener('resize', correctModalPosition);
         return () => {
             window.removeEventListener('resize', listenChangeWidth);
+            window.removeEventListener('resize', correctModalPosition);
         };
     }, []);
 
@@ -61,27 +100,16 @@ export const CalenDarWithData: FC<ICalenDarWithDataProps> = ({
     ) => {
         event.stopPropagation();
         setIsModalVisible(false);
-        const selectedCell = document.querySelector(`td[title="${event.currentTarget.id}"]`);
-        const modalParent = document.querySelector('#modalWrapperCalendar');
-        if (selectedCell && modalParent) {
-            setSelectedDay(moment(event.currentTarget.id, 'YYYY-MM-DD'));
-            const {
-                top: topModal,
-                left: leftModal,
-                right: rightModal,
-                width,
-            } = selectedCell.getBoundingClientRect();
-            const {
-                top: topParent,
-                left: leftParent,
-                right: rightParent,
-            } = modalParent.getBoundingClientRect();
+        const id = event.currentTarget.id;
+        const modalSizes = getModalDimensions(id, true);
+        if (modalSizes) {
             setSelectedCellData(currentData);
             setModalPosition({
-                top: topModal - topParent,
-                left: leftModal - leftParent,
-                right: rightParent - rightModal,
-                width,
+                top: modalSizes.topModal - modalSizes.topParent,
+                left: modalSizes.leftModal - modalSizes.leftParent,
+                right: modalSizes.rightParent - modalSizes.rightModal,
+                width: modalSizes.width,
+                heightSelectedCell: modalSizes.heightSelectedCell,
             });
             setIsModalVisible(true);
         }
@@ -149,12 +177,14 @@ export const CalenDarWithData: FC<ICalenDarWithDataProps> = ({
             <>
                 <CustomCalendarModal
                     isModalVisible={isModalVisible}
+                    isCentered={!isFullScreen}
                     value={selectedDay}
                     trains={selectedCellData}
                     modalPosition={modalPosition}
-                    widthModal='200px'
+                    widthModal={isFullScreen ? '200px' : ''}
                     allowOpen={allowOpen}
                 />
+
                 <Calendar
                     className={classes.calendar}
                     fullscreen={isFullScreen}

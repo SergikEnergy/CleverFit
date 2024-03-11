@@ -1,6 +1,7 @@
 .modal {
     position: absolute;
     min-height: 120px;
+    width: calc(100% - 48px);
 }
 
 .modal.hidden {
