@@ -3,7 +3,7 @@ import { ITrainingsResponse } from '@redux/API/api-types';
 import { Calendar, Badge } from 'antd';
 import { ruLocale } from './CalendarWithData.data';
 import { CustomCalendarModal } from '@components/customCalendarModal';
-import { getCellData, filterDataByDaySortByDate } from './CalendarWithData.utils';
+import { getCellData, filterDataByDaySortByDate, getMonthByName } from './CalendarWithData.utils';
 import { ICalenDarWithDataProps, IModalPosition } from './CalendarWithData.types';
 import moment, { Moment } from 'moment';
 import 'moment/dist/locale/ru';
@@ -94,24 +94,43 @@ export const CalenDarWithData: FC<ICalenDarWithDataProps> = ({
         };
     }, []);
 
+    const isCurrentMonth = (id: string) => {
+        const date = moment(id, 'YYYY-MM-DD');
+        const allowedMonth = date.month();
+        const allowedYear = date.year();
+        const selectedYear = Number(
+            document
+                .querySelector('.ant-picker-calendar-year-select span.ant-select-selection-item')
+                ?.getAttribute('title'),
+        );
+        const selectedMonthShort = document
+            .querySelector('.ant-picker-calendar-month-select span.ant-select-selection-item')
+            ?.getAttribute('title');
+        const selectedMonth = getMonthByName(selectedMonthShort as string);
+        return allowedMonth === selectedMonth && allowedYear === selectedYear;
+    };
+
     const handleDateClick = (
         currentData: ITrainingsResponse[] | [],
         event: MouseEvent<HTMLDivElement>,
     ) => {
-        event.stopPropagation();
-        setIsModalVisible(false);
         const id = event.currentTarget.id;
-        const modalSizes = getModalDimensions(id, true);
-        if (modalSizes) {
-            setSelectedCellData(currentData);
-            setModalPosition({
-                top: modalSizes.topModal - modalSizes.topParent,
-                left: modalSizes.leftModal - modalSizes.leftParent,
-                right: modalSizes.rightParent - modalSizes.rightModal,
-                width: modalSizes.width,
-                heightSelectedCell: modalSizes.heightSelectedCell,
-            });
-            setIsModalVisible(true);
+        if (isFullScreen || (!isFullScreen && isCurrentMonth(id))) {
+            event.stopPropagation();
+            setIsModalVisible(false);
+
+            const modalSizes = getModalDimensions(id, true);
+            if (modalSizes) {
+                setSelectedCellData(currentData);
+                setModalPosition({
+                    top: modalSizes.topModal - modalSizes.topParent,
+                    left: modalSizes.leftModal - modalSizes.leftParent,
+                    right: modalSizes.rightParent - modalSizes.rightModal,
+                    width: modalSizes.width,
+                    heightSelectedCell: modalSizes.heightSelectedCell,
+                });
+                setIsModalVisible(true);
+            }
         }
     };
 

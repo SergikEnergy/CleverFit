@@ -2,6 +2,7 @@ import { ITrainingsResponse } from '@redux/API/api-types';
 import moment, { Moment } from 'moment';
 import { CellDataType } from './CalendarWithData.types';
 import { ColorForTrain } from './CalendarWithData.data';
+import { shortMonthsRu } from './CalendarWithData.data';
 
 export const getColorTrainByName = (trainName: string) => {
     switch (trainName.toLowerCase()) {
@@ -41,4 +42,12 @@ export const getCellData = (filteredData: ITrainingsResponse[] | []): CellDataTy
     } else {
         return [];
     }
+};
+
+export const getMonthByName = (
+    shortCut: string,
+    namesMonth = shortMonthsRu,
+): number | undefined => {
+    const indexOfMonth = namesMonth.indexOf(shortCut);
+    if (indexOfMonth !== -1) return indexOfMonth;
 };
