@@ -1,6 +1,7 @@
 import { FC, useEffect, useContext } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '@hooks/typed-react-redux-hooks';
+import { CalendarDrawer } from '@components/calendarDrawer';
 import {
     useLazyGetAllTrainingsQuery,
     useLazyGetAllowedTrainsListQuery,
@@ -333,13 +334,16 @@ export const CalendarPage: FC = () => {
     ];
 
     return (
-        <BasePagesLayout isCalendarPage>
-            <div className={classes.wrapper} id={'modalWrapperCalendar'}>
-                <CalenDarWithData
-                    dataForRender={userTrainsData && allowedTrainsList ? userTraining : []}
-                    allowedTrainsList={allowedTrainsList ? allowedTrainsList : []}
-                />
-            </div>
-        </BasePagesLayout>
+        <>
+            <BasePagesLayout isCalendarPage>
+                <div className={classes.wrapper} id={'modalWrapperCalendar'}>
+                    <CalenDarWithData
+                        dataForRender={userTrainsData && allowedTrainsList ? userTraining : []}
+                        allowedTrainsList={allowedTrainsList ? allowedTrainsList : []}
+                    />
+                </div>
+            </BasePagesLayout>
+            <CalendarDrawer />
+        </>
     );
 };

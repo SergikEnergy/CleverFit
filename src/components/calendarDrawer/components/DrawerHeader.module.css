@@ -1,0 +1,32 @@
+.header {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    width: 100%;
+    gap: 10px;
+    flex: 1;
+}
+
+:global(button.ant-drawer-close) {
+    display: none;
+}
+
+.title {
+    font-size: 16px;
+    font-family: var(--main-font-family);
+    line-height: 130%;
+    flex-grow: 1;
+}
+
+.close {
+    text-align: end;
+    transition: all ease-in 0.3s;
+    margin-right: 8px;
+}
+.close:hover,
+.close:target,
+.close:focus {
+    cursor: pointer;
+    transform: scale(1.03);
+    color: rgb(127, 127, 128);
+}

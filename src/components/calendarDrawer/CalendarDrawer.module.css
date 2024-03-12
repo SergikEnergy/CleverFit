@@ -1,0 +1,23 @@
+.subtitle {
+    display: flex;
+    align-items: center;
+    justify-content: start;
+    width: 100%;
+    font-size: 14px;
+    font-family: var(--main-font-family);
+    line-height: 130%;
+}
+
+.badge {
+    display: block;
+    width: 50%;
+    flex-grow: 1;
+}
+.badge :global(.ant-badge-status-text) {
+    color: var(--character-light-secondary-45);
+}
+
+.date {
+    text-align: right;
+    color: var(--character-light-secondary-45);
+}
