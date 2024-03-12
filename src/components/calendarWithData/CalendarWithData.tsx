@@ -19,6 +19,7 @@ export const CalenDarWithData: FC<ICalenDarWithDataProps> = ({
     const [isFullScreen, setIsFullScreen] = useState(true);
     const [selectedCellData, setSelectedCellData] = useState<[] | ITrainingsResponse[]>([]);
     const [isModalVisible, setIsModalVisible] = useState(false);
+    const [modalType, setModalType] = useState<'train' | 'exercise'>('train');
     const [selectedDay, setSelectedDay] = useState<Moment>(moment());
     const [allowOpen, setAllowOpen] = useState(true);
     const [modalPosition, setModalPosition] = useState<IModalPosition>({
@@ -70,6 +71,10 @@ export const CalenDarWithData: FC<ICalenDarWithDataProps> = ({
         }
     };
 
+    const changeModalType = () => {
+        setModalType((prev) => (prev === 'train' ? 'exercise' : 'train'));
+    };
+
     useEffect(() => {
         const correctModalPosition = () => {
             if (isModalVisible) {
@@ -114,6 +119,7 @@ export const CalenDarWithData: FC<ICalenDarWithDataProps> = ({
         currentData: ITrainingsResponse[] | [],
         event: MouseEvent<HTMLDivElement>,
     ) => {
+        setModalType('train');
         const id = event.currentTarget.id;
         if (isFullScreen || (!isFullScreen && isCurrentMonth(id))) {
             event.stopPropagation();
@@ -131,6 +137,8 @@ export const CalenDarWithData: FC<ICalenDarWithDataProps> = ({
                 });
                 setIsModalVisible(true);
             }
+        } else {
+            setIsModalVisible(false);
         }
     };
 
@@ -195,6 +203,8 @@ export const CalenDarWithData: FC<ICalenDarWithDataProps> = ({
         return (
             <>
                 <CustomCalendarModal
+                    modalType={modalType}
+                    changeModalType={changeModalType}
                     isModalVisible={isModalVisible}
                     isCentered={!isFullScreen}
                     value={selectedDay}
@@ -202,6 +212,9 @@ export const CalenDarWithData: FC<ICalenDarWithDataProps> = ({
                     modalPosition={modalPosition}
                     widthModal={isFullScreen ? '264px' : ''}
                     allowOpen={allowOpen}
+                    closeModal={() => {
+                        setIsModalVisible(false);
+                    }}
                 />
 
                 <Calendar
@@ -210,9 +223,9 @@ export const CalenDarWithData: FC<ICalenDarWithDataProps> = ({
                     locale={ruLocale}
                     dateCellRender={dateCellRender}
                     defaultValue={moment()}
-                    // onChange={(date) => {
-                    //     console.log('date', date);
-                    // }}
+                    onChange={(date) => {
+                        console.log('date', date);
+                    }}
                     onPanelChange={(data, mode) => {
                         if (mode && isFullScreen) {
                             setAllowOpen(true);

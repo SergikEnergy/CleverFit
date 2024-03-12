@@ -6,6 +6,7 @@ import { store } from '@redux/configure-store';
 import { CollapsedContextProvider } from './reactContexts/collapseContextProvider';
 import { LoaderContextProvider } from './reactContexts/loaderStateContextProvider';
 import { ModalReportContextProvider } from './reactContexts/modalReportContextProvider';
+import { DrawerTrainsContextProvider } from './reactContexts/DrawerTrainsContextProvider';
 import { App } from './App';
 
 import 'normalize.css';
@@ -21,7 +22,9 @@ root.render(
             <CollapsedContextProvider>
                 <LoaderContextProvider>
                     <ModalReportContextProvider>
-                        <App />
+                        <DrawerTrainsContextProvider>
+                            <App />
+                        </DrawerTrainsContextProvider>
                     </ModalReportContextProvider>
                 </LoaderContextProvider>
             </CollapsedContextProvider>

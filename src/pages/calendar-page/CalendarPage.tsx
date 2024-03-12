@@ -7,6 +7,8 @@ import {
 } from '@redux/API/calendarAPI';
 import { ModalReportContext } from '../../reactContexts/modalReport-context';
 import { LoaderStateContext } from '../../reactContexts/loader-context';
+import { DrawerTrainsContext } from '../../reactContexts/drawerTrains-context';
+import { ITrainingsResponse } from '@redux/API/api-types';
 import { Paths } from '../../routes/pathes';
 import { BasePagesLayout } from '@pages/basePagesLayout';
 import { isFetchBaseQueryError } from '@redux/API/errorsCatching';
@@ -16,7 +18,6 @@ import { CalenDarWithData } from '@components/calendarWithData';
 import { ErrorShowAllowedTrainsList } from '@components/errorShowAllowedTrainsList';
 
 import classes from './CalendarPage.module.css';
-import { ITrainingsResponse } from '@redux/API/api-types';
 
 export const CalendarPage: FC = () => {
     const navigate = useNavigate();
@@ -24,6 +25,7 @@ export const CalendarPage: FC = () => {
     const dispatch = useAppDispatch();
     const token = useAppSelector((state) => state.auth.token);
     const { setNode, openModal, closeModal, setWidthModal } = useContext(ModalReportContext);
+    const { updateAllowedTrains } = useContext(DrawerTrainsContext);
     const { startLoader, stopLoader } = useContext(LoaderStateContext);
     const [
         getAllTrainings,
@@ -85,7 +87,10 @@ export const CalendarPage: FC = () => {
 
     const fetchAllowedTrainsList = async () => {
         try {
-            await getAllowedTrainsList();
+            const trainsAllowed = await getAllowedTrainsList();
+            if (Array.isArray(trainsAllowed.data)) {
+                updateAllowedTrains(trainsAllowed.data);
+            }
         } catch (error) {
             if (isFetchBaseQueryError(error)) {
                 if (error.status === 403) {

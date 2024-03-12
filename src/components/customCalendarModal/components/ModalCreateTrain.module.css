@@ -1,0 +1,68 @@
+.header {
+    width: 100%;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    margin-top: 16px;
+    margin-bottom: 18px;
+    padding: 0 12px;
+}
+
+.title {
+    font-family: var(--font-family);
+    font-weight: 600;
+    font-size: 1.5rem;
+    line-height: 130%;
+}
+
+.subtitle {
+    margin-top: 4px;
+    font-family: var(--font-family);
+    font-weight: 400;
+    font-size: 1.4rem;
+    line-height: 130%;
+    color: var(--character-light-secondary-45);
+}
+
+.content {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+}
+
+.close {
+    transition: all ease-in 0.3s;
+}
+.close:hover,
+.close:target,
+.close:focus {
+    cursor: pointer;
+    transform: scale(1.03);
+    color: rgb(127, 127, 128);
+}
+
+.trains__list {
+    padding: 0 12px;
+}
+
+.empty {
+    padding: 0 12px;
+    margin-top: 16px;
+    margin-bottom: 28px;
+}
+
+.buttons {
+    padding: 0 12px;
+    margin-bottom: 12px;
+}
+
+button.button__edit {
+    background-color: var(--primary-light-6);
+    border: none;
+    font-family: var(--font-family);
+    font-weight: 400;
+    font-size: 1.4rem;
+    line-height: 130%;
+}

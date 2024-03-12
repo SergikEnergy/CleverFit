@@ -1,0 +1,82 @@
+.header {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 16px;
+    padding: 0 12px;
+}
+
+.select {
+    font-family: var(--font-family);
+    font-weight: 400;
+    font-size: 1.4rem;
+    line-height: 130%;
+    width: 90%;
+}
+
+.select :global(.ant-select) {
+    width: 100%;
+    text-align: left;
+}
+
+div.select > :global(.ant-select) div:global(.ant-select-selector) {
+    border: none;
+}
+
+span:global(.ant-select-selection-placeholder) {
+    color: #000;
+}
+
+.close {
+    transition: all ease-in 0.3s;
+}
+.close:hover,
+.close:target,
+.close:focus {
+    cursor: pointer;
+    transform: scaleX(1.07);
+    color: rgb(127, 127, 128);
+}
+
+.exercises__list {
+    padding: 0 12px;
+    color: #8c8c8c;
+}
+
+.empty {
+    padding: 0 12px;
+    margin-top: 16px;
+    margin-bottom: 28px;
+}
+
+.buttons {
+    padding: 0 12px;
+    margin-bottom: 12px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 8px;
+    font-family: var(--font-family);
+    font-weight: 400;
+    font-size: 1.4rem;
+    line-height: 130%;
+}
+
+button.button__add {
+    background-color: var(--primary-light-6);
+    border: none;
+}
+button.button__save {
+    border: none;
+    background-color: transparent;
+    color: var(--primary-light-6);
+}
+button.button__save:disabled {
+    background-color: transparent;
+}
+
+button.button__save:hover:not(:disabled) {
+    background-color: #cfcfcfb2;
+}

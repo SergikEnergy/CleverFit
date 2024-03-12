@@ -10,15 +10,13 @@ interface TrainWithBadgeProps {
     train: ITrainingsResponse;
 }
 
-export const TrainWithBadge: FC<TrainWithBadgeProps> = ({ train }) => {
-    return (
-        <li className={classes.train}>
-            <Badge
-                className={classes.badge}
-                color={getColorTrainByName(train.name)}
-                text={train.name}
-            />
-            <EditOutlined style={{ color: 'blue' }} className={classes.highlighter} />
-        </li>
-    );
-};
+export const TrainWithBadge: FC<TrainWithBadgeProps> = ({ train }) => (
+    <li className={classes.train}>
+        <Badge
+            className={classes.badge}
+            color={getColorTrainByName(train.name)}
+            text={train.name}
+        />
+        <EditOutlined style={{ color: 'blue' }} className={classes.highlighter} />
+    </li>
+);

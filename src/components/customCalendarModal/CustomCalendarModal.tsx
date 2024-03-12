@@ -1,23 +1,26 @@
-import { FC, useState, useEffect } from 'react';
+import { FC, useContext } from 'react';
 import { Moment } from 'moment';
 import { checkNarrowFramesDay } from './CustomCalendarModal.utils';
 import { IModalPosition } from '@components/calendarWithData/CalendarWithData.types';
 import { ITrainingsResponse } from '@redux/API/api-types';
-import { TrainWithBadge } from './components';
-import { CloseOutlined } from '@ant-design/icons';
-import { Empty, Button, Divider } from 'antd';
+import { ModalCreateTrain, ModalSelectExercise } from './components';
+import { DrawerTrainsContext } from '../../reactContexts/drawerTrains-context';
 
 import classes from './CustomCalendarModal.module.css';
 import classnames from 'classnames';
 
+export type ModalModeType = 'train' | 'exercise';
 interface ICustomCalendarModalProps {
     widthModal: string;
+    modalType: ModalModeType;
     modalPosition: IModalPosition;
     value: Moment;
     trains: [] | ITrainingsResponse[];
     isCentered?: boolean;
     allowOpen: boolean;
     isModalVisible: boolean;
+    closeModal: () => void;
+    changeModalType: (mode: ModalModeType) => void;
 }
 
 export const CustomCalendarModal: FC<ICustomCalendarModalProps> = ({
@@ -28,7 +31,21 @@ export const CustomCalendarModal: FC<ICustomCalendarModalProps> = ({
     isCentered,
     isModalVisible,
     trains,
+    modalType,
+    changeModalType,
+    closeModal,
 }) => {
+    const { allowedTrains } = useContext(DrawerTrainsContext);
+
+    const existingTrainsFromCellData = trains.map((elem) => elem.name.toLocaleLowerCase());
+
+    const allowedTrainsForCellCorrected =
+        allowedTrains.length > 0
+            ? allowedTrains.filter((elem) =>
+                  !existingTrainsFromCellData.includes(elem.name.toLowerCase()) ? true : false,
+              )
+            : [];
+
     const topPosition = isCentered
         ? modalPosition.top + modalPosition.heightSelectedCell
         : modalPosition.top;
@@ -39,6 +56,7 @@ export const CustomCalendarModal: FC<ICustomCalendarModalProps> = ({
         left: 24,
         zIndex: 11,
     };
+
     const styleForOtherPosition =
         checkNarrowFramesDay(value.day()).side === 'left'
             ? {
@@ -63,42 +81,23 @@ export const CustomCalendarModal: FC<ICustomCalendarModalProps> = ({
                     }
                     className={classnames(classes.modal, { [classes.hidden]: !isModalVisible })}
                 >
-                    <div className={classes.header}>
-                        <div className={classes.content}>
-                            <div className={classes.title}>{`Тренировки на ${value.format(
-                                'DD.MM.YYYY',
-                            )}`}</div>
-                            {trains.length === 0 && (
-                                <div className={classes.subtitle}>Нет активных тренировок</div>
-                            )}
-                        </div>
-                        <div className={classes.close}>
-                            <CloseOutlined />
-                        </div>
-                    </div>
-                    {trains.length > 0 ? (
-                        <ul className={classes['trains__list']}>
-                            {trains.map((train) => (
-                                <TrainWithBadge train={train} key={train._id} />
-                            ))}
-                        </ul>
-                    ) : (
-                        <div className={classes.empty}>
-                            <Empty
-                                image='https://gw.alipayobjects.com/zos/antfincdn/ZHrcdLPrvN/empty.svg'
-                                imageStyle={{
-                                    height: 32,
-                                }}
-                                description={null}
-                            />
-                        </div>
+                    {modalType === 'train' && (
+                        <ModalCreateTrain
+                            disabledCreate={allowedTrainsForCellCorrected.length === 0}
+                            value={value}
+                            trains={trains}
+                            closeModal={closeModal}
+                            changeMode={changeModalType}
+                        />
                     )}
-                    <Divider style={{ marginTop: 12, marginBottom: 12 }} />
-                    <div className={classes.buttons}>
-                        <Button type='primary' block className={classes['button__edit']}>
-                            {trains.length > 0 ? 'Редактировать тренировку' : 'Создать тренировку'}
-                        </Button>
-                    </div>
+                    {modalType === 'exercise' && (
+                        <ModalSelectExercise
+                            date={value}
+                            allowedTrains={allowedTrainsForCellCorrected}
+                            changeMode={changeModalType}
+                            trains={trains}
+                        />
+                    )}
                 </div>
             )}
         </>
