@@ -1,8 +1,9 @@
-import { MouseEvent, FC, useState, useEffect } from 'react';
+import { MouseEvent, FC, useState, useEffect, useContext } from 'react';
 import { ITrainingsResponse } from '@redux/API/api-types';
 import { Calendar, Badge } from 'antd';
 import { ruLocale } from './CalendarWithData.data';
 import { CustomCalendarModal } from '@components/customCalendarModal';
+import { DrawerTrainsContext } from '../../reactContexts/drawerTrains-context';
 import { getCellData, filterDataByDaySortByDate, getMonthByName } from './CalendarWithData.utils';
 import { ICalenDarWithDataProps, IModalPosition } from './CalendarWithData.types';
 import moment, { Moment } from 'moment';
@@ -16,6 +17,7 @@ export const CalenDarWithData: FC<ICalenDarWithDataProps> = ({
     dataForRender,
     allowedTrainsList,
 }) => {
+    const { resetExercises } = useContext(DrawerTrainsContext);
     const [isFullScreen, setIsFullScreen] = useState(true);
     const [selectedCellData, setSelectedCellData] = useState<[] | ITrainingsResponse[]>([]);
     const [isModalVisible, setIsModalVisible] = useState(false);
@@ -99,6 +101,11 @@ export const CalenDarWithData: FC<ICalenDarWithDataProps> = ({
         };
     }, []);
 
+    useEffect(() => {
+        changeModalType();
+        console.log('mount');
+    }, [dataForRender]);
+
     const isCurrentMonth = (id: string) => {
         const date = moment(id, 'YYYY-MM-DD');
         const allowedMonth = date.month();
@@ -119,6 +126,7 @@ export const CalenDarWithData: FC<ICalenDarWithDataProps> = ({
         currentData: ITrainingsResponse[] | [],
         event: MouseEvent<HTMLDivElement>,
     ) => {
+        resetExercises();
         setModalType('train');
         const id = event.currentTarget.id;
         if (isFullScreen || (!isFullScreen && isCurrentMonth(id))) {
@@ -189,6 +197,7 @@ export const CalenDarWithData: FC<ICalenDarWithDataProps> = ({
             </div>
         );
     };
+    console.log('calendarWithData changed');
 
     if (dataForRender.length === 0 && allowedTrainsList.length === 0) {
         return (

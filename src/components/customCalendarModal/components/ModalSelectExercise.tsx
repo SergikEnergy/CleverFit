@@ -1,20 +1,23 @@
-import { FC, useState, useContext, useEffect } from 'react';
+import { FC, useState, useContext } from 'react';
 import { IAllowedTrainResponse, ITrainingsResponse } from '@redux/API/api-types';
-import { ModalModeType } from '../CustomCalendarModal';
 import { Divider, Button, Select, Empty } from 'antd';
 import { ArrowLeftOutlined } from '@ant-design/icons';
+import { ErrorAddTrain } from '@components/errorAddTrain';
 import { DrawerTrainsContext } from '../../../reactContexts/drawerTrains-context';
+import { ModalReportContext } from '../../../reactContexts/modalReport-context';
 import { ExerciseItem } from '.';
-import moment, { Moment } from 'moment';
+import { Moment } from 'moment';
 import EmptyImg from '/images/EmptyImg.svg';
-
+import { useAddNewTrainMutation } from '@redux/API/calendarAPI';
+import { NewTrainRequestType } from '@redux/API/api-types';
 import classes from './ModalSelectExercise.module.css';
 
 interface IModalSelectExercise {
-    changeMode: (mode: ModalModeType) => void;
+    changeMode: () => void;
     allowedTrains: IAllowedTrainResponse[];
     trains: [] | ITrainingsResponse[];
     date: Moment;
+    closeModal: () => void;
 }
 
 export const ModalSelectExercise: FC<IModalSelectExercise> = ({
@@ -22,9 +25,10 @@ export const ModalSelectExercise: FC<IModalSelectExercise> = ({
     allowedTrains,
     trains,
     date,
+    closeModal: closeTrainModal,
 }) => {
+    const [postNewTrain, { isLoading: isPostingTrain }] = useAddNewTrainMutation();
     const [trainSelect, setTrainSelect] = useState('');
-    const [activeTrains, setActiveTrains] = useState<ITrainingsResponse[]>([]);
     const {
         exercises,
         setDrawerTitle,
@@ -33,23 +37,43 @@ export const ModalSelectExercise: FC<IModalSelectExercise> = ({
         setTrainName,
         openDrawer,
         setExercises,
+        resetExercises,
     } = useContext(DrawerTrainsContext);
+    const { openModal, setNode, setWidthModal } = useContext(ModalReportContext);
 
-    useEffect(() => {
-        const filteredTrains = trains.filter(
-            (train) => moment(train.date).format('YYYY-DD-MM') === date.format('YYYY-DD-MM'),
-        );
-        if (Array.isArray(filteredTrains) && filteredTrains.length > 0) {
-            setActiveTrains(filteredTrains);
+    const addNewTrain = async () => {
+        const filterExercisesByName = exercises.filter((elem) => elem.name === trainSelect);
+        const exercisesRequest = filterExercisesByName[0].exercises;
+        const dateRequest = date.add(3, 'hours').toISOString();
+        const nameRequest = trainSelect;
+        const bodyRequest: NewTrainRequestType = {
+            date: dateRequest,
+            name: nameRequest,
+            exercises: exercisesRequest,
+        };
+
+        try {
+            await postNewTrain(bodyRequest).unwrap();
+            resetExercises();
+            // changeMode();
+        } catch (error) {
+            if (error) {
+                console.log(error);
+                resetExercises();
+                closeTrainModal();
+                setWidthModal('clamp(328px, 100%, 416px)');
+                setNode(<ErrorAddTrain />);
+                openModal();
+            }
         }
-    }, []);
+    };
 
     const onSelectChange = (value: string) => {
-        if (value) {
+        if (value && trainSelect !== value) {
             setTrainSelect(value);
 
-            if (activeTrains.length > 0) {
-                const trainsOnThisDate = activeTrains.filter((elem) => elem.name === value);
+            if (trains.length > 0) {
+                const trainsOnThisDate = trains.filter((elem) => elem.name === value);
                 if (Array.isArray(trainsOnThisDate) && trainsOnThisDate.length > 0) {
                     setExercises(trainsOnThisDate[0].exercises, value);
                 }
@@ -71,13 +95,21 @@ export const ModalSelectExercise: FC<IModalSelectExercise> = ({
         label: elem.name,
     }));
 
+    const exercisesFilteredBySelect = exercises
+        ? exercises.filter((elem) => elem.name === trainSelect)
+        : [];
+
+    const handleSaveExercisesClick = () => {
+        addNewTrain();
+    };
+
     return (
         <>
             <div className={classes.header}>
                 <div
                     className={classes.close}
                     onClick={() => {
-                        changeMode('exercise');
+                        changeMode();
                     }}
                 >
                     <ArrowLeftOutlined style={{ color: '#262626' }} />
@@ -95,15 +127,11 @@ export const ModalSelectExercise: FC<IModalSelectExercise> = ({
                 </div>
             </div>
             <Divider style={{ marginTop: 10, marginBottom: 12 }} />
-            {trainSelect &&
-            exercises.length > 0 &&
-            exercises.filter((elem) => elem.name === trainSelect)[0] ? (
+            {trainSelect && exercisesFilteredBySelect.length > 0 ? (
                 <ul className={classes['exercises__list']}>
-                    {exercises
-                        .filter((elem) => elem.name === trainSelect)[0]
-                        .exercises.map((exercise) => (
-                            <ExerciseItem exercise={exercise} key={exercise.name} />
-                        ))}
+                    {exercisesFilteredBySelect[0].exercises.map((exercise) => (
+                        <ExerciseItem exercise={exercise} key={exercise.name} />
+                    ))}
                 </ul>
             ) : (
                 <div className={classes.empty}>
@@ -129,9 +157,11 @@ export const ModalSelectExercise: FC<IModalSelectExercise> = ({
                 </Button>
                 <Button
                     type='default'
-                    disabled={exercises.length === 0 || !trainSelect}
+                    disabled={exercisesFilteredBySelect.length === 0 || !trainSelect}
                     block
                     className={classes['button__save']}
+                    onClick={handleSaveExercisesClick}
+                    loading={isPostingTrain}
                 >
                     Сохранить
                 </Button>

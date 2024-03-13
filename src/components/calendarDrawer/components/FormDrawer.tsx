@@ -1,4 +1,4 @@
-import { ReactNode, useContext, forwardRef } from 'react';
+import { ReactNode, useContext, forwardRef, useState, useEffect } from 'react';
 import { DrawerTrainsContext } from '../../../reactContexts/drawerTrains-context';
 import { Form, Button, Input, InputNumber } from 'antd';
 import { PlusOutlined } from '@ant-design/icons';
@@ -21,7 +21,6 @@ type FormFieldsType = { exercises: FormFieldType[] };
 export const FormDrawer = forwardRef<HTMLButtonElement, FormDrawerProps>((props, ref) => {
     const { exercises, setExercises, trainName } = useContext(DrawerTrainsContext);
     const [form] = Form.useForm<FormFieldsType>();
-
     const initialFormValuesFiltered =
         exercises.length > 0 ? exercises.filter((elem) => elem.name === trainName) : [];
 
@@ -40,9 +39,9 @@ export const FormDrawer = forwardRef<HTMLButtonElement, FormDrawerProps>((props,
                       key: 'empty',
                       name: 'empty',
                       exercise: '',
-                      replays: '',
-                      weight: '',
-                      quantity: '',
+                      replays: 1,
+                      weight: 0,
+                      approaches: 1,
                   },
               ];
 
@@ -51,7 +50,6 @@ export const FormDrawer = forwardRef<HTMLButtonElement, FormDrawerProps>((props,
             (elem) => elem.exercise && elem.exercise.length > 0,
         );
         if (filteredResult.length > 0) {
-            console.log(filteredResult);
             const trainsCorrected = filteredResult.map((train) => {
                 if (!train.approaches) train.approaches = 1;
                 if (!train.replays) train.replays = 1;
@@ -61,8 +59,7 @@ export const FormDrawer = forwardRef<HTMLButtonElement, FormDrawerProps>((props,
             });
             setExercises(trainsCorrected, trainName);
         }
-        // console.log(exercises);
-        //form.resetFields();
+        form.resetFields();
     };
 
     return (

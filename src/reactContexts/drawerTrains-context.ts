@@ -12,6 +12,7 @@ export type DrawerTrainsContextType = {
     trainName: string;
     setTrainName: (train: string) => void;
     exercises: ExercisesListType[];
+    resetExercises: () => void;
     isDrawerOpen: boolean;
     setExercises: (exercises: IExercise[], nameTrain: string) => void;
     openDrawer: () => void;
@@ -31,6 +32,9 @@ const initialContext: DrawerTrainsContextType = {
         //
     },
     setExercises: (exercises, nameTrain) => {
+        //
+    },
+    resetExercises: () => {
         //
     },
     setTrainName: (train) => {

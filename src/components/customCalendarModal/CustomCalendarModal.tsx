@@ -10,6 +10,7 @@ import classes from './CustomCalendarModal.module.css';
 import classnames from 'classnames';
 
 export type ModalModeType = 'train' | 'exercise';
+
 interface ICustomCalendarModalProps {
     widthModal: string;
     modalType: ModalModeType;
@@ -20,7 +21,7 @@ interface ICustomCalendarModalProps {
     allowOpen: boolean;
     isModalVisible: boolean;
     closeModal: () => void;
-    changeModalType: (mode: ModalModeType) => void;
+    changeModalType: () => void;
 }
 
 export const CustomCalendarModal: FC<ICustomCalendarModalProps> = ({
@@ -35,6 +36,8 @@ export const CustomCalendarModal: FC<ICustomCalendarModalProps> = ({
     changeModalType,
     closeModal,
 }) => {
+    console.log(trains, 'trains default');
+
     const { allowedTrains } = useContext(DrawerTrainsContext);
 
     const existingTrainsFromCellData = trains.map((elem) => elem.name.toLocaleLowerCase());
@@ -74,30 +77,36 @@ export const CustomCalendarModal: FC<ICustomCalendarModalProps> = ({
 
     return (
         <>
-            {allowOpen && (
+            {allowOpen && modalType === 'train' && (
                 <div
                     style={
                         isCentered ? { ...styleForCenteredPosition } : { ...styleForOtherPosition }
                     }
                     className={classnames(classes.modal, { [classes.hidden]: !isModalVisible })}
                 >
-                    {modalType === 'train' && (
-                        <ModalCreateTrain
-                            disabledCreate={allowedTrainsForCellCorrected.length === 0}
-                            value={value}
-                            trains={trains}
-                            closeModal={closeModal}
-                            changeMode={changeModalType}
-                        />
-                    )}
-                    {modalType === 'exercise' && (
-                        <ModalSelectExercise
-                            date={value}
-                            allowedTrains={allowedTrainsForCellCorrected}
-                            changeMode={changeModalType}
-                            trains={trains}
-                        />
-                    )}
+                    <ModalCreateTrain
+                        disabledCreate={allowedTrainsForCellCorrected.length === 0}
+                        value={value}
+                        trains={trains}
+                        closeModal={closeModal}
+                        changeMode={changeModalType}
+                    />
+                </div>
+            )}
+            {allowOpen && modalType === 'exercise' && (
+                <div
+                    style={
+                        isCentered ? { ...styleForCenteredPosition } : { ...styleForOtherPosition }
+                    }
+                    className={classnames(classes.modal, { [classes.hidden]: !isModalVisible })}
+                >
+                    <ModalSelectExercise
+                        date={value}
+                        allowedTrains={allowedTrainsForCellCorrected}
+                        changeMode={changeModalType}
+                        trains={trains}
+                        closeModal={closeModal}
+                    />
                 </div>
             )}
         </>

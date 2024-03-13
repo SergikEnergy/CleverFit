@@ -88,3 +88,5 @@ export interface IAllowedTrainResponse {
     name: 'string';
     key: 'string';
 }
+
+export type NewTrainRequestType = Pick<ITrainingsResponse, 'date' | 'exercises' | 'name'>;

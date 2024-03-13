@@ -46,6 +46,10 @@ export const DrawerTrainsContextProvider: FC<{ children: ReactNode }> = ({ child
         });
     };
 
+    const resetExercises = () => {
+        setExercisesList([]);
+    };
+
     const updateDate = (date: Moment) => {
         setDate(date);
     };
@@ -70,6 +74,7 @@ export const DrawerTrainsContextProvider: FC<{ children: ReactNode }> = ({ child
                 allowedTrains,
                 isDrawerOpen,
                 updateAllowedTrains,
+                resetExercises,
             }}
         >
             {children}

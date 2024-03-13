@@ -28,10 +28,10 @@ export const CalendarDrawer: FC = () => {
     }, []);
 
     const closeDrawerWithCheckingData = () => {
+        closeDrawer();
         if (submitRef.current) {
             submitRef.current.click();
         }
-        closeDrawer();
     };
 
     return (
@@ -51,7 +51,7 @@ export const CalendarDrawer: FC = () => {
                 />
                 <div className={classes.date}>{date?.format('DD.MM.YYYY')}</div>
             </div>
-            <FormDrawer ref={submitRef} />
+            {isDrawerOpen && <FormDrawer ref={submitRef} />}
         </Drawer>
     );
 };

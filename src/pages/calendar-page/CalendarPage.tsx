@@ -1,6 +1,7 @@
-import { FC, useEffect, useContext } from 'react';
+import { FC, useEffect, useContext, useState } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '@hooks/typed-react-redux-hooks';
+import { ITrainingsResponse } from '@redux/API/api-types';
 import { CalendarDrawer } from '@components/calendarDrawer';
 import {
     useLazyGetAllTrainingsQuery,
@@ -9,7 +10,6 @@ import {
 import { ModalReportContext } from '../../reactContexts/modalReport-context';
 import { LoaderStateContext } from '../../reactContexts/loader-context';
 import { DrawerTrainsContext } from '../../reactContexts/drawerTrains-context';
-import { ITrainingsResponse } from '@redux/API/api-types';
 import { Paths } from '../../routes/pathes';
 import { BasePagesLayout } from '@pages/basePagesLayout';
 import { isFetchBaseQueryError } from '@redux/API/errorsCatching';
@@ -140,205 +140,205 @@ export const CalendarPage: FC = () => {
         isGettingAllowedTrainsError,
         getAllowedTrainsError,
     ]);
-    const userTraining: ITrainingsResponse[] = [
-        {
-            _id: '1',
-            name: 'Ноги',
-            date: '2024-03-11T09:05:38.759Z',
-            isImplementation: false,
-            userId: '65b809899adc9e39e3660ae0',
-            exercises: [
-                {
-                    _id: '1',
-                    name: 'Присяд',
-                    replays: 3,
-                    weight: 50,
-                    approaches: 10,
-                },
-                {
-                    _id: '2',
-                    name: 'Толкание нагрузки',
-                    replays: 3,
-                    weight: 70,
-                    approaches: 10,
-                },
-            ],
-        },
-        {
-            _id: '2',
-            name: 'Руки',
-            date: '2024-03-11T09:05:38.759Z',
-            isImplementation: false,
-            userId: '65b809899adc9e39e3660ae0',
-            exercises: [
-                {
-                    _id: '2',
-                    name: 'Упражнение',
-                    replays: 1,
-                    weight: 0,
-                    approaches: 3,
-                },
-            ],
-        },
-        {
-            _id: '3',
-            name: 'Ноги',
-            date: '2024-03-12T09:05:38.759Z',
-            isImplementation: false,
-            userId: '65b809899adc9e39e3660ae0',
-            exercises: [
-                {
-                    _id: '1',
-                    name: 'Упражнение',
-                    replays: 1,
-                    weight: 0,
-                    approaches: 3,
-                },
-            ],
-        },
-        {
-            _id: '4',
-            name: 'Руки',
-            date: '2024-03-12T09:05:38.759Z',
-            isImplementation: false,
-            userId: '65b809899adc9e39e3660ae0',
-            exercises: [
-                {
-                    _id: '1',
-                    name: 'Упражнение',
-                    replays: 1,
-                    weight: 0,
-                    approaches: 3,
-                },
-            ],
-        },
-        {
-            _id: '5',
-            name: 'Силовая',
-            date: '2024-03-11T09:05:38.759Z',
-            isImplementation: false,
-            userId: '65b809899adc9e39e3660ae0',
-            exercises: [
-                {
-                    _id: '1',
-                    name: 'Упражнение',
-                    replays: 1,
-                    weight: 0,
-                    approaches: 3,
-                },
-            ],
-        },
-        {
-            _id: '6',
-            name: 'Спина',
-            date: '2024-03-11T09:05:38.759Z',
-            isImplementation: false,
-            userId: '65b809899adc9e39e3660ae0',
-            exercises: [
-                {
-                    _id: '1',
-                    name: 'Упражнение',
-                    replays: 1,
-                    weight: 0,
-                    approaches: 3,
-                },
-            ],
-        },
-        {
-            _id: '7',
-            name: 'Грудь',
-            date: '2024-03-11T09:05:38.759Z',
-            isImplementation: false,
-            userId: '65b809899adc9e39e3660ae0',
-            exercises: [
-                {
-                    _id: '1',
-                    name: 'Упражнение',
-                    replays: 1,
-                    weight: 0,
-                    approaches: 3,
-                },
-            ],
-        },
-        {
-            _id: '8',
-            name: 'Ноги',
-            date: '2024-03-13T09:05:38.759Z',
-            isImplementation: false,
-            userId: '65b809899adc9e39e3660ae0',
-            exercises: [
-                {
-                    _id: '1',
-                    name: 'Присяд',
-                    replays: 3,
-                    weight: 50,
-                    approaches: 10,
-                },
-                {
-                    _id: '2',
-                    name: 'Толкание нагрузки',
-                    replays: 3,
-                    weight: 70,
-                    approaches: 10,
-                },
-            ],
-        },
-        {
-            _id: '9',
-            name: 'Руки',
-            date: '2024-03-13T09:05:38.759Z',
-            isImplementation: false,
-            userId: '65b809899adc9e39e3660ae0',
-            exercises: [
-                {
-                    _id: '1',
-                    name: 'Упражнение',
-                    replays: 1,
-                    weight: 0,
-                    approaches: 3,
-                },
-            ],
-        },
-        {
-            _id: '10',
-            name: 'Силовая',
-            date: '2024-03-14T09:05:38.759Z',
-            isImplementation: false,
-            userId: '65b809899adc9e39e3660ae0',
-            exercises: [
-                {
-                    _id: '1',
-                    name: 'Упражнение',
-                    replays: 1,
-                    weight: 0,
-                    approaches: 3,
-                },
-            ],
-        },
-        {
-            _id: '11',
-            name: 'Грудь',
-            date: '2024-03-14T09:05:38.759Z',
-            isImplementation: false,
-            userId: '65b809899adc9e39e3660ae0',
-            exercises: [
-                {
-                    _id: '1',
-                    name: 'Упражнение',
-                    replays: 1,
-                    weight: 0,
-                    approaches: 3,
-                },
-            ],
-        },
-    ];
+    // const userTraining: ITrainingsResponse[] = [
+    //     {
+    //         _id: '1',
+    //         name: 'Ноги',
+    //         date: '2024-03-11T09:05:38.759Z',
+    //         isImplementation: false,
+    //         userId: '65b809899adc9e39e3660ae0',
+    //         exercises: [
+    //             {
+    //                 _id: '1',
+    //                 name: 'Присяд',
+    //                 replays: 3,
+    //                 weight: 50,
+    //                 approaches: 10,
+    //             },
+    //             {
+    //                 _id: '2',
+    //                 name: 'Толкание нагрузки',
+    //                 replays: 3,
+    //                 weight: 70,
+    //                 approaches: 10,
+    //             },
+    //         ],
+    //     },
+    //     {
+    //         _id: '2',
+    //         name: 'Руки',
+    //         date: '2024-03-11T09:05:38.759Z',
+    //         isImplementation: false,
+    //         userId: '65b809899adc9e39e3660ae0',
+    //         exercises: [
+    //             {
+    //                 _id: '2',
+    //                 name: 'Упражнение',
+    //                 replays: 1,
+    //                 weight: 0,
+    //                 approaches: 3,
+    //             },
+    //         ],
+    //     },
+    //     {
+    //         _id: '3',
+    //         name: 'Ноги',
+    //         date: '2024-03-12T09:05:38.759Z',
+    //         isImplementation: false,
+    //         userId: '65b809899adc9e39e3660ae0',
+    //         exercises: [
+    //             {
+    //                 _id: '1',
+    //                 name: 'Упражнение',
+    //                 replays: 1,
+    //                 weight: 0,
+    //                 approaches: 3,
+    //             },
+    //         ],
+    //     },
+    //     {
+    //         _id: '4',
+    //         name: 'Руки',
+    //         date: '2024-03-12T09:05:38.759Z',
+    //         isImplementation: false,
+    //         userId: '65b809899adc9e39e3660ae0',
+    //         exercises: [
+    //             {
+    //                 _id: '1',
+    //                 name: 'Упражнение',
+    //                 replays: 1,
+    //                 weight: 0,
+    //                 approaches: 3,
+    //             },
+    //         ],
+    //     },
+    //     {
+    //         _id: '5',
+    //         name: 'Силовая',
+    //         date: '2024-03-11T09:05:38.759Z',
+    //         isImplementation: false,
+    //         userId: '65b809899adc9e39e3660ae0',
+    //         exercises: [
+    //             {
+    //                 _id: '1',
+    //                 name: 'Упражнение',
+    //                 replays: 1,
+    //                 weight: 0,
+    //                 approaches: 3,
+    //             },
+    //         ],
+    //     },
+    //     {
+    //         _id: '6',
+    //         name: 'Спина',
+    //         date: '2024-03-11T09:05:38.759Z',
+    //         isImplementation: false,
+    //         userId: '65b809899adc9e39e3660ae0',
+    //         exercises: [
+    //             {
+    //                 _id: '1',
+    //                 name: 'Упражнение',
+    //                 replays: 1,
+    //                 weight: 0,
+    //                 approaches: 3,
+    //             },
+    //         ],
+    //     },
+    //     {
+    //         _id: '7',
+    //         name: 'Грудь',
+    //         date: '2024-03-11T09:05:38.759Z',
+    //         isImplementation: false,
+    //         userId: '65b809899adc9e39e3660ae0',
+    //         exercises: [
+    //             {
+    //                 _id: '1',
+    //                 name: 'Упражнение',
+    //                 replays: 1,
+    //                 weight: 0,
+    //                 approaches: 3,
+    //             },
+    //         ],
+    //     },
+    //     {
+    //         _id: '8',
+    //         name: 'Ноги',
+    //         date: '2024-03-13T09:05:38.759Z',
+    //         isImplementation: false,
+    //         userId: '65b809899adc9e39e3660ae0',
+    //         exercises: [
+    //             {
+    //                 _id: '1',
+    //                 name: 'Присяд',
+    //                 replays: 3,
+    //                 weight: 50,
+    //                 approaches: 10,
+    //             },
+    //             {
+    //                 _id: '2',
+    //                 name: 'Толкание нагрузки',
+    //                 replays: 3,
+    //                 weight: 70,
+    //                 approaches: 10,
+    //             },
+    //         ],
+    //     },
+    //     {
+    //         _id: '9',
+    //         name: 'Руки',
+    //         date: '2024-03-13T09:05:38.759Z',
+    //         isImplementation: false,
+    //         userId: '65b809899adc9e39e3660ae0',
+    //         exercises: [
+    //             {
+    //                 _id: '1',
+    //                 name: 'Упражнение',
+    //                 replays: 1,
+    //                 weight: 0,
+    //                 approaches: 3,
+    //             },
+    //         ],
+    //     },
+    //     {
+    //         _id: '10',
+    //         name: 'Силовая',
+    //         date: '2024-03-14T09:05:38.759Z',
+    //         isImplementation: false,
+    //         userId: '65b809899adc9e39e3660ae0',
+    //         exercises: [
+    //             {
+    //                 _id: '1',
+    //                 name: 'Упражнение',
+    //                 replays: 1,
+    //                 weight: 0,
+    //                 approaches: 3,
+    //             },
+    //         ],
+    //     },
+    //     {
+    //         _id: '11',
+    //         name: 'Грудь',
+    //         date: '2024-03-14T09:05:38.759Z',
+    //         isImplementation: false,
+    //         userId: '65b809899adc9e39e3660ae0',
+    //         exercises: [
+    //             {
+    //                 _id: '1',
+    //                 name: 'Упражнение',
+    //                 replays: 1,
+    //                 weight: 0,
+    //                 approaches: 3,
+    //             },
+    //         ],
+    //     },
+    // ];
 
     return (
         <>
             <BasePagesLayout isCalendarPage>
                 <div className={classes.wrapper} id={'modalWrapperCalendar'}>
                     <CalenDarWithData
-                        dataForRender={userTrainsData && allowedTrainsList ? userTraining : []}
+                        dataForRender={userTrainsData && allowedTrainsList ? userTrainsData : []}
                         allowedTrainsList={allowedTrainsList ? allowedTrainsList : []}
                     />
                 </div>

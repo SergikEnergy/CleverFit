@@ -4,7 +4,6 @@ import { ITrainingsResponse } from '@redux/API/api-types';
 import { TrainWithBadge } from '.';
 import { CloseOutlined } from '@ant-design/icons';
 import { Empty, Button, Divider } from 'antd';
-import { ModalModeType } from '../CustomCalendarModal';
 import EmptyImg from '/images/EmptyImg.svg';
 
 import classes from './ModalCreateTrain.module.css';
@@ -14,7 +13,7 @@ interface IModalCreateTrainProps {
     disabledCreate: boolean;
     trains: [] | ITrainingsResponse[];
     closeModal: () => void;
-    changeMode: (mode: ModalModeType) => void;
+    changeMode: () => void;
 }
 
 export const ModalCreateTrain: FC<IModalCreateTrainProps> = ({
@@ -64,7 +63,7 @@ export const ModalCreateTrain: FC<IModalCreateTrainProps> = ({
                     block
                     className={classes['button__edit']}
                     onClick={() => {
-                        changeMode('exercise');
+                        changeMode();
                     }}
                 >
                     {trains.length > 0 ? 'Добавить тренировку' : 'Создать тренировку'}
