@@ -1,4 +1,4 @@
-import { FC, useState, useContext } from 'react';
+import { FC, useState, useContext, useEffect } from 'react';
 import { IAllowedTrainResponse, ITrainingsResponse } from '@redux/API/api-types';
 import { ModalModeType } from '../CustomCalendarModal';
 import { Divider, Button, Select, Empty } from 'antd';
@@ -24,16 +24,44 @@ export const ModalSelectExercise: FC<IModalSelectExercise> = ({
     date,
 }) => {
     const [trainSelect, setTrainSelect] = useState('');
-    const { exercises, setDrawerTitle, updateDate, setTrainName, openDrawer } =
-        useContext(DrawerTrainsContext);
+    const [activeTrains, setActiveTrains] = useState<ITrainingsResponse[]>([]);
+    const {
+        exercises,
+        setDrawerTitle,
+        updateDate,
+        trainName,
+        setTrainName,
+        openDrawer,
+        setExercises,
+    } = useContext(DrawerTrainsContext);
+
+    useEffect(() => {
+        const filteredTrains = trains.filter(
+            (train) => moment(train.date).format('YYYY-DD-MM') === date.format('YYYY-DD-MM'),
+        );
+        if (Array.isArray(filteredTrains) && filteredTrains.length > 0) {
+            setActiveTrains(filteredTrains);
+        }
+    }, []);
 
     const onSelectChange = (value: string) => {
-        setTrainSelect(value);
+        if (value) {
+            setTrainSelect(value);
+
+            if (activeTrains.length > 0) {
+                const trainsOnThisDate = activeTrains.filter((elem) => elem.name === value);
+                if (Array.isArray(trainsOnThisDate) && trainsOnThisDate.length > 0) {
+                    setExercises(trainsOnThisDate[0].exercises, value);
+                }
+            }
+        }
     };
 
     const openDrawerNewExercise = () => {
         setDrawerTitle('Добавление упражнений');
-        setTrainName(trainSelect);
+        if (trainName !== trainSelect) {
+            setTrainName(trainSelect);
+        }
         updateDate(date);
         openDrawer();
     };
@@ -42,11 +70,7 @@ export const ModalSelectExercise: FC<IModalSelectExercise> = ({
         value: elem.name,
         label: elem.name,
     }));
-    const filteredTrains = trains.filter(
-        (train) =>
-            train.name.toLowerCase() === trainSelect &&
-            moment(train.date).format('YYYY-DD-MM') === date.format('YYYY-DD-MM'),
-    );
+
     return (
         <>
             <div className={classes.header}>
@@ -71,11 +95,15 @@ export const ModalSelectExercise: FC<IModalSelectExercise> = ({
                 </div>
             </div>
             <Divider style={{ marginTop: 10, marginBottom: 12 }} />
-            {trainSelect && exercises.length > 0 ? (
+            {trainSelect &&
+            exercises.length > 0 &&
+            exercises.filter((elem) => elem.name === trainSelect)[0] ? (
                 <ul className={classes['exercises__list']}>
-                    {filteredTrains[0].exercises.map((exercise) => (
-                        <ExerciseItem exercise={exercise} key={exercise._id} />
-                    ))}
+                    {exercises
+                        .filter((elem) => elem.name === trainSelect)[0]
+                        .exercises.map((exercise) => (
+                            <ExerciseItem exercise={exercise} key={exercise.name} />
+                        ))}
                 </ul>
             ) : (
                 <div className={classes.empty}>
@@ -101,7 +129,7 @@ export const ModalSelectExercise: FC<IModalSelectExercise> = ({
                 </Button>
                 <Button
                     type='default'
-                    disabled={!trainSelect && exercises.length === 0}
+                    disabled={exercises.length === 0 || !trainSelect}
                     block
                     className={classes['button__save']}
                 >

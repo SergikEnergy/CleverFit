@@ -76,7 +76,7 @@ export interface IParametersTraining {
 }
 
 export interface IExercise {
-    _id: string;
+    _id?: string;
     name: string;
     replays: number;
     weight: number;

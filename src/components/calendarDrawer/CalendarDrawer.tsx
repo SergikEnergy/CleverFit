@@ -28,7 +28,6 @@ export const CalendarDrawer: FC = () => {
     }, []);
 
     const closeDrawerWithCheckingData = () => {
-        console.log(submitRef.current);
         if (submitRef.current) {
             submitRef.current.click();
         }

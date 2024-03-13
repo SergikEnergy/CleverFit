@@ -1,9 +1,119 @@
-.form__element {
-    margin: auto;
-    margin-top: 24px;
-    margin-bottom: 24px;
+.wrapper {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: flex-start;
+    width: 100%;
+    margin-top: 24px;
+    margin-bottom: 24px;
+}
+
+.form__element {
+    margin: auto;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 8px;
+    font-family: var(--main-font-family);
+    font-weight: 400;
+    line-height: 130%;
+}
+
+.form__element :global(input[type='text']) {
+    font-size: 14px;
+    padding: 3px 0px 3px 8px;
+}
+.form__element :global(input[type='text']::placeholder) {
+    font-size: 14px;
+    color: var(--character-light-disable-25);
+}
+
+.details {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 24px;
+}
+.correct {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    width: 58%;
+}
+
+.repeat:global(.ant-form-item) {
+    width: 31%;
+    margin-bottom: 0;
+}
+
+.weight:global(.ant-form-item) {
+    margin-bottom: 0;
+    flex-shrink: 1;
+    width: 60%;
+}
+
+.details input:global(.ant-input-number-input) {
+    height: 24px;
+}
+
+.details :global(.ant-form-item-control-input-content) {
+    width: 100%;
+}
+.details :global(.ant-input-number) {
+    width: 100%;
+}
+
+.sign {
+    color: var(--character-light-disable-25);
+    font-size: 14px;
+    align-self: flex-end;
+    margin-left: 1px;
+    margin-right: 1px;
+    margin-bottom: 5px;
+}
+
+.quantity:global(.ant-form-item) {
+    margin-bottom: 0;
+    flex-grow: 1;
+}
+
+.details div:global(.ant-form-item-label) {
+    background-color: var(--neutral-gray-4);
+    padding: 0;
+    font-size: 12px;
+    margin-bottom: 6px;
+    border-radius: 2px;
+}
+
+.details label:global(.ant-form-item-label > label) {
+    height: 24px;
+    padding-left: 8px;
+    font-size: 12px;
+}
+
+.details div:global(.ant-form-item-label > label) {
+    height: 24px;
+    padding-left: 8px;
+}
+
+.add {
+    width: 100%;
+}
+.add button {
+    background-color: var(--neutral-gray-4);
+    border: none;
+    border-radius: 3px;
+    text-align: left;
+    font-family: var(--main-font-family);
+    font-weight: 400;
+    line-height: 130%;
+    font-size: 14px;
+}
+
+.add button:hover,
+.add button:focus,
+.add button:target {
+    background-color: #979797c0;
 }
