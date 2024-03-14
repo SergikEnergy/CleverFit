@@ -90,3 +90,5 @@ export interface IAllowedTrainResponse {
 }
 
 export type NewTrainRequestType = Pick<ITrainingsResponse, 'date' | 'exercises' | 'name'>;
+
+export type ChangeFutureTrainRequestType = { body: NewTrainRequestType; id: string };

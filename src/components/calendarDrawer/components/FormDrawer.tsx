@@ -1,11 +1,13 @@
-import { ReactNode, useContext, forwardRef, useState, useEffect } from 'react';
+import { ReactNode, useContext, forwardRef, useState } from 'react';
 import { DrawerTrainsContext } from '../../../reactContexts/drawerTrains-context';
-import { Form, Button, Input, InputNumber } from 'antd';
-import { PlusOutlined } from '@ant-design/icons';
+import { Form, Button, Input, InputNumber, Checkbox } from 'antd';
+import type { CheckboxChangeEvent } from 'antd/es/checkbox';
+import { PlusOutlined, MinusOutlined } from '@ant-design/icons';
 import classes from './FormDrawer.module.css';
 
 interface FormDrawerProps {
     children?: ReactNode;
+    editMode: boolean;
 }
 
 type FormFieldType = {
@@ -18,8 +20,9 @@ type FormFieldType = {
 };
 type FormFieldsType = { exercises: FormFieldType[] };
 
-export const FormDrawer = forwardRef<HTMLButtonElement, FormDrawerProps>((props, ref) => {
+export const FormDrawer = forwardRef<HTMLButtonElement, FormDrawerProps>(({ editMode }, ref) => {
     const { exercises, setExercises, trainName } = useContext(DrawerTrainsContext);
+    const [deletedIndexes, setDeletedIndexes] = useState<number[]>([]);
     const [form] = Form.useForm<FormFieldsType>();
     const initialFormValuesFiltered =
         exercises.length > 0 ? exercises.filter((elem) => elem.name === trainName) : [];
@@ -61,9 +64,13 @@ export const FormDrawer = forwardRef<HTMLButtonElement, FormDrawerProps>((props,
         }
         form.resetFields();
     };
-
+    console.log(deletedIndexes);
     return (
         <Form
+            onValuesChange={(changed: any, values: any) => {
+                console.log('prev', changed);
+                console.log('curr', values);
+            }}
             form={form}
             layout='vertical'
             name='dynamic_exercises'
@@ -72,7 +79,7 @@ export const FormDrawer = forwardRef<HTMLButtonElement, FormDrawerProps>((props,
             initialValues={{ exercises: initialFormValues }}
         >
             <Form.List name='exercises'>
-                {(fields, { add }) => (
+                {(fields, { add, remove }) => (
                     <div className={classes.wrapper}>
                         {fields.map(({ key, name, ...restField }) => (
                             <div key={key} className={classes['form__element']}>
@@ -82,7 +89,39 @@ export const FormDrawer = forwardRef<HTMLButtonElement, FormDrawerProps>((props,
                                     className={classes.exercise}
                                     noStyle
                                 >
-                                    <Input placeholder='Упражнение' />
+                                    <Input
+                                        // addonAfter={
+                                        //     editMode ? (
+                                        //         <Form.Item className={classes.checkbox}>
+                                        //             <Checkbox
+                                        //                 onChange={(e: CheckboxChangeEvent) => {
+                                        //                     console.log(e.target.);
+                                        //                 }}
+                                        //             />
+                                        //         </Form.Item>
+                                        //     ) : null
+                                        // }
+                                        placeholder='Упражнение'
+                                    />
+                                    {editMode && (
+                                        <Checkbox
+                                            className={classes.checkbox}
+                                            onChange={(e: CheckboxChangeEvent) => {
+                                                if (e.target.checked) {
+                                                    setDeletedIndexes((prev) =>
+                                                        prev.includes(name)
+                                                            ? prev
+                                                            : [...prev, name],
+                                                    );
+                                                } else {
+                                                    setDeletedIndexes((prev) =>
+                                                        prev.filter((elem) => elem !== name),
+                                                    );
+                                                }
+                                                // console.log(deletedIndexes);
+                                            }}
+                                        />
+                                    )}
                                 </Form.Item>
                                 <div className={classes.details}>
                                     <Form.Item
@@ -132,6 +171,24 @@ export const FormDrawer = forwardRef<HTMLButtonElement, FormDrawerProps>((props,
                             >
                                 Добавить еще
                             </Button>
+                            {editMode && (
+                                <Button
+                                    style={{ color: 'black' }}
+                                    type='default'
+                                    htmlType='button'
+                                    size='large'
+                                    onClick={() => {
+                                        remove(deletedIndexes);
+                                        setDeletedIndexes([]);
+                                    }}
+                                    className={classes.delete}
+                                    block
+                                    icon={<MinusOutlined />}
+                                    disabled={deletedIndexes.length === 0}
+                                >
+                                    Удалить
+                                </Button>
+                            )}
                         </Form.Item>
                     </div>
                 )}

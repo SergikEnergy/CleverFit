@@ -1,7 +1,12 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import { RootState } from '@redux/configure-store';
 import { API_BASE_URL } from './api-data';
-import { ITrainingsResponse, IAllowedTrainResponse, NewTrainRequestType } from './api-types';
+import {
+    ITrainingsResponse,
+    IAllowedTrainResponse,
+    NewTrainRequestType,
+    ChangeFutureTrainRequestType,
+} from './api-types';
 
 export const calendarAPI = createApi({
     reducerPath: 'calendarAPI',
@@ -47,6 +52,15 @@ export const calendarAPI = createApi({
             }),
             invalidatesTags: ['Trainings'],
         }),
+        changeTrain: build.mutation<void, ChangeFutureTrainRequestType>({
+            query: (data) => ({
+                url: `training/${data.id}`,
+                body: data.body,
+                method: 'PUT',
+                credentials: 'include',
+            }),
+            invalidatesTags: ['Trainings'],
+        }),
     }),
 });
 
@@ -54,4 +68,5 @@ export const {
     useLazyGetAllTrainingsQuery,
     useLazyGetAllowedTrainsListQuery,
     useAddNewTrainMutation,
+    useChangeTrainMutation,
 } = calendarAPI;

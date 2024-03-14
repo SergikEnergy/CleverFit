@@ -17,7 +17,7 @@ export const CalenDarWithData: FC<ICalenDarWithDataProps> = ({
     dataForRender,
     allowedTrainsList,
 }) => {
-    const { resetExercises } = useContext(DrawerTrainsContext);
+    const { date: dateFromContext, resetExercises } = useContext(DrawerTrainsContext);
     const [isFullScreen, setIsFullScreen] = useState(true);
     const [selectedCellData, setSelectedCellData] = useState<[] | ITrainingsResponse[]>([]);
     const [isModalVisible, setIsModalVisible] = useState(false);
@@ -103,6 +103,11 @@ export const CalenDarWithData: FC<ICalenDarWithDataProps> = ({
 
     useEffect(() => {
         changeModalType();
+        if (dateFromContext) {
+            const updatedData = filterDataByDaySortByDate(dateFromContext, dataForRender);
+            setSelectedCellData(updatedData);
+        }
+
         console.log('mount');
     }, [dataForRender]);
 

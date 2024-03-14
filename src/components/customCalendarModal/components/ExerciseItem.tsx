@@ -10,9 +10,14 @@ interface ExerciseItemProps {
 }
 
 export const ExerciseItem: FC<ExerciseItemProps> = ({ exercise }) => {
-    const { openDrawer } = useContext(DrawerTrainsContext);
+    const { openDrawer, editedTrain, setDrawerTitle, setTrainName } =
+        useContext(DrawerTrainsContext);
 
     const handleEditTrainClick = () => {
+        if (editedTrain) {
+            setDrawerTitle('Редактирование');
+            setTrainName(editedTrain);
+        }
         openDrawer();
     };
 

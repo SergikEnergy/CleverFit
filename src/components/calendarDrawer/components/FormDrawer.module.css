@@ -30,6 +30,10 @@
     color: var(--character-light-disable-25);
 }
 
+.form__element:global(.ant-form-item) {
+    margin-bottom: 0;
+}
+
 .details {
     display: flex;
     justify-content: space-between;
@@ -100,11 +104,12 @@
 
 .add {
     width: 100%;
+    background-color: var(--neutral-gray-4);
+    border-radius: 3px;
 }
 .add button {
-    background-color: var(--neutral-gray-4);
+    background-color: transparent;
     border: none;
-    border-radius: 3px;
     text-align: left;
     font-family: var(--main-font-family);
     font-weight: 400;
@@ -116,4 +121,7 @@
 .add button:focus,
 .add button:target {
     background-color: #979797c0;
+}
+
+.checkbox {
 }

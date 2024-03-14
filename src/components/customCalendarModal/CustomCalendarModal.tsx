@@ -36,9 +36,7 @@ export const CustomCalendarModal: FC<ICustomCalendarModalProps> = ({
     changeModalType,
     closeModal,
 }) => {
-    console.log(trains, 'trains default');
-
-    const { allowedTrains } = useContext(DrawerTrainsContext);
+    const { allowedTrains, editedTrain } = useContext(DrawerTrainsContext);
 
     const existingTrainsFromCellData = trains.map((elem) => elem.name.toLocaleLowerCase());
 
@@ -104,6 +102,7 @@ export const CustomCalendarModal: FC<ICustomCalendarModalProps> = ({
                         date={value}
                         allowedTrains={allowedTrainsForCellCorrected}
                         changeMode={changeModalType}
+                        trainForEdit={editedTrain}
                         trains={trains}
                         closeModal={closeModal}
                     />

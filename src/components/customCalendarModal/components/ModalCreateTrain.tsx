@@ -41,7 +41,11 @@ export const ModalCreateTrain: FC<IModalCreateTrainProps> = ({
             {trains.length > 0 ? (
                 <ul className={classes['trains__list']}>
                     {trains.map((train) => (
-                        <TrainWithBadge train={train} key={train._id} />
+                        <TrainWithBadge
+                            changeFlowToEdit={changeMode}
+                            train={train}
+                            key={train._id}
+                        />
                     ))}
                 </ul>
             ) : (

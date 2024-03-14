@@ -1,4 +1,4 @@
-import { FC, useState, useContext } from 'react';
+import { FC, useState, useContext, useLayoutEffect } from 'react';
 import { IAllowedTrainResponse, ITrainingsResponse } from '@redux/API/api-types';
 import { Divider, Button, Select, Empty } from 'antd';
 import { ArrowLeftOutlined } from '@ant-design/icons';
@@ -17,6 +17,7 @@ interface IModalSelectExercise {
     allowedTrains: IAllowedTrainResponse[];
     trains: [] | ITrainingsResponse[];
     date: Moment;
+    trainForEdit: string;
     closeModal: () => void;
 }
 
@@ -25,10 +26,9 @@ export const ModalSelectExercise: FC<IModalSelectExercise> = ({
     allowedTrains,
     trains,
     date,
+    trainForEdit,
     closeModal: closeTrainModal,
 }) => {
-    const [postNewTrain, { isLoading: isPostingTrain }] = useAddNewTrainMutation();
-    const [trainSelect, setTrainSelect] = useState('');
     const {
         exercises,
         setDrawerTitle,
@@ -39,6 +39,9 @@ export const ModalSelectExercise: FC<IModalSelectExercise> = ({
         setExercises,
         resetExercises,
     } = useContext(DrawerTrainsContext);
+    const [postNewTrain, { isLoading: isPostingTrain }] = useAddNewTrainMutation();
+    const [trainSelect, setTrainSelect] = useState(trainForEdit ? trainForEdit : '');
+
     const { openModal, setNode, setWidthModal } = useContext(ModalReportContext);
 
     const addNewTrain = async () => {
@@ -55,7 +58,6 @@ export const ModalSelectExercise: FC<IModalSelectExercise> = ({
         try {
             await postNewTrain(bodyRequest).unwrap();
             resetExercises();
-            // changeMode();
         } catch (error) {
             if (error) {
                 console.log(error);
@@ -67,6 +69,21 @@ export const ModalSelectExercise: FC<IModalSelectExercise> = ({
             }
         }
     };
+
+    useLayoutEffect(() => {
+        if (date) {
+            updateDate(date);
+        }
+        if (trainForEdit) {
+            if (trains.length > 0) {
+                const trainsOnThisDate = trains.filter((elem) => elem.name === trainForEdit);
+                if (Array.isArray(trainsOnThisDate) && trainsOnThisDate.length > 0) {
+                    setExercises(trainsOnThisDate[0].exercises, trainForEdit);
+                }
+            }
+        }
+        console.log('useffect edit train worked');
+    }, [trainForEdit, trains, date]);
 
     const onSelectChange = (value: string) => {
         if (value && trainSelect !== value) {
@@ -86,14 +103,15 @@ export const ModalSelectExercise: FC<IModalSelectExercise> = ({
         if (trainName !== trainSelect) {
             setTrainName(trainSelect);
         }
-        updateDate(date);
         openDrawer();
     };
 
-    const allowedOptions: { value: string; label: string }[] = allowedTrains.map((elem) => ({
-        value: elem.name,
-        label: elem.name,
-    }));
+    const allowedOptions: { value: string; label: string }[] = !trainForEdit
+        ? allowedTrains.map((elem) => ({
+              value: elem.name,
+              label: elem.name,
+          }))
+        : [{ value: trainForEdit, label: trainForEdit }];
 
     const exercisesFilteredBySelect = exercises
         ? exercises.filter((elem) => elem.name === trainSelect)
@@ -116,6 +134,7 @@ export const ModalSelectExercise: FC<IModalSelectExercise> = ({
                 </div>
                 <div className={classes.select}>
                     <Select
+                        defaultValue={trainForEdit ? trainForEdit : null}
                         placeholder='Выбор типа тренировки'
                         optionFilterProp='children'
                         onChange={onSelectChange}
@@ -147,7 +166,7 @@ export const ModalSelectExercise: FC<IModalSelectExercise> = ({
             <Divider style={{ marginTop: 12, marginBottom: 12 }} />
             <div className={classes.buttons}>
                 <Button
-                    disabled={!trainSelect}
+                    disabled={!trainSelect || !!trainForEdit}
                     type='primary'
                     block
                     className={classes['button__add']}
