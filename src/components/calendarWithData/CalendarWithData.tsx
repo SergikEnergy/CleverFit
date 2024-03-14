@@ -17,7 +17,11 @@ export const CalenDarWithData: FC<ICalenDarWithDataProps> = ({
     dataForRender,
     allowedTrainsList,
 }) => {
-    const { date: dateFromContext, resetExercises } = useContext(DrawerTrainsContext);
+    const {
+        date: dateFromContext,
+        resetExercises,
+        changeEditedTrainData,
+    } = useContext(DrawerTrainsContext);
     const [isFullScreen, setIsFullScreen] = useState(true);
     const [selectedCellData, setSelectedCellData] = useState<[] | ITrainingsResponse[]>([]);
     const [isModalVisible, setIsModalVisible] = useState(false);
@@ -132,6 +136,7 @@ export const CalenDarWithData: FC<ICalenDarWithDataProps> = ({
         event: MouseEvent<HTMLDivElement>,
     ) => {
         resetExercises();
+        changeEditedTrainData('', '');
         setModalType('train');
         const id = event.currentTarget.id;
         if (isFullScreen || (!isFullScreen && isCurrentMonth(id))) {

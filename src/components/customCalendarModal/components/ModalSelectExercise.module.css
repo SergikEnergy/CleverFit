@@ -42,6 +42,7 @@ span:global(.ant-select-selection-placeholder) {
 .exercises__list {
     padding: 0 12px;
     color: #8c8c8c;
+    min-height: 90px;
 }
 
 .empty {
@@ -58,23 +59,31 @@ span:global(.ant-select-selection-placeholder) {
     justify-content: flex-start;
     align-items: center;
     gap: 8px;
-    font-family: var(--font-family);
-    font-weight: 400;
-    font-size: 1.4rem;
-    line-height: 130%;
 }
 
 button.button__add {
     background-color: var(--primary-light-6);
     border: none;
+    font-family: var(--font-family);
+    font-weight: 400;
+    font-size: 1.4rem;
+    line-height: 130%;
 }
 button.button__save {
     border: none;
     background-color: transparent;
+    font-family: var(--font-family);
+    font-weight: 400;
+    font-size: 1.4rem;
+    line-height: 130%;
     color: var(--primary-light-6);
 }
 button.button__save:disabled {
     background-color: transparent;
+}
+
+button.button__save:global(.ant-btn.ant-btn-loading) {
+    color: var(--primary-light-7);
 }
 
 button.button__save:hover:not(:disabled) {

@@ -8,7 +8,7 @@ import { ModalReportContext } from '../../../reactContexts/modalReport-context';
 import { ExerciseItem } from '.';
 import { Moment } from 'moment';
 import EmptyImg from '/images/EmptyImg.svg';
-import { useAddNewTrainMutation } from '@redux/API/calendarAPI';
+import { useAddNewTrainMutation, useChangeTrainMutation } from '@redux/API/calendarAPI';
 import { NewTrainRequestType } from '@redux/API/api-types';
 import classes from './ModalSelectExercise.module.css';
 
@@ -31,6 +31,8 @@ export const ModalSelectExercise: FC<IModalSelectExercise> = ({
 }) => {
     const {
         exercises,
+        editedTrainID,
+        changeEditedTrainData,
         setDrawerTitle,
         updateDate,
         trainName,
@@ -39,8 +41,12 @@ export const ModalSelectExercise: FC<IModalSelectExercise> = ({
         setExercises,
         resetExercises,
     } = useContext(DrawerTrainsContext);
+
     const [postNewTrain, { isLoading: isPostingTrain }] = useAddNewTrainMutation();
-    const [trainSelect, setTrainSelect] = useState(trainForEdit ? trainForEdit : '');
+
+    const [updateTrainById, { isLoading: isUpdateTrainLoading }] = useChangeTrainMutation();
+
+    const [trainSelect, setTrainSelect] = useState(trainForEdit.length > 0 ? trainForEdit : '');
 
     const { openModal, setNode, setWidthModal } = useContext(ModalReportContext);
 
@@ -70,6 +76,35 @@ export const ModalSelectExercise: FC<IModalSelectExercise> = ({
         }
     };
 
+    const updateSelectedTrain = async () => {
+        const filterExercisesByName = exercises.filter((elem) => elem.name === trainSelect);
+        const exercisesRequest = filterExercisesByName[0].exercises;
+        const dateRequest = date.add(3, 'hours').toISOString();
+        const nameRequest = trainSelect;
+        const bodyRequest: NewTrainRequestType = {
+            date: dateRequest,
+            name: nameRequest,
+            exercises: exercisesRequest,
+        };
+        const idRequest = editedTrainID;
+
+        try {
+            console.log({ body: bodyRequest, id: idRequest });
+            await updateTrainById({ body: bodyRequest, id: idRequest }).unwrap();
+            resetExercises();
+            changeEditedTrainData('', '');
+        } catch (error) {
+            if (error) {
+                console.log(error);
+                resetExercises();
+                closeTrainModal();
+                setWidthModal('clamp(328px, 100%, 416px)');
+                setNode(<ErrorAddTrain />);
+                openModal();
+            }
+        }
+    };
+
     useLayoutEffect(() => {
         if (date) {
             updateDate(date);
@@ -77,6 +112,7 @@ export const ModalSelectExercise: FC<IModalSelectExercise> = ({
         if (trainForEdit) {
             if (trains.length > 0) {
                 const trainsOnThisDate = trains.filter((elem) => elem.name === trainForEdit);
+
                 if (Array.isArray(trainsOnThisDate) && trainsOnThisDate.length > 0) {
                     setExercises(trainsOnThisDate[0].exercises, trainForEdit);
                 }
@@ -87,6 +123,7 @@ export const ModalSelectExercise: FC<IModalSelectExercise> = ({
 
     const onSelectChange = (value: string) => {
         if (value && trainSelect !== value) {
+            changeEditedTrainData('', '');
             setTrainSelect(value);
 
             if (trains.length > 0) {
@@ -106,12 +143,10 @@ export const ModalSelectExercise: FC<IModalSelectExercise> = ({
         openDrawer();
     };
 
-    const allowedOptions: { value: string; label: string }[] = !trainForEdit
-        ? allowedTrains.map((elem) => ({
-              value: elem.name,
-              label: elem.name,
-          }))
-        : [{ value: trainForEdit, label: trainForEdit }];
+    const allowedOptions: { value: string; label: string }[] = allowedTrains.map((elem) => ({
+        value: elem.name,
+        label: elem.name,
+    }));
 
     const exercisesFilteredBySelect = exercises
         ? exercises.filter((elem) => elem.name === trainSelect)
@@ -119,6 +154,10 @@ export const ModalSelectExercise: FC<IModalSelectExercise> = ({
 
     const handleSaveExercisesClick = () => {
         addNewTrain();
+    };
+
+    const handleUpdateTrainClick = () => {
+        updateSelectedTrain();
     };
 
     return (
@@ -179,8 +218,9 @@ export const ModalSelectExercise: FC<IModalSelectExercise> = ({
                     disabled={exercisesFilteredBySelect.length === 0 || !trainSelect}
                     block
                     className={classes['button__save']}
-                    onClick={handleSaveExercisesClick}
-                    loading={isPostingTrain}
+                    onClick={trainForEdit ? handleUpdateTrainClick : handleSaveExercisesClick}
+                    loading={isPostingTrain || isUpdateTrainLoading}
+                    // loading={true}
                 >
                     Сохранить
                 </Button>

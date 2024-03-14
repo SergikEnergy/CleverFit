@@ -8,7 +8,7 @@ import { getColorTrainByName } from '@components/calendarWithData/CalendarWithDa
 import classes from './CalendarDrawer.module.css';
 
 export const CalendarDrawer: FC = () => {
-    const { isDrawerOpen, drawerTitle, closeDrawer, trainName, date, editedTrain } =
+    const { isDrawerOpen, drawerTitle, closeDrawer, trainName, date, editedTrainID } =
         useContext(DrawerTrainsContext);
     const [drawerWidth, setDrawerWidth] = useState(408);
     const submitRef = useRef<HTMLButtonElement | null>(null);
@@ -51,7 +51,7 @@ export const CalendarDrawer: FC = () => {
                 />
                 <div className={classes.date}>{date?.format('DD.MM.YYYY')}</div>
             </div>
-            {isDrawerOpen && <FormDrawer editMode={!!trainName} ref={submitRef} />}
+            {isDrawerOpen && <FormDrawer editMode={!!editedTrainID} ref={submitRef} />}
         </Drawer>
     );
 };

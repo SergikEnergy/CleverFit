@@ -11,7 +11,8 @@ export const DrawerTrainsContextProvider: FC<{ children: ReactNode }> = ({ child
     const [isDrawerOpen, setIsDrawerOpen] = useState(false);
     const [drawerHeader, setDrawerHeader] = useState('');
     const [exercisesList, setExercisesList] = useState<ExercisesListType[]>([]);
-    const [trainForEdit, setTrainForEdit] = useState('');
+    const [trainForEditID, setTrainForEditID] = useState('');
+    const [trainForEditName, setTrainForEditName] = useState('');
 
     const updateAllowedTrains = (trains: IAllowedTrainResponse[]) => {
         setAllowedTrains(trains);
@@ -59,15 +60,17 @@ export const DrawerTrainsContextProvider: FC<{ children: ReactNode }> = ({ child
         setDrawerHeader(title);
     };
 
-    const changeEditedTrain = (train: string) => {
-        setTrainForEdit(train);
+    const changeEditedTrainData = (id: string, train: string) => {
+        setTrainForEditID(id);
+        setTrainForEditName(train);
     };
 
     return (
         <DrawerTrainsContext.Provider
             value={{
-                editedTrain: trainForEdit,
-                changeEditedTrain,
+                editedTrainID: trainForEditID,
+                editedTrainName: trainForEditName,
+                changeEditedTrainData,
                 date,
                 trainName: train,
                 setTrainName,

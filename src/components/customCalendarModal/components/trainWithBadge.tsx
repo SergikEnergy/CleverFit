@@ -13,9 +13,9 @@ interface TrainWithBadgeProps {
 }
 
 export const TrainWithBadge: FC<TrainWithBadgeProps> = ({ train, changeFlowToEdit }) => {
-    const { changeEditedTrain } = useContext(DrawerTrainsContext);
+    const { changeEditedTrainData } = useContext(DrawerTrainsContext);
     const handleEditClick = () => {
-        changeEditedTrain(train.name);
+        changeEditedTrainData(train._id, train.name);
         changeFlowToEdit();
     };
 

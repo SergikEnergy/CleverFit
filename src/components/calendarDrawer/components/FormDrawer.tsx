@@ -49,28 +49,30 @@ export const FormDrawer = forwardRef<HTMLButtonElement, FormDrawerProps>(({ edit
               ];
 
     const finishFunc = (values: FormFieldsType) => {
-        const filteredResult = values.exercises.filter(
-            (elem) => elem.exercise && elem.exercise.length > 0,
-        );
-        if (filteredResult.length > 0) {
-            const trainsCorrected = filteredResult.map((train) => {
-                if (!train.approaches) train.approaches = 1;
-                if (!train.replays) train.replays = 1;
-                if (!train.weight) train.weight = 0;
-                train.name = train.exercise;
-                return train;
-            });
-            setExercises(trainsCorrected, trainName);
+        console.log(values);
+        if (values.exercises.length > 0) {
+            const filteredResult = values.exercises.filter(
+                (elem) => elem.exercise && elem.exercise.length > 0,
+            );
+            if (filteredResult.length > 0) {
+                const trainsCorrected = filteredResult.map((train) => {
+                    if (!train.approaches) train.approaches = 1;
+                    if (!train.replays) train.replays = 1;
+                    if (!train.weight) train.weight = 0;
+                    train.name = train.exercise;
+                    return train;
+                });
+                setExercises(trainsCorrected, trainName);
+            }
+        } else {
+            setExercises([], trainName);
         }
+
         form.resetFields();
     };
-    console.log(deletedIndexes);
+
     return (
         <Form
-            onValuesChange={(changed: any, values: any) => {
-                console.log('prev', changed);
-                console.log('curr', values);
-            }}
             form={form}
             layout='vertical'
             name='dynamic_exercises'
@@ -90,38 +92,30 @@ export const FormDrawer = forwardRef<HTMLButtonElement, FormDrawerProps>(({ edit
                                     noStyle
                                 >
                                     <Input
-                                        // addonAfter={
-                                        //     editMode ? (
-                                        //         <Form.Item className={classes.checkbox}>
-                                        //             <Checkbox
-                                        //                 onChange={(e: CheckboxChangeEvent) => {
-                                        //                     console.log(e.target.);
-                                        //                 }}
-                                        //             />
-                                        //         </Form.Item>
-                                        //     ) : null
-                                        // }
+                                        addonAfter={
+                                            editMode ? (
+                                                <Checkbox
+                                                    className={classes.checkbox}
+                                                    onChange={(e: CheckboxChangeEvent) => {
+                                                        if (e.target.checked) {
+                                                            setDeletedIndexes((prev) =>
+                                                                prev.includes(name)
+                                                                    ? prev
+                                                                    : [...prev, name],
+                                                            );
+                                                        } else {
+                                                            setDeletedIndexes((prev) =>
+                                                                prev.filter(
+                                                                    (elem) => elem !== name,
+                                                                ),
+                                                            );
+                                                        }
+                                                    }}
+                                                />
+                                            ) : null
+                                        }
                                         placeholder='Упражнение'
                                     />
-                                    {editMode && (
-                                        <Checkbox
-                                            className={classes.checkbox}
-                                            onChange={(e: CheckboxChangeEvent) => {
-                                                if (e.target.checked) {
-                                                    setDeletedIndexes((prev) =>
-                                                        prev.includes(name)
-                                                            ? prev
-                                                            : [...prev, name],
-                                                    );
-                                                } else {
-                                                    setDeletedIndexes((prev) =>
-                                                        prev.filter((elem) => elem !== name),
-                                                    );
-                                                }
-                                                // console.log(deletedIndexes);
-                                            }}
-                                        />
-                                    )}
                                 </Form.Item>
                                 <div className={classes.details}>
                                     <Form.Item
@@ -160,35 +154,41 @@ export const FormDrawer = forwardRef<HTMLButtonElement, FormDrawerProps>(({ edit
                             </div>
                         ))}
                         <Form.Item className={classes.add}>
-                            <Button
-                                block
-                                type='default'
-                                htmlType='button'
-                                size='large'
-                                style={{ color: 'blue' }}
-                                onClick={() => add()}
-                                icon={<PlusOutlined />}
-                            >
-                                Добавить еще
-                            </Button>
-                            {editMode && (
+                            <div className={classes.controls}>
                                 <Button
-                                    style={{ color: 'black' }}
+                                    block
                                     type='default'
                                     htmlType='button'
                                     size='large'
-                                    onClick={() => {
-                                        remove(deletedIndexes);
-                                        setDeletedIndexes([]);
-                                    }}
-                                    className={classes.delete}
-                                    block
-                                    icon={<MinusOutlined />}
-                                    disabled={deletedIndexes.length === 0}
+                                    style={{ color: 'blue' }}
+                                    onClick={() => add()}
+                                    icon={<PlusOutlined />}
                                 >
-                                    Удалить
+                                    Добавить еще
                                 </Button>
-                            )}
+                                {editMode && (
+                                    <Button
+                                        style={
+                                            deletedIndexes.length !== 0
+                                                ? { color: '#000' }
+                                                : { color: '#747474' }
+                                        }
+                                        type='default'
+                                        htmlType='button'
+                                        size='large'
+                                        onClick={() => {
+                                            remove(deletedIndexes);
+                                            setDeletedIndexes([]);
+                                        }}
+                                        className={classes.delete}
+                                        block
+                                        icon={<MinusOutlined />}
+                                        disabled={deletedIndexes.length === 0}
+                                    >
+                                        Удалить
+                                    </Button>
+                                )}
+                            </div>
                         </Form.Item>
                     </div>
                 )}

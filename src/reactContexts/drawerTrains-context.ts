@@ -10,8 +10,9 @@ export type DrawerTrainsContextType = {
     setDrawerTitle: (title: string) => void;
     date: Moment | null;
     trainName: string;
-    editedTrain: string;
-    changeEditedTrain: (train: string) => void;
+    editedTrainID: string;
+    editedTrainName: string;
+    changeEditedTrainData: (id: string, train: string) => void;
     setTrainName: (train: string) => void;
     exercises: ExercisesListType[];
     resetExercises: () => void;
@@ -25,13 +26,14 @@ export type DrawerTrainsContextType = {
 
 const initialContext: DrawerTrainsContextType = {
     allowedTrains: [],
-    editedTrain: '',
+    editedTrainID: '',
+    editedTrainName: '',
     date: null,
     drawerTitle: '',
     trainName: '',
     exercises: [],
     isDrawerOpen: false,
-    changeEditedTrain: (train) => {
+    changeEditedTrainData: (id, train) => {
         //
     },
     setDrawerTitle: (title) => {

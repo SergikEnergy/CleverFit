@@ -123,5 +123,14 @@
     background-color: #979797c0;
 }
 
-.checkbox {
+.controls {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex: 1;
+}
+
+button.delete,
+button.delete:disabled {
+    background-color: var(--neutral-gray-4);
 }

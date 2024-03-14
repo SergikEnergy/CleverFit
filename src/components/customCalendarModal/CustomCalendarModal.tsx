@@ -5,6 +5,7 @@ import { IModalPosition } from '@components/calendarWithData/CalendarWithData.ty
 import { ITrainingsResponse } from '@redux/API/api-types';
 import { ModalCreateTrain, ModalSelectExercise } from './components';
 import { DrawerTrainsContext } from '../../reactContexts/drawerTrains-context';
+import moment from 'moment';
 
 import classes from './CustomCalendarModal.module.css';
 import classnames from 'classnames';
@@ -36,7 +37,7 @@ export const CustomCalendarModal: FC<ICustomCalendarModalProps> = ({
     changeModalType,
     closeModal,
 }) => {
-    const { allowedTrains, editedTrain } = useContext(DrawerTrainsContext);
+    const { allowedTrains, editedTrainName } = useContext(DrawerTrainsContext);
 
     const existingTrainsFromCellData = trains.map((elem) => elem.name.toLocaleLowerCase());
 
@@ -46,6 +47,9 @@ export const CustomCalendarModal: FC<ICustomCalendarModalProps> = ({
                   !existingTrainsFromCellData.includes(elem.name.toLowerCase()) ? true : false,
               )
             : [];
+
+    const disableCreateButton =
+        allowedTrainsForCellCorrected.length === 0 || value.isSameOrBefore(moment());
 
     const topPosition = isCentered
         ? modalPosition.top + modalPosition.heightSelectedCell
@@ -83,7 +87,7 @@ export const CustomCalendarModal: FC<ICustomCalendarModalProps> = ({
                     className={classnames(classes.modal, { [classes.hidden]: !isModalVisible })}
                 >
                     <ModalCreateTrain
-                        disabledCreate={allowedTrainsForCellCorrected.length === 0}
+                        disabledCreate={disableCreateButton}
                         value={value}
                         trains={trains}
                         closeModal={closeModal}
@@ -102,7 +106,7 @@ export const CustomCalendarModal: FC<ICustomCalendarModalProps> = ({
                         date={value}
                         allowedTrains={allowedTrainsForCellCorrected}
                         changeMode={changeModalType}
-                        trainForEdit={editedTrain}
+                        trainForEdit={editedTrainName}
                         trains={trains}
                         closeModal={closeModal}
                     />
