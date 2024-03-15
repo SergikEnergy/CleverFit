@@ -10,11 +10,14 @@ import { Moment } from 'moment';
 import EmptyImg from '/images/EmptyImg.svg';
 import { useAddNewTrainMutation, useChangeTrainMutation } from '@redux/API/calendarAPI';
 import { NewTrainRequestType } from '@redux/API/api-types';
+import moment from 'moment';
+
 import classes from './ModalSelectExercise.module.css';
 
 interface IModalSelectExercise {
     changeMode: () => void;
     allowedTrains: IAllowedTrainResponse[];
+    existingTrains: IAllowedTrainResponse[];
     trains: [] | ITrainingsResponse[];
     date: Moment;
     trainForEdit: string;
@@ -24,6 +27,7 @@ interface IModalSelectExercise {
 export const ModalSelectExercise: FC<IModalSelectExercise> = ({
     changeMode,
     allowedTrains,
+    existingTrains,
     trains,
     date,
     trainForEdit,
@@ -42,6 +46,8 @@ export const ModalSelectExercise: FC<IModalSelectExercise> = ({
         resetExercises,
     } = useContext(DrawerTrainsContext);
 
+    const isPastDate = date.isSameOrBefore(moment());
+
     const [postNewTrain, { isLoading: isPostingTrain }] = useAddNewTrainMutation();
 
     const [updateTrainById, { isLoading: isUpdateTrainLoading }] = useChangeTrainMutation();
@@ -59,7 +65,9 @@ export const ModalSelectExercise: FC<IModalSelectExercise> = ({
             date: dateRequest,
             name: nameRequest,
             exercises: exercisesRequest,
+            isImplementation: false,
         };
+        console.log(isPastDate, 'past');
 
         try {
             await postNewTrain(bodyRequest).unwrap();
@@ -85,6 +93,7 @@ export const ModalSelectExercise: FC<IModalSelectExercise> = ({
             date: dateRequest,
             name: nameRequest,
             exercises: exercisesRequest,
+            isImplementation: isPastDate,
         };
         const idRequest = editedTrainID;
 
@@ -122,14 +131,21 @@ export const ModalSelectExercise: FC<IModalSelectExercise> = ({
     }, [trainForEdit, trains, date]);
 
     const onSelectChange = (value: string) => {
-        if (value && trainSelect !== value) {
-            changeEditedTrainData('', '');
-            setTrainSelect(value);
+        if (value) {
+            if (trainSelect !== value) {
+                if (!isPastDate) {
+                    changeEditedTrainData('', '');
+                }
+                setTrainSelect(value);
 
-            if (trains.length > 0) {
-                const trainsOnThisDate = trains.filter((elem) => elem.name === value);
-                if (Array.isArray(trainsOnThisDate) && trainsOnThisDate.length > 0) {
-                    setExercises(trainsOnThisDate[0].exercises, value);
+                if (trains.length > 0) {
+                    const trainsOnThisDate = trains.filter((elem) => elem.name === value);
+                    if (Array.isArray(trainsOnThisDate) && trainsOnThisDate.length > 0) {
+                        setExercises(trainsOnThisDate[0].exercises, value);
+                        if (isPastDate) {
+                            changeEditedTrainData(trainsOnThisDate[0]._id, value);
+                        }
+                    }
                 }
             }
         }
@@ -148,6 +164,11 @@ export const ModalSelectExercise: FC<IModalSelectExercise> = ({
         label: elem.name,
     }));
 
+    const existingOptions: { value: string; label: string }[] = existingTrains.map((elem) => ({
+        value: elem.name,
+        label: elem.name,
+    }));
+
     const exercisesFilteredBySelect = exercises
         ? exercises.filter((elem) => elem.name === trainSelect)
         : [];
@@ -157,6 +178,7 @@ export const ModalSelectExercise: FC<IModalSelectExercise> = ({
     };
 
     const handleUpdateTrainClick = () => {
+        console.log(trainForEdit, 'edit mode');
         updateSelectedTrain();
     };
 
@@ -180,7 +202,7 @@ export const ModalSelectExercise: FC<IModalSelectExercise> = ({
                         filterOption={(input, option) =>
                             (option?.label.toLowerCase() ?? '').includes(input.toLowerCase())
                         }
-                        options={allowedOptions}
+                        options={isPastDate ? existingOptions : allowedOptions}
                     />
                 </div>
             </div>
@@ -220,7 +242,6 @@ export const ModalSelectExercise: FC<IModalSelectExercise> = ({
                     className={classes['button__save']}
                     onClick={trainForEdit ? handleUpdateTrainClick : handleSaveExercisesClick}
                     loading={isPostingTrain || isUpdateTrainLoading}
-                    // loading={true}
                 >
                     Сохранить
                 </Button>

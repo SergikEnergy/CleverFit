@@ -19,6 +19,10 @@
     line-height: 130%;
 }
 
+.badge.implemented :global(.ant-badge-status-text) {
+    color: gray;
+}
+
 .highlighter {
     width: 15%;
     text-align: right;
@@ -26,6 +30,12 @@
     display: flex;
     align-items: center;
     justify-content: flex-end;
+}
+
+.highlighter.implemented:hover,
+.highlighter.implemented:target,
+.highlighter.implemented:focus {
+    cursor: none;
 }
 
 .highlighter:hover,

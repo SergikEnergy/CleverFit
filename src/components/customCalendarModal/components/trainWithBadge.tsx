@@ -6,6 +6,7 @@ import { EditOutlined } from '@ant-design/icons';
 import { getColorTrainByName } from '@components/calendarWithData/CalendarWithData.utils';
 
 import classes from './TrainWithBadge.module.css';
+import classnames from 'classnames';
 
 interface TrainWithBadgeProps {
     train: ITrainingsResponse;
@@ -15,21 +16,27 @@ interface TrainWithBadgeProps {
 export const TrainWithBadge: FC<TrainWithBadgeProps> = ({ train, changeFlowToEdit }) => {
     const { changeEditedTrainData } = useContext(DrawerTrainsContext);
     const handleEditClick = () => {
-        changeEditedTrainData(train._id, train.name);
-        changeFlowToEdit();
+        if (!train.isImplementation) {
+            changeEditedTrainData(train._id, train.name);
+            changeFlowToEdit();
+        }
     };
 
     return (
         <li className={classes.train}>
             <Badge
-                className={classes.badge}
+                className={classnames(classes.badge, {
+                    [classes.implemented]: train.isImplementation,
+                })}
                 color={getColorTrainByName(train.name)}
                 text={train.name}
             />
             <EditOutlined
                 onClick={handleEditClick}
-                style={{ color: 'blue' }}
-                className={classes.highlighter}
+                style={train.isImplementation ? { color: 'gray' } : { color: 'blue' }}
+                className={classnames(classes.highlighter, {
+                    [classes.implemented]: train.isImplementation,
+                })}
             />
         </li>
     );

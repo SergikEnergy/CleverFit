@@ -1,6 +1,10 @@
 import { FC, useContext } from 'react';
 import { Moment } from 'moment';
-import { checkNarrowFramesDay } from './CustomCalendarModal.utils';
+import {
+    checkNarrowFramesDay,
+    getAllowedTrains,
+    getExistedNotImplementedTrains,
+} from './CustomCalendarModal.utils';
 import { IModalPosition } from '@components/calendarWithData/CalendarWithData.types';
 import { ITrainingsResponse } from '@redux/API/api-types';
 import { ModalCreateTrain, ModalSelectExercise } from './components';
@@ -37,19 +41,25 @@ export const CustomCalendarModal: FC<ICustomCalendarModalProps> = ({
     changeModalType,
     closeModal,
 }) => {
+    const isPastDate = value.isSameOrBefore(moment());
     const { allowedTrains, editedTrainName } = useContext(DrawerTrainsContext);
 
-    const existingTrainsFromCellData = trains.map((elem) => elem.name.toLocaleLowerCase());
+    const existingTrainsFromCellData = trains.map((elem) => ({
+        name: elem.name.toLocaleLowerCase(),
+        isImplemented: elem.isImplementation,
+    }));
 
-    const allowedTrainsForCellCorrected =
-        allowedTrains.length > 0
-            ? allowedTrains.filter((elem) =>
-                  !existingTrainsFromCellData.includes(elem.name.toLowerCase()) ? true : false,
-              )
-            : [];
+    const allowedTrainsForCellCorrected = getAllowedTrains(
+        existingTrainsFromCellData,
+        allowedTrains,
+    );
 
-    const disableCreateButton =
-        allowedTrainsForCellCorrected.length === 0 || value.isSameOrBefore(moment());
+    const existingTrainsForCell = getExistedNotImplementedTrains(
+        existingTrainsFromCellData,
+        allowedTrains,
+    );
+
+    const disableCreateButton = allowedTrainsForCellCorrected.length === 0 || isPastDate;
 
     const topPosition = isCentered
         ? modalPosition.top + modalPosition.heightSelectedCell
@@ -105,6 +115,7 @@ export const CustomCalendarModal: FC<ICustomCalendarModalProps> = ({
                     <ModalSelectExercise
                         date={value}
                         allowedTrains={allowedTrainsForCellCorrected}
+                        existingTrains={existingTrainsForCell}
                         changeMode={changeModalType}
                         trainForEdit={editedTrainName}
                         trains={trains}
