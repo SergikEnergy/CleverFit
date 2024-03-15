@@ -91,6 +91,9 @@ export const CustomCalendarModal: FC<ICustomCalendarModalProps> = ({
         <>
             {allowOpen && modalType === 'train' && (
                 <div
+                    data-test-id={
+                        modalType === 'train' ? 'modal-create-training' : 'modal-create-exercise'
+                    }
                     style={
                         isCentered ? { ...styleForCenteredPosition } : { ...styleForOtherPosition }
                     }

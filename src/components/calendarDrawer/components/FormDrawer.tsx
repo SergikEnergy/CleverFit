@@ -92,9 +92,11 @@ export const FormDrawer = forwardRef<HTMLButtonElement, FormDrawerProps>(({ edit
                                     noStyle
                                 >
                                     <Input
+                                        data-test-id={`modal-drawer-right-input-exercise${key}`}
                                         addonAfter={
                                             editMode ? (
                                                 <Checkbox
+                                                    data-test-id={`modal-drawer-right-checkbox-exercise${key}`}
                                                     className={classes.checkbox}
                                                     onChange={(e: CheckboxChangeEvent) => {
                                                         if (e.target.checked) {
@@ -125,6 +127,7 @@ export const FormDrawer = forwardRef<HTMLButtonElement, FormDrawerProps>(({ edit
                                         className={classes.repeat}
                                     >
                                         <InputNumber
+                                            data-test-id={`modal-drawer-right-input-approach${key}`}
                                             type='number'
                                             placeholder='1'
                                             addonBefore={'+'}
@@ -138,7 +141,12 @@ export const FormDrawer = forwardRef<HTMLButtonElement, FormDrawerProps>(({ edit
                                             label='Вес, кг'
                                             className={classes.weight}
                                         >
-                                            <InputNumber type='number' placeholder='0' min={0} />
+                                            <InputNumber
+                                                data-test-id={`modal-drawer-right-input-weight${key}`}
+                                                type='number'
+                                                placeholder='0'
+                                                min={0}
+                                            />
                                         </Form.Item>
                                         <div className={classes.sign}>x</div>
                                         <Form.Item
@@ -147,7 +155,12 @@ export const FormDrawer = forwardRef<HTMLButtonElement, FormDrawerProps>(({ edit
                                             label='Количество'
                                             className={classes.quantity}
                                         >
-                                            <InputNumber type='number' placeholder='1' min={1} />
+                                            <InputNumber
+                                                data-test-id={`modal-drawer-right-input-quantity${key}`}
+                                                type='number'
+                                                placeholder='1'
+                                                min={1}
+                                            />
                                         </Form.Item>
                                     </div>
                                 </div>

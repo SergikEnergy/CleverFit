@@ -66,6 +66,7 @@ export const CardsSection: FC = () => {
                         action={
                             <Button
                                 onClick={handleMoveToCalendarPage}
+                                data-test-id='menu-button-calendar'
                                 type='text'
                                 block
                                 icon={

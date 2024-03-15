@@ -42,11 +42,19 @@ export const ErrorShowAllowedTrainsList: FC<IErrorShowAllowedTrainsListProps> = 
             <div className={classes.main}>
                 <div className={classes.status}>{getIconFromStatus(status)}</div>
                 <div className={classes.content}>
-                    <div className={classes.title}>{title}</div>
-                    <div className={classes.subtitle}>{subtitle}</div>
+                    <div data-test-id='modal-error-user-training-title' className={classes.title}>
+                        {title}
+                    </div>
+                    <div
+                        data-test-id='modal-error-user-training-subtitle'
+                        className={classes.subtitle}
+                    >
+                        {subtitle}
+                    </div>
                 </div>
                 <div className={classes.close}>
                     <Button
+                        data-test-id='modal-error-user-training-button-close'
                         onClick={handleCloseButtonClick}
                         icon={<CloseOutlined style={{ fontSize: '14px' }} />}
                         shape='circle'
@@ -55,7 +63,12 @@ export const ErrorShowAllowedTrainsList: FC<IErrorShowAllowedTrainsListProps> = 
                 </div>
             </div>
             <div className={classes.button}>
-                <Button type='primary' htmlType='button' onClick={handleActionButtonClick}>
+                <Button
+                    data-test-id='modal-error-user-training-button'
+                    type='primary'
+                    htmlType='button'
+                    onClick={handleActionButtonClick}
+                >
                     {buttonText}
                 </Button>
             </div>

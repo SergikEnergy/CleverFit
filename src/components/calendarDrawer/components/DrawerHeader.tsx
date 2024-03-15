@@ -16,6 +16,7 @@ export const DrawerHeader: FC<DrawerHeaderProps> = ({ title, closeDrawer }) => (
         <div className={classes.title}>{title}</div>
         <div
             className={classes.close}
+            data-test-id='modal-drawer-right-button-close'
             onClick={() => {
                 closeDrawer();
             }}

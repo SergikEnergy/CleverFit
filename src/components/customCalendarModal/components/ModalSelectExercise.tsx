@@ -187,6 +187,7 @@ export const ModalSelectExercise: FC<IModalSelectExercise> = ({
             <div className={classes.header}>
                 <div
                     className={classes.close}
+                    data-test-id='modal-exercise-training-button-close'
                     onClick={() => {
                         changeMode();
                     }}
@@ -195,6 +196,7 @@ export const ModalSelectExercise: FC<IModalSelectExercise> = ({
                 </div>
                 <div className={classes.select}>
                     <Select
+                        data-test-id='modal-create-exercise-select'
                         defaultValue={trainForEdit ? trainForEdit : null}
                         placeholder='Выбор типа тренировки'
                         optionFilterProp='children'

@@ -28,7 +28,7 @@ export const ShowFetchDataError: FC<IShowFetchDataErrorProps> = ({ forPage }) =>
     const buttonKey = 'error get feedback';
 
     return (
-        <div className={classes.result}>
+        <div className={classes.result} data-test-id='modal-no-review'>
             <Result
                 className={classes.error}
                 status={status}

@@ -36,6 +36,7 @@ export const CalendarDrawer: FC = () => {
 
     return (
         <Drawer
+            data-test-id='modal-drawer-right'
             title={<DrawerHeader title={drawerTitle} closeDrawer={closeDrawerWithCheckingData} />}
             width={drawerWidth}
             maskClosable={false}

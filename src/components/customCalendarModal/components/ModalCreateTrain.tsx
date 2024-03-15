@@ -34,7 +34,11 @@ export const ModalCreateTrain: FC<IModalCreateTrainProps> = ({
                         <div className={classes.subtitle}>Нет активных тренировок</div>
                     )}
                 </div>
-                <div className={classes.close} onClick={closeModal}>
+                <div
+                    className={classes.close}
+                    data-test-id='modal-create-training-button-close'
+                    onClick={closeModal}
+                >
                     <CloseOutlined />
                 </div>
             </div>
