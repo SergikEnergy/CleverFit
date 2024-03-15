@@ -9,17 +9,21 @@ import { CalendarTwoTone, HeartFilled, TrophyFilled } from '@ant-design/icons';
 import { ProfileIconComponent } from '@components/customIcon/profileIcon';
 import { menuItemsKeys } from './menuLinks.data';
 import { getSelectedKey } from './menuLink.utils';
+import { useGetAllUserTrains } from '@hooks/useGetAllUserTrains';
 
 import { primaryLight } from '../../utils/constants/colors';
 import classes from './menuLinks.module.css';
 import classnames from 'classnames';
 
 export const MenuLinks: FC = () => {
+    const fetchAllUserTrains = useGetAllUserTrains();
     const { collapsed } = useContext(CollapsedContext);
     const location = useLocation();
 
     const handleMoveToCalendarPage = () => {
-        history.push(Paths.CALENDAR_PAGE, { allowRequest: true });
+        fetchAllUserTrains().then(() => {
+            history.push(Paths.CALENDAR_PAGE, { allowRequest: true });
+        });
     };
 
     return (

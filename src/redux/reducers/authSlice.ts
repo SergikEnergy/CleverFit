@@ -1,6 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 import type { PayloadAction } from '@reduxjs/toolkit';
 import { getParamFromStorage } from './authSlice.utils';
+import { LOCAL_STORAGE_AUTH_PARAM } from '@redux/API/api-data';
 
 type AuthUserState = {
     email: string;
@@ -9,8 +10,8 @@ type AuthUserState = {
     rememberMe: boolean;
 };
 
-const initialToken = getParamFromStorage('userCleverFit', 'token', null);
-const initialEmail = getParamFromStorage('userCleverFit', 'email', '') as string;
+const initialToken = getParamFromStorage(LOCAL_STORAGE_AUTH_PARAM, 'token', null);
+const initialEmail = getParamFromStorage(LOCAL_STORAGE_AUTH_PARAM, 'email', '') as string;
 
 const initialUserAuthState: AuthUserState = {
     email: initialEmail,
@@ -42,7 +43,7 @@ const slice = createSlice({
         saveCredentialsToStorage: (state) => {
             const userData = { email: state.email, token: state.token };
             if (state.rememberMe) {
-                localStorage.setItem('userCleverFit', JSON.stringify(userData));
+                localStorage.setItem(LOCAL_STORAGE_AUTH_PARAM, JSON.stringify(userData));
             }
         },
         resetCredentials: (state) => {

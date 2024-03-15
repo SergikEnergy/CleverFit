@@ -1,5 +1,5 @@
 import { FC } from 'react';
-import { Moment } from 'moment';
+import moment, { Moment } from 'moment';
 import { ITrainingsResponse } from '@redux/API/api-types';
 import { TrainWithBadge } from '.';
 import { CloseOutlined } from '@ant-design/icons';
@@ -23,6 +23,9 @@ export const ModalCreateTrain: FC<IModalCreateTrainProps> = ({
     closeModal,
     changeMode,
 }) => {
+    const isPastDate = value.isSameOrBefore(moment());
+    const buttonText =
+        !isPastDate || trains.length === 0 ? 'Создать тренировку' : 'Создать тренировку';
     return (
         <>
             <div className={classes.header}>
@@ -44,11 +47,12 @@ export const ModalCreateTrain: FC<IModalCreateTrainProps> = ({
             </div>
             {trains.length > 0 ? (
                 <ul className={classes['trains__list']}>
-                    {trains.map((train) => (
+                    {trains.map((train, index) => (
                         <TrainWithBadge
                             changeFlowToEdit={changeMode}
                             train={train}
                             key={train._id}
+                            index={index}
                         />
                     ))}
                 </ul>
@@ -74,7 +78,7 @@ export const ModalCreateTrain: FC<IModalCreateTrainProps> = ({
                         changeMode();
                     }}
                 >
-                    {trains.length > 0 ? 'Добавить тренировку' : 'Создать тренировку'}
+                    {buttonText}
                 </Button>
             </div>
         </>

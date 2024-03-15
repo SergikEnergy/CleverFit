@@ -1,6 +1,7 @@
 import { FC, useContext, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Paths } from '../../routes/pathes';
+import { LOCAL_STORAGE_AUTH_PARAM } from '@redux/API/api-data';
 import { useAppDispatch, useAppSelector } from '@hooks/typed-react-redux-hooks';
 import { resetCredentials } from '@redux/reducers/authSlice';
 import { BasePagesLayout } from '@pages/basePagesLayout';
@@ -31,7 +32,7 @@ export const FeedbacksPage: FC = () => {
     useEffect(() => {
         if (isFetchBaseQueryError(error)) {
             if (error.status === 403) {
-                localStorage.removeItem('userCleverFit');
+                localStorage.removeItem(LOCAL_STORAGE_AUTH_PARAM);
                 dispatch(resetCredentials());
                 navigate(Paths.AUTH, { replace: true });
             } else {

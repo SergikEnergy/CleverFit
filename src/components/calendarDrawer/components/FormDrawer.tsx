@@ -177,7 +177,7 @@ export const FormDrawer = forwardRef<HTMLButtonElement, FormDrawerProps>(({ edit
                                     onClick={() => add()}
                                     icon={<PlusOutlined />}
                                 >
-                                    Добавить еще
+                                    Добавить ещё
                                 </Button>
                                 {editMode && (
                                     <Button

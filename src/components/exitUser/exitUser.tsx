@@ -1,6 +1,7 @@
 import { FC, useContext } from 'react';
 import { useAppDispatch } from '@hooks/typed-react-redux-hooks';
 import { resetCredentials } from '@redux/reducers/authSlice';
+import { LOCAL_STORAGE_AUTH_PARAM } from '@redux/API/api-data';
 
 import { CollapsedContext } from '../../reactContexts/collapse-context';
 import type { CustomIconComponentProps } from '@ant-design/icons/lib/components/Icon';
@@ -20,7 +21,7 @@ export const ExitUser: FC = () => {
     const { collapsed } = useContext(CollapsedContext);
 
     const handleExitUser = () => {
-        localStorage.removeItem('userCleverFit');
+        localStorage.removeItem(LOCAL_STORAGE_AUTH_PARAM);
         dispatch(resetCredentials());
     };
     return (

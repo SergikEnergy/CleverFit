@@ -10,11 +10,11 @@ import classnames from 'classnames';
 
 interface TrainWithBadgeProps {
     train: ITrainingsResponse;
-    key: string;
+    index: number;
     changeFlowToEdit: () => void;
 }
 
-export const TrainWithBadge: FC<TrainWithBadgeProps> = ({ train, changeFlowToEdit, key }) => {
+export const TrainWithBadge: FC<TrainWithBadgeProps> = ({ train, changeFlowToEdit, index }) => {
     const { changeEditedTrainData } = useContext(DrawerTrainsContext);
     const handleEditClick = () => {
         if (!train.isImplementation) {
@@ -33,7 +33,7 @@ export const TrainWithBadge: FC<TrainWithBadgeProps> = ({ train, changeFlowToEdi
                 text={train.name}
             />
             <EditOutlined
-                data-test-id={`modal-update-training-edit-button${key}`}
+                data-test-id={`modal-update-training-edit-button${index}`}
                 onClick={handleEditClick}
                 style={train.isImplementation ? { color: 'gray' } : { color: 'blue' }}
                 className={classnames(classes.highlighter, {

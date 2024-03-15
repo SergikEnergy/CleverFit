@@ -1,12 +1,9 @@
-import { FC, useEffect, useContext, useState } from 'react';
+import { FC, useEffect, useContext } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '@hooks/typed-react-redux-hooks';
-import { ITrainingsResponse } from '@redux/API/api-types';
 import { CalendarDrawer } from '@components/calendarDrawer';
-import {
-    useLazyGetAllTrainingsQuery,
-    useLazyGetAllowedTrainsListQuery,
-} from '@redux/API/calendarAPI';
+import { LOCAL_STORAGE_AUTH_PARAM } from '@redux/API/api-data';
+import { useLazyGetAllowedTrainsListQuery } from '@redux/API/calendarAPI';
 import { ModalReportContext } from '../../reactContexts/modalReport-context';
 import { LoaderStateContext } from '../../reactContexts/loader-context';
 import { DrawerTrainsContext } from '../../reactContexts/drawerTrains-context';
@@ -14,7 +11,6 @@ import { Paths } from '../../routes/pathes';
 import { BasePagesLayout } from '@pages/basePagesLayout';
 import { isFetchBaseQueryError } from '@redux/API/errorsCatching';
 import { resetCredentials } from '@redux/reducers/authSlice';
-import { ShowFetchDataError } from '@components/showFetchDataError';
 import { CalenDarWithData } from '@components/calendarWithData';
 import { ErrorShowAllowedTrainsList } from '@components/errorShowAllowedTrainsList';
 
@@ -25,18 +21,14 @@ export const CalendarPage: FC = () => {
     const location = useLocation();
     const dispatch = useAppDispatch();
     const token = useAppSelector((state) => state.auth.token);
+    const isGettingTrainSuccessful = useAppSelector(
+        (state) => state.calendar.isGetTrainsSuccessful,
+    );
+    const userTrainsData = useAppSelector((state) => state.calendar.userTrains);
+    console.log(userTrainsData);
     const { setNode, openModal, closeModal, setWidthModal } = useContext(ModalReportContext);
     const { updateAllowedTrains } = useContext(DrawerTrainsContext);
     const { startLoader, stopLoader } = useContext(LoaderStateContext);
-    const [
-        getAllTrainings,
-        {
-            data: userTrainsData,
-            error: errorGetAllTrains,
-            isError: isGettingTrainsError,
-            isLoading: isFetchingAllTrains,
-        },
-    ] = useLazyGetAllTrainingsQuery();
 
     const [
         getAllowedTrainsList,
@@ -62,28 +54,9 @@ export const CalendarPage: FC = () => {
     };
 
     const resetUser = () => {
-        localStorage.removeItem('userCleverFit');
+        localStorage.removeItem(LOCAL_STORAGE_AUTH_PARAM);
         dispatch(resetCredentials());
         navigate(Paths.AUTH, { replace: true });
-    };
-
-    const fetchAllTrainings = async () => {
-        try {
-            await getAllTrainings();
-        } catch (error) {
-            if (isFetchBaseQueryError(error)) {
-                if (error.status === 403) {
-                    resetUser();
-                } else {
-                    navigate(Paths.MAIN_PAGE, { replace: true });
-                    setNode(<ShowFetchDataError forPage='calendar' />);
-                    setWidthModal('clamp(328px, 100%, 539px)');
-                    openModal();
-                }
-            }
-        } finally {
-            stopLoader();
-        }
     };
 
     const fetchAllowedTrainsList = async () => {
@@ -114,12 +87,12 @@ export const CalendarPage: FC = () => {
     };
 
     useEffect(() => {
-        if (isFetchingAllTrains || isFetchingAllowedTrains) {
+        if (isFetchingAllowedTrains) {
             startLoader();
         } else {
             stopLoader();
         }
-    }, [isFetchingAllTrains, isFetchingAllowedTrains]);
+    }, [isFetchingAllowedTrains, startLoader, stopLoader]);
 
     useEffect(() => {
         if (!token) {
@@ -129,17 +102,11 @@ export const CalendarPage: FC = () => {
 
     useEffect(() => {
         if (location.state && location.state.allowRequest) {
-            console.log('from main-page allow request');
-            fetchAllTrainings().then(() => {
+            if (isGettingTrainSuccessful) {
                 fetchAllowedTrainsList();
-            });
+            }
         }
-    }, [
-        errorGetAllTrains,
-        isGettingTrainsError,
-        isGettingAllowedTrainsError,
-        getAllowedTrainsError,
-    ]);
+    }, [isGettingAllowedTrainsError, getAllowedTrainsError, isGettingTrainSuccessful]);
 
     return (
         <>
