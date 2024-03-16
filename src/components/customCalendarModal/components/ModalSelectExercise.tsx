@@ -4,7 +4,6 @@ import { Divider, Button, Select, Empty } from 'antd';
 import { ArrowLeftOutlined } from '@ant-design/icons';
 import { ErrorAddTrain } from '@components/errorAddTrain';
 import { DrawerTrainsContext, ModalReportContext } from '../../../reactContexts';
-import { useGetAllTrainingsQuery, useGetAllowedTrainsListQuery } from '@redux/API/calendarAPI';
 import { ExerciseItem } from '.';
 import { Moment } from 'moment';
 import EmptyImg from '/images/EmptyImg.svg';
@@ -33,8 +32,6 @@ export const ModalSelectExercise: FC<IModalSelectExercise> = ({
     trainForEdit,
     closeModal: closeTrainModal,
 }) => {
-    const { refetch: refetchAllTrainings } = useGetAllTrainingsQuery();
-    const { refetch: refetchAllTrainingsList } = useGetAllowedTrainsListQuery();
     const {
         exercises,
         editedTrainID,
@@ -72,9 +69,6 @@ export const ModalSelectExercise: FC<IModalSelectExercise> = ({
 
         try {
             await postNewTrain(bodyRequest).unwrap();
-            await refetchAllTrainings();
-            await refetchAllTrainingsList();
-            console.log('after refetching');
             resetExercises();
         } catch (error) {
             if (error) {
@@ -102,8 +96,6 @@ export const ModalSelectExercise: FC<IModalSelectExercise> = ({
 
         try {
             await updateTrainById({ body: bodyRequest, id: idRequest }).unwrap();
-            await refetchAllTrainings();
-            await refetchAllTrainingsList();
             resetExercises();
             changeEditedTrainData('', '');
         } catch (error) {
@@ -212,8 +204,8 @@ export const ModalSelectExercise: FC<IModalSelectExercise> = ({
             <Divider style={{ marginTop: 10, marginBottom: 12 }} />
             {trainSelect && exercisesFilteredBySelect.length > 0 ? (
                 <ul className={classes['exercises__list']}>
-                    {exercisesFilteredBySelect[0].exercises.map((exercise) => (
-                        <ExerciseItem exercise={exercise} key={exercise.name} />
+                    {exercisesFilteredBySelect[0].exercises.map((exercise, index) => (
+                        <ExerciseItem index={index} exercise={exercise} key={exercise.name} />
                     ))}
                 </ul>
             ) : (

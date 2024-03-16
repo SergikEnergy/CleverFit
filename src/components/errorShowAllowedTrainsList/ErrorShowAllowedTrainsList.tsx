@@ -33,13 +33,12 @@ export const ErrorShowAllowedTrainsList: FC<IErrorShowAllowedTrainsListProps> = 
     const buttonText = 'Обновить';
 
     const handleCloseButtonClick = () => {
-        console.log('clicked close');
         if (closeClickAction) closeClickAction();
     };
 
     const handleActionButtonClick = () => {
         if (buttonActionClick) buttonActionClick();
-        console.log('clicked action refetch');
+
     };
 
     return (

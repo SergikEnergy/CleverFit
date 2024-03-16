@@ -1,4 +1,4 @@
-import { FC, useContext } from 'react';
+import { FC, useContext, useState, useLayoutEffect } from 'react';
 import { Moment } from 'moment';
 import {
     checkNarrowFramesDay,
@@ -9,7 +9,6 @@ import { IModalPosition } from '@components/calendarWithData/CalendarWithData.ty
 import { ITrainingsResponse } from '@redux/API/api-types';
 import { ModalCreateTrain, ModalSelectExercise } from './components';
 import { DrawerTrainsContext } from '../../reactContexts';
-import moment from 'moment';
 
 import classes from './CustomCalendarModal.module.css';
 import classnames from 'classnames';
@@ -41,25 +40,35 @@ export const CustomCalendarModal: FC<ICustomCalendarModalProps> = ({
     changeModalType,
     closeModal,
 }) => {
-    const isPastDate = value.isSameOrBefore(moment());
-    const { allowedTrains, editedTrainName } = useContext(DrawerTrainsContext);
-
-    const existingTrainsFromCellData = trains.map((elem) => ({
+    const existingTrainsFromCellDataInitial = trains.map((elem) => ({
         name: elem.name.toLocaleLowerCase(),
         isImplemented: elem.isImplementation,
     }));
 
-    const allowedTrainsForCellCorrected = getAllowedTrains(
-        existingTrainsFromCellData,
+    const [existingTrainingsFromCellData, setExistingTrainingsFromCellData] = useState(
+        existingTrainsFromCellDataInitial,
+    );
+
+    useLayoutEffect(() => {
+        setExistingTrainingsFromCellData(
+            trains.map((elem) => ({
+                name: elem.name.toLocaleLowerCase(),
+                isImplemented: elem.isImplementation,
+            })),
+        );
+    }, [trains]);
+
+    const { allowedTrains, editedTrainName } = useContext(DrawerTrainsContext);
+
+    const allowedTrainingsForCellCorrected = getAllowedTrains(
+        existingTrainingsFromCellData,
         allowedTrains,
     );
 
-    const existingTrainsForCell = getExistedNotImplementedTrains(
-        existingTrainsFromCellData,
+    const existingTrainingsForCell = getExistedNotImplementedTrains(
+        existingTrainingsFromCellData,
         allowedTrains,
     );
-
-    const disableCreateButton = allowedTrainsForCellCorrected.length === 0 || isPastDate;
 
     const topPosition = isCentered
         ? modalPosition.top + modalPosition.heightSelectedCell
@@ -98,7 +107,6 @@ export const CustomCalendarModal: FC<ICustomCalendarModalProps> = ({
                     className={classnames(classes.modal, { [classes.hidden]: !isModalVisible })}
                 >
                     <ModalCreateTrain
-                        disabledCreate={disableCreateButton}
                         value={value}
                         trains={trains}
                         closeModal={closeModal}
@@ -116,8 +124,8 @@ export const CustomCalendarModal: FC<ICustomCalendarModalProps> = ({
                 >
                     <ModalSelectExercise
                         date={value}
-                        allowedTrains={allowedTrainsForCellCorrected}
-                        existingTrains={existingTrainsForCell}
+                        allowedTrains={allowedTrainingsForCellCorrected}
+                        existingTrains={existingTrainingsForCell}
                         changeMode={changeModalType}
                         trainForEdit={editedTrainName}
                         trains={trains}

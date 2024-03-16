@@ -7,9 +7,10 @@ import classes from './ExerciseItem.module.css';
 
 interface ExerciseItemProps {
     exercise: IExercise;
+    index: number;
 }
 
-export const ExerciseItem: FC<ExerciseItemProps> = ({ exercise }) => {
+export const ExerciseItem: FC<ExerciseItemProps> = ({ exercise, index }) => {
     const { openDrawer, editedTrainName, setDrawerTitle, setTrainName } =
         useContext(DrawerTrainsContext);
 
@@ -25,6 +26,7 @@ export const ExerciseItem: FC<ExerciseItemProps> = ({ exercise }) => {
         <li className={classes.exercise}>
             <span className={classes.name}>{exercise.name}</span>
             <EditOutlined
+                data-test-id={`modal-update-training-edit-button${index}`}
                 onClick={handleEditTrainClick}
                 style={{ color: 'blue' }}
                 className={classes.highlighter}

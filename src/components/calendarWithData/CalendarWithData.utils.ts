@@ -51,3 +51,19 @@ export const getMonthByName = (
     const indexOfMonth = namesMonth.indexOf(shortCut);
     if (indexOfMonth !== -1) return indexOfMonth;
 };
+
+export const isCurrentMonth = (id: string):boolean => {
+    const date = moment(id, 'YYYY-MM-DD');
+    const allowedMonth = date.month();
+    const allowedYear = date.year();
+    const selectedYear = Number(
+        document
+            .querySelector('.ant-picker-calendar-year-select span.ant-select-selection-item')
+            ?.getAttribute('title'),
+    );
+    const selectedMonthShort = document
+        .querySelector('.ant-picker-calendar-month-select span.ant-select-selection-item')
+        ?.getAttribute('title');
+    const selectedMonth = getMonthByName(selectedMonthShort as string);
+    return allowedMonth === selectedMonth && allowedYear === selectedYear;
+};

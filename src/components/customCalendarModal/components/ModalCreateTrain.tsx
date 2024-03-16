@@ -1,4 +1,4 @@
-import { FC } from 'react';
+import { FC, useState, useEffect } from 'react';
 import moment, { Moment } from 'moment';
 import { ITrainingsResponse } from '@redux/API/api-types';
 import { TrainWithBadge } from '.';
@@ -10,7 +10,6 @@ import classes from './ModalCreateTrain.module.css';
 
 interface IModalCreateTrainProps {
     value: Moment;
-    disabledCreate: boolean;
     trains: [] | ITrainingsResponse[];
     closeModal: () => void;
     changeMode: () => void;
@@ -18,14 +17,22 @@ interface IModalCreateTrainProps {
 
 export const ModalCreateTrain: FC<IModalCreateTrainProps> = ({
     value,
-    disabledCreate,
     trains,
     closeModal,
     changeMode,
 }) => {
+    const [disabledCreateButton, setDisabledCreateButton] = useState<boolean>(true);
+
     const isPastDate = value.isSameOrBefore(moment());
     const buttonText =
         !isPastDate || trains.length === 0 ? 'Создать тренировку' : 'Создать тренировку';
+
+    useEffect(() => {
+        console.log('worked layout mount');
+        const isDisabled = value.isSameOrBefore(moment()) || trains.length >= 5;
+        setDisabledCreateButton(isDisabled);
+    }, [value, trains.length]);
+
     return (
         <>
             <div className={classes.header}>
@@ -70,7 +77,7 @@ export const ModalCreateTrain: FC<IModalCreateTrainProps> = ({
             <Divider style={{ marginTop: 12, marginBottom: 12 }} />
             <div className={classes.buttons}>
                 <Button
-                    disabled={disabledCreate}
+                    disabled={disabledCreateButton}
                     type='primary'
                     block
                     className={classes['button__edit']}

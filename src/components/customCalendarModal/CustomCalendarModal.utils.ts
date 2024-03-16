@@ -12,10 +12,10 @@ export const getAllowedTrains: CheckAllowedOrExistingTrainsType = (
     existingTrains,
     allowedTrains,
 ) => {
-    const existingTrainNames = existingTrains.map((elem) => elem.name);
+    const existingTrainNames = existingTrains.map((elem) => elem.name.toLowerCase());
 
     return allowedTrains.length > 0
-        ? allowedTrains.filter((train) => !existingTrainNames.includes(train.name))
+        ? allowedTrains.filter((train) => !existingTrainNames.includes(train.name.toLowerCase()))
         : [];
 };
 
@@ -25,11 +25,13 @@ export const getExistedNotImplementedTrains: CheckAllowedOrExistingTrainsType = 
 ) => {
     const existingNotImplementedTrainNames = existingTrains.map((elem) => {
         if (!elem.isImplemented) {
-            return elem.name;
+            return elem.name.toLowerCase();
         }
     });
 
     return allowedTrains.length > 0
-        ? allowedTrains.filter((train) => existingNotImplementedTrainNames.includes(train.name))
+        ? allowedTrains.filter((train) =>
+              existingNotImplementedTrainNames.includes(train.name.toLowerCase()),
+          )
         : [];
 };

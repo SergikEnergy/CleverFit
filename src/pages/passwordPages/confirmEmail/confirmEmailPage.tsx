@@ -65,7 +65,7 @@ export const ConfirmEmailPage: FC = () => {
                 data-test-id='verification-input'
                 placeholder=''
                 validChars='0-9'
-                inputProps={{ inputMode: 'numeric', ['data-test-id']: 'verification-input' }}
+                inputProps={{ inputMode: 'numeric' }}
                 onComplete={handleCompleteInput}
                 classNames={{
                     container: classes.container,

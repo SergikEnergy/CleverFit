@@ -3,7 +3,7 @@ import { useNavigate, useLocation } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '@hooks/typed-react-redux-hooks';
 import { CalendarDrawer } from '@components/calendarDrawer';
 import { LOCAL_STORAGE_AUTH_PARAM } from '@redux/API/api-data';
-import { useLazyGetAllowedTrainsListQuery } from '@redux/API/calendarAPI';
+import { useLazyGetAllowedTrainsListQuery, useGetAllTrainingsQuery } from '@redux/API/calendarAPI';
 import { ModalReportContext, LoaderStateContext, DrawerTrainsContext } from '../../reactContexts';
 import { Paths } from '../../routes/pathes';
 import { BasePagesLayout } from '@pages/basePagesLayout';
@@ -19,10 +19,7 @@ export const CalendarPage: FC = () => {
     const location = useLocation();
     const dispatch = useAppDispatch();
     const token = useAppSelector((state) => state.auth.token);
-    const isGettingTrainSuccessful = useAppSelector(
-        (state) => state.calendar.isGetTrainsSuccessful,
-    );
-    const userTrainingsData = useAppSelector((state) => state.calendar.userTrains);
+
     const { setNode, openModal, closeModal, setWidthModal } = useContext(ModalReportContext);
     const { updateAllowedTrains } = useContext(DrawerTrainsContext);
     const { startLoader, stopLoader } = useContext(LoaderStateContext);
@@ -31,6 +28,8 @@ export const CalendarPage: FC = () => {
         getAllowedTrainingsList,
         { data: allowedTrainsList, isLoading: isFetchingAllowedTrains },
     ] = useLazyGetAllowedTrainsListQuery();
+
+    const { data: userTrainingsData } = useGetAllTrainingsQuery();
 
     const handlerErrorCloseAction = () => {
         setNode(null);
@@ -84,11 +83,9 @@ export const CalendarPage: FC = () => {
 
     useEffect(() => {
         if (location.state.allowRequest) {
-            if (isGettingTrainSuccessful) {
-                fetchAllowedTrainingsList();
-            }
+            fetchAllowedTrainingsList();
         }
-    }, [userTrainingsData, isGettingTrainSuccessful]);
+    }, [userTrainingsData]);
 
     useEffect(() => {
         if (isFetchingAllowedTrains) {
@@ -103,7 +100,6 @@ export const CalendarPage: FC = () => {
             navigate(Paths.AUTH, { replace: true });
         }
     }, [token, navigate]);
-    console.log('allowedList', allowedTrainsList);
 
     return (
         <>

@@ -3,7 +3,6 @@ import { useNavigate } from 'react-router-dom';
 import { Paths } from '../routes/pathes';
 import { history } from '@redux/configure-store';
 import { LOCAL_STORAGE_AUTH_PARAM } from '@redux/API/api-data';
-import { setUserTrainsFromServer, resetUserTrainsFromServer } from '@redux/reducers/calendarSlice';
 import { LoaderStateContext, ModalReportContext } from '../reactContexts';
 import { isFetchBaseQueryError } from '@redux/API/errorsCatching';
 import { useAppDispatch } from '.';
@@ -17,14 +16,7 @@ export const useGetAllUserTrainings = () => {
     const { startLoader, stopLoader } = useContext(LoaderStateContext);
     const { setNode, setWidthModal, openModal } = useContext(ModalReportContext);
 
-    const [getAllTrainings, { data, isLoading: isFetchingAllTrains }] =
-        useLazyGetAllTrainingsQuery();
-
-    useEffect(() => {
-        if (data && !isFetchBaseQueryError(data)) {
-            dispatch(setUserTrainsFromServer(data));
-        }
-    }, [data]);
+    const [getAllTrainings, { isLoading }] = useLazyGetAllTrainingsQuery();
 
     const resetUser = () => {
         localStorage.removeItem(LOCAL_STORAGE_AUTH_PARAM);
@@ -33,15 +25,10 @@ export const useGetAllUserTrainings = () => {
     };
 
     useEffect(() => {
-        if (isFetchingAllTrains) {
-            startLoader();
-        } else {
-            stopLoader();
-        }
-    }, [isFetchingAllTrains, startLoader, stopLoader]);
+        isLoading ? startLoader() : stopLoader();
+    }, [isLoading, startLoader, stopLoader]);
 
     const handleGetTrainingsError = (error: unknown) => {
-        dispatch(resetUserTrainsFromServer());
         if (isFetchBaseQueryError(error) && error.status === 403) {
             resetUser();
         } else {
@@ -53,18 +40,14 @@ export const useGetAllUserTrainings = () => {
 
     const fetchAllTrainings = async () => {
         try {
-            const trainings = await getAllTrainings();
-            if (trainings.data) {
-                dispatch(setUserTrainsFromServer(trainings.data));
-                history.push(Paths.CALENDAR_PAGE, { allowRequest: true });
-            } else if (isFetchBaseQueryError(trainings)) {
-                handleGetTrainingsError(trainings);
-            }
+            await getAllTrainings().unwrap();
+            history.push(Paths.CALENDAR_PAGE, { allowRequest: true });
         } catch (error) {
             handleGetTrainingsError(error);
         } finally {
             stopLoader();
         }
     };
+
     return fetchAllTrainings;
 };

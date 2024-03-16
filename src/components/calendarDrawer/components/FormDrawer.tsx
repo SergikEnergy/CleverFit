@@ -82,7 +82,7 @@ export const FormDrawer = forwardRef<HTMLButtonElement, FormDrawerProps>(({ edit
             <Form.List name='exercises'>
                 {(fields, { add, remove }) => (
                     <div className={classes.wrapper}>
-                        {fields.map(({ key, name, ...restField }) => (
+                        {fields.map(({ key, name, ...restField }, index) => (
                             <div key={key} className={classes['form__element']}>
                                 <Form.Item
                                     {...restField}
@@ -91,11 +91,11 @@ export const FormDrawer = forwardRef<HTMLButtonElement, FormDrawerProps>(({ edit
                                     noStyle
                                 >
                                     <Input
-                                        data-test-id={`modal-drawer-right-input-exercise${key}`}
+                                        data-test-id={`modal-drawer-right-input-exercise${index}`}
                                         addonAfter={
                                             editMode ? (
                                                 <Checkbox
-                                                    data-test-id={`modal-drawer-right-checkbox-exercise${key}`}
+                                                    data-test-id={`modal-drawer-right-checkbox-exercise${index}`}
                                                     className={classes.checkbox}
                                                     onChange={(e: CheckboxChangeEvent) => {
                                                         if (e.target.checked) {
@@ -126,7 +126,7 @@ export const FormDrawer = forwardRef<HTMLButtonElement, FormDrawerProps>(({ edit
                                         className={classes.repeat}
                                     >
                                         <InputNumber
-                                            data-test-id={`modal-drawer-right-input-approach${key}`}
+                                            data-test-id={`modal-drawer-right-input-approach${index}`}
                                             type='number'
                                             placeholder='1'
                                             addonBefore={'+'}
@@ -141,7 +141,7 @@ export const FormDrawer = forwardRef<HTMLButtonElement, FormDrawerProps>(({ edit
                                             className={classes.weight}
                                         >
                                             <InputNumber
-                                                data-test-id={`modal-drawer-right-input-weight${key}`}
+                                                data-test-id={`modal-drawer-right-input-weight${index}`}
                                                 type='number'
                                                 placeholder='0'
                                                 min={0}
@@ -155,7 +155,7 @@ export const FormDrawer = forwardRef<HTMLButtonElement, FormDrawerProps>(({ edit
                                             className={classes.quantity}
                                         >
                                             <InputNumber
-                                                data-test-id={`modal-drawer-right-input-quantity${key}`}
+                                                data-test-id={`modal-drawer-right-input-quantity${index}`}
                                                 type='number'
                                                 placeholder='1'
                                                 min={1}

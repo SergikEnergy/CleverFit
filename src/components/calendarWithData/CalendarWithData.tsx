@@ -4,7 +4,7 @@ import { Calendar, Badge } from 'antd';
 import { ruLocale } from './CalendarWithData.data';
 import { CustomCalendarModal } from '@components/customCalendarModal';
 import { DrawerTrainsContext, CollapsedContext } from '../../reactContexts';
-import { getCellData, filterDataByDaySortByDate, getMonthByName } from './CalendarWithData.utils';
+import { getCellData, filterDataByDaySortByDate, isCurrentMonth } from './CalendarWithData.utils';
 import { ICalenDarWithDataProps, IModalPosition } from './CalendarWithData.types';
 import moment, { Moment } from 'moment';
 import 'moment/dist/locale/ru';
@@ -22,7 +22,9 @@ export const CalenDarWithData: FC<ICalenDarWithDataProps> = ({
         resetExercises,
         changeEditedTrainData,
     } = useContext(DrawerTrainsContext);
+
     const { hideCollapsed } = useContext(CollapsedContext);
+
     const [isFullScreen, setIsFullScreen] = useState(true);
     const [selectedCellData, setSelectedCellData] = useState<[] | ITrainingsResponse[]>([]);
     const [isModalVisible, setIsModalVisible] = useState(false);
@@ -114,23 +116,7 @@ export const CalenDarWithData: FC<ICalenDarWithDataProps> = ({
         }
     }, [dataForRender]);
 
-    const isCurrentMonth = (id: string) => {
-        const date = moment(id, 'YYYY-MM-DD');
-        const allowedMonth = date.month();
-        const allowedYear = date.year();
-        const selectedYear = Number(
-            document
-                .querySelector('.ant-picker-calendar-year-select span.ant-select-selection-item')
-                ?.getAttribute('title'),
-        );
-        const selectedMonthShort = document
-            .querySelector('.ant-picker-calendar-month-select span.ant-select-selection-item')
-            ?.getAttribute('title');
-        const selectedMonth = getMonthByName(selectedMonthShort as string);
-        return allowedMonth === selectedMonth && allowedYear === selectedYear;
-    };
-
-    const handleDateClick = (
+    const handleDateClick = async (
         currentData: ITrainingsResponse[] | [],
         event: MouseEvent<HTMLDivElement>,
     ) => {
@@ -155,7 +141,10 @@ export const CalenDarWithData: FC<ICalenDarWithDataProps> = ({
                     width: modalSizes.width,
                     heightSelectedCell: modalSizes.heightSelectedCell,
                 });
-                setIsModalVisible(true);
+                setTimeout(() => {
+                    setIsModalVisible(true);
+                }, 0);
+                //предотвращает мерцание кнопки создать дизаблейд - если кликаем по предыдущему компоненту - то получаем изначально модалка появляется с незадизейбленной - потом правильно рисуется- но тест не прошел - если можно подскажите плиз, как быть здесь получше
             }
         } else {
             setIsModalVisible(false);
