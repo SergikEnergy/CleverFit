@@ -3,10 +3,12 @@ import { createRoot } from 'react-dom/client';
 import { Provider } from 'react-redux';
 
 import { store } from '@redux/configure-store';
-import { CollapsedContextProvider } from './reactContexts/collapseContextProvider';
-import { LoaderContextProvider } from './reactContexts/loaderStateContextProvider';
-import { ModalReportContextProvider } from './reactContexts/modalReportContextProvider';
-import { DrawerTrainsContextProvider } from './reactContexts/DrawerTrainsContextProvider';
+import {
+    CollapsedContextProvider,
+    DrawerTrainsContextProvider,
+    LoaderContextProvider,
+    ModalReportContextProvider,
+} from './reactContexts';
 import { App } from './App';
 
 import 'normalize.css';

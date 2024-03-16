@@ -3,7 +3,7 @@ import { ITrainingsResponse } from '@redux/API/api-types';
 import { Calendar, Badge } from 'antd';
 import { ruLocale } from './CalendarWithData.data';
 import { CustomCalendarModal } from '@components/customCalendarModal';
-import { DrawerTrainsContext } from '../../reactContexts/drawerTrains-context';
+import { DrawerTrainsContext, CollapsedContext } from '../../reactContexts';
 import { getCellData, filterDataByDaySortByDate, getMonthByName } from './CalendarWithData.utils';
 import { ICalenDarWithDataProps, IModalPosition } from './CalendarWithData.types';
 import moment, { Moment } from 'moment';
@@ -22,6 +22,7 @@ export const CalenDarWithData: FC<ICalenDarWithDataProps> = ({
         resetExercises,
         changeEditedTrainData,
     } = useContext(DrawerTrainsContext);
+    const { hideCollapsed } = useContext(CollapsedContext);
     const [isFullScreen, setIsFullScreen] = useState(true);
     const [selectedCellData, setSelectedCellData] = useState<[] | ITrainingsResponse[]>([]);
     const [isModalVisible, setIsModalVisible] = useState(false);
@@ -111,8 +112,6 @@ export const CalenDarWithData: FC<ICalenDarWithDataProps> = ({
             const updatedData = filterDataByDaySortByDate(dateFromContext, dataForRender);
             setSelectedCellData(updatedData);
         }
-
-        console.log('mount');
     }, [dataForRender]);
 
     const isCurrentMonth = (id: string) => {
@@ -140,6 +139,9 @@ export const CalenDarWithData: FC<ICalenDarWithDataProps> = ({
         setModalType('train');
         const id = event.currentTarget.id;
         if (isFullScreen || (!isFullScreen && isCurrentMonth(id))) {
+            if (!isFullScreen) {
+                hideCollapsed();
+            }
             event.stopPropagation();
             setIsModalVisible(false);
 
@@ -207,7 +209,6 @@ export const CalenDarWithData: FC<ICalenDarWithDataProps> = ({
             </div>
         );
     };
-    console.log('calendarWithData changed');
 
     if (dataForRender.length === 0 && allowedTrainsList.length === 0) {
         return (
@@ -243,18 +244,18 @@ export const CalenDarWithData: FC<ICalenDarWithDataProps> = ({
                     dateCellRender={dateCellRender}
                     defaultValue={moment()}
                     onChange={(date) => {
-                        console.log('date', date);
+                        //console.log('date', date);
                     }}
-                    onPanelChange={(data, mode) => {
-                        if (mode && isFullScreen) {
-                            setAllowOpen(true);
-                        }
-                        if (mode && !isFullScreen) {
-                            // setAllowOpen(false);
-                        }
-                        console.log('date panel', data);
-                        console.log('mode panel', mode);
-                    }}
+                    // onPanelChange={(data, mode) => {
+                    //     if (mode && isFullScreen) {
+                    //         setAllowOpen(true);
+                    //     }
+                    //     if (mode && !isFullScreen) {
+                    //         // setAllowOpen(false);
+                    //     }
+                    //     console.log('date panel', data);
+                    //     console.log('mode panel', mode);
+                    // }}
                 />
             </>
         );

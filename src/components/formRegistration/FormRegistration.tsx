@@ -2,7 +2,7 @@ import { FC, useState, useContext, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import { useRegisterUserMutation } from '@redux/API/authAPI';
 import { history } from '@redux/configure-store';
-import { LoaderStateContext } from '../../reactContexts/loader-context';
+import { LoaderStateContext } from '../../reactContexts';
 import { Paths } from '../../routes/pathes';
 import { isFetchBaseQueryError } from '@redux/API/errorsCatching';
 import { useAppDispatch } from '@hooks/typed-react-redux-hooks';

@@ -1,5 +1,5 @@
 import { ReactNode, useContext, forwardRef, useState } from 'react';
-import { DrawerTrainsContext } from '../../../reactContexts/drawerTrains-context';
+import { DrawerTrainsContext } from '../../../reactContexts';
 import { Form, Button, Input, InputNumber, Checkbox } from 'antd';
 import type { CheckboxChangeEvent } from 'antd/es/checkbox';
 import { PlusOutlined, MinusOutlined } from '@ant-design/icons';
@@ -49,7 +49,6 @@ export const FormDrawer = forwardRef<HTMLButtonElement, FormDrawerProps>(({ edit
               ];
 
     const finishFunc = (values: FormFieldsType) => {
-        console.log(values);
         if (values.exercises.length > 0) {
             const filteredResult = values.exercises.filter(
                 (elem) => elem.exercise && elem.exercise.length > 0,

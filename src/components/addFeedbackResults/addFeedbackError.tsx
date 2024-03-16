@@ -1,6 +1,6 @@
 import { FC, useContext } from 'react';
 import { Button, Result } from 'antd';
-import { ModalReportContext } from '../../reactContexts/modalReport-context';
+import { ModalReportContext } from '../../reactContexts';
 import { NewFeedback } from '@components/newFeedback';
 
 import classes from './addFeedbackError.module.css';

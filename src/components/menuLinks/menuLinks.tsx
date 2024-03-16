@@ -3,27 +3,25 @@ import { useLocation } from 'react-router-dom';
 import { history } from '@redux/configure-store';
 import { Paths } from '../../routes/pathes';
 
-import { CollapsedContext } from '../../reactContexts/collapse-context';
+import { CollapsedContext } from '../../reactContexts';
 import { Menu, Typography } from 'antd';
 import { CalendarTwoTone, HeartFilled, TrophyFilled } from '@ant-design/icons';
 import { ProfileIconComponent } from '@components/customIcon/profileIcon';
 import { menuItemsKeys } from './menuLinks.data';
 import { getSelectedKey } from './menuLink.utils';
-import { useGetAllUserTrains } from '@hooks/useGetAllUserTrains';
+import { useGetAllUserTrainings } from '@hooks/useGetAllUserTrainings';
 
 import { primaryLight } from '../../utils/constants/colors';
 import classes from './menuLinks.module.css';
 import classnames from 'classnames';
 
 export const MenuLinks: FC = () => {
-    const fetchAllUserTrains = useGetAllUserTrains();
+    const fetchAllUserTrains = useGetAllUserTrainings();
     const { collapsed } = useContext(CollapsedContext);
     const location = useLocation();
 
     const handleMoveToCalendarPage = () => {
-        fetchAllUserTrains().then(() => {
-            history.push(Paths.CALENDAR_PAGE, { allowRequest: true });
-        });
+        fetchAllUserTrains();
     };
 
     return (

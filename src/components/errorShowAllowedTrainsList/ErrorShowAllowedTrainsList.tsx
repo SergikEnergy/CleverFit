@@ -29,14 +29,19 @@ export const ErrorShowAllowedTrainsList: FC<IErrorShowAllowedTrainsListProps> = 
     buttonActionClick,
 }) => {
     const title = 'При открытии данных произошла ошибка';
-    const subtitle = 'Попробуйте еще раз.';
+    const subtitle = 'Попробуйте ещё раз.';
     const buttonText = 'Обновить';
+
     const handleCloseButtonClick = () => {
+        console.log('clicked close');
         if (closeClickAction) closeClickAction();
     };
+
     const handleActionButtonClick = () => {
         if (buttonActionClick) buttonActionClick();
+        console.log('clicked action refetch');
     };
+
     return (
         <div className={classes.wrapper}>
             <div className={classes.main}>
@@ -58,6 +63,7 @@ export const ErrorShowAllowedTrainsList: FC<IErrorShowAllowedTrainsListProps> = 
                         onClick={handleCloseButtonClick}
                         icon={<CloseOutlined style={{ fontSize: '14px' }} />}
                         shape='circle'
+                        block
                         style={{ border: 'none' }}
                     />
                 </div>

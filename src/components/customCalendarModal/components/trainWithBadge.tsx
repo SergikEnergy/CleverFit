@@ -1,6 +1,6 @@
 import { FC, useContext } from 'react';
 import { ITrainingsResponse } from '@redux/API/api-types';
-import { DrawerTrainsContext } from '../../../reactContexts/drawerTrains-context';
+import { DrawerTrainsContext } from '../../../reactContexts';
 import { Badge } from 'antd';
 import { EditOutlined } from '@ant-design/icons';
 import { getColorTrainByName } from '@components/calendarWithData/CalendarWithData.utils';

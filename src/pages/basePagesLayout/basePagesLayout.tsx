@@ -1,5 +1,5 @@
 import { FC, useState, useEffect, useContext, ReactNode } from 'react';
-import { CollapsedContext } from '../../reactContexts/collapse-context';
+import { CollapsedContext } from '../../reactContexts';
 import { ModalPopUp } from '@components/modalPopup';
 
 import { SideBar } from '@components/sidebar';

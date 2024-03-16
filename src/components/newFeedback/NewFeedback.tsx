@@ -1,6 +1,5 @@
 import { FC, useContext, useState, useEffect } from 'react';
-import { ModalReportContext } from '../../reactContexts/modalReport-context';
-import { LoaderStateContext } from '../../reactContexts/loader-context';
+import { ModalReportContext, LoaderStateContext } from '../../reactContexts';
 import { useAppSelector, useAppDispatch } from '@hooks/typed-react-redux-hooks';
 import { setFeedback, resetFeedback } from '@redux/reducers/feedbackSlice';
 import { useAddNewFeedbackMutation } from '@redux/API/feedbacksAPI';

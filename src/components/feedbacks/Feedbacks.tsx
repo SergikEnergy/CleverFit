@@ -1,7 +1,7 @@
 import { FC, useState, useContext } from 'react';
 import { IFeedbackResponse } from '@redux/API/api-types';
 import { FeedbacksList } from '@components/feedbacksList';
-import { ModalReportContext } from '../../reactContexts/modalReport-context';
+import { ModalReportContext } from '../../reactContexts';
 import { NewFeedback } from '@components/newFeedback';
 
 import { Button } from 'antd';

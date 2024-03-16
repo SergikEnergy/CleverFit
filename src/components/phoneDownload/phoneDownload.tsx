@@ -1,6 +1,6 @@
 import { FC, useContext } from 'react';
 
-import { CollapsedContext } from '../../reactContexts/collapse-context';
+import { CollapsedContext } from '../../reactContexts';
 import { Button, Divider } from 'antd';
 import { AppleFilled, AndroidFilled } from '@ant-design/icons';
 

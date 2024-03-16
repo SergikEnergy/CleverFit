@@ -8,7 +8,7 @@ import {
 import { IModalPosition } from '@components/calendarWithData/CalendarWithData.types';
 import { ITrainingsResponse } from '@redux/API/api-types';
 import { ModalCreateTrain, ModalSelectExercise } from './components';
-import { DrawerTrainsContext } from '../../reactContexts/drawerTrains-context';
+import { DrawerTrainsContext } from '../../reactContexts';
 import moment from 'moment';
 
 import classes from './CustomCalendarModal.module.css';

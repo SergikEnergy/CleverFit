@@ -4,9 +4,7 @@ import { useAppDispatch, useAppSelector } from '@hooks/typed-react-redux-hooks';
 import { CalendarDrawer } from '@components/calendarDrawer';
 import { LOCAL_STORAGE_AUTH_PARAM } from '@redux/API/api-data';
 import { useLazyGetAllowedTrainsListQuery } from '@redux/API/calendarAPI';
-import { ModalReportContext } from '../../reactContexts/modalReport-context';
-import { LoaderStateContext } from '../../reactContexts/loader-context';
-import { DrawerTrainsContext } from '../../reactContexts/drawerTrains-context';
+import { ModalReportContext, LoaderStateContext, DrawerTrainsContext } from '../../reactContexts';
 import { Paths } from '../../routes/pathes';
 import { BasePagesLayout } from '@pages/basePagesLayout';
 import { isFetchBaseQueryError } from '@redux/API/errorsCatching';
@@ -24,33 +22,25 @@ export const CalendarPage: FC = () => {
     const isGettingTrainSuccessful = useAppSelector(
         (state) => state.calendar.isGetTrainsSuccessful,
     );
-    const userTrainsData = useAppSelector((state) => state.calendar.userTrains);
-    console.log(userTrainsData);
+    const userTrainingsData = useAppSelector((state) => state.calendar.userTrains);
     const { setNode, openModal, closeModal, setWidthModal } = useContext(ModalReportContext);
     const { updateAllowedTrains } = useContext(DrawerTrainsContext);
     const { startLoader, stopLoader } = useContext(LoaderStateContext);
 
     const [
-        getAllowedTrainsList,
-        {
-            data: allowedTrainsList,
-            error: getAllowedTrainsError,
-            isError: isGettingAllowedTrainsError,
-            isLoading: isFetchingAllowedTrains,
-        },
+        getAllowedTrainingsList,
+        { data: allowedTrainsList, isLoading: isFetchingAllowedTrains },
     ] = useLazyGetAllowedTrainsListQuery();
 
-    const handlerToErrorCloseAction = () => {
+    const handlerErrorCloseAction = () => {
         setNode(null);
         closeModal();
     };
 
-    const refetchAllowedTrainsList = () => {
+    const refetchAllowedTrainingsList = () => {
         setNode(null);
         closeModal();
-        fetchAllowedTrainsList().finally(() => {
-            stopLoader();
-        });
+        fetchAllowedTrainingsList();
     };
 
     const resetUser = () => {
@@ -59,32 +49,46 @@ export const CalendarPage: FC = () => {
         navigate(Paths.AUTH, { replace: true });
     };
 
-    const fetchAllowedTrainsList = async () => {
+    const handleErrorAllowedTrainings = (error: unknown) => {
+        if (isFetchBaseQueryError(error)) {
+            if (error.status === 403) {
+                resetUser();
+            } else {
+                setNode(
+                    <ErrorShowAllowedTrainsList
+                        status='info'
+                        buttonActionClick={refetchAllowedTrainingsList}
+                        closeClickAction={handlerErrorCloseAction}
+                    />,
+                );
+                setWidthModal('clamp(328px, 100%, 384px)');
+                openModal();
+            }
+        }
+    };
+
+    const fetchAllowedTrainingsList = async () => {
         try {
-            const trainsAllowed = await getAllowedTrainsList();
-            if (Array.isArray(trainsAllowed.data)) {
-                updateAllowedTrains(trainsAllowed.data);
+            const trainingsAllowed = await getAllowedTrainingsList();
+            if (Array.isArray(trainingsAllowed.data)) {
+                updateAllowedTrains(trainingsAllowed.data);
+            } else if (isFetchBaseQueryError(trainingsAllowed)) {
+                handleErrorAllowedTrainings(trainingsAllowed);
             }
         } catch (error) {
-            if (isFetchBaseQueryError(error)) {
-                if (error.status === 403) {
-                    resetUser();
-                } else {
-                    setNode(
-                        <ErrorShowAllowedTrainsList
-                            status='info'
-                            buttonActionClick={refetchAllowedTrainsList}
-                            closeClickAction={handlerToErrorCloseAction}
-                        />,
-                    );
-                    setWidthModal('clamp(328px, 100%, 384px)');
-                    openModal();
-                }
-            }
+            handleErrorAllowedTrainings(error);
         } finally {
             stopLoader();
         }
     };
+
+    useEffect(() => {
+        if (location.state.allowRequest) {
+            if (isGettingTrainSuccessful) {
+                fetchAllowedTrainingsList();
+            }
+        }
+    }, [userTrainingsData, isGettingTrainSuccessful]);
 
     useEffect(() => {
         if (isFetchingAllowedTrains) {
@@ -92,28 +96,23 @@ export const CalendarPage: FC = () => {
         } else {
             stopLoader();
         }
-    }, [isFetchingAllowedTrains, startLoader, stopLoader]);
+    }, [isFetchingAllowedTrains]);
 
     useEffect(() => {
         if (!token) {
             navigate(Paths.AUTH, { replace: true });
         }
     }, [token, navigate]);
-
-    useEffect(() => {
-        if (location.state && location.state.allowRequest) {
-            if (isGettingTrainSuccessful) {
-                fetchAllowedTrainsList();
-            }
-        }
-    }, [isGettingAllowedTrainsError, getAllowedTrainsError, isGettingTrainSuccessful]);
+    console.log('allowedList', allowedTrainsList);
 
     return (
         <>
             <BasePagesLayout isCalendarPage>
                 <div className={classes.wrapper} id={'modalWrapperCalendar'}>
                     <CalenDarWithData
-                        dataForRender={userTrainsData && allowedTrainsList ? userTrainsData : []}
+                        dataForRender={
+                            userTrainingsData && allowedTrainsList ? userTrainingsData : []
+                        }
                         allowedTrainsList={allowedTrainsList ? allowedTrainsList : []}
                     />
                 </div>

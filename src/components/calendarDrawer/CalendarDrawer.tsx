@@ -1,6 +1,6 @@
 import { FC, useContext, useEffect, useState, useRef } from 'react';
 import { Drawer, Badge } from 'antd';
-import { DrawerTrainsContext } from '../../reactContexts/drawerTrains-context';
+import { DrawerTrainsContext } from '../../reactContexts';
 import { DrawerHeader } from './components/DrawerHeader';
 import { FormDrawer } from './components/FormDrawer';
 import { getColorTrainByName } from '@components/calendarWithData/CalendarWithData.utils';

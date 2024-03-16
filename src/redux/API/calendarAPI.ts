@@ -66,6 +66,8 @@ export const calendarAPI = createApi({
 
 export const {
     useLazyGetAllTrainingsQuery,
+    useGetAllTrainingsQuery,
+    useGetAllowedTrainsListQuery,
     useLazyGetAllowedTrainsListQuery,
     useAddNewTrainMutation,
     useChangeTrainMutation,

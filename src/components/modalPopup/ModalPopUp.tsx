@@ -1,5 +1,5 @@
 import { FC, useContext } from 'react';
-import { ModalReportContext } from '../../reactContexts/modalReport-context';
+import { ModalReportContext } from '../../reactContexts';
 
 import { Modal } from 'antd';
 import classes from './ModalPopUp.module.css';

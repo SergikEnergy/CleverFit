@@ -3,8 +3,8 @@ import { IAllowedTrainResponse, ITrainingsResponse } from '@redux/API/api-types'
 import { Divider, Button, Select, Empty } from 'antd';
 import { ArrowLeftOutlined } from '@ant-design/icons';
 import { ErrorAddTrain } from '@components/errorAddTrain';
-import { DrawerTrainsContext } from '../../../reactContexts/drawerTrains-context';
-import { ModalReportContext } from '../../../reactContexts/modalReport-context';
+import { DrawerTrainsContext, ModalReportContext } from '../../../reactContexts';
+import { useGetAllTrainingsQuery, useGetAllowedTrainsListQuery } from '@redux/API/calendarAPI';
 import { ExerciseItem } from '.';
 import { Moment } from 'moment';
 import EmptyImg from '/images/EmptyImg.svg';
@@ -33,6 +33,8 @@ export const ModalSelectExercise: FC<IModalSelectExercise> = ({
     trainForEdit,
     closeModal: closeTrainModal,
 }) => {
+    const { refetch: refetchAllTrainings } = useGetAllTrainingsQuery();
+    const { refetch: refetchAllTrainingsList } = useGetAllowedTrainsListQuery();
     const {
         exercises,
         editedTrainID,
@@ -67,14 +69,15 @@ export const ModalSelectExercise: FC<IModalSelectExercise> = ({
             exercises: exercisesRequest,
             isImplementation: false,
         };
-        console.log(isPastDate, 'past');
 
         try {
             await postNewTrain(bodyRequest).unwrap();
+            await refetchAllTrainings();
+            await refetchAllTrainingsList();
+            console.log('after refetching');
             resetExercises();
         } catch (error) {
             if (error) {
-                console.log(error);
                 resetExercises();
                 closeTrainModal();
                 setWidthModal('clamp(328px, 100%, 416px)');
@@ -98,13 +101,13 @@ export const ModalSelectExercise: FC<IModalSelectExercise> = ({
         const idRequest = editedTrainID;
 
         try {
-            console.log({ body: bodyRequest, id: idRequest });
             await updateTrainById({ body: bodyRequest, id: idRequest }).unwrap();
+            await refetchAllTrainings();
+            await refetchAllTrainingsList();
             resetExercises();
             changeEditedTrainData('', '');
         } catch (error) {
             if (error) {
-                console.log(error);
                 resetExercises();
                 closeTrainModal();
                 setWidthModal('clamp(328px, 100%, 416px)');
@@ -127,7 +130,6 @@ export const ModalSelectExercise: FC<IModalSelectExercise> = ({
                 }
             }
         }
-        console.log('useffect edit train worked');
     }, [trainForEdit, trains, date]);
 
     const onSelectChange = (value: string) => {
@@ -178,7 +180,6 @@ export const ModalSelectExercise: FC<IModalSelectExercise> = ({
     };
 
     const handleUpdateTrainClick = () => {
-        console.log(trainForEdit, 'edit mode');
         updateSelectedTrain();
     };
 

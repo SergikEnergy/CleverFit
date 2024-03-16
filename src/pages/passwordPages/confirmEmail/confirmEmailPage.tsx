@@ -1,6 +1,6 @@
 import { FC, useState, useContext } from 'react';
 import { useAppSelector } from '@hooks/typed-react-redux-hooks';
-import { LoaderStateContext } from '../../../reactContexts/loader-context';
+import { LoaderStateContext } from '../../../reactContexts';
 import { useConfirmEmailMutation } from '@redux/API/authAPI';
 import { isFetchBaseQueryError } from '@redux/API/errorsCatching';
 import { Paths } from '../../../routes/pathes';

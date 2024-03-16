@@ -1,6 +1,6 @@
 import { FC, useContext, useEffect } from 'react';
 import { Navigate, useNavigate } from 'react-router-dom';
-import { CollapsedContext } from '../../reactContexts/collapse-context';
+import { CollapsedContext } from '../../reactContexts';
 import { useAppSelector } from '@hooks/typed-react-redux-hooks';
 import { Paths } from '../../routes/pathes';
 

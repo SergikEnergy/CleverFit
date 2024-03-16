@@ -1,7 +1,7 @@
 import { FC, useContext, useState, useEffect } from 'react';
 import { useLocation, Link } from 'react-router-dom';
 
-import { CollapsedContext } from '../../reactContexts/collapse-context';
+import { CollapsedContext } from '../../reactContexts';
 import { Button, Breadcrumb } from 'antd';
 import { SettingOutlined } from '@ant-design/icons';
 import { breadcrumbsInitialItems } from './header.data';
