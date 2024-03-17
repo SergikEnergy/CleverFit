@@ -28,7 +28,6 @@ export const ModalCreateTrain: FC<IModalCreateTrainProps> = ({
         !isPastDate || trains.length === 0 ? 'Создать тренировку' : 'Создать тренировку';
 
     useEffect(() => {
-        console.log('worked layout mount');
         const isDisabled = value.isSameOrBefore(moment()) || trains.length >= 5;
         setDisabledCreateButton(isDisabled);
     }, [value, trains.length]);
@@ -58,7 +57,7 @@ export const ModalCreateTrain: FC<IModalCreateTrainProps> = ({
                         <TrainWithBadge
                             changeFlowToEdit={changeMode}
                             train={train}
-                            key={train._id}
+                            key={`${train.name}+${index}`}
                             index={index}
                         />
                     ))}

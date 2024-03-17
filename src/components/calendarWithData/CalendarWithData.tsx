@@ -119,7 +119,6 @@ export const CalenDarWithData: FC<ICalenDarWithDataProps> = ({
         currentData: ITrainingsResponse[] | [],
         event: MouseEvent<HTMLDivElement>,
     ) => {
-        console.log(collapsed, 'collapsed');
         if (!isFullScreen) {
             hideCollapsed();
         }
