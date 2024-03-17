@@ -9,7 +9,7 @@ export const CollapsedContextProvider: FC<{ children: ReactNode }> = ({ children
     };
 
     const hideCollapsed = () => {
-        setIsCollapsed(false);
+        setIsCollapsed(true);
     };
 
     return (

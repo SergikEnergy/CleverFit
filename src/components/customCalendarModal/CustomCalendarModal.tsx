@@ -22,14 +22,12 @@ interface ICustomCalendarModalProps {
     value: Moment;
     trains: [] | ITrainingsResponse[];
     isCentered?: boolean;
-    allowOpen: boolean;
     isModalVisible: boolean;
     closeModal: () => void;
     changeModalType: () => void;
 }
 
 export const CustomCalendarModal: FC<ICustomCalendarModalProps> = ({
-    allowOpen,
     modalPosition,
     value,
     widthModal,
@@ -98,7 +96,7 @@ export const CustomCalendarModal: FC<ICustomCalendarModalProps> = ({
 
     return (
         <>
-            {allowOpen && modalType === 'train' && (
+            {modalType === 'train' && (
                 <div
                     data-test-id='modal-create-training'
                     style={
@@ -114,7 +112,7 @@ export const CustomCalendarModal: FC<ICustomCalendarModalProps> = ({
                     />
                 </div>
             )}
-            {allowOpen && modalType === 'exercise' && (
+            {modalType === 'exercise' && (
                 <div
                     data-test-id='modal-create-exercise'
                     style={

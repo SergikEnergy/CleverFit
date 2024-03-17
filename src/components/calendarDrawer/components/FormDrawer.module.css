@@ -134,3 +134,12 @@ button.delete,
 button.delete:disabled {
     background-color: var(--neutral-gray-4);
 }
+
+@media screen and (max-width: 1000px) {
+    .correct {
+        width: 62%;
+    }
+    .weight:global(.ant-form-item) {
+        width: 80%;
+    }
+}

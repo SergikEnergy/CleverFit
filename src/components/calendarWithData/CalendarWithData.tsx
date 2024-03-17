@@ -23,14 +23,13 @@ export const CalenDarWithData: FC<ICalenDarWithDataProps> = ({
         changeEditedTrainData,
     } = useContext(DrawerTrainsContext);
 
-    const { hideCollapsed } = useContext(CollapsedContext);
+    const { hideCollapsed, collapsed } = useContext(CollapsedContext);
 
     const [isFullScreen, setIsFullScreen] = useState(true);
     const [selectedCellData, setSelectedCellData] = useState<[] | ITrainingsResponse[]>([]);
     const [isModalVisible, setIsModalVisible] = useState(false);
     const [modalType, setModalType] = useState<'train' | 'exercise'>('train');
     const [selectedDay, setSelectedDay] = useState<Moment>(moment());
-    const [allowOpen, setAllowOpen] = useState(true);
     const [modalPosition, setModalPosition] = useState<IModalPosition>({
         top: 0,
         left: 0,
@@ -120,14 +119,15 @@ export const CalenDarWithData: FC<ICalenDarWithDataProps> = ({
         currentData: ITrainingsResponse[] | [],
         event: MouseEvent<HTMLDivElement>,
     ) => {
+        console.log(collapsed, 'collapsed');
+        if (!isFullScreen) {
+            hideCollapsed();
+        }
         resetExercises();
         changeEditedTrainData('', '');
         setModalType('train');
         const id = event.currentTarget.id;
         if (isFullScreen || (!isFullScreen && isCurrentMonth(id))) {
-            if (!isFullScreen) {
-                hideCollapsed();
-            }
             event.stopPropagation();
             setIsModalVisible(false);
 
@@ -144,7 +144,7 @@ export const CalenDarWithData: FC<ICalenDarWithDataProps> = ({
                 setTimeout(() => {
                     setIsModalVisible(true);
                 }, 0);
-                //предотвращает мерцание кнопки создать дизаблейд - если кликаем по предыдущему компоненту - то получаем изначально модалка появляется с незадизейбленной - потом правильно рисуется- но тест не прошел - если можно подскажите плиз, как быть здесь получше
+                //предотвращает мерцание кнопки создать дизаблейд - если кликаем по предыдущему компоненту - то получаем изначально модалка появляется с незадизейбленной - потом правильно рисуется- но тест не прошел - если можно подскажите плиз, как быть здесь получше - все перерыл - но лучшего костыля не нашел - это позволяет выполнить функцию после очереди отрисовок реакт...
             }
         } else {
             setIsModalVisible(false);
@@ -220,7 +220,6 @@ export const CalenDarWithData: FC<ICalenDarWithDataProps> = ({
                     trains={selectedCellData}
                     modalPosition={modalPosition}
                     widthModal={isFullScreen ? '264px' : ''}
-                    allowOpen={allowOpen}
                     closeModal={() => {
                         setIsModalVisible(false);
                     }}
@@ -232,19 +231,6 @@ export const CalenDarWithData: FC<ICalenDarWithDataProps> = ({
                     locale={ruLocale}
                     dateCellRender={dateCellRender}
                     defaultValue={moment()}
-                    onChange={(date) => {
-                        //console.log('date', date);
-                    }}
-                    // onPanelChange={(data, mode) => {
-                    //     if (mode && isFullScreen) {
-                    //         setAllowOpen(true);
-                    //     }
-                    //     if (mode && !isFullScreen) {
-                    //         // setAllowOpen(false);
-                    //     }
-                    //     console.log('date panel', data);
-                    //     console.log('mode panel', mode);
-                    // }}
                 />
             </>
         );

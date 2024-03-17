@@ -8,9 +8,10 @@ import classes from './ExerciseItem.module.css';
 interface ExerciseItemProps {
     exercise: IExercise;
     index: number;
+    disabledIcon: boolean;
 }
 
-export const ExerciseItem: FC<ExerciseItemProps> = ({ exercise, index }) => {
+export const ExerciseItem: FC<ExerciseItemProps> = ({ exercise, index, disabledIcon }) => {
     const { openDrawer, editedTrainName, setDrawerTitle, setTrainName } =
         useContext(DrawerTrainsContext);
 
@@ -26,9 +27,10 @@ export const ExerciseItem: FC<ExerciseItemProps> = ({ exercise, index }) => {
         <li className={classes.exercise}>
             <span className={classes.name}>{exercise.name}</span>
             <EditOutlined
+                disabled={disabledIcon}
                 data-test-id={`modal-update-training-edit-button${index}`}
                 onClick={handleEditTrainClick}
-                style={{ color: 'blue' }}
+                style={disabledIcon ? { color: 'gray' } : { color: 'blue' }}
                 className={classes.highlighter}
             />
         </li>

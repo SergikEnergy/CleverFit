@@ -1,3 +1,8 @@
+.drawer :global(.ant-drawer-content) {
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+}
+
 .subtitle {
     display: flex;
     align-items: center;
@@ -20,4 +25,18 @@
 .date {
     text-align: right;
     color: var(--character-light-secondary-45);
+}
+
+@media screen and (max-width: 480px) {
+    .drawer:global(.ant-drawer) {
+        top: 85px;
+    }
+    .drawer :global(.ant-drawer-mask) {
+        background: transparent;
+    }
+    .drawer :global(.ant-drawer-content) {
+        border-top-left-radius: 15px;
+        border-top-right-radius: 15px;
+        border-bottom-left-radius: 0%;
+    }
 }

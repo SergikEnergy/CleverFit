@@ -1,6 +1,5 @@
 import { FC, useContext } from 'react';
 import { useLocation } from 'react-router-dom';
-import { history } from '@redux/configure-store';
 import { Paths } from '../../routes/pathes';
 
 import { CollapsedContext } from '../../reactContexts';

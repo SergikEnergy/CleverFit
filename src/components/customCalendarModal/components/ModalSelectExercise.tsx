@@ -3,6 +3,7 @@ import { IAllowedTrainResponse, ITrainingsResponse } from '@redux/API/api-types'
 import { Divider, Button, Select, Empty } from 'antd';
 import { ArrowLeftOutlined } from '@ant-design/icons';
 import { ErrorAddTrain } from '@components/errorAddTrain';
+// import { AlertCancelEditTrain } from './AlertCancelEditTrain';
 import { DrawerTrainsContext, ModalReportContext } from '../../../reactContexts';
 import { ExerciseItem } from '.';
 import { Moment } from 'moment';
@@ -12,6 +13,9 @@ import { NewTrainRequestType } from '@redux/API/api-types';
 import moment from 'moment';
 
 import classes from './ModalSelectExercise.module.css';
+
+// const TIMER_DELAY = 5000;
+// export type TimeoutType = ReturnType<typeof setTimeout>;
 
 interface IModalSelectExercise {
     changeMode: () => void;
@@ -45,7 +49,13 @@ export const ModalSelectExercise: FC<IModalSelectExercise> = ({
         resetExercises,
     } = useContext(DrawerTrainsContext);
 
+    // const timerRef = useRef<TimeoutType | null>(null);
+
+    // const [isAlertShowed, setIsAlertShowed] = useState(false);
+
     const isPastDate = date.isSameOrBefore(moment());
+
+    const [isEditDisabled, setIsEditDisabled] = useState(false);
 
     const [postNewTrain, { isLoading: isPostingTrain }] = useAddNewTrainMutation();
 
@@ -81,21 +91,9 @@ export const ModalSelectExercise: FC<IModalSelectExercise> = ({
         }
     };
 
-    const updateSelectedTrain = async () => {
-        const filterExercisesByName = exercises.filter((elem) => elem.name === trainSelect);
-        const exercisesRequest = filterExercisesByName[0].exercises;
-        const dateRequest = date.add(3, 'hours').toISOString();
-        const nameRequest = trainSelect;
-        const bodyRequest: NewTrainRequestType = {
-            date: dateRequest,
-            name: nameRequest,
-            exercises: exercisesRequest,
-            isImplementation: isPastDate,
-        };
-        const idRequest = editedTrainID;
-
+    const updateTrainRequestHandler = async (body: NewTrainRequestType, id: string) => {
         try {
-            await updateTrainById({ body: bodyRequest, id: idRequest }).unwrap();
+            await updateTrainById({ body, id }).unwrap();
             resetExercises();
             changeEditedTrainData('', '');
         } catch (error) {
@@ -109,6 +107,35 @@ export const ModalSelectExercise: FC<IModalSelectExercise> = ({
         }
     };
 
+    // const updateTrainWithDelayHandler = (body: NewTrainRequestType, id: string) => {
+    //     setIsAlertShowed(false);
+    //     updateTrainRequestHandler(body, id);
+    // };
+
+    const updateSelectedTrain = async () => {
+        const filterExercisesByName = exercises.filter((elem) => elem.name === trainSelect);
+        const exercisesRequest = filterExercisesByName[0].exercises;
+        const dateRequest = date.add(3, 'hours').toISOString();
+        const nameRequest = trainSelect;
+        const bodyRequest: NewTrainRequestType = {
+            date: dateRequest,
+            name: nameRequest,
+            exercises: exercisesRequest,
+            isImplementation: isPastDate,
+        };
+        const idRequest = editedTrainID;
+        await updateTrainRequestHandler(bodyRequest, idRequest);
+
+        // if (!isPastDate) {
+        //     await updateTrainRequestHandler(bodyRequest, idRequest);
+        // } else {
+        //     setIsAlertShowed(true);
+        //     timerRef.current = setTimeout(() => {
+        //         updateTrainWithDelayHandler(bodyRequest, idRequest);
+        //     }, TIMER_DELAY);
+        // }
+    };
+
     useLayoutEffect(() => {
         if (date) {
             updateDate(date);
@@ -119,6 +146,7 @@ export const ModalSelectExercise: FC<IModalSelectExercise> = ({
 
                 if (Array.isArray(trainsOnThisDate) && trainsOnThisDate.length > 0) {
                     setExercises(trainsOnThisDate[0].exercises, trainForEdit);
+                    setIsEditDisabled(trainsOnThisDate[0].isImplementation);
                 }
             }
         }
@@ -205,7 +233,12 @@ export const ModalSelectExercise: FC<IModalSelectExercise> = ({
             {trainSelect && exercisesFilteredBySelect.length > 0 ? (
                 <ul className={classes['exercises__list']}>
                     {exercisesFilteredBySelect[0].exercises.map((exercise, index) => (
-                        <ExerciseItem index={index} exercise={exercise} key={exercise.name} />
+                        <ExerciseItem
+                            disabledIcon={isEditDisabled}
+                            index={index}
+                            exercise={exercise}
+                            key={exercise.name}
+                        />
                     ))}
                 </ul>
             ) : (
@@ -238,9 +271,17 @@ export const ModalSelectExercise: FC<IModalSelectExercise> = ({
                     onClick={trainForEdit ? handleUpdateTrainClick : handleSaveExercisesClick}
                     loading={isPostingTrain || isUpdateTrainLoading}
                 >
-                    Сохранить
+                    {isPastDate ? 'Сохранить изменения' : 'Сохранить'}
                 </Button>
             </div>
+            {/* {isAlertShowed && (
+                <AlertCancelEditTrain
+                    closeAlert={() => {
+                        setIsAlertShowed(false);
+                    }}
+                    currentTimerID={timerRef.current as TimeoutType}
+                />
+            )} */}
         </>
     );
 };
