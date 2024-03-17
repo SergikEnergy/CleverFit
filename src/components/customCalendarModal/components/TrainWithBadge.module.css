@@ -32,6 +32,10 @@
     justify-content: flex-end;
 }
 
+button.highlighter > span.edit__icon {
+    justify-content: flex-end;
+}
+
 .highlighter.implemented:hover,
 .highlighter.implemented:target,
 .highlighter.implemented:focus {

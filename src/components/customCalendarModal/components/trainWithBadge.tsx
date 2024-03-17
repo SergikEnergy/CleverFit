@@ -1,7 +1,7 @@
 import { FC, useContext } from 'react';
 import { ITrainingsResponse } from '@redux/API/api-types';
 import { DrawerTrainsContext } from '../../../reactContexts';
-import { Badge } from 'antd';
+import { Badge, Button } from 'antd';
 import { EditOutlined } from '@ant-design/icons';
 import { getColorTrainByName } from '@components/calendarWithData/CalendarWithData.utils';
 
@@ -33,14 +33,24 @@ export const TrainWithBadge: FC<TrainWithBadgeProps> = ({ train, changeFlowToEdi
                 text={train.name}
             />
 
-            <EditOutlined
-                data-test-id={`modal-update-training-edit-button${index}`}
+            <Button
+                type='text'
                 onClick={handleEditClick}
-                disabled={train.isImplementation ? true : false}
-                style={train.isImplementation ? { color: 'gray' } : { color: 'blue' }}
                 className={classnames(classes.highlighter, {
                     [classes.implemented]: train.isImplementation,
                 })}
+                disabled={train.isImplementation ? true : false}
+                data-test-id={`modal-update-training-edit-button${index}`}
+                icon={
+                    <EditOutlined
+                        className={classes['edit__icon']}
+                        disabled={train.isImplementation ? true : false}
+                        style={{
+                            textAlign: 'right',
+                            color: `${train.isImplementation ? 'gray' : 'blue'}`,
+                        }}
+                    />
+                }
             />
         </li>
     );
