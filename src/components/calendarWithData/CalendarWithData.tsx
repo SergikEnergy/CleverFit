@@ -6,6 +6,7 @@ import { CustomCalendarModal } from '@components/customCalendarModal';
 import { DrawerTrainsContext, CollapsedContext } from '../../reactContexts';
 import { getCellData, filterDataByDaySortByDate, isCurrentMonth } from './CalendarWithData.utils';
 import { ICalenDarWithDataProps, IModalPosition } from './CalendarWithData.types';
+import { dateFullFormatWithDash } from '@utils/constants/dateFormats';
 import moment, { Moment } from 'moment';
 import 'moment/dist/locale/ru';
 moment.locale('ru');
@@ -46,12 +47,15 @@ export const CalenDarWithData: FC<ICalenDarWithDataProps> = ({
         }
     };
 
-    const getModalDimensions = (id = selectedDay.format('YYYY-MM-DD'), setDay = false) => {
+    const getModalDimensions = (
+        id = selectedDay.format(dateFullFormatWithDash),
+        setDay = false,
+    ) => {
         const selectedCell = document.querySelector(`td[title="${id}"]`);
         const modalParent = document.querySelector('#modalWrapperCalendar');
         if (selectedCell && modalParent) {
             if (setDay) {
-                setSelectedDay(moment(id, 'YYYY-MM-DD'));
+                setSelectedDay(moment(id, dateFullFormatWithDash));
             }
 
             const {
@@ -86,7 +90,7 @@ export const CalenDarWithData: FC<ICalenDarWithDataProps> = ({
     useEffect(() => {
         const correctModalPosition = () => {
             if (isModalVisible) {
-                const modalSizes = getModalDimensions(selectedDay.format('YYYY-MM-DD'));
+                const modalSizes = getModalDimensions(selectedDay.format(dateFullFormatWithDash));
                 if (modalSizes) {
                     setModalPosition({
                         top: modalSizes.topModal - modalSizes.topParent,
@@ -156,13 +160,13 @@ export const CalenDarWithData: FC<ICalenDarWithDataProps> = ({
         const isMobileData = !isFullScreen && cellData.length > 0;
         if (isMobileData) {
             const cellWithTrains = document.querySelector(
-                `td[title="${date.format('YYYY-MM-DD')}"]`,
+                `td[title="${date.format(dateFullFormatWithDash)}"]`,
             );
             if (cellWithTrains) {
                 cellWithTrains.classList.add(classes['cell__mobile-data']);
             }
             const currentDayCell = document.querySelector(
-                `td[title="${moment().format('YYYY-MM-DD')}"]`,
+                `td[title="${moment().format(dateFullFormatWithDash)}"]`,
             );
             if (currentDayCell) {
                 currentDayCell.classList.add(classes['cell__mobile-active']);
@@ -180,7 +184,7 @@ export const CalenDarWithData: FC<ICalenDarWithDataProps> = ({
                     zIndex: 10,
                 }}
                 className={classnames(classes.cell)}
-                id={date.format('YYYY-MM-DD')}
+                id={date.format(dateFullFormatWithDash)}
                 onClick={(event: MouseEvent<HTMLDivElement>) => handleDateClick(currentData, event)}
             >
                 {!isMobileData && (

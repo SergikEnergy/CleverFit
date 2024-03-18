@@ -3,6 +3,7 @@ import moment, { Moment } from 'moment';
 import { CellDataType } from './CalendarWithData.types';
 import { ColorForTrain } from './CalendarWithData.data';
 import { shortMonthsRu } from './CalendarWithData.data';
+import { dateFullFormatWithDash } from '@utils/constants/dateFormats';
 
 export const getColorTrainByName = (trainName: string) => {
     switch (trainName.toLowerCase()) {
@@ -25,7 +26,11 @@ export const filterDataByDaySortByDate = (
 ): ITrainingsResponse[] | [] => {
     if (dataForRender.length > 0) {
         return dataForRender
-            .filter((elem) => moment(elem.date).format('YYYY-MM-DD') === date.format('YYYY-MM-DD'))
+            .filter(
+                (elem) =>
+                    moment(elem.date).format(dateFullFormatWithDash) ===
+                    date.format(dateFullFormatWithDash),
+            )
             .sort((elem1, elem2) => moment(elem2.date).diff(moment(elem1.date)));
     } else return [];
 };
@@ -52,8 +57,8 @@ export const getMonthByName = (
     if (indexOfMonth !== -1) return indexOfMonth;
 };
 
-export const isCurrentMonth = (id: string):boolean => {
-    const date = moment(id, 'YYYY-MM-DD');
+export const isCurrentMonth = (id: string): boolean => {
+    const date = moment(id, dateFullFormatWithDash);
     const allowedMonth = date.month();
     const allowedYear = date.year();
     const selectedYear = Number(

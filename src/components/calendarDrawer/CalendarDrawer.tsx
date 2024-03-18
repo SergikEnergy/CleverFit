@@ -4,6 +4,7 @@ import { DrawerTrainsContext } from '../../reactContexts';
 import { DrawerHeader } from './components/DrawerHeader';
 import { FormDrawer } from './components/FormDrawer';
 import { getColorTrainByName } from '@components/calendarWithData/CalendarWithData.utils';
+import { dateDayMonthYearDotFormat } from '@utils/constants/dateFormats';
 
 import classes from './CalendarDrawer.module.css';
 
@@ -51,7 +52,7 @@ export const CalendarDrawer: FC = () => {
                     color={getColorTrainByName(trainName)}
                     text={trainName}
                 />
-                <div className={classes.date}>{date?.format('DD.MM.YYYY')}</div>
+                <div className={classes.date}>{date?.format(dateDayMonthYearDotFormat)}</div>
             </div>
             {isDrawerOpen && <FormDrawer editMode={!!editedTrainID} ref={submitRef} />}
         </Drawer>

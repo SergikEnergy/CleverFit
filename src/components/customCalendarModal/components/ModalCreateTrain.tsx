@@ -5,6 +5,7 @@ import { TrainWithBadge } from '.';
 import { CloseOutlined } from '@ant-design/icons';
 import { Empty, Button, Divider } from 'antd';
 import EmptyImg from '/images/EmptyImg.svg';
+import { dateDayMonthYearDotFormat } from '@utils/constants/dateFormats';
 
 import classes from './ModalCreateTrain.module.css';
 
@@ -37,7 +38,7 @@ export const ModalCreateTrain: FC<IModalCreateTrainProps> = ({
             <div className={classes.header}>
                 <div className={classes.content}>
                     <div className={classes.title}>{`Тренировки на ${value.format(
-                        'DD.MM.YYYY',
+                        dateDayMonthYearDotFormat,
                     )}`}</div>
                     {trains.length === 0 && (
                         <div className={classes.subtitle}>Нет активных тренировок</div>
