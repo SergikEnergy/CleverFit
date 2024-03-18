@@ -14,18 +14,18 @@
     align-items: flex-start;
     justify-content: space-between;
     font-family: var(--font-family);
-    font-weight: 400;
-    line-height: 130%;
-    gap: 12px;
+    font-weight: var(--font-weight-normal);
+    line-height: var(--line-height-main);
+    gap: var(--gap-little);
     padding: 0.7rem 0 1.8rem 2.2rem;
 }
 
 .title {
-    font-size: 1.6rem;
+    font-size: var(--font-size-title);
     color: var(--primary-light-6);
 }
 .text {
-    font-size: 14px;
+    font-size: var(--font-size-main);
     color: var(--character-light-secondary-45);
 }
 
@@ -38,16 +38,16 @@
 }
 .button {
     font-family: var(--font-family);
-    font-weight: 400;
-    font-size: 1.4rem;
-    line-height: 130%;
+    font-weight: var(--font-weight-normal);
+    font-size: var(--font-size-main);
+    line-height: var(--line-height-main);
     text-align: center;
     color: var(--character-light-title-85);
     display: flex;
     align-items: center;
     justify-content: center;
-    margin: 0;
-    padding: 0;
+    margin: var(--margin-zero);
+    padding: var(--padding-zero);
 }
 
 .button > button {

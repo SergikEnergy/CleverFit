@@ -1,59 +1,92 @@
-export interface IRequest {
+export type RequestType = {
     email?: string;
     password?: string;
-}
+};
 
-export interface IErrorData {
+export type ErrorDataType = {
     statusCode?: number;
     error?: string;
     message?: string;
-}
+};
 
-export interface IResponseError {
+export type ResponseErrorType = {
     status: number;
-    data: IErrorData;
-}
+    data: ErrorDataType;
+};
 
-export interface IRegistrationResponse {
+export type RegistrationResponseType = {
     data: null;
-}
-export interface ILoginResponse {
+};
+export type LoginResponseType = {
     accessToken: string;
-}
-export interface ICheckEmailResponse {
+};
+export type CheckEmailResponseType = {
     email: string;
     message: string;
-}
+};
 
-export interface IConfirmRequest {
+export type ConfirmRequestType = {
     email: string;
     code: string;
-}
+};
 
-export interface IConfirmResponse {
-    email: string;
-    message: string;
-}
+export type IConfirmResponseType = ConfirmRequestType;
 
-export interface IChangePasswordRequest {
+export type ChangePasswordRequestType = {
     password: string;
     confirmPassword: string;
-}
+};
 
-export interface IChangePasswordResponse {
-    message: string;
-}
+export type ChangePasswordResponseType = Pick<CheckEmailResponseType, 'message'>;
 
-export interface IFeedbackResponse {
+export type FeedbackResponseType = {
     id: string;
     fullName: string | null;
     imageSrc: string | null;
     message: string | null;
     rating: number;
     createdAt: string;
-}
+};
 
-export interface IPostFeedbackRequest {
+export type PostFeedbackRequestType = {
     message: string;
     rating: number;
-}
+};
+
+export type TrainingsResponseType = {
+    _id: string;
+    name: string;
+    date: string;
+    isImplementation: boolean;
+    userId: string;
+    exercises: ExerciseType[];
+    parameters?: ParametersTrainingType;
+};
+
+export type ParametersTrainingType = {
+    repeat: boolean;
+    period: number;
+    jointTraining: boolean;
+    participants: string[];
+};
+
+export type ExerciseType = {
+    name: string;
+    replays: number;
+    weight: number;
+    approaches: number;
+    isImplementation?: boolean;
+    _id?: string;
+};
+
+export type AllowedTrainResponseType = {
+    name: 'string';
+    key: 'string';
+};
+
+export type NewTrainRequestType = Pick<
+    TrainingsResponseType,
+    'date' | 'exercises' | 'name' | 'isImplementation'
+>;
+
+export type ChangeFutureTrainRequestType = { body: NewTrainRequestType; id: string };

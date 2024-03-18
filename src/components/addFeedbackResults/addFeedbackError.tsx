@@ -1,12 +1,12 @@
 import { FC, useContext } from 'react';
 import { Button, Result } from 'antd';
-import { ModalFeedbackContext } from '../../reactContexts/modalFeedback-context';
+import { ModalReportContext } from '../../reactContexts';
 import { NewFeedback } from '@components/newFeedback';
 
 import classes from './addFeedbackError.module.css';
 
 export const AddFeedbackError: FC = () => {
-    const { closeModal, setNode, openModal, setWidthModal } = useContext(ModalFeedbackContext);
+    const { closeModal, setNode, openModal, setWidthModal } = useContext(ModalReportContext);
     const handleClickButtonWrite = () => {
         closeModal();
         setNode(<NewFeedback />);

@@ -19,9 +19,9 @@
 
 .buttons button {
     font-family: var(--font-family);
-    font-weight: 400;
-    font-size: 16px;
-    line-height: 130%;
+    font-weight: var(--font-weight-normal);
+    font-size: var(--font-size-title);
+    line-height: var(--line-height-main);
     color: var(--character-light-title-85);
     width: 50%;
     border: none;
@@ -30,8 +30,8 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    padding-top: 16px;
-    padding-bottom: 16px;
+    padding-top: var(--padding-little-size);
+    padding-bottom: var(--padding-little-size);
     height: 46px;
 }
 button > span {
@@ -52,11 +52,11 @@ button > span {
 
 @media screen and (max-width: 360px) {
     .logo {
-        margin-top: 3.2rem;
-        margin-bottom: 3.2rem;
+        margin-top: var(--margin-middle-size);
+        margin-bottom: var(--margin-middle-size);
     }
     .buttons button {
-        font-size: 14px;
+        font-size: var(--font-size-main);
         padding-top: 14px;
         padding-bottom: 14px;
     }

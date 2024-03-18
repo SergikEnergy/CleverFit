@@ -1,0 +1,68 @@
+.header {
+    width: 100%;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    margin-top: var(--margin-little-size);
+    margin-bottom: var(--margin-little-size);
+    padding: var(--padding-modal-calendar);
+}
+
+.title {
+    font-family: var(--font-family);
+    font-weight: var(--font-weight-title);
+    font-size: 1.5rem;
+    line-height: var(--line-height-main);
+}
+
+.subtitle {
+    margin-top: var(--margin-small-size);
+    font-family: var(--font-family);
+    font-weight: var(--font-weight-normal);
+    font-size: var(--font-size-main);
+    line-height: var(--line-height-main);
+    color: var(--character-light-secondary-45);
+}
+
+.content {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+}
+
+.close {
+    transition: all ease-in 0.3s;
+}
+.close:hover,
+.close:target,
+.close:focus {
+    cursor: pointer;
+    transform: scale(1.03);
+    color: rgb(127, 127, 128);
+}
+
+.trains__list {
+    padding: var(--padding-modal-calendar);
+}
+
+.empty {
+    padding: var(--padding-modal-calendar);
+    margin-top: var(--margin-little-size);
+    margin-bottom: var(--margin-medium-size);
+}
+
+.buttons {
+    padding: var(--padding-modal-calendar);
+    margin-bottom: var(--margin-little-size);
+}
+
+button.button__edit {
+    background-color: var(--primary-light-6);
+    border: none;
+    font-family: var(--font-family);
+    font-weight: var(--font-weight-normal);
+    font-size: var(--font-size-main);
+    line-height: var(--line-height-main);
+}

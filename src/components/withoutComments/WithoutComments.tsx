@@ -1,12 +1,12 @@
 import { FC, useContext } from 'react';
-import { ModalFeedbackContext } from '../../reactContexts/modalFeedback-context';
+import { ModalReportContext } from '../../reactContexts';
 import { NewFeedback } from '@components/newFeedback';
 
 import { Button } from 'antd';
 import classes from './WithoutComments.module.css';
 
 export const WithoutComments: FC = () => {
-    const { openModal, setNode, setWidthModal } = useContext(ModalFeedbackContext);
+    const { openModal, setNode, setWidthModal } = useContext(ModalReportContext);
     const handleAddFeedback = () => {
         setNode(<NewFeedback />);
         setWidthModal('clamp(328px, 100%, 539px)');

@@ -1,15 +1,15 @@
 import { FC } from 'react';
-import { IFeedbackResponse } from '@redux/API/api-types';
+import { FeedbackResponseType } from '@redux/API/api-types';
 import { FeedbackItem } from '@components/feedbackItem';
 
 import classes from './FeedbacksList.module.css';
 
-interface IFeedbacksListProps {
-    feedbacks: IFeedbackResponse[];
+type FeedbacksListPropsType = {
+    feedbacks: FeedbackResponseType[];
     limit: number;
-}
+};
 
-export const FeedbacksList: FC<IFeedbacksListProps> = ({ feedbacks, limit }) => (
+export const FeedbacksList: FC<FeedbacksListPropsType> = ({ feedbacks, limit }) => (
     <div className={classes['feedbacks-list']}>
         {feedbacks &&
             feedbacks

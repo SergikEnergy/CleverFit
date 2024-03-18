@@ -2,11 +2,11 @@ import { FC, useState, useContext, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import { history } from '@redux/configure-store';
 import { useLoginUserMutation, useCheckEmailMutation } from '@redux/API/authAPI';
-import { LoaderStateContext } from '../../reactContexts/loader-context';
+import { LoaderStateContext } from '../../reactContexts';
 import { useAppDispatch, useAppSelector } from '@hooks/typed-react-redux-hooks';
 import { Paths } from '../../routes/pathes';
 import { isFetchBaseQueryError } from '@redux/API/errorsCatching';
-import { IErrorData } from '@redux/API/api-types';
+import { ErrorDataType } from '@redux/API/api-types';
 import { setCredentials, saveCredentialsToStorage } from '@redux/reducers/authSlice';
 import { saveEmail } from '@redux/reducers/userSlice';
 
@@ -94,7 +94,7 @@ export const FormLogin: FC = () => {
             history.push(Paths.AUTH_CONFIRM_EMAIL, { fromPath: location.pathname });
         } catch (error) {
             if (isFetchBaseQueryError(error)) {
-                const errorData = error.data as IErrorData;
+                const errorData = error.data as ErrorDataType;
                 if (error.status === 404 && errorData && errorData.message === 'Email не найден') {
                     history.push(Paths.ERROR_NO_EMAIL_AND_404, { fromPath: location.pathname });
                 } else {

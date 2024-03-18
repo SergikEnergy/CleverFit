@@ -1,0 +1,51 @@
+.train {
+    display: flex;
+    width: 100%;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.badge,
+.highlighter {
+    display: block;
+}
+
+.badge {
+    width: 80%;
+    text-align: left;
+    font-family: var(--font-family);
+    font-weight: var(--font-weight-normal);
+    font-size: var(--font-size-main);
+    line-height: var(--line-height-main);
+}
+
+.badge.implemented :global(.ant-badge-status-text) {
+    color: gray;
+}
+
+.highlighter {
+    width: 15%;
+    text-align: right;
+    transition: all ease-in 0.3s;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+}
+
+button.highlighter > span.edit__icon {
+    justify-content: flex-end;
+}
+
+.highlighter.implemented:hover,
+.highlighter.implemented:target,
+.highlighter.implemented:focus {
+    cursor: none;
+}
+
+.highlighter:hover,
+.highlighter:target,
+.highlighter:focus {
+    transform: scale(1.03);
+    color: rgb(121, 121, 248);
+    cursor: pointer;
+}

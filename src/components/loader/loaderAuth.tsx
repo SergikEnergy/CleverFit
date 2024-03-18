@@ -1,6 +1,6 @@
 import { FC, useContext } from 'react';
 
-import { LoaderStateContext } from '../../reactContexts/loader-context';
+import { LoaderStateContext } from '../../reactContexts';
 import { LottieAuthSlider } from './lotties/lottieSliderAuth';
 
 import { Modal } from 'antd';

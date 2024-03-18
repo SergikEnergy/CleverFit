@@ -1,6 +1,6 @@
 import { FC, useState, useContext } from 'react';
 import { useAppSelector } from '@hooks/typed-react-redux-hooks';
-import { LoaderStateContext } from '../../../reactContexts/loader-context';
+import { LoaderStateContext } from '../../../reactContexts';
 import { useConfirmEmailMutation } from '@redux/API/authAPI';
 import { isFetchBaseQueryError } from '@redux/API/errorsCatching';
 import { Paths } from '../../../routes/pathes';
@@ -65,7 +65,7 @@ export const ConfirmEmailPage: FC = () => {
                 data-test-id='verification-input'
                 placeholder=''
                 validChars='0-9'
-                inputProps={{ inputMode: 'numeric', ['data-test-id']: 'verification-input' }}
+                inputProps={{ inputMode: 'numeric' }}
                 onComplete={handleCompleteInput}
                 classNames={{
                     container: classes.container,

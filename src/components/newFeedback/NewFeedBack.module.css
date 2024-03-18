@@ -5,8 +5,8 @@
 .title {
     font-family: var(--font-family);
     font-weight: 500;
-    font-size: 1.6rem;
-    line-height: 130%;
+    font-size: var(--font-size-title);
+    line-height: var(--line-height-main);
     color: var(--character-light-title-85);
 }
 
@@ -32,7 +32,7 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 16px 0;
+    padding: var(--padding-small-top-bottom-frames);
 }
 
 form.form {
@@ -44,18 +44,18 @@ form.form {
 
 .rating,
 .rating.antFixed {
-    padding-left: 24px;
-    padding-right: 24px;
+    padding-left: var(--padding-medium-size);
+    padding-right: var(--padding-medium-size);
     align-self: flex-start;
-    margin-top: 24px;
-    margin-bottom: 16px;
+    margin-top: var(--padding-medium-size);
+    margin-bottom: var(--padding-little-size);
 }
 
 :global(#ratingForm_comment::placeholder) {
     font-family: var(--font-family);
-    font-weight: 400;
-    font-size: 1.4rem;
-    line-height: 130%;
+    font-weight: var(--font-weight-normal);
+    font-size: var(--font-size-main);
+    line-height: var(--line-height-main);
     color: var(--character-light-disable-25);
 }
 
@@ -65,15 +65,15 @@ form.form {
 
 .comment,
 .comment.antFixed {
-    padding-left: 24px;
-    padding-right: 24px;
+    padding-left: var(--padding-medium-size);
+    padding-right: var(--padding-medium-size);
     width: 100%;
 }
 
 .button,
 .button.antFixed {
-    padding-left: 24px;
-    padding-right: 24px;
+    padding-left: var(--padding-medium-size);
+    padding-right: var(--padding-medium-size);
     align-self: flex-end;
     margin-top: 10px;
     margin-bottom: 10px;
@@ -84,7 +84,7 @@ form.form {
     box-shadow: 0 2px 0 0 rgba(0, 0, 0, 0.04);
     border-radius: 2px;
     font-family: var(--font-family);
-    font-weight: 400;
-    font-size: 1.4rem;
-    line-height: 130%;
+    font-weight: var(--font-weight-normal);
+    font-size: var(--font-size-main);
+    line-height: var(--line-height-main);
 }

@@ -20,7 +20,7 @@ export const LoginPage: FC = () => {
     return (
         <div className={classes.login}>
             <div className={classes.wrapper}>
-                <MainFormsLayout setActiveLogin={true} />
+                <MainFormsLayout setActiveLogin />
                 <FormLogin />
             </div>
         </div>

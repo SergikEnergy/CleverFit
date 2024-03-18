@@ -1,17 +1,24 @@
 import { FC, useContext } from 'react';
-import { CollapsedContext } from '../../reactContexts/collapse-context';
-
+import { CollapsedContext } from '../../reactContexts';
 import { Col, Row, Typography, Button } from 'antd';
 import { HeartFilled, CalendarTwoTone } from '@ant-design/icons';
 import { CardMainAction } from '@components/cardMainAction';
 import { ProfileIconComponent } from '@components/customIcon/profileIcon';
 import { primaryLight } from '@utils/constants/colors';
+import { useGetAllUserTrainings } from '@hooks/useGetAllUserTrainings';
 
 import classes from './cardsSection.module.css';
 import classnames from 'classnames';
 
 export const CardsSection: FC = () => {
+    const fetchAllTrainings = useGetAllUserTrainings();
+
+    const handleCalendarPageClick = () => {
+        fetchAllTrainings();
+    };
+
     const { collapsed } = useContext(CollapsedContext);
+
     return (
         <>
             <Row
@@ -58,6 +65,8 @@ export const CardsSection: FC = () => {
                         body={'Назначить календарь'}
                         action={
                             <Button
+                                onClick={handleCalendarPageClick}
+                                data-test-id='menu-button-calendar'
                                 type='text'
                                 block
                                 icon={

@@ -3,9 +3,12 @@ import { createRoot } from 'react-dom/client';
 import { Provider } from 'react-redux';
 
 import { store } from '@redux/configure-store';
-import { CollapsedContextProvider } from './reactContexts/collapseContextProvider';
-import { LoaderContextProvider } from './reactContexts/loaderStateContextProvider';
-import { ModalFeedbackContextProvider } from './reactContexts/modalFeedbackContextProvider';
+import {
+    CollapsedContextProvider,
+    DrawerTrainsContextProvider,
+    LoaderContextProvider,
+    ModalReportContextProvider,
+} from './reactContexts';
 import { App } from './App';
 
 import 'normalize.css';
@@ -20,9 +23,11 @@ root.render(
         <Provider store={store}>
             <CollapsedContextProvider>
                 <LoaderContextProvider>
-                    <ModalFeedbackContextProvider>
-                        <App />
-                    </ModalFeedbackContextProvider>
+                    <ModalReportContextProvider>
+                        <DrawerTrainsContextProvider>
+                            <App />
+                        </DrawerTrainsContextProvider>
+                    </ModalReportContextProvider>
                 </LoaderContextProvider>
             </CollapsedContextProvider>
         </Provider>

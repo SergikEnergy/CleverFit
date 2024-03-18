@@ -1,5 +1,5 @@
 import { FC } from 'react';
-import { IFeedbackResponse } from '@redux/API/api-types';
+import { FeedbackResponseType } from '@redux/API/api-types';
 import { UserOutlined, StarFilled, StarOutlined } from '@ant-design/icons';
 import { CustomAvatar } from '@components/customAvatar';
 import { getFormattedDate } from './FeedbackItem.utils';
@@ -7,11 +7,11 @@ import { Rate } from 'antd';
 
 import classes from './FeedbackItem.module.css';
 
-interface IFeedbackItemProps {
-    feedbackContent: IFeedbackResponse;
-}
+type FeedbackItemPropsType = {
+    feedbackContent: FeedbackResponseType;
+};
 
-export const FeedbackItem: FC<IFeedbackItemProps> = ({ feedbackContent }) => {
+export const FeedbackItem: FC<FeedbackItemPropsType> = ({ feedbackContent }) => {
     const dateFormatted = getFormattedDate(feedbackContent.createdAt);
     return (
         <div className={classes.feedback}>

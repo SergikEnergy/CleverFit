@@ -7,11 +7,11 @@ import { Button } from 'antd';
 import classes from './mainFormsLayout..module.css';
 import classnames from 'classnames';
 
-interface MainFormsLayoutProps {
+type MainFormsLayoutPropsType = {
     setActiveLogin?: boolean;
-}
+};
 
-export const MainFormsLayout: FC<MainFormsLayoutProps> = ({ setActiveLogin }) => {
+export const MainFormsLayout: FC<MainFormsLayoutPropsType> = ({ setActiveLogin }) => {
     const navigate = useNavigate();
 
     const handleRegisterClick = () => {

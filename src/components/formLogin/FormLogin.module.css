@@ -4,15 +4,15 @@
     flex-direction: column;
     align-items: center;
     justify-content: flex-start;
-    gap: 8px;
+    gap: var(--gap-extra-small);
 }
 
 .form > div {
     width: 100%;
     font-family: var(--font-family);
-    font-weight: 400;
-    font-size: 14px;
-    line-height: 130%;
+    font-weight: var(--font-weight-normal);
+    font-size: var(--font-size-main);
+    line-height: var(--line-height-main);
 }
 
 div.password-wrapper.antFixed {
@@ -30,7 +30,7 @@ div.password-wrapper.antFixed {
 }
 
 :global(#loginForm_password_help > div) {
-    font-size: 12px;
+    font-size: var(--font-size-mobile);
     text-align: start;
     color: var(--character-light-secondary-45);
 }
@@ -45,7 +45,7 @@ div.password-wrapper.antFixed {
 }
 
 :global(#loginForm_password_help > div.ant-form-item-explain-error) {
-    font-size: 12px;
+    font-size: var(--font-size-mobile);
     color: var(--character-light-error);
 }
 
@@ -61,8 +61,8 @@ div.checkbox-wrapper {
 }
 
 :global(.ant-btn.ant-btn-text).forgot-link {
-    font-size: 16px;
-    padding: 0;
+    font-size: var(--font-size-title);
+    padding: var(--padding-zero);
     text-align: center;
 }
 :global(.ant-btn:not(:disabled).ant-btn-text).forgot-link {
@@ -74,22 +74,22 @@ div.checkbox-wrapper {
 }
 
 .submit-button.antFixed {
-    font-size: 16px;
+    font-size: var(--font-size-title);
     color: var(--character-light-primary-inverse);
 }
 
 .google-button.antFixed {
-    font-size: 16px;
+    font-size: var(--font-size-title);
     color: var(--character-light-title-85);
 }
 
 @media screen and (max-width: 360px) {
     .submit-button.antFixed {
-        font-size: 14px;
+        font-size: var(--font-size-main);
     }
 
     .google-button.antFixed {
-        font-size: 14px;
+        font-size: var(--font-size-main);
     }
     .google-icon.antFixed {
         display: none;
@@ -98,11 +98,11 @@ div.checkbox-wrapper {
         margin-top: 9px;
     }
     div.checkbox-wrapper {
-        font-size: 14px;
+        font-size: var(--font-size-main);
         margin-bottom: 15px;
     }
     .forgot-link {
-        font-size: 14px;
+        font-size: var(--font-size-main);
         margin-right: 8px;
     }
     div.password-wrapper.antFixed {

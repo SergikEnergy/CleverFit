@@ -1,5 +1,5 @@
 .exit {
-    font-size: 1.6rem;
+    font-size: var(--font-size-title);
     display: flex;
     justify-content: center;
     align-items: flex-end;
@@ -10,9 +10,9 @@
 .exit__text,
 .exit__text.antFixed {
     font-family: var(--font-family);
-    font-weight: 400;
-    font-size: 1.4rem;
-    line-height: 130%;
+    font-weight: var(--font-weight-normal);
+    font-size: var(--font-size-main);
+    line-height: var(--line-height-main);
     color: var(--character-light-title-85);
     margin-left: 1.3rem;
 }
@@ -40,7 +40,7 @@ li.exit__item.antFixed {
     .exit__text.antFixed,
     .exit__item,
     li.exit__item.antFixed {
-        padding: 0;
+        padding: var(--padding-zero);
     }
 }
 

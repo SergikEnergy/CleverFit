@@ -8,9 +8,13 @@ export const CollapsedContextProvider: FC<{ children: ReactNode }> = ({ children
         setIsCollapsed((prev) => !prev);
     };
 
+    const hideCollapsed = () => {
+        setIsCollapsed(true);
+    };
+
     return (
         <CollapsedContext.Provider
-            value={{ collapsed: isCollapsed, toggleCollapsed: toggleCollapsedState }}
+            value={{ collapsed: isCollapsed, toggleCollapsed: toggleCollapsedState, hideCollapsed }}
         >
             {children}
         </CollapsedContext.Provider>

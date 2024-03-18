@@ -1,7 +1,7 @@
 import { FC, useContext, useState, useEffect } from 'react';
 import { useLocation, Link } from 'react-router-dom';
 
-import { CollapsedContext } from '../../reactContexts/collapse-context';
+import { CollapsedContext } from '../../reactContexts';
 import { Button, Breadcrumb } from 'antd';
 import { SettingOutlined } from '@ant-design/icons';
 import { breadcrumbsInitialItems } from './header.data';
@@ -10,11 +10,12 @@ import { prepareDataForBreadCrumbs } from './header.utils';
 import classes from './header.module.css';
 import classnames from 'classnames';
 
-interface HeaderProps {
+type HeaderPropsType = {
     hideElement?: boolean;
-}
+    hideForCalendar?: boolean;
+};
 
-export const Header: FC<HeaderProps> = ({ hideElement }) => {
+export const Header: FC<HeaderPropsType> = ({ hideElement, hideForCalendar }) => {
     const { collapsed } = useContext(CollapsedContext);
     const [breadCrumbsItems, setBreadCrumbsItems] = useState(breadcrumbsInitialItems);
     const location = useLocation();
@@ -25,9 +26,9 @@ export const Header: FC<HeaderProps> = ({ hideElement }) => {
     }, []);
 
     return (
-        <div className={`${classes['header__wrapper']} wrapper`}>
+        <div className={classnames(classes['header__wrapper'], 'wrapper')}>
             <div className={classes.navigation}>
-                <Breadcrumb>
+                <Breadcrumb className={classes.breadcrumbs}>
                     {breadCrumbsItems.map((breadcrumb) => (
                         <Breadcrumb.Item key={breadcrumb.key}>
                             <Link to={breadcrumb.path} className={classes.antFixed}>
@@ -38,29 +39,38 @@ export const Header: FC<HeaderProps> = ({ hideElement }) => {
                 </Breadcrumb>
             </div>
             {!hideElement && (
-                <div className={classnames(classes.greeting, { [classes.collapsed]: collapsed })}>
-                    <div
-                        className={classnames(classes['greeting__text'], {
-                            [classes.collapsed]: collapsed,
-                        })}
-                    >
-                        Приветствуем тебя в&nbsp;CleverFit — приложении,
-                        <pre
-                            className={classnames(classes.xlWidth, {
+                <div
+                    className={classnames(classes.greeting, {
+                        [classes.collapsed]: collapsed,
+                        [classes['calendar__settings_wrapper']]: hideForCalendar,
+                    })}
+                >
+                    {!hideForCalendar && (
+                        <div
+                            className={classnames(classes['greeting__text'], {
                                 [classes.collapsed]: collapsed,
                             })}
                         >
-                            {'                   '}
-                        </pre>{' '}
-                        которое поможет тебе добиться своей мечты!
-                    </div>
+                            Приветствуем тебя в&nbsp;CleverFit — приложении,
+                            <pre
+                                className={classnames(classes.xlWidth, {
+                                    [classes.collapsed]: collapsed,
+                                })}
+                            >
+                                {'                   '}
+                            </pre>{' '}
+                            которое поможет тебе добиться своей мечты!
+                        </div>
+                    )}
                     <div
                         className={classnames(classes['greeting__settings'], {
                             [classes.collapsed]: collapsed,
                         })}
                     >
                         <Button
-                            className={classnames(classes['mobile__button'], classes.antFixed)}
+                            className={classnames(classes['mobile__button'], classes.antFixed, {
+                                [classes['calendar-mobile']]: hideForCalendar,
+                            })}
                             type='text'
                             shape='circle'
                             icon={<SettingOutlined />}

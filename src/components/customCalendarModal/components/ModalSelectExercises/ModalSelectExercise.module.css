@@ -1,0 +1,111 @@
+.header {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: var(--margin-little-size);
+    padding: var(--padding-modal-calendar);
+}
+
+.select {
+    font-family: var(--font-family);
+    font-weight: var(--font-weight-normal);
+    font-size: var(--font-size-main);
+    line-height: var(--line-height-main);
+    width: 90%;
+}
+
+.select :global(.ant-select) {
+    width: 100%;
+    text-align: left;
+}
+
+div.select > :global(.ant-select) div:global(.ant-select-selector) {
+    border: none;
+}
+
+span:global(.ant-select-selection-placeholder) {
+    color: #000;
+}
+
+.close {
+    transition: all ease-in 0.3s;
+}
+.close:hover,
+.close:target,
+.close:focus {
+    cursor: pointer;
+    transform: scaleX(1.07);
+    color: rgb(127, 127, 128);
+}
+
+.exercises__list {
+    padding: var(--padding-modal-calendar);
+    color: #8c8c8c;
+    min-height: 90px;
+    max-height: 200px;
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+
+.exercises__list::-webkit-scrollbar {
+    width: 6px;
+    margin-left: 2px;
+    max-height: 60px;
+}
+
+.exercises__list::-webkit-scrollbar-thumb {
+    width: 6px;
+    background: #8c8c8c;
+    border-radius: 10px;
+}
+
+.exercises__list::-webkit-scrollbar-track {
+    width: 6px;
+    background: transparent;
+}
+
+.empty {
+    padding: var(--padding-modal-calendar);
+    margin-top: var(--margin-little-size);
+    margin-bottom: var(--margin-medium-size);
+}
+
+/* .buttons {
+    padding: var(--padding-modal-calendar);
+    margin-bottom: var(--margin-little-size);
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    gap: var(--gap-extra-small);
+}
+
+button.button__add {
+    background-color: var(--primary-light-6);
+    border: none;
+    font-family: var(--font-family);
+    font-weight: var(--font-weight-normal);
+    font-size: var(--font-size-main);
+    line-height: var(--line-height-main);
+}
+button.button__save {
+    border: none;
+    background-color: transparent;
+    font-family: var(--font-family);
+    font-weight: var(--font-weight-normal);
+    font-size: var(--font-size-main);
+    line-height: var(--line-height-main);
+    color: var(--primary-light-6);
+}
+button.button__save:disabled {
+    background-color: transparent;
+}
+
+button.button__save:global(.ant-btn.ant-btn-loading) {
+    color: var(--primary-light-7);
+}
+
+button.button__save:hover:not(:disabled) {
+    background-color: #cfcfcfb2;
+} */

@@ -1,6 +1,6 @@
 import { FC, useContext } from 'react';
 
-import { CollapsedContext } from '../../reactContexts/collapse-context';
+import { CollapsedContext } from '../../reactContexts';
 import { Typography } from 'antd';
 import classes from './aboutApp.module.css';
 import classnames from 'classnames';

@@ -1,5 +1,5 @@
 import { FC, useState, useContext, useEffect } from 'react';
-import { LoaderStateContext } from '../../../reactContexts/loader-context';
+import { LoaderStateContext } from '../../../reactContexts';
 import { useChangePasswordMutation } from '@redux/API/authAPI';
 import { useLocation } from 'react-router-dom';
 import { history } from '@redux/configure-store';

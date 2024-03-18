@@ -1,6 +1,6 @@
 import { FC, useContext } from 'react';
 
-import { CollapsedContext } from '../../reactContexts/collapse-context';
+import { CollapsedContext } from '../../reactContexts';
 import LogoIcon from '/images/LogoFit.svg';
 import LogoText from '/images/LogoText.svg';
 import LogoMobile from '/images/LogoMobile.svg';

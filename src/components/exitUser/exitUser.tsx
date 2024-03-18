@@ -1,8 +1,9 @@
 import { FC, useContext } from 'react';
 import { useAppDispatch } from '@hooks/typed-react-redux-hooks';
 import { resetCredentials } from '@redux/reducers/authSlice';
+import { LOCAL_STORAGE_AUTH_PARAM } from '@redux/API/api-data';
 
-import { CollapsedContext } from '../../reactContexts/collapse-context';
+import { CollapsedContext } from '../../reactContexts';
 import type { CustomIconComponentProps } from '@ant-design/icons/lib/components/Icon';
 import { Menu, Typography, Divider } from 'antd';
 import Icon from '@ant-design/icons';
@@ -20,7 +21,7 @@ export const ExitUser: FC = () => {
     const { collapsed } = useContext(CollapsedContext);
 
     const handleExitUser = () => {
-        localStorage.removeItem('userCleverFit');
+        localStorage.removeItem(LOCAL_STORAGE_AUTH_PARAM);
         dispatch(resetCredentials());
     };
     return (

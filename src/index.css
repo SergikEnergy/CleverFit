@@ -1,7 +1,22 @@
 @import './utils/fonts/font.css';
 
+body {
+    /* media query sizes */
+
+    --FULL_TO_TABLET_POINT1: 1290px;
+    --FULL_TO_TABLET_POINT2: 1100px;
+    --TABLET_WIDTH: 834px;
+    --TABLET_TO_MOBILE_POINT1: 780px;
+    --TABLET_TO_MOBILE_POINT2: 750px;
+    --TABLET_TO_MOBILE_POINT3: 550px;
+    --TABLET_TO_MOBILE_POINT4: 500px;
+    --TABLET_TO_MOBILE_POINT5: 400px;
+    --MOBILE_WIDTH: 360px;
+}
+
 :root {
     font-family: Inter, Verdana, Arial, sans-serif;
+    --main-font-family: Inter, sans-serif;
     line-height: 1.5;
     font-weight: normal;
     font-size: 10px;
@@ -113,7 +128,58 @@
     /* fonts styling */
 
     --font-family: 'Inter', Verdana, sans-serif;
+    --font-size-main: 1.4rem;
+    --line-height-main: 130%;
+    --font-style-main: normal;
+    --font-style-title: bold;
+    --font-weight-normal: 400;
+    --font-weight-title: 600;
+    --font-size-title: 1.6rem;
+    --font-size-mobile: 1.2rem;
     --second-family: 'Roboto', Verdana, sans-serif;
+
+    /* margins and paddings */
+
+    --padding-drawer-calendar-main: 3px 0px 3px 8px;
+    --padding-zero: 0;
+    --padding-alert-cancel-calendar: 9px 16px;
+    --padding-modal-calendar: 0 12px;
+    --padding-middle-size: 32px;
+    --padding-big-top-bottom-frames: 64px 0;
+    --padding-middle-top-bottom-frames: 32px 0;
+    --padding-small-top-bottom-frames: 16px 0;
+    --padding-modal-error-main: 32px 32px 24px;
+    --padding-error-get-trains-main: 24px 16px;
+    --padding-small-size: 8px;
+    --padding-little-size: 16px;
+    --padding-medium-size: 24px;
+    --padding-middle-size: 32px;
+    --padding-big-size: 64px;
+    --padding-calendar-page-main: 10px 24px 93px;
+    --padding-calendar-page-tablet: 12px 24px 271px;
+    --padding-calendar-page-mobile: 19px 24px 23px;
+
+    --margin-zero: 0;
+    --margin-small-size: 8px;
+    --margin-little-size: 16px;
+    --margin-medium-size: 24px;
+    --margin-middle-size: 32px;
+    --margin-big-size: 64px;
+
+    /* gaps */
+
+    --gap-extra-small: 8px;
+    --gap-small: 10px;
+    --gap-little: 12px;
+    --gap-medium: 16px;
+    --gap-middle: 20px;
+    --gap-big: 46px;
+
+    /* borders */
+
+    --border-radius-middle: 10px;
+    --border-radius-big: 15px;
+    --border-radius-zero: 0%;
 }
 
 html,

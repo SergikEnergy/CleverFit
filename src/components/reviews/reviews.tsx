@@ -3,7 +3,7 @@ import { useLocation } from 'react-router-dom';
 import { history } from '@redux/configure-store';
 import { Paths } from '../../routes/pathes';
 
-import { CollapsedContext } from '../../reactContexts/collapse-context';
+import { CollapsedContext } from '../../reactContexts';
 
 import { Button } from 'antd';
 import classes from './reviews.module.css';

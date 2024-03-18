@@ -1,0 +1,23 @@
+.wrapper {
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    width: 100%;
+    height: calc(100% - 48px);
+    padding: var(--padding-calendar-page-main);
+    background: var(--primary-light-1);
+    position: relative;
+}
+
+@media screen and (max-width: 834px) {
+    .wrapper {
+        padding: var(--padding-calendar-page-tablet);
+        height: calc(100% - 42px);
+    }
+}
+@media screen and (max-width: 500px) {
+    .wrapper {
+        padding: var(--padding-calendar-page-mobile);
+        height: calc(100% - 292px);
+    }
+}

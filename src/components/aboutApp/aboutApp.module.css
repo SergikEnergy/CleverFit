@@ -1,5 +1,5 @@
 .about {
-    margin-top: 2.5rem;
+    margin-top: var(--margin-medium-size);
     width: 63.5%;
     box-shadow: 0 2px 0 0 rgba(0, 0, 0, 0.04);
     background: var(--character-light-primary-inverse);
@@ -17,9 +17,9 @@
 
 .about .line {
     font-family: var(--font-family);
-    font-weight: 400;
-    font-size: 1.6rem;
-    line-height: 130%;
+    font-weight: var(--font-weight-normal);
+    font-size: var(--font-size-title);
+    line-height: var(--line-height-main);
     color: var(--primary-light-9);
     display: inline-block;
     text-align: left;

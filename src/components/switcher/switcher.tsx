@@ -1,6 +1,6 @@
 import { FC, useContext } from 'react';
 
-import { CollapsedContext } from '../../reactContexts/collapse-context';
+import { CollapsedContext } from '../../reactContexts';
 import { MenuFoldOutlined, MenuUnfoldOutlined } from '@ant-design/icons';
 import classes from './switcher.module.css';
 import classnames from 'classnames';

@@ -1,6 +1,6 @@
 import { FC, ReactNode, useContext } from 'react';
 
-import { CollapsedContext } from '../../reactContexts/collapse-context';
+import { CollapsedContext } from '../../reactContexts';
 
 import classes from './cardMainAction.module.css';
 import classnames from 'classnames';

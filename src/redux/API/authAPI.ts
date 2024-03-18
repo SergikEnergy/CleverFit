@@ -1,17 +1,16 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import { RootState } from '@redux/configure-store';
 import {
-    IRequest,
-    IRegistrationResponse,
-    ILoginResponse,
-    ICheckEmailResponse,
-    IConfirmRequest,
-    IConfirmResponse,
-    IChangePasswordResponse,
-    IChangePasswordRequest,
-} from './api-types';
-
-const API_BASE_URL = 'https://marathon-api.clevertec.ru/';
+    RequestType,
+    RegistrationResponseType,
+    LoginResponseType,
+    CheckEmailResponseType,
+    ConfirmRequestType,
+    IConfirmResponseType,
+    ChangePasswordResponseType,
+    ChangePasswordRequestType,
+} from './api-types.ts';
+import { API_BASE_URL } from './api-data.ts';
 
 export const authApi = createApi({
     reducerPath: 'authAPI',
@@ -28,7 +27,7 @@ export const authApi = createApi({
     }),
 
     endpoints: (build) => ({
-        registerUser: build.mutation<IRegistrationResponse, IRequest>({
+        registerUser: build.mutation<RegistrationResponseType, RequestType>({
             query: (body) => ({
                 url: 'auth/registration',
                 body,
@@ -36,7 +35,7 @@ export const authApi = createApi({
                 credentials: 'include',
             }),
         }),
-        loginUser: build.mutation<ILoginResponse, IRequest>({
+        loginUser: build.mutation<LoginResponseType, RequestType>({
             query: (body) => ({
                 url: 'auth/login',
                 body,
@@ -44,7 +43,7 @@ export const authApi = createApi({
                 credentials: 'include',
             }),
         }),
-        checkEmail: build.mutation<ICheckEmailResponse, IRequest>({
+        checkEmail: build.mutation<CheckEmailResponseType, RequestType>({
             query: (body) => ({
                 url: 'auth/check-email',
                 body,
@@ -52,7 +51,7 @@ export const authApi = createApi({
                 credentials: 'include',
             }),
         }),
-        confirmEmail: build.mutation<IConfirmResponse, IConfirmRequest>({
+        confirmEmail: build.mutation<IConfirmResponseType, ConfirmRequestType>({
             query: (body) => ({
                 url: 'auth/confirm-email',
                 body,
@@ -60,7 +59,7 @@ export const authApi = createApi({
                 credentials: 'include',
             }),
         }),
-        changePassword: build.mutation<IChangePasswordResponse, IChangePasswordRequest>({
+        changePassword: build.mutation<ChangePasswordResponseType, ChangePasswordRequestType>({
             query: (body) => ({
                 url: 'auth/change-password',
                 body,

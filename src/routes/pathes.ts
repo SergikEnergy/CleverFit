@@ -2,6 +2,7 @@ export const enum Paths {
     ROOT = '/',
     MAIN_PAGE = '/main',
     FEEDBACKS_PAGE = '/feedbacks',
+    CALENDAR_PAGE = '/calendar',
     AUTH = '/auth',
     AUTH_GOOGLE = '/google',
     AUTH_REGISTRATION = '/auth/registration',
