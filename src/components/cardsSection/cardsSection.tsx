@@ -1,19 +1,9 @@
-import { FC, useContext, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { LoaderStateContext, CollapsedContext, ModalReportContext } from '../../reactContexts';
-import { useGetAllTrainingsQuery, useLazyGetAllTrainingsQuery } from '@redux/API/calendarAPI';
-import { isFetchBaseQueryError } from '@redux/API/errorsCatching';
-import { history } from '@redux/configure-store';
-import { useAppDispatch } from '@hooks/typed-react-redux-hooks';
-import { resetCredentials } from '@redux/reducers/authSlice';
-import { LOCAL_STORAGE_AUTH_PARAM } from '@redux/API/api-data';
-import { Paths } from '../../routes/pathes';
-
+import { FC, useContext } from 'react';
+import { CollapsedContext } from '../../reactContexts';
 import { Col, Row, Typography, Button } from 'antd';
 import { HeartFilled, CalendarTwoTone } from '@ant-design/icons';
 import { CardMainAction } from '@components/cardMainAction';
 import { ProfileIconComponent } from '@components/customIcon/profileIcon';
-import { ShowFetchDataError } from '@components/showFetchDataError';
 import { primaryLight } from '@utils/constants/colors';
 import { useGetAllUserTrainings } from '@hooks/useGetAllUserTrainings';
 
@@ -22,43 +12,6 @@ import classnames from 'classnames';
 
 export const CardsSection: FC = () => {
     const fetchAllTrainings = useGetAllUserTrainings();
-    // const navigate = useNavigate();
-    // const dispatch = useAppDispatch();
-    // const { startLoader, stopLoader } = useContext(LoaderStateContext);
-    // const { setNode, setWidthModal, openModal } = useContext(ModalReportContext);
-
-    // const [getAllTrainings, { isLoading }] = useLazyGetAllTrainingsQuery();
-
-    // const resetUser = () => {
-    //     localStorage.removeItem(LOCAL_STORAGE_AUTH_PARAM);
-    //     dispatch(resetCredentials());
-    //     navigate(Paths.AUTH, { replace: true });
-    // };
-
-    // useEffect(() => {
-    //     isLoading ? startLoader() : stopLoader();
-    // }, [isLoading, startLoader, stopLoader]);
-
-    // const handleGetTrainingsError = (error: unknown) => {
-    //     if (isFetchBaseQueryError(error) && error.status === 403) {
-    //         resetUser();
-    //     } else {
-    //         setNode(<ShowFetchDataError forPage='calendar' />);
-    //         setWidthModal('clamp(328px, 100%, 539px)');
-    //         openModal();
-    //     }
-    // };
-
-    // const fetchAllTrainings = async () => {
-    //     try {
-    //         await getAllTrainings().unwrap();
-    //         history.push(Paths.CALENDAR_PAGE, { allowRequest: true });
-    //     } catch (error) {
-    //         handleGetTrainingsError(error);
-    //     } finally {
-    //         stopLoader();
-    //     }
-    // };
 
     const handleCalendarPageClick = () => {
         fetchAllTrainings();

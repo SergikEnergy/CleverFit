@@ -205,4 +205,8 @@ button.mobile__button {
     button.mobile__button.antFixed.calendar-mobile {
         background: transparent;
     }
+    button.mobile__button.antFixed.calendar-mobile > span {
+        font-size: var(--font-size-main);
+        margin-right: var(--margin-little-size);
+    }
 }

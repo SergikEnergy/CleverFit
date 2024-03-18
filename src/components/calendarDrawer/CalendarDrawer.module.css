@@ -1,6 +1,6 @@
 .drawer :global(.ant-drawer-content) {
-    border-top-left-radius: 10px;
-    border-bottom-left-radius: 10px;
+    border-top-left-radius: var(----border-radius-middle);
+    border-bottom-left-radius: var(--border-radius-middle);
 }
 
 .subtitle {
@@ -35,8 +35,8 @@
         background: transparent;
     }
     .drawer :global(.ant-drawer-content) {
-        border-top-left-radius: 15px;
-        border-top-right-radius: 15px;
-        border-bottom-left-radius: 0%;
+        border-top-left-radius: var(--border-radius-big);
+        border-top-right-radius: var(--border-radius-big);
+        border-bottom-left-radius: var(--border-radius-zero);
     }
 }
