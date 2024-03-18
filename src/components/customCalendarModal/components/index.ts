@@ -1,4 +1,4 @@
 export { TrainWithBadge } from './trainWithBadge';
 export { ModalCreateTrain } from './ModalCreateTrain';
-export { ModalSelectExercise } from './ModalSelectExercise';
+export { ModalSelectExercise } from './ModalSelectExercises/ModalSelectExercise';
 export { ExerciseItem } from './ExerciseItem';

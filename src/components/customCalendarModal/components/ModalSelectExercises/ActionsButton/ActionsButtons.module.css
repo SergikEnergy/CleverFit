@@ -1,0 +1,38 @@
+.buttons {
+    padding: var(--padding-modal-calendar);
+    margin-bottom: var(--margin-little-size);
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    gap: var(--gap-extra-small);
+}
+
+button.button__add {
+    background-color: var(--primary-light-6);
+    border: none;
+    font-family: var(--font-family);
+    font-weight: var(--font-weight-normal);
+    font-size: var(--font-size-main);
+    line-height: var(--line-height-main);
+}
+button.button__save {
+    border: none;
+    background-color: transparent;
+    font-family: var(--font-family);
+    font-weight: var(--font-weight-normal);
+    font-size: var(--font-size-main);
+    line-height: var(--line-height-main);
+    color: var(--primary-light-6);
+}
+button.button__save:disabled {
+    background-color: transparent;
+}
+
+button.button__save:global(.ant-btn.ant-btn-loading) {
+    color: var(--primary-light-7);
+}
+
+button.button__save:hover:not(:disabled) {
+    background-color: #cfcfcfb2;
+}

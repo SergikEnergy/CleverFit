@@ -71,7 +71,7 @@ span:global(.ant-select-selection-placeholder) {
     margin-bottom: var(--margin-medium-size);
 }
 
-.buttons {
+/* .buttons {
     padding: var(--padding-modal-calendar);
     margin-bottom: var(--margin-little-size);
     display: flex;
@@ -108,4 +108,4 @@ button.button__save:global(.ant-btn.ant-btn-loading) {
 
 button.button__save:hover:not(:disabled) {
     background-color: #cfcfcfb2;
-}
+} */

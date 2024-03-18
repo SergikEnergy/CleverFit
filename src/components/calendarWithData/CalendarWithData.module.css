@@ -15,64 +15,11 @@
     z-index: 3;
 }
 
-/* .cell {
-    display: flex;
-    align-items: flex-start;
-    justify-content: flex-start;
-} */
-
-/* .exercises {
-    margin-top: var(--margin-medium-size);
-    margin-left: var(--margin-small-size);
-    width: 99%;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    justify-content: flex-start;
-} */
-
-/* .exercise {
-    font-size: var(--font-size-mobile);
-    font-family: var(--main-font-family);
-    line-height: var(--line-height-main);
-    display: inline-block;
-} */
-
 @media screen and (max-width: 900px) {
-    /* .exercises {
-        margin-top: var(--margin-medium-size);
-        margin-left: 3px;
-        font-size: var(--font-size-mobile);
-    }
-    .exercises :global(.ant-badge-status-text) {
-        margin-left: 5px;
-        font-size: var(--font-size-mobile);
-    } */
-    /* :global(.ant-picker-calendar-date-today) {
-        border: none;
-    } */
-    /* .cell__mobile-data {
-        background-color: #f0f5ff;
-    } */
     table:global(.ant-picker-content) {
         border-collapse: separate;
         border-spacing: 0;
     }
-    /* td.cell__mobile-active {
-        background: transparent;
-        border-radius: 3px;
-        border: 1px solid #2f54eb;
-    }
-    td.cell__mobile-active:global(.ant-picker-cell-selected) :global(.ant-picker-cell-inner) {
-        background: white;
-        border: none;
-        color: #000;
-    }
-    .cell__mobile-active:global(
-            .ant-picker-cell-in-view.ant-picker-cell-today .ant-picker-cell-inner::before
-        ) {
-        border: none;
-    } */
 }
 
 @media screen and (max-width: 500px) {

@@ -1,31 +1,15 @@
 import { FC, useContext, useState, useLayoutEffect } from 'react';
-import { Moment } from 'moment';
 import {
     checkNarrowFramesDay,
     getAllowedTrains,
     getExistedNotImplementedTrains,
 } from './CustomCalendarModal.utils';
-import { ModalPositionType } from '@components/calendarWithData/CalendarWithData.types';
-import { TrainingsResponseType } from '@redux/API/api-types';
+import { CustomCalendarModalPropsType } from './CustomCalendarModal.types';
 import { ModalCreateTrain, ModalSelectExercise } from './components';
 import { DrawerTrainsContext } from '../../reactContexts';
 
 import classes from './CustomCalendarModal.module.css';
 import classnames from 'classnames';
-
-export type ModalModeType = 'train' | 'exercise';
-
-type CustomCalendarModalPropsType = {
-    widthModal: string;
-    modalType: ModalModeType;
-    modalPosition: ModalPositionType;
-    value: Moment;
-    trains: [] | TrainingsResponseType[];
-    isModalVisible: boolean;
-    closeModal: () => void;
-    changeModalType: () => void;
-    isCentered?: boolean;
-};
 
 export const CustomCalendarModal: FC<CustomCalendarModalPropsType> = ({
     modalPosition,

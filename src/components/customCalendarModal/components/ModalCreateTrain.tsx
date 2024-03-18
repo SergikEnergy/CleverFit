@@ -6,6 +6,7 @@ import { CloseOutlined } from '@ant-design/icons';
 import { Empty, Button, Divider } from 'antd';
 import EmptyImg from '/images/EmptyImg.svg';
 import { dateDayMonthYearDotFormat } from '@utils/constants/dateFormats';
+import { TRAIN_PER_DAY_MAX } from '@utils/constants/trainings-frames';
 
 import classes from './ModalCreateTrain.module.css';
 
@@ -29,7 +30,7 @@ export const ModalCreateTrain: FC<ModalCreateTrainPropsType> = ({
         !isPastDate || trains.length === 0 ? 'Создать тренировку' : 'Создать тренировку';
 
     useEffect(() => {
-        const isDisabled = value.isSameOrBefore(moment()) || trains.length >= 5;
+        const isDisabled = value.isSameOrBefore(moment()) || trains.length >= TRAIN_PER_DAY_MAX;
         setDisabledCreateButton(isDisabled);
     }, [value, trains.length]);
 
