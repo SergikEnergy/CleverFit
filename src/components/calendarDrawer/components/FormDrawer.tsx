@@ -1,24 +1,12 @@
-import { ReactNode, useContext, forwardRef, useState } from 'react';
+import { useContext, forwardRef, useState } from 'react';
+import { FormDrawerPropsType, FormFieldsType } from './FormDrawer.types';
+import { finishFormHandler } from './FormDrawer.utils';
+import { emptyFields } from './FormDrawer.data';
 import { DrawerTrainsContext } from '../../../reactContexts';
 import { Form, Button, Input, InputNumber, Checkbox } from 'antd';
 import type { CheckboxChangeEvent } from 'antd/es/checkbox';
 import { PlusOutlined, MinusOutlined } from '@ant-design/icons';
 import classes from './FormDrawer.module.css';
-
-type FormDrawerPropsType = {
-    editMode: boolean;
-    children?: ReactNode;
-};
-
-type FormFieldType = {
-    key: string;
-    name: string;
-    exercise: string;
-    replays: number;
-    weight: number;
-    approaches: number;
-};
-type FormFieldsType = { exercises: FormFieldType[] };
 
 export const FormDrawer = forwardRef<HTMLButtonElement, FormDrawerPropsType>(
     ({ editMode }, ref) => {
@@ -38,37 +26,19 @@ export const FormDrawer = forwardRef<HTMLButtonElement, FormDrawerPropsType>(
                       weight: exercise.weight,
                       approaches: exercise.approaches,
                   }))
-                : [
-                      {
-                          key: 'empty',
-                          name: 'empty',
-                          exercise: '',
-                          replays: 1,
-                          weight: 0,
-                          approaches: 1,
-                      },
-                  ];
+                : [emptyFields];
 
         const finishFunc = (values: FormFieldsType) => {
-            if (values.exercises.length > 0) {
-                const filteredResult = values.exercises.filter(
-                    (elem) => elem.exercise && elem.exercise.length > 0,
-                );
-                if (filteredResult.length > 0) {
-                    const trainsCorrected = filteredResult.map((train) => {
-                        if (!train.approaches) train.approaches = 1;
-                        if (!train.replays) train.replays = 1;
-                        if (!train.weight) train.weight = 0;
-                        train.name = train.exercise;
-                        return train;
-                    });
-                    setExercises(trainsCorrected, trainName);
-                }
-            } else {
-                setExercises([], trainName);
-            }
-
+            finishFormHandler(values, trainName, setExercises);
             form.resetFields();
+        };
+
+        const checkboxChangeHandler = (e: CheckboxChangeEvent, name: number) => {
+            if (e.target.checked) {
+                setDeletedIndexes((prev) => (prev.includes(name) ? prev : [...prev, name]));
+            } else {
+                setDeletedIndexes((prev) => prev.filter((elem) => elem !== name));
+            }
         };
 
         return (
@@ -98,20 +68,8 @@ export const FormDrawer = forwardRef<HTMLButtonElement, FormDrawerPropsType>(
                                                     <Checkbox
                                                         data-test-id={`modal-drawer-right-checkbox-exercise${index}`}
                                                         className={classes.checkbox}
-                                                        onChange={(e: CheckboxChangeEvent) => {
-                                                            if (e.target.checked) {
-                                                                setDeletedIndexes((prev) =>
-                                                                    prev.includes(name)
-                                                                        ? prev
-                                                                        : [...prev, name],
-                                                                );
-                                                            } else {
-                                                                setDeletedIndexes((prev) =>
-                                                                    prev.filter(
-                                                                        (elem) => elem !== name,
-                                                                    ),
-                                                                );
-                                                            }
+                                                        onChange={(event: CheckboxChangeEvent) => {
+                                                            checkboxChangeHandler(event, name);
                                                         }}
                                                     />
                                                 ) : null

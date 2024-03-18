@@ -1,6 +1,7 @@
 import ru_RU from 'antd/lib/calendar/locale/ru_RU';
 import CalendarLocale from 'rc-picker/lib/locale/ru_RU';
 import TimePickerLocale from 'antd/lib/time-picker/locale/ru_RU';
+import { ModalPositionType } from './CalendarWithData.types';
 
 export const shortMonthsRu = [
     'Янв',
@@ -36,3 +37,11 @@ export enum ColorForTrain {
     back = 'orange',
     chest = 'green',
 }
+
+export const modalInitialPosition: ModalPositionType = {
+    top: 0,
+    left: 0,
+    right: 0,
+    width: 0,
+    heightSelectedCell: 0,
+};
