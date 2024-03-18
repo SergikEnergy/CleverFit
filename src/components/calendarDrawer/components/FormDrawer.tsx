@@ -6,8 +6,8 @@ import { PlusOutlined, MinusOutlined } from '@ant-design/icons';
 import classes from './FormDrawer.module.css';
 
 type FormDrawerPropsType = {
-    children?: ReactNode;
     editMode: boolean;
+    children?: ReactNode;
 };
 
 type FormFieldType = {

@@ -21,10 +21,10 @@ type CustomCalendarModalPropsType = {
     modalPosition: ModalPositionType;
     value: Moment;
     trains: [] | TrainingsResponseType[];
-    isCentered?: boolean;
     isModalVisible: boolean;
     closeModal: () => void;
     changeModalType: () => void;
+    isCentered?: boolean;
 };
 
 export const CustomCalendarModal: FC<CustomCalendarModalPropsType> = ({

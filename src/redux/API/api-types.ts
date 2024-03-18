@@ -59,8 +59,8 @@ export type TrainingsResponseType = {
     date: string;
     isImplementation: boolean;
     userId: string;
-    parameters?: ParametersTrainingType;
     exercises: ExerciseType[];
+    parameters?: ParametersTrainingType;
 };
 
 export type ParametersTrainingType = {
@@ -71,12 +71,12 @@ export type ParametersTrainingType = {
 };
 
 export type ExerciseType = {
-    _id?: string;
     name: string;
     replays: number;
     weight: number;
     approaches: number;
     isImplementation?: boolean;
+    _id?: string;
 };
 
 export type AllowedTrainResponseType = {
