@@ -1,6 +1,6 @@
 import { FC, useState, useEffect } from 'react';
 import moment, { Moment } from 'moment';
-import { ITrainingsResponse } from '@redux/API/api-types';
+import { TrainingsResponseType } from '@redux/API/api-types';
 import { TrainWithBadge } from '.';
 import { CloseOutlined } from '@ant-design/icons';
 import { Empty, Button, Divider } from 'antd';
@@ -9,14 +9,14 @@ import { dateDayMonthYearDotFormat } from '@utils/constants/dateFormats';
 
 import classes from './ModalCreateTrain.module.css';
 
-interface IModalCreateTrainProps {
+type ModalCreateTrainPropsType = {
     value: Moment;
-    trains: [] | ITrainingsResponse[];
+    trains: [] | TrainingsResponseType[];
     closeModal: () => void;
     changeMode: () => void;
-}
+};
 
-export const ModalCreateTrain: FC<IModalCreateTrainProps> = ({
+export const ModalCreateTrain: FC<ModalCreateTrainPropsType> = ({
     value,
     trains,
     closeModal,

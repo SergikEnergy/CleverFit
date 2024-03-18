@@ -17,13 +17,13 @@ const getIconFromStatus = (status: StatusMessageType = 'error') => {
     }
 };
 
-interface IErrorShowAllowedTrainsListProps {
+type ErrorShowAllowedTrainsListPropsType = {
     status?: StatusMessageType;
     closeClickAction?: () => void;
     buttonActionClick?: () => void;
-}
+};
 
-export const ErrorShowAllowedTrainsList: FC<IErrorShowAllowedTrainsListProps> = ({
+export const ErrorShowAllowedTrainsList: FC<ErrorShowAllowedTrainsListPropsType> = ({
     status,
     closeClickAction,
     buttonActionClick,
@@ -38,7 +38,6 @@ export const ErrorShowAllowedTrainsList: FC<IErrorShowAllowedTrainsListProps> = 
 
     const handleActionButtonClick = () => {
         if (buttonActionClick) buttonActionClick();
-
     };
 
     return (

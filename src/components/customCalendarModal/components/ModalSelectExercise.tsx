@@ -1,9 +1,8 @@
 import { FC, useState, useContext, useLayoutEffect } from 'react';
-import { IAllowedTrainResponse, ITrainingsResponse } from '@redux/API/api-types';
+import { AllowedTrainResponseType, TrainingsResponseType } from '@redux/API/api-types';
 import { Divider, Button, Select, Empty } from 'antd';
 import { ArrowLeftOutlined } from '@ant-design/icons';
 import { ErrorAddTrain } from '@components/errorAddTrain';
-// import { AlertCancelEditTrain } from './AlertCancelEditTrain';
 import { DrawerTrainsContext, ModalReportContext } from '../../../reactContexts';
 import { ExerciseItem } from '.';
 import { Moment } from 'moment';
@@ -14,20 +13,17 @@ import moment from 'moment';
 
 import classes from './ModalSelectExercise.module.css';
 
-// const TIMER_DELAY = 5000;
-// export type TimeoutType = ReturnType<typeof setTimeout>;
-
-interface IModalSelectExercise {
+type ModalSelectExercisePropsType = {
     changeMode: () => void;
-    allowedTrains: IAllowedTrainResponse[];
-    existingTrains: IAllowedTrainResponse[];
-    trains: [] | ITrainingsResponse[];
+    allowedTrains: AllowedTrainResponseType[];
+    existingTrains: AllowedTrainResponseType[];
+    trains: [] | TrainingsResponseType[];
     date: Moment;
     trainForEdit: string;
     closeModal: () => void;
-}
+};
 
-export const ModalSelectExercise: FC<IModalSelectExercise> = ({
+export const ModalSelectExercise: FC<ModalSelectExercisePropsType> = ({
     changeMode,
     allowedTrains,
     existingTrains,
@@ -48,10 +44,6 @@ export const ModalSelectExercise: FC<IModalSelectExercise> = ({
         setExercises,
         resetExercises,
     } = useContext(DrawerTrainsContext);
-
-    // const timerRef = useRef<TimeoutType | null>(null);
-
-    // const [isAlertShowed, setIsAlertShowed] = useState(false);
 
     const isPastDate = date.isSameOrBefore(moment());
 
@@ -107,11 +99,6 @@ export const ModalSelectExercise: FC<IModalSelectExercise> = ({
         }
     };
 
-    // const updateTrainWithDelayHandler = (body: NewTrainRequestType, id: string) => {
-    //     setIsAlertShowed(false);
-    //     updateTrainRequestHandler(body, id);
-    // };
-
     const updateSelectedTrain = async () => {
         const filterExercisesByName = exercises.filter((elem) => elem.name === trainSelect);
         const exercisesRequest = filterExercisesByName[0].exercises;
@@ -125,15 +112,6 @@ export const ModalSelectExercise: FC<IModalSelectExercise> = ({
         };
         const idRequest = editedTrainID;
         await updateTrainRequestHandler(bodyRequest, idRequest);
-
-        // if (!isPastDate) {
-        //     await updateTrainRequestHandler(bodyRequest, idRequest);
-        // } else {
-        //     setIsAlertShowed(true);
-        //     timerRef.current = setTimeout(() => {
-        //         updateTrainWithDelayHandler(bodyRequest, idRequest);
-        //     }, TIMER_DELAY);
-        // }
     };
 
     useLayoutEffect(() => {
@@ -274,14 +252,6 @@ export const ModalSelectExercise: FC<IModalSelectExercise> = ({
                     {isPastDate ? 'Сохранить изменения' : 'Сохранить'}
                 </Button>
             </div>
-            {/* {isAlertShowed && (
-                <AlertCancelEditTrain
-                    closeAlert={() => {
-                        setIsAlertShowed(false);
-                    }}
-                    currentTimerID={timerRef.current as TimeoutType}
-                />
-            )} */}
         </>
     );
 };

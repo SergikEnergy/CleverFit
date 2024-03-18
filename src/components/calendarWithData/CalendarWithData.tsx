@@ -1,5 +1,5 @@
 import { MouseEvent, FC, useState, useEffect, useContext } from 'react';
-import { ITrainingsResponse } from '@redux/API/api-types';
+import { TrainingsResponseType } from '@redux/API/api-types';
 import { Calendar, Badge } from 'antd';
 import { ruLocale } from './CalendarWithData.data';
 import { CustomCalendarModal } from '@components/customCalendarModal';
@@ -27,7 +27,7 @@ export const CalenDarWithData: FC<ICalenDarWithDataProps> = ({
     const { hideCollapsed, collapsed } = useContext(CollapsedContext);
 
     const [isFullScreen, setIsFullScreen] = useState(true);
-    const [selectedCellData, setSelectedCellData] = useState<[] | ITrainingsResponse[]>([]);
+    const [selectedCellData, setSelectedCellData] = useState<[] | TrainingsResponseType[]>([]);
     const [isModalVisible, setIsModalVisible] = useState(false);
     const [modalType, setModalType] = useState<'train' | 'exercise'>('train');
     const [selectedDay, setSelectedDay] = useState<Moment>(moment());
@@ -120,7 +120,7 @@ export const CalenDarWithData: FC<ICalenDarWithDataProps> = ({
     }, [dataForRender]);
 
     const handleDateClick = async (
-        currentData: ITrainingsResponse[] | [],
+        currentData: TrainingsResponseType[] | [],
         event: MouseEvent<HTMLDivElement>,
     ) => {
         if (!isFullScreen) {

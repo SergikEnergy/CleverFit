@@ -1,6 +1,6 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import { RootState } from '@redux/configure-store';
-import { IFeedbackResponse, IPostFeedbackRequest } from './api-types.ts';
+import { FeedbackResponseType, PostFeedbackRequestType } from './api-types.ts';
 import { API_BASE_URL } from './api-data.ts';
 
 export const feedbackApi = createApi({
@@ -19,7 +19,7 @@ export const feedbackApi = createApi({
     }),
 
     endpoints: (build) => ({
-        getAllFeedbacks: build.query<IFeedbackResponse[], void>({
+        getAllFeedbacks: build.query<FeedbackResponseType[], void>({
             query: () => ({
                 url: 'feedback',
                 credentials: 'include',
@@ -29,7 +29,7 @@ export const feedbackApi = createApi({
                     ? [...result.map(({ id }) => ({ type: 'Feedbacks' as const, id })), 'Feedbacks']
                     : ['Feedbacks'],
         }),
-        addNewFeedback: build.mutation<void, IPostFeedbackRequest>({
+        addNewFeedback: build.mutation<void, PostFeedbackRequestType>({
             query: (body) => ({
                 url: 'feedback',
                 body,

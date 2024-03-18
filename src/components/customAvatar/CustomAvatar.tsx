@@ -2,11 +2,11 @@ import { FC } from 'react';
 
 import classes from './CustomAvatar.module.css';
 
-interface CustomAvatarProps {
+type CustomAvatarPropsType = {
     url: string;
-}
+};
 
-export const CustomAvatar: FC<CustomAvatarProps> = ({ url }) => (
+export const CustomAvatar: FC<CustomAvatarPropsType> = ({ url }) => (
     <div className={classes.avatar}>
         <img src={url} alt='user image' />
     </div>

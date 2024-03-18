@@ -1,4 +1,4 @@
-import { ITrainingsResponse } from '@redux/API/api-types';
+import { TrainingsResponseType } from '@redux/API/api-types';
 import moment, { Moment } from 'moment';
 import { CellDataType } from './CalendarWithData.types';
 import { ColorForTrain } from './CalendarWithData.data';
@@ -22,8 +22,8 @@ export const getColorTrainByName = (trainName: string) => {
 
 export const filterDataByDaySortByDate = (
     date: Moment,
-    dataForRender: ITrainingsResponse[],
-): ITrainingsResponse[] | [] => {
+    dataForRender: TrainingsResponseType[],
+): TrainingsResponseType[] | [] => {
     if (dataForRender.length > 0) {
         return dataForRender
             .filter(
@@ -35,7 +35,7 @@ export const filterDataByDaySortByDate = (
     } else return [];
 };
 
-export const getCellData = (filteredData: ITrainingsResponse[] | []): CellDataType[] | [] => {
+export const getCellData = (filteredData: TrainingsResponseType[] | []): CellDataType[] | [] => {
     if (filteredData.length > 0) {
         return filteredData.map((train) => {
             return {

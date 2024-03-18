@@ -1,5 +1,5 @@
 import { FC, useState, useContext } from 'react';
-import { IFeedbackResponse } from '@redux/API/api-types';
+import { FeedbackResponseType } from '@redux/API/api-types';
 import { FeedbacksList } from '@components/feedbacksList';
 import { ModalReportContext } from '../../reactContexts';
 import { NewFeedback } from '@components/newFeedback';
@@ -7,22 +7,22 @@ import { NewFeedback } from '@components/newFeedback';
 import { Button } from 'antd';
 import classes from './Feedbacks.module.css';
 
-interface IFeedbacksProps {
-    feedbacks: IFeedbackResponse[];
-}
+type FeedbacksPropsType = {
+    feedbacks: FeedbackResponseType[];
+};
 
-export const Feedbacks: FC<IFeedbacksProps> = ({ feedbacks }) => {
+export const Feedbacks: FC<FeedbacksPropsType> = ({ feedbacks }) => {
     const hiddenCommentText = 'Свернуть все отзывы';
     const spreadCommentText = 'Развернуть все отзывы';
     const { setNode, setWidthModal, openModal } = useContext(ModalReportContext);
     const [textButton, setTextButton] = useState<string>(spreadCommentText);
     const [limit, setLimit] = useState(4);
 
-    const sortFeedbacksByDateAscend = (data: IFeedbackResponse[]) => {
+    const sortFeedbacksByDateAscend = (data: FeedbackResponseType[]) => {
         if (data.length === 1) {
             return data;
         }
-        return data.sort((item1: IFeedbackResponse, item2: IFeedbackResponse) => {
+        return data.sort((item1: FeedbackResponseType, item2: FeedbackResponseType) => {
             const dataItem1 = new Date(item1.createdAt);
             const dataItem2 = new Date(item2.createdAt);
             return -dataItem1.getTime() + dataItem2.getTime();

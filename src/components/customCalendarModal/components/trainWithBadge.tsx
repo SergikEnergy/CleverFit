@@ -1,5 +1,5 @@
 import { FC, useContext } from 'react';
-import { ITrainingsResponse } from '@redux/API/api-types';
+import { TrainingsResponseType } from '@redux/API/api-types';
 import { DrawerTrainsContext } from '../../../reactContexts';
 import { Badge, Button } from 'antd';
 import { EditOutlined } from '@ant-design/icons';
@@ -8,13 +8,13 @@ import { getColorTrainByName } from '@components/calendarWithData/CalendarWithDa
 import classes from './TrainWithBadge.module.css';
 import classnames from 'classnames';
 
-interface TrainWithBadgeProps {
-    train: ITrainingsResponse;
+type TrainWithBadgePropsType = {
+    train: TrainingsResponseType;
     index: number;
     changeFlowToEdit: () => void;
-}
+};
 
-export const TrainWithBadge: FC<TrainWithBadgeProps> = ({ train, changeFlowToEdit, index }) => {
+export const TrainWithBadge: FC<TrainWithBadgePropsType> = ({ train, changeFlowToEdit, index }) => {
     const { changeEditedTrainData } = useContext(DrawerTrainsContext);
     const handleEditClick = () => {
         if (!train.isImplementation) {

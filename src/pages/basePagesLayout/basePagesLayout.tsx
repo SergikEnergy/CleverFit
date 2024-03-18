@@ -14,13 +14,13 @@ import classnames from 'classnames';
 
 const { Header: AntHeader, Sider, Content } = AntLayout;
 
-interface BasePagesLayoutProps {
+type BasePagesLayoutPropsType = {
     children: ReactNode;
     isFeedbackPage?: boolean;
     isCalendarPage?: boolean;
-}
+};
 
-export const BasePagesLayout: FC<BasePagesLayoutProps> = ({
+export const BasePagesLayout: FC<BasePagesLayoutPropsType> = ({
     children,
     isFeedbackPage,
     isCalendarPage,

@@ -1,96 +1,91 @@
-export interface IRequest {
+export type RequestType = {
     email?: string;
     password?: string;
-}
+};
 
-export interface IErrorData {
+export type ErrorDataType = {
     statusCode?: number;
     error?: string;
     message?: string;
-}
+};
 
-export interface IResponseError {
+export type ResponseErrorType = {
     status: number;
-    data: IErrorData;
-}
+    data: ErrorDataType;
+};
 
-export interface IRegistrationResponse {
+export type RegistrationResponseType = {
     data: null;
-}
-export interface ILoginResponse {
+};
+export type LoginResponseType = {
     accessToken: string;
-}
-export interface ICheckEmailResponse {
+};
+export type CheckEmailResponseType = {
     email: string;
     message: string;
-}
+};
 
-export interface IConfirmRequest {
+export type ConfirmRequestType = {
     email: string;
     code: string;
-}
+};
 
-export interface IConfirmResponse {
-    email: string;
-    message: string;
-}
+export type IConfirmResponseType = ConfirmRequestType;
 
-export interface IChangePasswordRequest {
+export type ChangePasswordRequestType = {
     password: string;
     confirmPassword: string;
-}
+};
 
-export interface IChangePasswordResponse {
-    message: string;
-}
+export type ChangePasswordResponseType = Pick<CheckEmailResponseType, 'message'>;
 
-export interface IFeedbackResponse {
+export type FeedbackResponseType = {
     id: string;
     fullName: string | null;
     imageSrc: string | null;
     message: string | null;
     rating: number;
     createdAt: string;
-}
+};
 
-export interface IPostFeedbackRequest {
+export type PostFeedbackRequestType = {
     message: string;
     rating: number;
-}
+};
 
-export interface ITrainingsResponse {
+export type TrainingsResponseType = {
     _id: string;
     name: string;
     date: string;
     isImplementation: boolean;
     userId: string;
-    parameters?: IParametersTraining;
-    exercises: IExercise[];
-}
+    parameters?: ParametersTrainingType;
+    exercises: ExerciseType[];
+};
 
-export interface IParametersTraining {
+export type ParametersTrainingType = {
     repeat: boolean;
     period: number;
     jointTraining: boolean;
     participants: string[];
-}
+};
 
-export interface IExercise {
+export type ExerciseType = {
     _id?: string;
     name: string;
     replays: number;
     weight: number;
     approaches: number;
     isImplementation?: boolean;
-}
+};
 
-export interface IAllowedTrainResponse {
+export type AllowedTrainResponseType = {
     name: 'string';
     key: 'string';
-}
+};
 
 export type NewTrainRequestType = Pick<
-    ITrainingsResponse,
+    TrainingsResponseType,
     'date' | 'exercises' | 'name' | 'isImplementation'
 >;
 

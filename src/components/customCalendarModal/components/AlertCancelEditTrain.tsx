@@ -4,12 +4,12 @@ import { Alert, Button } from 'antd';
 import { LoadingOutlined } from '@ant-design/icons';
 import classes from './AlertCancelEditTrain.module.css';
 
-interface AlertCancelEditTrainProps {
+type AlertCancelEditTrainPropsType = {
     currentTimerID: ReturnType<typeof setTimeout>;
     closeAlert: () => void;
-}
+};
 
-export const AlertCancelEditTrain: FC<AlertCancelEditTrainProps> = ({
+export const AlertCancelEditTrain: FC<AlertCancelEditTrainPropsType> = ({
     currentTimerID,
     closeAlert,
 }) => {

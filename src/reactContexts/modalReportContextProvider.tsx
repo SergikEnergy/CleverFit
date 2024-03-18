@@ -1,11 +1,11 @@
 import { FC, useState, ReactNode } from 'react';
 import { ModalReportContext } from './modalReport-context';
 
-interface ModalReportProviderProps {
+type ModalReportProviderPropsType = {
     children: ReactNode;
-}
+};
 
-export const ModalReportContextProvider: FC<ModalReportProviderProps> = ({ children }) => {
+export const ModalReportContextProvider: FC<ModalReportProviderPropsType> = ({ children }) => {
     const [isOpen, setIsOpen] = useState(false);
     const [width, setWidth] = useState<string>('');
     const [nodeForModal, setNodeForModal] = useState<ReactNode | null>(null);

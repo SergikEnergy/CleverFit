@@ -3,11 +3,11 @@ import { useLocation, Navigate } from 'react-router-dom';
 import { isAllowedPreviousLocation } from '../helpers/isAllowedPreviousLocation';
 import { Paths } from '../routes/pathes';
 
-interface ProtectedRouteProps {
+type ProtectedRoutePropsType = {
     children: ReactNode;
-}
+};
 
-export const ProtectedRoute: FC<ProtectedRouteProps> = ({ children }) => {
+export const ProtectedRoute: FC<ProtectedRoutePropsType> = ({ children }) => {
     const location = useLocation();
     const isRightPath = isAllowedPreviousLocation(location);
 

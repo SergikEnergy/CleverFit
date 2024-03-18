@@ -1,13 +1,13 @@
 import { createSlice } from '@reduxjs/toolkit';
 import type { PayloadAction } from '@reduxjs/toolkit';
-import { ITrainingsResponse } from '@redux/API/api-types';
+import { TrainingsResponseType } from '@redux/API/api-types';
 
-interface IUserTrains {
-    userTrains: ITrainingsResponse[];
+type UserTrainsPropsType = {
+    userTrains: TrainingsResponseType[];
     isGetTrainsSuccessful: boolean;
-}
+};
 
-const initialCalendarState: IUserTrains = {
+const initialCalendarState: UserTrainsPropsType = {
     userTrains: [],
     isGetTrainsSuccessful: false,
 };
@@ -15,7 +15,7 @@ const slice = createSlice({
     name: 'calendar',
     initialState: initialCalendarState,
     reducers: {
-        setUserTrainsFromServer: (state, { payload }: PayloadAction<ITrainingsResponse[]>) => {
+        setUserTrainsFromServer: (state, { payload }: PayloadAction<TrainingsResponseType[]>) => {
             if (payload) {
                 state.userTrains = payload;
                 state.isGetTrainsSuccessful = true;

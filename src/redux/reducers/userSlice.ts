@@ -1,13 +1,13 @@
 import { createSlice } from '@reduxjs/toolkit';
 import type { PayloadAction } from '@reduxjs/toolkit';
 
-interface IUserData {
+type UserDataPropsType = {
     email: string;
     password: string;
     confirmPassword?: string;
-}
+};
 
-const initialUserState: IUserData = {
+const initialUserState: UserDataPropsType = {
     email: '',
     password: '',
     confirmPassword: '',

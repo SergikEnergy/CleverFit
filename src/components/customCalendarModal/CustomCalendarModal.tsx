@@ -5,8 +5,8 @@ import {
     getAllowedTrains,
     getExistedNotImplementedTrains,
 } from './CustomCalendarModal.utils';
-import { IModalPosition } from '@components/calendarWithData/CalendarWithData.types';
-import { ITrainingsResponse } from '@redux/API/api-types';
+import { ModalPositionType } from '@components/calendarWithData/CalendarWithData.types';
+import { TrainingsResponseType } from '@redux/API/api-types';
 import { ModalCreateTrain, ModalSelectExercise } from './components';
 import { DrawerTrainsContext } from '../../reactContexts';
 
@@ -15,19 +15,19 @@ import classnames from 'classnames';
 
 export type ModalModeType = 'train' | 'exercise';
 
-interface ICustomCalendarModalProps {
+type CustomCalendarModalPropsType = {
     widthModal: string;
     modalType: ModalModeType;
-    modalPosition: IModalPosition;
+    modalPosition: ModalPositionType;
     value: Moment;
-    trains: [] | ITrainingsResponse[];
+    trains: [] | TrainingsResponseType[];
     isCentered?: boolean;
     isModalVisible: boolean;
     closeModal: () => void;
     changeModalType: () => void;
-}
+};
 
-export const CustomCalendarModal: FC<ICustomCalendarModalProps> = ({
+export const CustomCalendarModal: FC<CustomCalendarModalPropsType> = ({
     modalPosition,
     value,
     widthModal,

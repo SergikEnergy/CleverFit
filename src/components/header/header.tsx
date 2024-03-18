@@ -10,12 +10,12 @@ import { prepareDataForBreadCrumbs } from './header.utils';
 import classes from './header.module.css';
 import classnames from 'classnames';
 
-interface HeaderProps {
+type HeaderPropsType = {
     hideElement?: boolean;
     hideForCalendar?: boolean;
-}
+};
 
-export const Header: FC<HeaderProps> = ({ hideElement, hideForCalendar }) => {
+export const Header: FC<HeaderPropsType> = ({ hideElement, hideForCalendar }) => {
     const { collapsed } = useContext(CollapsedContext);
     const [breadCrumbsItems, setBreadCrumbsItems] = useState(breadcrumbsInitialItems);
     const location = useLocation();

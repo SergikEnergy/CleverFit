@@ -1,11 +1,15 @@
 import { createContext } from 'react';
-import { IAllowedTrainResponse, ITrainingsResponse, IExercise } from '@redux/API/api-types';
+import {
+    AllowedTrainResponseType,
+    TrainingsResponseType,
+    ExerciseType,
+} from '@redux/API/api-types';
 import { Moment } from 'moment';
 
-export type ExercisesListType = Pick<ITrainingsResponse, 'exercises' | 'name'>;
+export type ExercisesListType = Pick<TrainingsResponseType, 'exercises' | 'name'>;
 
 export type DrawerTrainsContextType = {
-    allowedTrains: IAllowedTrainResponse[];
+    allowedTrains: AllowedTrainResponseType[];
     drawerTitle: string;
     setDrawerTitle: (title: string) => void;
     date: Moment | null;
@@ -17,11 +21,11 @@ export type DrawerTrainsContextType = {
     exercises: ExercisesListType[];
     resetExercises: () => void;
     isDrawerOpen: boolean;
-    setExercises: (exercises: IExercise[], nameTrain: string) => void;
+    setExercises: (exercises: ExerciseType[], nameTrain: string) => void;
     openDrawer: () => void;
     closeDrawer: () => void;
     updateDate: (date: Moment) => void;
-    updateAllowedTrains: (trains: IAllowedTrainResponse[]) => void;
+    updateAllowedTrains: (trains: AllowedTrainResponseType[]) => void;
 };
 
 const initialContext: DrawerTrainsContextType = {

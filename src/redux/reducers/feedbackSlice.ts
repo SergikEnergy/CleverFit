@@ -1,12 +1,12 @@
 import { createSlice } from '@reduxjs/toolkit';
 import type { PayloadAction } from '@reduxjs/toolkit';
 
-interface IFeedbackData {
+type FeedbackDataPropsType = {
     rating: number | null;
     comment: string;
-}
+};
 
-const initialFeedbackState: IFeedbackData = {
+const initialFeedbackState: FeedbackDataPropsType = {
     rating: null,
     comment: '',
 };

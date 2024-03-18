@@ -6,11 +6,11 @@ import { Paths } from '../../routes/pathes';
 
 import classes from './ShowFetchDataError.module.css';
 
-interface IShowFetchDataErrorProps {
+type ShowFetchDataErrorPropsType = {
     forPage: 'calendar' | 'feedback';
-}
+};
 
-export const ShowFetchDataError: FC<IShowFetchDataErrorProps> = ({ forPage }) => {
+export const ShowFetchDataError: FC<ShowFetchDataErrorPropsType> = ({ forPage }) => {
     const navigate = useNavigate();
     const { closeModal, setNode } = useContext(ModalReportContext);
     const handleClickButton = () => {

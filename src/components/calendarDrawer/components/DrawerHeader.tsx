@@ -3,12 +3,12 @@ import { PlusOutlined, CloseOutlined } from '@ant-design/icons';
 
 import classes from './DrawerHeader.module.css';
 
-interface DrawerHeaderProps {
+type DrawerHeaderPropsType = {
     title: string;
     closeDrawer: () => void;
-}
+};
 
-export const DrawerHeader: FC<DrawerHeaderProps> = ({ title, closeDrawer }) => (
+export const DrawerHeader: FC<DrawerHeaderPropsType> = ({ title, closeDrawer }) => (
     <div className={classes.header}>
         <div className={classes.icon}>
             <PlusOutlined />

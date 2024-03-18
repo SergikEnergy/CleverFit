@@ -2,8 +2,8 @@ import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import { RootState } from '@redux/configure-store';
 import { API_BASE_URL } from './api-data';
 import {
-    ITrainingsResponse,
-    IAllowedTrainResponse,
+    TrainingsResponseType,
+    AllowedTrainResponseType,
     NewTrainRequestType,
     ChangeFutureTrainRequestType,
 } from './api-types';
@@ -24,7 +24,7 @@ export const calendarAPI = createApi({
     }),
 
     endpoints: (build) => ({
-        getAllTrainings: build.query<ITrainingsResponse[], void>({
+        getAllTrainings: build.query<TrainingsResponseType[], void>({
             query: () => ({
                 url: 'training',
                 credentials: 'include',
@@ -37,7 +37,7 @@ export const calendarAPI = createApi({
                       ]
                     : [{ type: 'Trainings', id: 'LIST' }],
         }),
-        getAllowedTrainsList: build.query<IAllowedTrainResponse[], void>({
+        getAllowedTrainsList: build.query<AllowedTrainResponseType[], void>({
             query: () => ({
                 url: 'catalogs/training-list',
                 credentials: 'include',

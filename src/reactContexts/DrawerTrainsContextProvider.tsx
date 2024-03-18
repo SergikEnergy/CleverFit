@@ -1,11 +1,11 @@
 import { FC, useState, ReactNode } from 'react';
 import { DrawerTrainsContext } from './drawerTrains-context';
-import { IAllowedTrainResponse, IExercise } from '@redux/API/api-types';
+import { AllowedTrainResponseType, ExerciseType } from '@redux/API/api-types';
 import { ExercisesListType } from './drawerTrains-context';
 import { Moment } from 'moment';
 
 export const DrawerTrainsContextProvider: FC<{ children: ReactNode }> = ({ children }) => {
-    const [allowedTrains, setAllowedTrains] = useState<IAllowedTrainResponse[]>([]);
+    const [allowedTrains, setAllowedTrains] = useState<AllowedTrainResponseType[]>([]);
     const [date, setDate] = useState<Moment | null>(null);
     const [train, setTrain] = useState('');
     const [isDrawerOpen, setIsDrawerOpen] = useState(false);
@@ -14,7 +14,7 @@ export const DrawerTrainsContextProvider: FC<{ children: ReactNode }> = ({ child
     const [trainForEditID, setTrainForEditID] = useState('');
     const [trainForEditName, setTrainForEditName] = useState('');
 
-    const updateAllowedTrains = (trains: IAllowedTrainResponse[]) => {
+    const updateAllowedTrains = (trains: AllowedTrainResponseType[]) => {
         setAllowedTrains(trains);
     };
 
@@ -30,7 +30,7 @@ export const DrawerTrainsContextProvider: FC<{ children: ReactNode }> = ({ child
         setTrain(train);
     };
 
-    const setExercises = (list: IExercise[], nameTrain: string) => {
+    const setExercises = (list: ExerciseType[], nameTrain: string) => {
         setExercisesList((prev) => {
             let isSameElement = false;
             const updatedList = prev.map((elem) => {

@@ -1,17 +1,17 @@
 import { FC, useContext } from 'react';
-import { IExercise } from '@redux/API/api-types';
+import { ExerciseType } from '@redux/API/api-types';
 import { EditOutlined } from '@ant-design/icons';
 import { DrawerTrainsContext } from '../../../reactContexts';
 
 import classes from './ExerciseItem.module.css';
 
-interface ExerciseItemProps {
-    exercise: IExercise;
+type ExerciseItemPropsType = {
+    exercise: ExerciseType;
     index: number;
     disabledIcon: boolean;
-}
+};
 
-export const ExerciseItem: FC<ExerciseItemProps> = ({ exercise, index, disabledIcon }) => {
+export const ExerciseItem: FC<ExerciseItemPropsType> = ({ exercise, index, disabledIcon }) => {
     const { openDrawer, editedTrainName, setDrawerTitle, setTrainName } =
         useContext(DrawerTrainsContext);
 

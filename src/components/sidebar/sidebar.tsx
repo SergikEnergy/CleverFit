@@ -6,11 +6,11 @@ import { ExitUser } from '@components/exitUser';
 import classes from './sidebar.module.css';
 import classnames from 'classnames';
 
-interface ISideBarProps {
+type SideBarPropsType = {
     isCalendarPage?: boolean;
-}
+};
 
-export const SideBar: FC<ISideBarProps> = ({ isCalendarPage }) => (
+export const SideBar: FC<SideBarPropsType> = ({ isCalendarPage }) => (
     <div className={classnames(classes.sidebar, { [classes.calendar]: isCalendarPage })}>
         <Logo />
         <MenuLinks />
