@@ -11,7 +11,7 @@
     align-items: stretch;
     flex-direction: column;
     justify-content: flex-start;
-    gap: 20px;
+    gap: var(--gap-middle);
 }
 
 .feedbacks-list {
@@ -28,7 +28,7 @@
 
 @media screen and (max-width: 680px) {
     .feedbacks-list {
-        margin-top: 24px;
+        margin-top: var(--margin-medium-size);
         max-height: 770px;
     }
 }

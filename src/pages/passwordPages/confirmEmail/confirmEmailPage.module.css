@@ -9,7 +9,7 @@
 }
 
 .confirm :global(.ant-result) {
-    padding: 0;
+    padding: var(--padding-zero);
     width: 475px;
     font-family: var(--font-family);
     color: var(--character-light-title-85);
@@ -22,22 +22,22 @@
 .confirm :global(.ant-result-title) {
     font-weight: 500;
     font-size: 2.4rem;
-    line-height: 130%;
+    line-height: var(--line-height-main);
     font-family: var(--font-family);
     white-space: pre-wrap;
     text-align: center;
 }
 
 .confirm :global(.ant-result-icon) {
-    margin-bottom: 35px;
+    margin-bottom: var(--margin-middle-size);
     width: 81px;
     height: 80px;
 }
 
 .subtitle {
-    font-weight: 400;
-    font-size: 1.4rem;
-    line-height: 130%;
+    font-weight: var(--font-weight-normal);
+    font-size: var(--font-size-main);
+    line-height: var(--line-height-main);
     color: var(--character-light-secondary-45);
     white-space: pre-wrap;
     margin-bottom: 2.4rem;
@@ -51,7 +51,7 @@
     height: 40px;
     margin: auto;
     margin-bottom: 24px;
-    gap: 12px;
+    gap: var(--gap-little);
 }
 
 .character {
@@ -64,18 +64,18 @@
     height: 40px;
     background: var(--character-light-primary-inverse);
     font-family: var(--font-family);
-    font-weight: 400;
-    font-size: 1.4rem;
-    line-height: 130%;
+    font-weight: var(--font-weight-normal);
+    font-size: var(--font-size-main);
+    line-height: var(--line-height-main);
     text-align: center;
     color: var(--character-light-title-85);
 }
 
 .character__filled {
     font-family: var(--font-family);
-    font-weight: 400;
-    font-size: 1.4rem;
-    line-height: 130%;
+    font-weight: var(--font-weight-normal);
+    font-size: var(--font-size-main);
+    line-height: var(--line-height-main);
     text-align: center;
     color: var(--character-light-title-85);
 }
@@ -109,9 +109,9 @@
 
 .additional {
     font-family: var(--font-family);
-    font-weight: 400;
-    font-size: 1.4rem;
-    line-height: 130%;
+    font-weight: var(--font-weight-normal);
+    font-size: var(--font-size-main);
+    line-height: var(--line-height-main);
     text-align: center;
     color: var(--character-light-secondary-45);
 }
@@ -135,7 +135,7 @@
         padding-right: 10px;
     }
     .container {
-        gap: 8px;
+        gap: var(--gap-extra-small);
     }
     .additional {
         width: 80%;

@@ -4,8 +4,8 @@
     align-items: center;
     justify-content: flex-start;
     gap: 132px;
-    margin-left: 2.4rem;
-    margin-right: 2.4rem;
+    margin-left: var(--margin-medium-size);
+    margin-right: var(--margin-medium-size);
 }
 
 .navigation {
@@ -28,9 +28,9 @@ button.button_filled {
 
 button.button_text {
     font-family: var(--font-family);
-    font-weight: 400;
-    font-size: 1.6rem;
-    line-height: 130%;
+    font-weight: var(--font-weight-normal);
+    font-size: var(--font-size-title);
+    line-height: var(--line-height-main);
     text-align: center;
     color: var(--primary-light-6);
 }
@@ -56,9 +56,9 @@ button.button_text:focus {
 
 @media screen and (max-width: 550px) {
     .feedbacks {
-        margin-left: 1.2rem;
-        margin-right: 1.2rem;
-        gap: 48px;
+        margin-left: var(--margin-little-size);
+        margin-right: var(--margin-little-size);
+        gap: var(--gap-big);
     }
     .navigation {
         align-items: center;

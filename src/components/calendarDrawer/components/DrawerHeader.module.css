@@ -3,7 +3,7 @@
     align-items: center;
     justify-content: flex-start;
     width: 100%;
-    gap: 10px;
+    gap: var(--gap-small);
     flex: 1;
 }
 
@@ -12,16 +12,16 @@
 }
 
 .title {
-    font-size: 16px;
+    font-size: var(--font-size-title);
     font-family: var(--main-font-family);
-    line-height: 130%;
+    line-height: var(--line-height-main);
     flex-grow: 1;
 }
 
 .close {
     text-align: end;
     transition: all ease-in 0.3s;
-    margin-right: 8px;
+    margin-right: var(--margin-small-size);
 }
 .close:hover,
 .close:target,

@@ -1,5 +1,5 @@
 .wrapper {
-    padding: 24px 16px;
+    padding: var(--padding-error-get-trains-main);
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -10,7 +10,7 @@
     display: flex;
     align-items: flex-start;
     justify-content: space-between;
-    gap: 16px;
+    gap: var(--gap-medium);
 }
 
 .content {
@@ -18,27 +18,27 @@
 }
 
 .status {
-    margin-top: 6px;
+    margin-top: var(--margin-small-size);
 }
 .title {
-    margin-top: 6px;
+    margin-top: var(--margin-small-size);
     font-family: var(--font-family);
-    font-weight: 400;
-    font-size: 1.6rem;
-    line-height: 130%;
+    font-weight: var(--font-weight-normal);
+    font-size: var(--font-size-title);
+    line-height: var(--line-height-main);
     text-align: start;
     color: var(--character-light-title-85);
-    margin-bottom: 8px;
+    margin-bottom: var(--margin-small-size);
 }
 
 .subtitle {
     font-family: var(--font-family);
-    font-weight: 400;
-    font-size: 1.4rem;
-    line-height: 130%;
+    font-weight: var(--font-weight-normal);
+    font-size: var(--font-size-main);
+    line-height: var(--line-height-main);
     text-align: start;
     color: var(--character-light-secondary-45);
-    margin-bottom: 16px;
+    margin-bottom: var(--margin-little-size);
 }
 
 .button {
@@ -64,7 +64,7 @@
     border-color: var(--primary-light-6);
     color: var(--character-light-primary-inverse);
     font-family: var(--font-family);
-    font-weight: 400;
-    font-size: 1.4rem;
-    line-height: 130%;
+    font-weight: var(--font-weight-normal);
+    font-size: var(--font-size-main);
+    line-height: var(--line-height-main);
 }

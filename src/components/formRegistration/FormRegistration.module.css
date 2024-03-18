@@ -9,9 +9,9 @@
 .form > div {
     width: 100%;
     font-family: var(--font-family);
-    font-weight: 400;
-    font-size: 14px;
-    line-height: 130%;
+    font-weight: var(--font-weight-normal);
+    font-size: var(--font-size-main);
+    line-height: var(--line-height-main);
     margin-bottom: 24px;
 }
 
@@ -40,7 +40,7 @@ span.input input {
 
 :global(#registrationForm_password_help > div),
 :global(#registrationForm_confirmPassword_help > div) {
-    font-size: 12px;
+    font-size: var(--font-size-mobile);
     text-align: start;
     color: var(--character-light-secondary-45);
 }
@@ -56,18 +56,18 @@ span.input input {
 
 :global(#registrationForm_password_help > div.ant-form-item-explain-error),
 :global(#registrationForm_confirmPassword_help > div.ant-form-item-explain-error) {
-    font-size: 12px;
+    font-size: var(--font-size-mobile);
     color: var(--character-light-error);
 }
 
 .submit-block.antFixed {
     margin-bottom: 16px;
-    font-size: 16px;
+    font-size: var(--font-size-title);
     color: var(--character-light-primary-inverse);
 }
 
 .google-button.antFixed {
-    font-size: 16px;
+    font-size: var(--font-size-title);
     color: var(--character-light-title-85);
 }
 
@@ -90,7 +90,7 @@ span.input input {
     }
     .submit-block.antFixed,
     .google-button.antFixed {
-        font-size: 14px;
+        font-size: var(--font-size-main);
     }
     .submit-block.antFixed {
         margin-bottom: 13px;

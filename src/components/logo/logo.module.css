@@ -9,7 +9,7 @@
 }
 
 .logo.collapsed {
-    margin-left: 0;
+    margin-left: var(--margin-zero);
 }
 
 .logo__menu .ant-menu-item-icon {
@@ -43,7 +43,7 @@
 @media screen and (max-width: 400px) {
     .logo {
         padding-top: 1.3rem;
-        margin-left: 0;
+        margin-left: var(--margin-zero);
         margin-bottom: 2.8rem;
     }
 }

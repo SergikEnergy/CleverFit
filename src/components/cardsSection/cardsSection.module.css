@@ -17,12 +17,12 @@
 h1.title__text.antFixed,
 .title__text {
     font-family: var(--font-family);
-    margin-bottom: 0;
+    margin-bottom: var(--margin-zero);
     font-weight: 500;
     font-style: normal;
     text-align: left;
     font-size: 2rem;
-    line-height: 130%;
+    line-height: var(--line-height-main);
     color: var(--character-light-title-85);
 }
 
@@ -63,7 +63,7 @@ h1.title__text.antFixed,
 
 @media screen and (max-width: 750px) {
     .cards {
-        gap: 16px;
+        gap: var(--gap-medium);
     }
 }
 @media screen and (max-width: 400px) {
@@ -77,6 +77,6 @@ h1.title__text.antFixed,
     .cards.collapsed,
     .cards {
         width: 98.5%;
-        gap: 8px;
+        gap: var(--gap-extra-small);
     }
 }

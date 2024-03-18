@@ -5,7 +5,7 @@
 
 .alert:global(.ant-alert) {
     position: fixed;
-    padding: 9px 16px;
+    padding: var(--padding-alert-cancel-calendar);
     min-height: 118px;
     width: 395px;
     bottom: calc(52px + 118px);
@@ -25,15 +25,15 @@
 }
 
 .title {
-    font-size: 1.6rem;
+    font-size: var(--font-size-title);
     font-family: var(--main-font-family);
-    line-height: 130%;
+    line-height: var(--line-height-main);
     color: var(--character-light-title-85);
 }
 
 .alert :global(.ant-alert-description) {
     text-align: left;
-    font-size: 1.4rem;
+    font-size: var(--font-size-main);
     font-family: var(--main-font-family);
     line-height: 2.2rem;
     color: var(--character-light-primary-85);
@@ -41,9 +41,9 @@
 
 .cancel,
 .header > button {
-    font-size: 1.4rem;
+    font-size: var(--font-size-main);
     font-family: var(--main-font-family);
-    line-height: 130%;
+    line-height: var(--line-height-main);
     color: var(--character-light-title-85);
 }
 
@@ -52,14 +52,14 @@
         width: 340px;
     }
     .title {
-        font-size: 1.4rem;
+        font-size: var(--font-size-main);
     }
     .cancel,
     .header > button {
-        font-size: 1.2rem;
+        font-size: var(--font-size-mobile);
     }
 
     .alert :global(.ant-alert-description) {
-        font-size: 1.2rem;
+        font-size: var(--font-size-mobile);
     }
 }

@@ -14,9 +14,9 @@
     width: 80%;
     text-align: left;
     font-family: var(--font-family);
-    font-weight: 400;
-    font-size: 1.4rem;
-    line-height: 130%;
+    font-weight: var(--font-weight-normal);
+    font-size: var(--font-size-main);
+    line-height: var(--line-height-main);
 }
 
 .badge.implemented :global(.ant-badge-status-text) {

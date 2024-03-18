@@ -4,20 +4,20 @@
     justify-content: center;
     width: 100%;
     height: calc(100% - 48px);
-    padding: 10px 24px 93px;
+    padding: var(--padding-calendar-page-main);
     background: var(--primary-light-1);
     position: relative;
 }
 
 @media screen and (max-width: 834px) {
     .wrapper {
-        padding: 12px 24px 271px;
+        padding: var(--padding-calendar-page-tablet);
         height: calc(100% - 42px);
     }
 }
 @media screen and (max-width: 500px) {
     .wrapper {
-        padding: 19px 24px 23px;
+        padding: var(--padding-calendar-page-mobile);
         height: calc(100% - 292px);
     }
 }

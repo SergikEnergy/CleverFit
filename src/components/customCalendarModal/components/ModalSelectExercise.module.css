@@ -3,15 +3,15 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    margin-top: 16px;
-    padding: 0 12px;
+    margin-top: var(--margin-little-size);
+    padding: var(--padding-modal-calendar);
 }
 
 .select {
     font-family: var(--font-family);
-    font-weight: 400;
-    font-size: 1.4rem;
-    line-height: 130%;
+    font-weight: var(--font-weight-normal);
+    font-size: var(--font-size-main);
+    line-height: var(--line-height-main);
     width: 90%;
 }
 
@@ -40,7 +40,7 @@ span:global(.ant-select-selection-placeholder) {
 }
 
 .exercises__list {
-    padding: 0 12px;
+    padding: var(--padding-modal-calendar);
     color: #8c8c8c;
     min-height: 90px;
     max-height: 200px;
@@ -65,41 +65,37 @@ span:global(.ant-select-selection-placeholder) {
     background: transparent;
 }
 
-.exercises__list:hover {
-    --fix: ; /* This custom property invalidates styles on hover, thereby enforcing a style recomputation. This is needed to work around a bug in Safari. */
-}
-
 .empty {
-    padding: 0 12px;
-    margin-top: 16px;
-    margin-bottom: 28px;
+    padding: var(--padding-modal-calendar);
+    margin-top: var(--margin-little-size);
+    margin-bottom: var(--margin-medium-size);
 }
 
 .buttons {
-    padding: 0 12px;
-    margin-bottom: 12px;
+    padding: var(--padding-modal-calendar);
+    margin-bottom: var(--margin-little-size);
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
     align-items: center;
-    gap: 8px;
+    gap: var(--gap-extra-small);
 }
 
 button.button__add {
     background-color: var(--primary-light-6);
     border: none;
     font-family: var(--font-family);
-    font-weight: 400;
-    font-size: 1.4rem;
-    line-height: 130%;
+    font-weight: var(--font-weight-normal);
+    font-size: var(--font-size-main);
+    line-height: var(--line-height-main);
 }
 button.button__save {
     border: none;
     background-color: transparent;
     font-family: var(--font-family);
-    font-weight: 400;
-    font-size: 1.4rem;
-    line-height: 130%;
+    font-weight: var(--font-weight-normal);
+    font-size: var(--font-size-main);
+    line-height: var(--line-height-main);
     color: var(--primary-light-6);
 }
 button.button__save:disabled {

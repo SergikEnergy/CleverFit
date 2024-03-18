@@ -8,9 +8,9 @@
     align-items: center;
     justify-content: start;
     width: 100%;
-    font-size: 14px;
+    font-size: var(--font-size-main);
     font-family: var(--main-font-family);
-    line-height: 130%;
+    line-height: var(--line-height-main);
 }
 
 .badge {

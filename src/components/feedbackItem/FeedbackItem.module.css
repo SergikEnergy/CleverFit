@@ -1,6 +1,6 @@
 .feedback {
-    padding: 16px;
-    gap: 12px;
+    padding: var(--padding-little-size);
+    gap: var(--gap-little);
     display: flex;
     align-items: flex-start;
     justify-content: space-between;
@@ -16,7 +16,7 @@
     flex-direction: column;
     justify-content: flex-start;
     width: 13%;
-    gap: 12px;
+    gap: var(--gap-little);
 }
 
 .avatar {
@@ -35,9 +35,9 @@
 
 .name {
     font-family: var(--font-family);
-    font-weight: 400;
-    font-size: 1.6rem;
-    line-height: 130%;
+    font-weight: var(--font-weight-normal);
+    font-size: var(--font-size-title);
+    line-height: var(--line-height-main);
     white-space: pre-wrap;
     color: var(--character-light-title-85);
 }
@@ -47,7 +47,7 @@
     align-items: flex-start;
     flex-direction: column;
     justify-content: flex-start;
-    gap: 12px;
+    gap: var(--gap-little);
     width: 85%;
 }
 
@@ -55,22 +55,22 @@
     display: flex;
     justify-content: flex-start;
     align-items: flex-end;
-    gap: 16px;
+    gap: var(--gap-medium);
 }
 
 .date {
     font-family: var(--font-family);
-    font-weight: 400;
-    font-size: 1.4rem;
-    line-height: 130%;
+    font-weight: var(--font-weight-normal);
+    font-size: var(--font-size-main);
+    line-height: var(--line-height-main);
     color: var(--character-light-disable-25);
 }
 
 .comment {
     font-family: var(--font-family);
-    font-weight: 400;
-    font-size: 1.4rem;
-    line-height: 130%;
+    font-weight: var(--font-weight-normal);
+    font-size: var(--font-size-main);
+    line-height: var(--line-height-main);
     text-align: start;
     color: var(--character-light-secondary-45);
     word-break: break-all;
@@ -96,7 +96,7 @@
         width: 95%;
         align-items: center;
         justify-content: flex-start;
-        gap: 16px;
+        gap: var(--gap-medium);
     }
     .name {
         width: 30%;

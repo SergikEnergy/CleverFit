@@ -8,15 +8,15 @@
     display: inline-block;
     width: 100%;
     margin: 4px 10px 3px 17px;
-    padding: 0;
+    padding: var(--padding-zero);
     border: none;
 }
 
 .reviews > button > span {
     font-family: var(--font-family);
-    font-weight: 400;
-    font-size: 1.6rem;
-    line-height: 130%;
+    font-weight: var(--font-weight-normal);
+    font-size: var(--font-size-title);
+    line-height: var(--line-height-main);
     text-align: center;
     color: var(--primary-light-6);
 }

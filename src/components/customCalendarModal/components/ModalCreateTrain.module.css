@@ -3,24 +3,24 @@
     display: flex;
     align-items: flex-start;
     justify-content: center;
-    margin-top: 16px;
-    margin-bottom: 18px;
-    padding: 0 12px;
+    margin-top: var(--margin-little-size);
+    margin-bottom: var(--margin-little-size);
+    padding: var(--padding-modal-calendar);
 }
 
 .title {
     font-family: var(--font-family);
-    font-weight: 600;
+    font-weight: var(--font-weight-title);
     font-size: 1.5rem;
-    line-height: 130%;
+    line-height: var(--line-height-main);
 }
 
 .subtitle {
-    margin-top: 4px;
+    margin-top: var(--margin-small-size);
     font-family: var(--font-family);
-    font-weight: 400;
-    font-size: 1.4rem;
-    line-height: 130%;
+    font-weight: var(--font-weight-normal);
+    font-size: var(--font-size-main);
+    line-height: var(--line-height-main);
     color: var(--character-light-secondary-45);
 }
 
@@ -44,25 +44,25 @@
 }
 
 .trains__list {
-    padding: 0 12px;
+    padding: var(--padding-modal-calendar);
 }
 
 .empty {
-    padding: 0 12px;
-    margin-top: 16px;
-    margin-bottom: 28px;
+    padding: var(--padding-modal-calendar);
+    margin-top: var(--margin-little-size);
+    margin-bottom: var(--margin-medium-size);
 }
 
 .buttons {
-    padding: 0 12px;
-    margin-bottom: 12px;
+    padding: var(--padding-modal-calendar);
+    margin-bottom: var(--margin-little-size);
 }
 
 button.button__edit {
     background-color: var(--primary-light-6);
     border: none;
     font-family: var(--font-family);
-    font-weight: 400;
-    font-size: 1.4rem;
-    line-height: 130%;
+    font-weight: var(--font-weight-normal);
+    font-size: var(--font-size-main);
+    line-height: var(--line-height-main);
 }

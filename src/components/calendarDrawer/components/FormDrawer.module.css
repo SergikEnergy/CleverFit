@@ -4,8 +4,8 @@
     align-items: center;
     justify-content: flex-start;
     width: 100%;
-    margin-top: 24px;
-    margin-bottom: 24px;
+    margin-top: var(--margin-medium-size);
+    margin-bottom: var(--margin-medium-size);
 }
 
 .form__element {
@@ -15,30 +15,30 @@
     flex-direction: column;
     align-items: center;
     justify-content: flex-start;
-    gap: 8px;
+    gap: var(--gap-extra-small);
     font-family: var(--main-font-family);
-    font-weight: 400;
-    line-height: 130%;
+    font-weight: var(--font-weight-normal);
+    line-height: var(--line-height-main);
 }
 
 .form__element :global(input[type='text']) {
-    font-size: 14px;
-    padding: 3px 0px 3px 8px;
+    font-size: var(--font-size-main);
+    padding: var(--padding-drawer-calendar-main);
 }
 .form__element :global(input[type='text']::placeholder) {
-    font-size: 14px;
+    font-size: var(--font-size-main);
     color: var(--character-light-disable-25);
 }
 
 .form__element:global(.ant-form-item) {
-    margin-bottom: 0;
+    margin-bottom: var(--margin-zero);
 }
 
 .details {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 24px;
+    margin-bottom: var(--margin-medium-size);
 }
 .correct {
     display: flex;
@@ -49,11 +49,11 @@
 
 .repeat:global(.ant-form-item) {
     width: 31%;
-    margin-bottom: 0;
+    margin-bottom: var(--margin-zero);
 }
 
 .weight:global(.ant-form-item) {
-    margin-bottom: 0;
+    margin-bottom: var(--margin-zero);
     flex-shrink: 1;
     width: 60%;
 }
@@ -71,7 +71,7 @@
 
 .sign {
     color: var(--character-light-disable-25);
-    font-size: 14px;
+    font-size: var(--font-size-main);
     align-self: flex-end;
     margin-left: 1px;
     margin-right: 1px;
@@ -79,27 +79,27 @@
 }
 
 .quantity:global(.ant-form-item) {
-    margin-bottom: 0;
+    margin-bottom: var(--margin-zero);
     flex-grow: 1;
 }
 
 .details div:global(.ant-form-item-label) {
     background-color: var(--neutral-gray-4);
-    padding: 0;
-    font-size: 12px;
-    margin-bottom: 6px;
+    padding: var(--padding-zero);
+    font-size: var(--font-size-mobile);
+    margin-bottom: --margin-small-size;
     border-radius: 2px;
 }
 
 .details label:global(.ant-form-item-label > label) {
     height: 24px;
-    padding-left: 8px;
-    font-size: 12px;
+    padding-left: var(--padding-small-size);
+    font-size: var(--font-size-mobile);
 }
 
 .details div:global(.ant-form-item-label > label) {
     height: 24px;
-    padding-left: 8px;
+    padding-left: var(--padding-small-size);
 }
 
 .add {
@@ -112,9 +112,9 @@
     border: none;
     text-align: left;
     font-family: var(--main-font-family);
-    font-weight: 400;
-    line-height: 130%;
-    font-size: 14px;
+    font-weight: var(--font-weight-normal);
+    line-height: var(--line-height-main);
+    font-size: var(--font-size-main);
 }
 
 .add button:hover,
