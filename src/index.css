@@ -16,6 +16,7 @@ body {
 
 :root {
     font-family: Inter, Verdana, Arial, sans-serif;
+
     --main-font-family: Inter, sans-serif;
     line-height: 1.5;
     font-weight: normal;
@@ -140,7 +141,7 @@ body {
 
     /* margins and paddings */
 
-    --padding-drawer-calendar-main: 3px 0px 3px 8px;
+    --padding-drawer-calendar-main: 3px 0 3px 8px;
     --padding-zero: 0;
     --padding-alert-cancel-calendar: 9px 16px;
     --padding-modal-calendar: 0 12px;
@@ -158,7 +159,6 @@ body {
     --padding-calendar-page-main: 10px 24px 93px;
     --padding-calendar-page-tablet: 12px 24px 271px;
     --padding-calendar-page-mobile: 19px 24px 23px;
-
     --margin-zero: 0;
     --margin-small-size: 8px;
     --margin-little-size: 16px;

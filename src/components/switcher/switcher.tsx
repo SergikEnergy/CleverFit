@@ -1,9 +1,10 @@
 import { FC, useContext } from 'react';
-
-import { CollapsedContext } from '../../reactContexts';
 import { MenuFoldOutlined, MenuUnfoldOutlined } from '@ant-design/icons';
-import classes from './switcher.module.css';
 import classnames from 'classnames';
+
+import { CollapsedContext } from '../../react-contexts';
+
+import classes from './switcher.module.css';
 
 type SwitcherProps = {
     collapsed: boolean;
@@ -21,10 +22,10 @@ export const Switcher: FC<SwitcherProps> = ({ collapsed }) => {
             data-test-id='sider-switch'
             className={classnames(classes.switcher, { [classes.collapsed]: collapsed })}
         >
-            {!collapsed ? (
-                <MenuFoldOutlined data-test-id='sider-switch-mobile' onClick={toggleSider} />
-            ) : (
+            {collapsed ? (
                 <MenuUnfoldOutlined data-test-id='sider-switch-mobile' onClick={toggleSider} />
+            ) : (
+                <MenuFoldOutlined data-test-id='sider-switch-mobile' onClick={toggleSider} />
             )}
         </div>
     );

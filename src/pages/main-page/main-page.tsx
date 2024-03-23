@@ -1,13 +1,14 @@
 import { FC, useContext, useEffect } from 'react';
 import { Navigate, useNavigate } from 'react-router-dom';
-import { CollapsedContext } from '../../reactContexts';
+import { Footer } from '@components/footer';
+import { MainContent } from '@components/main-content';
 import { useAppSelector } from '@hooks/typed-react-redux-hooks';
+import { BasePagesLayout } from '@pages/base-pages-layout';
+import { Layout as AntLayout } from 'antd';
+
+import { CollapsedContext } from '../../react-contexts';
 import { Paths } from '../../routes/pathes';
 
-import { Footer } from '@components/footer';
-import { MainContent } from '@components/mainContent';
-import { BasePagesLayout } from '@pages/basePagesLayout';
-import { Layout as AntLayout } from 'antd';
 import './main-page.css';
 
 const { Footer: AntFooter } = AntLayout;
@@ -24,18 +25,18 @@ export const MainPage: FC = () => {
     }, [token, navigate]);
 
     if (!token) {
-        return <Navigate to={Paths.AUTH} replace />;
-    } else {
-        return (
-            <BasePagesLayout>
-                <MainContent />
-                <AntFooter
-                    className={!collapsed ? 'footer' : 'footer collapsed'}
-                    style={{ padding: 0, background: 'transparent' }}
-                >
-                    <Footer />
-                </AntFooter>
-            </BasePagesLayout>
-        );
+        return <Navigate to={Paths.AUTH} replace={true} />;
     }
+
+    return (
+        <BasePagesLayout>
+            <MainContent />
+            <AntFooter
+                className={collapsed ? 'footer collapsed' : 'footer'}
+                style={{ padding: 0, background: 'transparent' }}
+            >
+                <Footer />
+            </AntFooter>
+        </BasePagesLayout>
+    );
 };

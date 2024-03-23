@@ -1,6 +1,8 @@
+/* eslint-disable unicorn/filename-case */
 import { FC, ReactNode } from 'react';
-import { useLocation, Navigate } from 'react-router-dom';
-import { isAllowedPreviousLocation } from '../helpers/isAllowedPreviousLocation';
+import { Navigate, useLocation } from 'react-router-dom';
+
+import { isAllowedPreviousLocation } from '../helpers/is-allowed-previous-location';
 import { Paths } from '../routes/pathes';
 
 type ProtectedRoutePropsType = {
@@ -13,7 +15,7 @@ export const ProtectedRoute: FC<ProtectedRoutePropsType> = ({ children }) => {
 
     if (isRightPath) {
         return children;
-    } else {
-        return <Navigate to={Paths.AUTH} replace />;
     }
+
+    return <Navigate to={Paths.AUTH} replace={true} />;
 };

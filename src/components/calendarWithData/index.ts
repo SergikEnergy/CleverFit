@@ -1,1 +1,0 @@
-export { CalenDarWithData } from './CalendarWithData';

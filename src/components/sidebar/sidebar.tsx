@@ -1,10 +1,10 @@
 import { FC } from 'react';
+import { ExitUser } from '@components/exit-user';
 import { Logo } from '@components/logo';
-import { MenuLinks } from '@components/menuLinks';
-import { ExitUser } from '@components/exitUser';
+import { MenuLinks } from '@components/menu-links';
+import classnames from 'classnames';
 
 import classes from './sidebar.module.css';
-import classnames from 'classnames';
 
 type SideBarPropsType = {
     isCalendarPage?: boolean;

@@ -1,14 +1,15 @@
-import { FC, useContext, useState, useEffect } from 'react';
-import { useLocation, Link } from 'react-router-dom';
-
-import { CollapsedContext } from '../../reactContexts';
-import { Button, Breadcrumb } from 'antd';
+import { FC, useContext, useEffect, useState } from 'react';
+import { Link, useLocation } from 'react-router-dom';
 import { SettingOutlined } from '@ant-design/icons';
+import { Breadcrumb, Button } from 'antd';
+import classnames from 'classnames';
+
+import { CollapsedContext } from '../../react-contexts';
+
 import { breadcrumbsInitialItems } from './header.data';
 import { prepareDataForBreadCrumbs } from './header.utils';
 
 import classes from './header.module.css';
-import classnames from 'classnames';
 
 type HeaderPropsType = {
     hideElement?: boolean;
@@ -22,11 +23,12 @@ export const Header: FC<HeaderPropsType> = ({ hideElement, hideForCalendar }) =>
 
     useEffect(() => {
         const dataForBreadcrumbs = prepareDataForBreadCrumbs(location.pathname);
+
         setBreadCrumbsItems(dataForBreadcrumbs);
-    }, []);
+    }, [location.pathname]);
 
     return (
-        <div className={classnames(classes['header__wrapper'], 'wrapper')}>
+        <div className={classnames(classes.header__wrapper, 'wrapper')}>
             <div className={classes.navigation}>
                 <Breadcrumb className={classes.breadcrumbs}>
                     {breadCrumbsItems.map((breadcrumb) => (
@@ -42,12 +44,12 @@ export const Header: FC<HeaderPropsType> = ({ hideElement, hideForCalendar }) =>
                 <div
                     className={classnames(classes.greeting, {
                         [classes.collapsed]: collapsed,
-                        [classes['calendar__settings_wrapper']]: hideForCalendar,
+                        [classes.calendar__settings_wrapper]: hideForCalendar,
                     })}
                 >
                     {!hideForCalendar && (
                         <div
-                            className={classnames(classes['greeting__text'], {
+                            className={classnames(classes.greeting__text, {
                                 [classes.collapsed]: collapsed,
                             })}
                         >
@@ -63,12 +65,12 @@ export const Header: FC<HeaderPropsType> = ({ hideElement, hideForCalendar }) =>
                         </div>
                     )}
                     <div
-                        className={classnames(classes['greeting__settings'], {
+                        className={classnames(classes.greeting__settings, {
                             [classes.collapsed]: collapsed,
                         })}
                     >
                         <Button
-                            className={classnames(classes['mobile__button'], classes.antFixed, {
+                            className={classnames(classes.mobile__button, classes.antFixed, {
                                 [classes['calendar-mobile']]: hideForCalendar,
                             })}
                             type='text'
@@ -77,12 +79,12 @@ export const Header: FC<HeaderPropsType> = ({ hideElement, hideForCalendar }) =>
                         />
 
                         <Button
-                            className={classes['settings__button']}
+                            className={classes.settings__button}
                             type='text'
                             icon={<SettingOutlined />}
                         >
                             <span
-                                className={classnames(classes['button__text'], {
+                                className={classnames(classes.button__text, {
                                     [classes.collapsed]: collapsed,
                                 })}
                             >

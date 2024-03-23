@@ -1,11 +1,12 @@
-import { FC, useState, useContext } from 'react';
-import { FeedbackResponseType } from '@redux/API/api-types';
-import { FeedbacksList } from '@components/feedbacksList';
-import { ModalReportContext } from '../../reactContexts';
-import { NewFeedback } from '@components/newFeedback';
-
+import { FC, useContext, useState } from 'react';
+import { FeedbacksList } from '@components/feedbacks-list';
+import { NewFeedback } from '@components/new-feedback';
+import { FeedbackResponseType } from '@redux/api/api-types';
 import { Button } from 'antd';
-import classes from './Feedbacks.module.css';
+
+import { ModalReportContext } from '../../react-contexts';
+
+import classes from './feedbacks.module.css';
 
 type FeedbacksPropsType = {
     feedbacks: FeedbackResponseType[];
@@ -22,9 +23,11 @@ export const Feedbacks: FC<FeedbacksPropsType> = ({ feedbacks }) => {
         if (data.length === 1) {
             return data;
         }
+
         return data.sort((item1: FeedbackResponseType, item2: FeedbackResponseType) => {
             const dataItem1 = new Date(item1.createdAt);
             const dataItem2 = new Date(item2.createdAt);
+
             return -dataItem1.getTime() + dataItem2.getTime();
         });
     };
@@ -52,14 +55,14 @@ export const Feedbacks: FC<FeedbacksPropsType> = ({ feedbacks }) => {
                     htmlType='button'
                     type='primary'
                     size='large'
-                    className={classes['button_filled']}
+                    className={classes.button_filled}
                 >
                     Написать отзыв
                 </Button>
                 <Button
                     data-test-id='all-reviews-button'
                     htmlType='button'
-                    className={classes['button_text']}
+                    className={classes.button_text}
                     type='text'
                     size='large'
                     onClick={toggleAllComment}

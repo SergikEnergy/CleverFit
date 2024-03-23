@@ -4,4 +4,4 @@ export { Footer } from './footer';
 
 export { SideBar } from './sidebar';
 
-export { MainContent } from './mainContent';
+export { MainContent } from './main-content';

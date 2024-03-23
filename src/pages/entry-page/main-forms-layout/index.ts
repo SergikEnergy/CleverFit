@@ -1,1 +1,1 @@
-export { MainFormsLayout } from './mainFormsLayout';
+export { MainFormsLayout } from './main-forms-layout';

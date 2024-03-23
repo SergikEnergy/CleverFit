@@ -1,13 +1,14 @@
-import { configureStore } from '@reduxjs/toolkit';
 import { createReduxHistoryContext } from 'redux-first-history';
+import { configureStore } from '@reduxjs/toolkit';
 import { createBrowserHistory } from 'history';
-import { authApi } from './API/authAPI';
-import { feedbackApi } from './API/feedbacksAPI';
-import { authReducer } from './reducers/authSlice';
-import { userReducer } from './reducers/userSlice';
-import { calendarReducer } from './reducers/calendarSlice';
-import { feedbackReducer } from './reducers/feedbackSlice';
-import { calendarAPI } from './API/calendarAPI';
+
+import { authApi } from './api/auth-api';
+import { calendarAPI } from './api/calendar-api';
+import { feedbackApi } from './api/feedbacks-api';
+import { authReducer } from './reducers/auth-slice';
+import { calendarReducer } from './reducers/calendar-slice';
+import { feedbackReducer } from './reducers/feedback-slice';
+import { userReducer } from './reducers/user-slice';
 
 const { createReduxHistory, routerMiddleware, routerReducer } = createReduxHistoryContext({
     history: createBrowserHistory(),

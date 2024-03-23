@@ -1,1 +1,0 @@
-export { ResultsWrapper } from './resultsWrapper';

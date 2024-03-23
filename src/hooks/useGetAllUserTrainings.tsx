@@ -1,14 +1,17 @@
+/* eslint-disable unicorn/filename-case */
 import { useContext, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Paths } from '../routes/pathes';
+import { ShowFetchDataError } from '@components/show-fetch-data-error';
+import { LOCAL_STORAGE_AUTH_PARAM } from '@redux/api/api-data';
+import { useLazyGetAllTrainingsQuery } from '@redux/api/calendar-api';
+import { isFetchBaseQueryError } from '@redux/api/errors-catching';
 import { history } from '@redux/configure-store';
-import { LOCAL_STORAGE_AUTH_PARAM } from '@redux/API/api-data';
-import { LoaderStateContext, ModalReportContext } from '../reactContexts';
-import { isFetchBaseQueryError } from '@redux/API/errorsCatching';
+import { resetCredentials } from '@redux/reducers/auth-slice';
+
+import { LoaderStateContext, ModalReportContext } from '../react-contexts';
+import { Paths } from '../routes/pathes';
+
 import { useAppDispatch } from '.';
-import { resetCredentials } from '@redux/reducers/authSlice';
-import { useLazyGetAllTrainingsQuery } from '@redux/API/calendarAPI';
-import { ShowFetchDataError } from '@components/showFetchDataError';
 
 export const useGetAllUserTrainings = () => {
     const navigate = useNavigate();
@@ -25,7 +28,11 @@ export const useGetAllUserTrainings = () => {
     };
 
     useEffect(() => {
-        isLoading ? startLoader() : stopLoader();
+        if (isLoading) {
+            startLoader();
+        } else {
+            stopLoader();
+        }
     }, [isLoading, startLoader, stopLoader]);
 
     const handleGetTrainingsError = (error: unknown) => {
