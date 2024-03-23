@@ -6,11 +6,7 @@ import { BasePagesLayout } from '@pages/base-pages-layout';
 
 import { Paths } from '../../routes/pathes';
 
-type NotFoundPagePropsType = {
-    //
-};
-
-export const NotFoundPage: FC<NotFoundPagePropsType> = () => {
+export const NotFoundPage: FC = () => {
     const navigate = useNavigate();
     const token = useAppSelector((state) => state.auth.token);
 

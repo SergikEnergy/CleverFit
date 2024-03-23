@@ -135,8 +135,10 @@ body {
     --font-style-title: bold;
     --font-weight-normal: 400;
     --font-weight-title: 600;
+    --font-weight-title-result: 500;
     --font-size-title: 1.6rem;
     --font-size-mobile: 1.2rem;
+    --font-size-title-result-main: 2.4rem;
     --second-family: 'Roboto', Verdana, sans-serif;
 
     /* margins and paddings */
@@ -145,7 +147,6 @@ body {
     --padding-zero: 0;
     --padding-alert-cancel-calendar: 9px 16px;
     --padding-modal-calendar: 0 12px;
-    --padding-middle-size: 32px;
     --padding-big-top-bottom-frames: 64px 0;
     --padding-middle-top-bottom-frames: 32px 0;
     --padding-small-top-bottom-frames: 16px 0;
@@ -159,6 +160,7 @@ body {
     --padding-calendar-page-main: 10px 24px 93px;
     --padding-calendar-page-tablet: 12px 24px 271px;
     --padding-calendar-page-mobile: 19px 24px 23px;
+    --padding-not-found-page-main: 24px 24px 42px;
     --margin-zero: 0;
     --margin-small-size: 8px;
     --margin-little-size: 16px;
