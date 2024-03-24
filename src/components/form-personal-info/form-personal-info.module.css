@@ -1,0 +1,16 @@
+.form:global(.ant-form) {
+    margin: var(--margin-medium-size);
+    margin-right: 0;
+    max-width: 480px;
+    width: 100%;
+}
+
+.title {
+    font-family: var(--font-family);
+    font-size: var(--font-size-title);
+    color: var(--character-light-title-85);
+    line-height: 140%;
+    font-weight: var(--font-weight-medium);
+    padding-left: var(--padding-small-size);
+    text-align: left;
+}

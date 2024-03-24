@@ -9,6 +9,7 @@ import { removeRegistrationData, saveRegistrationData } from '@redux/reducers/us
 import { Button, Form, Input } from 'antd';
 import classnames from 'classnames';
 
+import { ERRORS_MESSAGES } from '../../data/form-messages';
 import { LoaderStateContext } from '../../react-contexts';
 import { Paths } from '../../routes/pathes';
 
@@ -40,9 +41,6 @@ export const FormRegistration: FC = () => {
             stopLoader();
         }
     }, [isRTKLoading, startLoader, stopLoader]);
-
-    const passwordErrorMessage = 'Пароль не менее 8 символов, с заглавной буквой и цифрой';
-    const matchedErrorMessage = 'Пароли не совпадают';
 
     const sendRegisterData = async ({ email, password }: { email: string; password: string }) => {
         try {
@@ -113,13 +111,13 @@ export const FormRegistration: FC = () => {
                 />
             </Form.Item>
             <Form.Item<FieldType>
-                help={isPasswordHelperVisible ? passwordErrorMessage : ''}
+                help={isPasswordHelperVisible ? ERRORS_MESSAGES.PASSWORD : ''}
                 name='password'
                 rules={[
                     {
                         required: true,
                         pattern: new RegExp(/^(?=.*[A-Z])(?=.*\d)[A-Za-z\d]{8,}$/),
-                        message: passwordErrorMessage,
+                        message: ERRORS_MESSAGES.PASSWORD,
                     },
                 ]}
             >
@@ -152,7 +150,7 @@ export const FormRegistration: FC = () => {
                                 return Promise.resolve();
                             }
 
-                            return Promise.reject(new Error(matchedErrorMessage));
+                            return Promise.reject(new Error(ERRORS_MESSAGES.PASSWORD_CONFIRM));
                         },
                     }),
                 ]}
