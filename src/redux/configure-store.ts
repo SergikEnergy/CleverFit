@@ -5,9 +5,10 @@ import { createBrowserHistory } from 'history';
 import { authApi } from './api/auth-api';
 import { calendarAPI } from './api/calendar-api';
 import { feedbackApi } from './api/feedbacks-api';
+import { profileAPI } from './api/profile-api';
 import { authReducer } from './reducers/auth-slice';
-import { calendarReducer } from './reducers/calendar-slice';
 import { feedbackReducer } from './reducers/feedback-slice';
+import { personalInfoReducer } from './reducers/personal-info-slice';
 import { userReducer } from './reducers/user-slice';
 
 const { createReduxHistory, routerMiddleware, routerReducer } = createReduxHistoryContext({
@@ -21,10 +22,11 @@ export const store = configureStore({
         [authApi.reducerPath]: authApi.reducer,
         [feedbackApi.reducerPath]: feedbackApi.reducer,
         [calendarAPI.reducerPath]: calendarAPI.reducer,
+        [profileAPI.reducerPath]: profileAPI.reducer,
         auth: authReducer,
         user: userReducer,
         feedback: feedbackReducer,
-        calendar: calendarReducer,
+        personalInfo: personalInfoReducer,
     },
     middleware: (getDefaultMiddleware) =>
         getDefaultMiddleware().concat([
@@ -32,6 +34,7 @@ export const store = configureStore({
             authApi.middleware,
             feedbackApi.middleware,
             calendarAPI.middleware,
+            profileAPI.middleware,
         ]),
 });
 

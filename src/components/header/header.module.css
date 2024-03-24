@@ -34,6 +34,22 @@
     flex: 1;
 }
 
+.greetings__settings {
+    margin-top: 7px;
+    margin-left: 3px;
+    height: 32px;
+    padding: var(--padding-zero);
+    width: 10%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-grow: 1;
+}
+
+.greetings__settings.collapsed {
+    justify-content: flex-end;
+}
+
 .calendar__settings_wrapper {
     align-self: flex-end;
     margin-bottom: 6px;
@@ -55,51 +71,15 @@
     width: 78%;
 }
 
-.greeting__settings {
-    margin-top: 7px;
-    margin-left: 3px;
-    height: 32px;
-    padding: var(--padding-zero);
-    width: 10%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-grow: 1;
-}
-
-.greeting__settings.collapsed {
-    justify-content: flex-end;
-}
-.button__text,
-span.button__text {
-    font-family: var(--font-family);
-    font-weight: var(--font-weight-normal);
-    font-size: var(--font-size-main);
-    line-height: var(--line-height-main);
-    color: var(--character-light-title-85);
-}
-
-button.settings__button {
-    border: none;
-}
-
 .xlWidth,
 .xlWidth.collapsed {
     display: none;
-}
-
-button.mobile__button {
-    display: none;
-    flex-grow: 0;
 }
 
 @media screen and (max-width: 1290px) {
     .greeting__text {
         font-size: 2.8rem;
         width: 85%;
-    }
-    .settings__button > span[role='img'] {
-        display: none;
     }
 }
 
@@ -115,28 +95,22 @@ button.mobile__button {
     .greeting {
         margin-left: 1.2rem;
     }
+
+    .greetings__settings {
+        margin-left: -18px;
+        margin-top: 6px;
+    }
+    .greetings__settings.collapsed {
+        margin-left: 5rem;
+        justify-content: flex-start;
+    }
+
     .navigation {
         margin-top: 1.4rem;
         margin-left: 1.2rem;
     }
     .xlWidth {
         display: inline;
-    }
-    .greeting__settings {
-        margin-left: -18px;
-        margin-top: 6px;
-    }
-    .greeting__settings.collapsed {
-        margin-left: 5rem;
-        justify-content: flex-start;
-    }
-
-    button > span.button__text {
-        margin-left: var(--margin-zero);
-    }
-    button.settings__button {
-        padding-left: 2px;
-        padding-right: 2px;
     }
 }
 
@@ -146,18 +120,6 @@ button.mobile__button {
     }
     .greeting__text {
         font-size: 2rem;
-    }
-    button.mobile__button {
-        display: inline-block;
-        padding: var(--padding-zero);
-    }
-    button.mobile__button.antFixed:not(.calendar-mobile) {
-        width: 32px;
-        background: var(--neutral-gray-1);
-    }
-    button.mobile__button.antFixed.calendar-mobile {
-        width: 32px;
-        background: transparent;
     }
     .header {
         margin-left: 4px;
@@ -170,7 +132,7 @@ button.mobile__button {
     .greeting__text.collapsed {
         padding-top: 0.4rem;
     }
-    .greeting__settings {
+    .greetings__settings {
         width: 32px;
         height: 32px;
         border-radius: 50%;
@@ -178,13 +140,9 @@ button.mobile__button {
         margin-left: var(--margin-zero);
     }
 
-    .greeting__settings.collapsed {
+    .greetings__settings.collapsed {
         margin-top: var(--margin-zero);
         margin-left: var(--margin-zero);
-    }
-
-    button.settings__button {
-        display: none;
     }
 }
 
@@ -200,13 +158,5 @@ button.mobile__button {
     }
     .greeting__text.collapsed {
         width: 85%;
-    }
-
-    button.mobile__button.antFixed.calendar-mobile {
-        background: transparent;
-    }
-    button.mobile__button.antFixed.calendar-mobile > span {
-        font-size: var(--font-size-main);
-        margin-right: var(--margin-little-size);
     }
 }

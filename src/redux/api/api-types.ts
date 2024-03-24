@@ -90,3 +90,17 @@ export type NewTrainRequestType = Pick<
 >;
 
 export type ChangeFutureTrainRequestType = { body: NewTrainRequestType; id: string };
+
+export type ResponseUserInfoType = {
+    email: string;
+    readyForJointTraining: boolean;
+    sendNotification: boolean;
+    firstName?: string;
+    lastName?: string;
+    birthday?: string;
+    imgSrc?: string;
+    tariff?: {
+        tariffId: string;
+        expired: string;
+    };
+};

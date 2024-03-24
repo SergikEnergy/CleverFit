@@ -17,5 +17,7 @@ export const enum Paths {
     ERROR_NO_EMAIL_AND_404 = '/result/error-check-email-no-exist',
     ERROR_CHECK_EMAIL = '/result/error-check-email',
     ERROR_CHANGE_PASSWORD = '/result/error-change-password',
-    NOT_FOUND_PAGE = '*',
+    PROFILE_PAGE = '/profile',
+    NOT_FOUND_PAGE = 'not-found',
+    OTHERS_ROOT = '*',
 }

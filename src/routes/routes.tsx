@@ -1,4 +1,4 @@
-import { Route, Routes } from 'react-router-dom';
+import { Navigate, Route, Routes } from 'react-router-dom';
 import { DummyRootElement } from '@components/dummy-root/dummy-root';
 import { CalendarPage } from '@pages/calendar-page';
 import { EntryPageLayout } from '@pages/entry-page';
@@ -9,6 +9,7 @@ import { MainPage } from '@pages/main-page';
 import { NotFoundPage } from '@pages/not-found-page';
 import { ChangePasswordPage } from '@pages/password-pages/change-password';
 import { ConfirmEmailPage } from '@pages/password-pages/confirm-email';
+import { ProfilePage } from '@pages/profile-page';
 import { ErrorChangePasswordPage } from '@pages/results-pages/error-change-password';
 import { ErrorCheckEmailPage } from '@pages/results-pages/error-check-email';
 import { ErrorCheckNoExistEmailPage } from '@pages/results-pages/error-check-noexist-email';
@@ -29,6 +30,7 @@ export const routes = (
         <Route path={Paths.MAIN_PAGE} element={<MainPage />} />
         <Route path={Paths.FEEDBACKS_PAGE} element={<FeedbacksPage />} />
         <Route path={Paths.CALENDAR_PAGE} element={<CalendarPage />} />
+        <Route path={Paths.PROFILE_PAGE} element={<ProfilePage />} />
         <Route path={Paths.AUTH} element={<EntryPageLayout />}>
             <Route index={true} element={<LoginPage />} />
             <Route path={Paths.AUTH_REGISTRATION} element={<RegisterPage />} />
@@ -123,6 +125,11 @@ export const routes = (
                 }
             />
         </Route>
+
         <Route path={Paths.NOT_FOUND_PAGE} element={<NotFoundPage />} />
+        <Route
+            path={Paths.OTHERS_ROOT}
+            element={<Navigate to={Paths.NOT_FOUND_PAGE} replace={true} />}
+        />
     </Routes>
 );

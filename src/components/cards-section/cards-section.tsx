@@ -1,4 +1,5 @@
 import { FC, Fragment, useContext } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { CalendarTwoTone, HeartFilled } from '@ant-design/icons';
 import { CardMainAction } from '@components/card-main-action';
 import { ProfileIconComponent } from '@components/custom-icons/profile-icon';
@@ -8,14 +9,20 @@ import { Button, Col, Row, Typography } from 'antd';
 import classnames from 'classnames';
 
 import { CollapsedContext } from '../../react-contexts';
+import { Paths } from '../../routes/pathes';
 
 import classes from './cards-section.module.css';
 
 export const CardsSection: FC = () => {
+    const navigate = useNavigate();
     const fetchAllTrainings = useGetAllUserTrainings();
 
     const handleCalendarPageClick = () => {
         fetchAllTrainings();
+    };
+
+    const handleMoveToProfilePage = () => {
+        navigate(Paths.PROFILE_PAGE, { replace: true });
     };
 
     const { collapsed } = useContext(CollapsedContext);
@@ -85,6 +92,7 @@ export const CardsSection: FC = () => {
                         action={
                             <Button
                                 block={true}
+                                onClick={handleMoveToProfilePage}
                                 type='text'
                                 icon={
                                     <ProfileIconComponent

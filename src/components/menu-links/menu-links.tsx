@@ -1,5 +1,5 @@
 import { FC, useContext } from 'react';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { CalendarTwoTone, HeartFilled, TrophyFilled } from '@ant-design/icons';
 import { ProfileIconComponent } from '@components/custom-icons/profile-icon';
 import { useGetAllUserTrainings } from '@hooks/useGetAllUserTrainings';
@@ -19,9 +19,14 @@ export const MenuLinks: FC = () => {
     const fetchAllUserTrains = useGetAllUserTrainings();
     const { collapsed } = useContext(CollapsedContext);
     const location = useLocation();
+    const navigate = useNavigate();
 
     const handleMoveToCalendarPage = () => {
         fetchAllUserTrains();
+    };
+
+    const handleMoveToProfilePage = () => {
+        navigate(Paths.PROFILE_PAGE, { replace: true });
     };
 
     return (
@@ -87,6 +92,7 @@ export const MenuLinks: FC = () => {
                 className={classnames(classes.menu__item, {
                     [classes.collapsed]: collapsed,
                 })}
+                onClick={handleMoveToProfilePage}
                 key={menuItemsKeys['/profile']}
                 icon={
                     <ProfileIconComponent

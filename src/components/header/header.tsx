@@ -1,11 +1,11 @@
 import { FC, useContext, useEffect, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { SettingOutlined } from '@ant-design/icons';
-import { Breadcrumb, Button } from 'antd';
+import { Breadcrumb } from 'antd';
 import classnames from 'classnames';
 
 import { CollapsedContext } from '../../react-contexts';
 
+import { SettingsButton } from './components';
 import { breadcrumbsInitialItems } from './header.data';
 import { prepareDataForBreadCrumbs } from './header.utils';
 
@@ -69,28 +69,7 @@ export const Header: FC<HeaderPropsType> = ({ hideElement, hideForCalendar }) =>
                             [classes.collapsed]: collapsed,
                         })}
                     >
-                        <Button
-                            className={classnames(classes.mobile__button, classes.antFixed, {
-                                [classes['calendar-mobile']]: hideForCalendar,
-                            })}
-                            type='text'
-                            shape='circle'
-                            icon={<SettingOutlined />}
-                        />
-
-                        <Button
-                            className={classes.settings__button}
-                            type='text'
-                            icon={<SettingOutlined />}
-                        >
-                            <span
-                                className={classnames(classes.button__text, {
-                                    [classes.collapsed]: collapsed,
-                                })}
-                            >
-                                Настройки
-                            </span>
-                        </Button>
+                        <SettingsButton hiddenForCalendar={hideForCalendar} />
                     </div>
                 </div>
             )}
