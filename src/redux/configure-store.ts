@@ -9,6 +9,7 @@ import { profileAPI } from './api/profile-api';
 import { authReducer } from './reducers/auth-slice';
 import { feedbackReducer } from './reducers/feedback-slice';
 import { personalInfoReducer } from './reducers/personal-info-slice';
+import { uploadProgressReducer } from './reducers/upload-progress-slice';
 import { userReducer } from './reducers/user-slice';
 
 const { createReduxHistory, routerMiddleware, routerReducer } = createReduxHistoryContext({
@@ -27,6 +28,7 @@ export const store = configureStore({
         user: userReducer,
         feedback: feedbackReducer,
         personalInfo: personalInfoReducer,
+        uploadProgress: uploadProgressReducer,
     },
     middleware: (getDefaultMiddleware) =>
         getDefaultMiddleware().concat([

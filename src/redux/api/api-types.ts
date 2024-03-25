@@ -104,3 +104,12 @@ export type ResponseUserInfoType = {
         expired: string;
     };
 };
+
+export type ImageUpdateResponseType = {
+    name: string;
+    url: string;
+};
+
+export type ImageUpdateRequestType = {
+    imageFile: File;
+};

@@ -8,21 +8,27 @@ import { WRONG_SIZE_IMG } from './wrong-img-size.data';
 
 import classes from './wrong-img-size.module.css';
 
-export const ErrorWrongImgSize: FC = () => {
+type ErrorWrongImgSizePropsType = {
+    disabledSubmit?: (value: boolean) => void;
+};
+
+export const ErrorWrongImgSize: FC<ErrorWrongImgSizePropsType> = ({ disabledSubmit }) => {
     const { closeModal, setNode } = useContext(ModalReportContext);
 
     const handleClickButton = () => {
         closeModal();
         setNode(null);
+        if (disabledSubmit) disabledSubmit(true);
     };
 
     return (
         <div className={classes.wrapper}>
+            <div className={classes.icon}>
+                <CloseCircleTwoTone style={{ fontSize: 22 }} twoToneColor={['red', '#fff']} />
+            </div>
             <Result
+                icon={null}
                 className={classes.result}
-                icon={
-                    <CloseCircleTwoTone style={{ fontSize: 22 }} twoToneColor={['red', '#fff']} />
-                }
                 title={WRONG_SIZE_IMG.title}
                 subTitle={WRONG_SIZE_IMG.subTitle}
                 extra={

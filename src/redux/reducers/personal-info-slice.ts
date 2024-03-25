@@ -1,10 +1,10 @@
-import { ResponseUserInfoType } from '@redux/api/api-types';
+import { ImageUpdateResponseType, ResponseUserInfoType } from '@redux/api/api-types';
 import type { PayloadAction } from '@reduxjs/toolkit';
 import { createSlice } from '@reduxjs/toolkit';
 
 export type GoogleOrFormType = 'form' | 'google';
 export type LoggedViaType = { createdFrom: GoogleOrFormType };
-export type PersonalUserInfoType = ResponseUserInfoType & LoggedViaType;
+export type PersonalUserInfoType = ResponseUserInfoType & LoggedViaType & ImageUpdateResponseType;
 
 const initialUserInfoState: PersonalUserInfoType = {
     email: '',
@@ -16,6 +16,8 @@ const initialUserInfoState: PersonalUserInfoType = {
     tariff: { tariffId: '', expired: '' },
     readyForJointTraining: false,
     sendNotification: false,
+    name: '',
+    url: '',
 };
 
 const slice = createSlice({
@@ -38,8 +40,16 @@ const slice = createSlice({
         setEntryPoint: (state, { payload: createdFrom }: PayloadAction<GoogleOrFormType>) => {
             state.createdFrom = createdFrom;
         },
+        saveImgUploadData: (
+            state,
+            { payload: { name, url } }: PayloadAction<ImageUpdateResponseType>,
+        ) => {
+            state.name = name;
+            state.url = url;
+        },
     },
 });
 
-export const { savePersonalInfoAfterRegistration, setEntryPoint } = slice.actions;
+export const { savePersonalInfoAfterRegistration, setEntryPoint, saveImgUploadData } =
+    slice.actions;
 export const personalInfoReducer = slice.reducer;

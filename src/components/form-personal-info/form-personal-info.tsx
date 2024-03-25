@@ -1,5 +1,6 @@
 import { FC, useState } from 'react';
 import { EyeInvisibleOutlined, EyeTwoTone } from '@ant-design/icons';
+import { useAppSelector } from '@hooks/typed-react-redux-hooks';
 import { dateDayMonthYearDotFormat } from '@utils/constants/date-formats';
 import { Button, DatePicker, Form, Input } from 'antd';
 import classnames from 'classnames';
@@ -12,7 +13,10 @@ import { FieldType, FormPersonalInfoPropsType } from './form-personal-info.types
 import classes from './form-personal-info.module.css';
 
 export const FormPersonalInfo: FC<FormPersonalInfoPropsType> = () => {
-    const [isPasswordHelperVisible, setIsPasswordHelperVisible] = useState(false);
+    const userEmail = useAppSelector((state) => state.personalInfo.email);
+    const [isPasswordHelperVisible, setIsPasswordHelperVisible] = useState(true);
+    const [isPasswordRequired, setIsPasswordRequired] = useState(false);
+    const [isConfirmRequired, setIsConfirmRequired] = useState(false);
     const [passPlaceholderVisible, setPassPlaceholderVisible] = useState(true);
     const [confirmPlaceholderVisible, setConfirmPlaceholderVisible] = useState(true);
     const [submitDisabled, setSubmitDisabled] = useState(false);
@@ -37,19 +41,9 @@ export const FormPersonalInfo: FC<FormPersonalInfoPropsType> = () => {
         >
             <div className={classes.personal}>
                 <div className={classes.title}>Личная информация</div>
-                <CustomUpload />
+                <CustomUpload setDisabledSaveButton={setSubmitDisabled} />
                 <div className={classes.personal__names}>
-                    <Form.Item<FieldType>
-                        name='userName'
-                        className={classes.wrapper__line}
-                        // rules={[
-                        //     {
-                        //         required: true,
-                        //         message: '   ',
-                        //         pattern: new RegExp(/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/),
-                        //     },
-                        // ]}
-                    >
+                    <Form.Item<FieldType> name='userName' className={classes.wrapper__line}>
                         <Input
                             size='large'
                             style={{ outline: 'none' }}
@@ -80,6 +74,7 @@ export const FormPersonalInfo: FC<FormPersonalInfoPropsType> = () => {
                     <Form.Item<FieldType>
                         name='email'
                         className={classes.wrapper__line}
+                        initialValue={userEmail}
                         rules={[
                             {
                                 required: true,
@@ -103,16 +98,18 @@ export const FormPersonalInfo: FC<FormPersonalInfoPropsType> = () => {
                         name='password'
                         rules={[
                             {
-                                required: true,
+                                required: isPasswordRequired,
                                 pattern: new RegExp(/^(?=.*[A-Z])(?=.*\d)[A-Za-z\d]{8,}$/),
                                 message: ERRORS_MESSAGES.PASSWORD,
                             },
                         ]}
                     >
                         <Input.Password
+                            autoComplete='off'
                             placeholder={passPlaceholderVisible ? 'Пароль' : ''}
                             onChange={() => {
                                 setPassPlaceholderVisible(false);
+                                setIsPasswordRequired(true);
                             }}
                             style={{ outline: 'none' }}
                             className={classnames(
@@ -134,7 +131,7 @@ export const FormPersonalInfo: FC<FormPersonalInfoPropsType> = () => {
                         className={classnames(classes.antFixed, classes.wrapper__line)}
                         rules={[
                             {
-                                required: true,
+                                required: isConfirmRequired,
                                 message: '',
                             },
                             ({ getFieldValue }) => ({
@@ -151,10 +148,12 @@ export const FormPersonalInfo: FC<FormPersonalInfoPropsType> = () => {
                         ]}
                     >
                         <Input.Password
+                            autoComplete='off'
                             placeholder={confirmPlaceholderVisible ? 'Повторите пароль' : ''}
                             style={{ outline: 'none' }}
                             onChange={() => {
                                 setConfirmPlaceholderVisible(false);
+                                setIsConfirmRequired(true);
                             }}
                             className={classnames(classes.confirm, classes.input, classes.antFixed)}
                             // eslint-disable-next-line react/no-unstable-nested-components
