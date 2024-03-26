@@ -47,9 +47,16 @@ const slice = createSlice({
             state.name = name;
             state.url = url;
         },
+        resetImgUploadData: (state) => {
+            state.name = '';
+            state.url = '';
+        },
+        resetImgSrcUrl: (state) => {
+            state.imgSrc = '';
+        },
     },
 });
 
-export const { savePersonalInfoAfterRegistration, setEntryPoint, saveImgUploadData } =
+export const { savePersonalInfoAfterRegistration, setEntryPoint, saveImgUploadData,resetImgSrcUrl,resetImgUploadData } =
     slice.actions;
 export const personalInfoReducer = slice.reducer;

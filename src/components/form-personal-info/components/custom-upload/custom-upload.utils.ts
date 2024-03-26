@@ -1,5 +1,6 @@
 import { API_IMGS_BASE } from '@redux/api/api-data';
 import { LIMIT_IMG_SIZE } from '@utils/constants/profile-data';
+import { UploadFile } from 'antd';
 import { RcFile } from 'antd/es/upload';
 
 export const isStringURL = (string: string) => {
@@ -10,7 +11,8 @@ export const isStringURL = (string: string) => {
 
 export const isImage = (file: File) => file.type.startsWith('image/');
 
-export const isSizeValid = (file: File) => file.size / 1024 / 1024 < LIMIT_IMG_SIZE;
+export const isSizeValid = (file: UploadFile) =>
+    file.size && file.size / 1024 / 1024 <= LIMIT_IMG_SIZE;
 
 export const getImageSrc = (url: string) => {
     let imgSrc = '';

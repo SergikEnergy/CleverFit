@@ -8,17 +8,12 @@ import { WRONG_SIZE_IMG } from './wrong-img-size.data';
 
 import classes from './wrong-img-size.module.css';
 
-type ErrorWrongImgSizePropsType = {
-    disabledSubmit?: (value: boolean) => void;
-};
-
-export const ErrorWrongImgSize: FC<ErrorWrongImgSizePropsType> = ({ disabledSubmit }) => {
+export const ErrorWrongImgSize: FC = () => {
     const { closeModal, setNode } = useContext(ModalReportContext);
 
     const handleClickButton = () => {
         closeModal();
         setNode(null);
-        if (disabledSubmit) disabledSubmit(true);
     };
 
     return (
