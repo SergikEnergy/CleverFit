@@ -54,9 +54,20 @@ const slice = createSlice({
         resetImgSrcUrl: (state) => {
             state.imgSrc = '';
         },
+        resetPersonalInfo: (state, payload) => {
+            if (payload.type === 'RESET') {
+                state = initialUserInfoState;
+            }
+        },
     },
 });
 
-export const { savePersonalInfoAfterRegistration, setEntryPoint, saveImgUploadData,resetImgSrcUrl,resetImgUploadData } =
-    slice.actions;
+export const {
+    savePersonalInfoAfterRegistration,
+    setEntryPoint,
+    saveImgUploadData,
+    resetImgSrcUrl,
+    resetImgUploadData,
+    resetPersonalInfo,
+} = slice.actions;
 export const personalInfoReducer = slice.reducer;

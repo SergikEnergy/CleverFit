@@ -168,6 +168,7 @@ body {
     --margin-little-size: 16px;
     --margin-medium-size: 24px;
     --margin-middle-size: 32px;
+    --margin-submit-profile-main: 54px;
     --margin-big-size: 64px;
 
     /* gaps */
@@ -177,6 +178,7 @@ body {
     --gap-little: 12px;
     --gap-medium: 16px;
     --gap-middle: 20px;
+    --gap-main: 32px;
     --gap-big: 46px;
 
     /* borders */

@@ -1,0 +1,20 @@
+:global(#root) {
+    height: 1020px;
+}
+.alert:global(.ant-alert) {
+    max-width: 395px;
+    width: 100%;
+    position: fixed;
+    left: 50%;
+    transform: translateX(-50%);
+    top: calc(100vh - 100px);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--gap-extra-small);
+    z-index: 11;
+}
+
+.alert :global(.ant-alert-content) {
+    text-align: left;
+}

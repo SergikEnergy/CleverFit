@@ -2,8 +2,8 @@ import { FC, Fragment, useContext, useEffect, useState } from 'react';
 import { ErrorWrongImgSize } from '@components/wrong-img-file';
 import { useAppDispatch, useAppSelector } from '@hooks/typed-react-redux-hooks';
 import { API_BASE_URL, API_IMGS_BASE } from '@redux/api/api-data';
-import { resetImgUploadData } from '@redux/reducers/personal-info-slice';
-import { Form, Modal, Upload } from 'antd';
+import { resetImgUploadData, saveImgUploadData } from '@redux/reducers/personal-info-slice';
+import { Modal, Upload } from 'antd';
 import type { UploadChangeParam, UploadProps } from 'antd/es/upload';
 import type { UploadFile } from 'antd/es/upload/interface';
 
@@ -21,7 +21,7 @@ type CustomUploadPropsType = {
 
 export const CustomUpload: FC<CustomUploadPropsType> = ({ setDisabledSaveButton }) => {
     const { openModal, setNode, setWidthModal } = useContext(ModalReportContext);
-    const { imgSrc: imageSrc, url: urlPreview } = useAppSelector((state) => state.personalInfo);
+    const { imgSrc: imageSrc } = useAppSelector((state) => state.personalInfo);
     const dispatch = useAppDispatch();
     const token = useAppSelector((state) => state.auth.token);
 
@@ -46,12 +46,11 @@ export const CustomUpload: FC<CustomUploadPropsType> = ({ setDisabledSaveButton 
 
     const handleRemove = () => {
         dispatch(resetImgUploadData());
+        setFileList([]);
     };
 
-    const handlePreview = async () => {
-        if (previewTitle && urlPreview) {
-            setPreviewOpen(true);
-        }
+    const handlePreview = () => {
+        setPreviewOpen(true);
     };
 
     const handleChange: UploadProps['onChange'] = ({
@@ -68,42 +67,43 @@ export const CustomUpload: FC<CustomUploadPropsType> = ({ setDisabledSaveButton 
             setPreviewImage('');
             setFileList([{ ...errorFile, name: file.name }]);
             setDisabledSaveButton(true);
-        } else if (file) {
+        } else if (file && file.status !== 'removed') {
             setFileList(newFileList);
             setPreviewTitle(newFileList[0].name || 'Noname.jpg');
-        }
-        if (file.response?.url) {
-            setPreviewImage(`${API_IMGS_BASE}${file.response.url}`);
+            console.log(file);
+            if (file.response?.url) {
+                setPreviewImage(`${API_IMGS_BASE}${file.response.url}`);
+                saveImgUploadData({ url: file.response.url, name: file.response.name });
+                setDisabledSaveButton(false);
+                console.log(file.response);
+            }
         }
     };
 
     return (
         <Fragment>
-            <Form.Item name='uploadFile' className={classes.upload__item}>
-                <Upload
-                    progress={loaderProgressStyle}
-                    locale={{
-                        uploading: 'Загрузка',
-                    }}
-                    headers={{
-                        Authorization: `Bearer ${token}`,
-                        'Content-Type': 'multipart/form-data',
-                    }}
-                    action={`${API_BASE_URL}upload-image`}
-                    method='POST'
-                    showUploadList={true}
-                    onPreview={handlePreview}
-                    listType={window.innerWidth >= 500 ? 'picture-card' : 'picture'}
-                    maxCount={1}
-                    className={classes.upload}
-                    accept='image/*'
-                    onChange={handleChange}
-                    onRemove={handleRemove}
-                    fileList={fileList}
-                >
-                    {fileList.length === 0 && <NoAvatarButton />}
-                </Upload>
-            </Form.Item>
+            <Upload
+                progress={loaderProgressStyle}
+                locale={{
+                    uploading: 'Загрузка',
+                }}
+                headers={{
+                    Authorization: `Bearer ${token}`,
+                }}
+                action={`${API_BASE_URL}upload-image`}
+                method='POST'
+                showUploadList={true}
+                onPreview={handlePreview}
+                listType={window.innerWidth >= 500 ? 'picture-card' : 'picture'}
+                maxCount={1}
+                className={classes.upload}
+                accept='image/*'
+                onChange={handleChange}
+                onRemove={handleRemove}
+                fileList={fileList}
+            >
+                {fileList.length === 0 && <NoAvatarButton />}
+            </Upload>
             <Modal
                 open={previewOpen}
                 title={previewTitle}

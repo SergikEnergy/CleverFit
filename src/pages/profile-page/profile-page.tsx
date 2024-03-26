@@ -5,7 +5,10 @@ import { ProfileHeader } from '@components/profile-header';
 import { useAppDispatch, useAppSelector } from '@hooks/typed-react-redux-hooks';
 import { BasePagesLayout } from '@pages/base-pages-layout';
 import { useGetUserInfoQuery } from '@redux/api/profile-api';
-import { savePersonalInfoAfterRegistration } from '@redux/reducers/personal-info-slice';
+import {
+    resetPersonalInfo,
+    savePersonalInfoAfterRegistration,
+} from '@redux/reducers/personal-info-slice';
 
 import { Paths } from '../../routes/pathes';
 
@@ -18,15 +21,16 @@ export const ProfilePage: FC = () => {
 
     useLayoutEffect(() => {
         if (!isUserData && userPersonalInfo) {
-            dispatch(savePersonalInfoAfterRegistration(userPersonalInfo));
+            dispatch(savePersonalInfoAfterRegistration({ ...userPersonalInfo, url: '', name: '' }));
         }
     }, [dispatch, userPersonalInfo, isUserData]);
 
     useEffect(() => {
         if (!token) {
+            dispatch(resetPersonalInfo({ type: 'RESET' }));
             navigate(Paths.AUTH, { replace: true });
         }
-    }, [token, navigate]);
+    }, [token, navigate, dispatch]);
 
     if (!token) {
         return <Navigate to={Paths.AUTH} replace={true} />;
