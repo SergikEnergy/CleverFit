@@ -2,27 +2,18 @@ import { TariffResponseType } from '@redux/api/api-types';
 import type { PayloadAction } from '@reduxjs/toolkit';
 import { createSlice } from '@reduxjs/toolkit';
 
-export type TariffListType = TariffResponseType[];
+export type TariffListType = {
+    tariffs: TariffResponseType[];
+};
 
-const initialState: TariffListType = [
-    {
-        _id: '',
-        name: '',
-        periods: [
-            {
-                text: '',
-                cost: 0,
-                days: 0,
-            },
-        ],
-    },
-];
+const initialState: TariffListType = { tariffs: [] };
+
 const slice = createSlice({
     name: 'tariffsList',
     initialState,
     reducers: {
         saveAvailableTariffs: (state, { payload }: PayloadAction<TariffListType>) => {
-            state = payload;
+            state.tariffs = payload.tariffs;
         },
     },
 });

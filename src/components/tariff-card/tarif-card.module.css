@@ -1,0 +1,53 @@
+.card {
+    box-shadow: 0px 2px 8px 0px #00000026;
+    width: 240px;
+}
+
+.card :global(.ant-card-body img) {
+    width: 100%;
+    max-height: 150px;
+}
+
+.status {
+    min-height: 95px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--gap-extra-small);
+}
+
+.status > span {
+    font-size: var(--font-size-title);
+    color: var(--primary-light-10);
+    line-height: 130%;
+    font-weight: var(--font-weight-medium);
+}
+
+.card :global(.ant-card-head) {
+    padding: 0;
+    font-family: var(--font-family);
+}
+
+.card :global(.ant-card-head-wrapper) {
+    gap: var(--gap-little);
+}
+.card :global(.ant-card-head-title) {
+    font-size: var(--font-size-big-title);
+    color: var(--character-light-title-85);
+    line-height: 130%;
+    font-weight: var(--font-weight-medium);
+}
+
+.card :global(.ant-card-extra) {
+    font-size: var(--font-size-main);
+    line-height: 120%;
+    font-weight: var(--font-weight-normal);
+}
+
+.status > button {
+    background-color: var(--primary-light-6);
+    color: var(--character-light-primary-inverse);
+    font-size: var(--font-size-main);
+    line-height: 130%;
+    font-weight: var(--font-weight-normal);
+}

@@ -4,7 +4,7 @@ import { history } from '@redux/configure-store';
 import { Button } from 'antd';
 import classnames from 'classnames';
 
-import { DATA_TEST_ID } from '../../data/data-test-ids';
+import { DATA_TEST_ID } from '../../../../data/data-test-ids';
 
 import classes from './settings-header.module.css';
 

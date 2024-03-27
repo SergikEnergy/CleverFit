@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { FeedbacksActionButtons } from '@components/feedback-action-buttons';
 import classnames from 'classnames';
 
-import { Paths } from '../../routes/pathes';
+import { Paths } from '../../../../routes/pathes';
 
 import classes from './settings-footer.module.css';
 

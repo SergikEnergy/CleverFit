@@ -1,16 +1,19 @@
 import { FC, useEffect, useLayoutEffect } from 'react';
 import { Navigate, useNavigate } from 'react-router-dom';
-import { SettingsFooter } from '@components/settings-footer';
-import { SettingsHeader } from '@components/settings-header';
 import { useAppDispatch, useAppSelector } from '@hooks/typed-react-redux-hooks';
 import { BasePagesLayout } from '@pages/base-pages-layout';
+import { SettingsContent } from '@pages/settings-page/components/settings-content';
+import { SettingsFooter } from '@pages/settings-page/components/settings-footer';
+import { SettingsHeader } from '@pages/settings-page/components/settings-header';
 import { useLazyGetTariffsListQuery } from '@redux/api/settings-api';
 import { saveAvailableTariffs } from '@redux/reducers/tariff-slice';
 
 import { Paths } from '../../routes/pathes';
 
+import classes from './settings-page.module.css';
+
 export const SettingsPage: FC = () => {
-    const [getAllTariffs, { data: tariffs, isSuccess: isGetchedTariffs }] =
+    const [getAllTariffs, { data: tariffs, isSuccess: isFetchedTariffs }] =
         useLazyGetTariffsListQuery();
     const dispatch = useAppDispatch();
     const navigate = useNavigate();
@@ -21,10 +24,10 @@ export const SettingsPage: FC = () => {
     }, [getAllTariffs]);
 
     useEffect(() => {
-        if (isGetchedTariffs && tariffs) {
-            dispatch(saveAvailableTariffs(tariffs));
+        if (isFetchedTariffs && tariffs) {
+            dispatch(saveAvailableTariffs({ tariffs }));
         }
-    }, [dispatch, isGetchedTariffs, tariffs]);
+    }, [dispatch, isFetchedTariffs, tariffs]);
 
     useEffect(() => {
         if (!token) {
@@ -39,8 +42,10 @@ export const SettingsPage: FC = () => {
     return (
         <BasePagesLayout customHeader={true}>
             <SettingsHeader />
-            {/* <SettingsContent/> */}
-            <SettingsFooter />
+            <div className={classes.settings}>
+                <SettingsContent />
+                <SettingsFooter />
+            </div>
         </BasePagesLayout>
     );
 };
