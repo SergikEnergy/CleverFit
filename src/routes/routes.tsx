@@ -19,6 +19,7 @@ import { ErrorUserExistPage } from '@pages/results-pages/error-user-exist';
 import { ResultsPageLayout } from '@pages/results-pages/results-layout';
 import { SuccessChangePasswordPage } from '@pages/results-pages/success-change-password';
 import { SuccessRegisterPage } from '@pages/results-pages/success-register';
+import { SettingsPage } from '@pages/settings-page';
 
 import { ProtectedRoute } from '../hoc';
 
@@ -31,6 +32,7 @@ export const routes = (
         <Route path={Paths.FEEDBACKS_PAGE} element={<FeedbacksPage />} />
         <Route path={Paths.CALENDAR_PAGE} element={<CalendarPage />} />
         <Route path={Paths.PROFILE_PAGE} element={<ProfilePage />} />
+        <Route path={Paths.SETTINGS_PAGE} element={<SettingsPage />} />
         <Route path={Paths.AUTH} element={<EntryPageLayout />}>
             <Route index={true} element={<LoginPage />} />
             <Route path={Paths.AUTH_REGISTRATION} element={<RegisterPage />} />

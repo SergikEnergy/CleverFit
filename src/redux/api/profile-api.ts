@@ -40,4 +40,5 @@ export const profileAPI = createApi({
     }),
 });
 
-export const { useGetUserInfoQuery, useUpdateUserInfoMutation } = profileAPI;
+export const { useGetUserInfoQuery, useUpdateUserInfoMutation, useLazyGetUserInfoQuery } =
+    profileAPI;

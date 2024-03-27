@@ -1,4 +1,4 @@
-import { FC, Fragment, useContext, useState } from 'react';
+import { FC, Fragment, useContext, useEffect, useState } from 'react';
 import { EyeInvisibleOutlined, EyeTwoTone } from '@ant-design/icons';
 import { ErrorProfile } from '@components/error-profile-page';
 import { ERROR_UPDATE_PROFILE } from '@components/error-profile-page/error-messages.data';
@@ -24,13 +24,8 @@ import classes from './form-personal-info.module.css';
 
 export const FormPersonalInfo: FC<FormPersonalInfoPropsType> = () => {
     const { openModal, setNode, setWidthModal } = useContext(ModalReportContext);
-    const {
-        email: userEmail,
-        firstName,
-        lastName,
-        birthday,
-        url: ImageUrl,
-    } = useAppSelector((state) => state.personalInfo);
+    const personalInfo = useAppSelector((state) => state.personalInfo);
+    const { email: userEmail, firstName, lastName, birthday, url: ImageUrl } = personalInfo;
     const dispatch = useAppDispatch();
     const [updatePersonalInfo] = useUpdateUserInfoMutation();
     const [isPasswordHelperVisible, setIsPasswordHelperVisible] = useState(true);
@@ -41,6 +36,15 @@ export const FormPersonalInfo: FC<FormPersonalInfoPropsType> = () => {
     const [isAlertShowed, setIsAlertShowed] = useState(false);
     const [uploadStatus, setUploadStatus] = useState<'error' | 'done'>('error');
     const [form] = Form.useForm();
+
+    useEffect(() => {
+        form.setFieldsValue({
+            email: userEmail,
+            firstName,
+            lastName,
+            birthday: birthday ? moment(birthday, dateDayMonthYearDotFormat) : undefined,
+        });
+    }, [birthday, firstName, form, lastName, userEmail]);
 
     const handleFormChanged = (changedFields: FieldType) => {
         if (changedFields.password || changedFields.passwordConfirm) {
@@ -84,6 +88,8 @@ export const FormPersonalInfo: FC<FormPersonalInfoPropsType> = () => {
             setIsAlertShowed(true);
             dispatch(savePersonalInfoAfterRegistration({ ...info, url: '', name: '' }));
             form.resetFields();
+            setSubmitDisabled(true);
+            setIsPasswordRequired(false);
         } catch (err) {
             if (err) {
                 setNode(
@@ -121,7 +127,6 @@ export const FormPersonalInfo: FC<FormPersonalInfoPropsType> = () => {
                         <Form.Item<FieldType> name='firstName' className={classes.wrapper__line}>
                             <Input
                                 data-test-id={DATA_TEST_ID.profileName}
-                                defaultValue={firstName}
                                 placeholder='Имя'
                                 size='large'
                                 style={{ outline: 'none' }}
@@ -131,7 +136,6 @@ export const FormPersonalInfo: FC<FormPersonalInfoPropsType> = () => {
                         <Form.Item<FieldType> name='lastName' className={classes.wrapper__line}>
                             <Input
                                 data-test-id={DATA_TEST_ID.profileSurname}
-                                defaultValue={lastName}
                                 placeholder='Фамилия'
                                 size='large'
                                 style={{ outline: 'none' }}
@@ -141,11 +145,6 @@ export const FormPersonalInfo: FC<FormPersonalInfoPropsType> = () => {
                         <Form.Item<FieldType> name='birthday' className={classes.wrapper__line}>
                             <DatePicker
                                 data-test-id={DATA_TEST_ID.profileBirthday}
-                                defaultValue={
-                                    birthday
-                                        ? moment(birthday, dateDayMonthYearDotFormat)
-                                        : undefined
-                                }
                                 size='large'
                                 placeholder='Дата рождения'
                                 format={dateDayMonthYearDotFormat}
@@ -159,7 +158,6 @@ export const FormPersonalInfo: FC<FormPersonalInfoPropsType> = () => {
                     <Form.Item<FieldType>
                         name='email'
                         className={classes.wrapper__line}
-                        initialValue={userEmail}
                         rules={[
                             {
                                 required: true,

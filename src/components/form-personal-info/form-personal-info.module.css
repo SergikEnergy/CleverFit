@@ -1,5 +1,5 @@
 .form:global(.ant-form) {
-    margin: var(--margin-medium-size);
+    padding: var(--padding-medium-size);
     margin-right: 0;
     max-width: 480px;
     width: 100%;

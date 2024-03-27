@@ -12,7 +12,7 @@
 
 .result {
     flex-shrink: 1;
-    width: 90%;
+    width: 93%;
     max-width: 350px;
     display: flex;
     flex-direction: column;
@@ -34,6 +34,7 @@
     line-height: var(--line-height-main);
     color: var(--character-light-title-85);
     align-self: flex-start;
+    text-align: left;
 }
 
 .result :global(.ant-result-subtitle) {

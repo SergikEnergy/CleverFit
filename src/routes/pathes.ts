@@ -18,6 +18,7 @@ export const enum Paths {
     ERROR_CHECK_EMAIL = '/result/error-check-email',
     ERROR_CHANGE_PASSWORD = '/result/error-change-password',
     PROFILE_PAGE = '/profile',
+    SETTINGS_PAGE = '/settings',
     NOT_FOUND_PAGE = 'not-found',
     OTHERS_ROOT = '*',
 }

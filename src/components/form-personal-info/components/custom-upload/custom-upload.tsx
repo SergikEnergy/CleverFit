@@ -14,7 +14,6 @@ import { ModalReportContext } from '../../../../react-contexts';
 import { NoAvatarButton } from '../no-avatar-button/no-avatar-button';
 
 import { errorFile, loaderProgressStyle } from './custom-upload.data';
-import { isSizeValid } from './custom-upload.utils';
 
 import classes from './custom-upload.module.css';
 
@@ -65,19 +64,17 @@ export const CustomUpload: FC<CustomUploadPropsType> = ({
         fileList: newFileList,
     }: UploadChangeParam<UploadFile>) => {
         if (file?.error || file.status === 'error') {
-            if (!isSizeValid(file)) {
-                setNode(
-                    <ErrorProfile
-                        title={WRONG_SIZE_IMG.title}
-                        subTitle={WRONG_SIZE_IMG.subTitle}
-                        buttonKey={WRONG_SIZE_IMG.buttonKey}
-                        buttonText={WRONG_SIZE_IMG.buttonText}
-                        dataTestIdBtn={DATA_TEST_ID.bigFileErrorClose}
-                    />,
-                );
-                setWidthModal('clamp(328px, 100%, 416px)');
-                openModal();
-            }
+            setNode(
+                <ErrorProfile
+                    title={WRONG_SIZE_IMG.title}
+                    subTitle={WRONG_SIZE_IMG.subTitle}
+                    buttonKey={WRONG_SIZE_IMG.buttonKey}
+                    buttonText={WRONG_SIZE_IMG.buttonText}
+                    dataTestIdBtn={DATA_TEST_ID.bigFileErrorClose}
+                />,
+            );
+            setWidthModal('clamp(328px, 100%, 416px)');
+            openModal();
 
             setPreviewImage('');
             setFileList([{ ...errorFile, name: file.name }]);
@@ -98,9 +95,12 @@ export const CustomUpload: FC<CustomUploadPropsType> = ({
 
     return (
         <Fragment>
-            <Form.Item<FieldType> name='uploadFile' className={classes.upload__item}>
+            <Form.Item<FieldType>
+                name='uploadFile'
+                className={classes.upload__item}
+                data-test-id={DATA_TEST_ID.profileAvatar}
+            >
                 <Upload
-                    data-test-id={DATA_TEST_ID.profileAvatar}
                     progress={loaderProgressStyle}
                     locale={{
                         uploading: 'Загрузка',
