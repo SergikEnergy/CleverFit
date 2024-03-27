@@ -7,12 +7,14 @@ type AlertNotificationPropsType = {
     message: string;
     type: AlertProps['type'];
     handleCloseAlert: () => void;
+    dataTestId?: string;
 };
 
 export const AlertNotification: FC<AlertNotificationPropsType> = ({
     message,
     type,
     handleCloseAlert,
+    dataTestId,
 }) => {
     const handleClose = () => {
         handleCloseAlert();
@@ -20,6 +22,7 @@ export const AlertNotification: FC<AlertNotificationPropsType> = ({
 
     return (
         <Alert
+            data-test-id={dataTestId}
             showIcon={true}
             className={classes.alert}
             message={message}

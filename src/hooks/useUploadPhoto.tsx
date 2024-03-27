@@ -1,7 +1,8 @@
 /* eslint-disable unicorn/filename-case */
 import { useContext, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { ErrorWrongImgSize } from '@components/wrong-img-file';
+import { ErrorProfile } from '@components/error-profile-page';
+import { WRONG_SIZE_IMG } from '@components/error-profile-page/error-messages.data';
 import { API_BASE_URL, LOCAL_STORAGE_AUTH_PARAM } from '@redux/api/api-data';
 import { resetCredentials } from '@redux/reducers/auth-slice';
 import { saveImgUploadData } from '@redux/reducers/personal-info-slice';
@@ -31,7 +32,14 @@ export const useUploadPhoto = () => {
         if (axiosError.response?.status === 403) {
             resetUser();
         } else if (axiosError.response?.status === 409) {
-            setNode(<ErrorWrongImgSize />);
+            setNode(
+                <ErrorProfile
+                    title={WRONG_SIZE_IMG.title}
+                    subTitle={WRONG_SIZE_IMG.subTitle}
+                    buttonKey={WRONG_SIZE_IMG.buttonKey}
+                    buttonText={WRONG_SIZE_IMG.buttonText}
+                />,
+            );
             setWidthModal('clamp(328px, 100%, 416px)');
             openModal();
         }

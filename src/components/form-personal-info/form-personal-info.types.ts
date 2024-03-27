@@ -5,12 +5,11 @@ export type FormPersonalInfoPropsType = {
 };
 
 export type FieldType = {
-    userName?: string;
+    email: string;
+    firstName?: string;
     uploadFile?: UploadFile;
-    userLastName?: string;
-    userBirthDate?: string;
-    userImg?: string;
-    email?: string;
+    lastName?: string;
+    birthday?: string;
     password?: string;
     passwordConfirm?: string;
 };

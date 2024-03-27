@@ -1,12 +1,15 @@
 import { FC, Fragment, useContext, useEffect, useState } from 'react';
-import { ErrorWrongImgSize } from '@components/wrong-img-file';
+import { ErrorProfile } from '@components/error-profile-page';
+import { WRONG_SIZE_IMG } from '@components/error-profile-page/error-messages.data';
+import { FieldType } from '@components/form-personal-info/form-personal-info.types';
 import { useAppDispatch, useAppSelector } from '@hooks/typed-react-redux-hooks';
 import { API_BASE_URL, API_IMGS_BASE } from '@redux/api/api-data';
 import { resetImgUploadData, saveImgUploadData } from '@redux/reducers/personal-info-slice';
-import { Modal, Upload } from 'antd';
+import { Form, Modal, Upload } from 'antd';
 import type { UploadChangeParam, UploadProps } from 'antd/es/upload';
 import type { UploadFile } from 'antd/es/upload/interface';
 
+import { DATA_TEST_ID } from '../../../../data/data-test-ids';
 import { ModalReportContext } from '../../../../react-contexts';
 import { NoAvatarButton } from '../no-avatar-button/no-avatar-button';
 
@@ -17,9 +20,13 @@ import classes from './custom-upload.module.css';
 
 type CustomUploadPropsType = {
     setDisabledSaveButton: (value: boolean) => void;
+    setUploadStatus: (status: 'error' | 'done') => void;
 };
 
-export const CustomUpload: FC<CustomUploadPropsType> = ({ setDisabledSaveButton }) => {
+export const CustomUpload: FC<CustomUploadPropsType> = ({
+    setDisabledSaveButton,
+    setUploadStatus,
+}) => {
     const { openModal, setNode, setWidthModal } = useContext(ModalReportContext);
     const { imgSrc: imageSrc } = useAppSelector((state) => state.personalInfo);
     const dispatch = useAppDispatch();
@@ -59,7 +66,15 @@ export const CustomUpload: FC<CustomUploadPropsType> = ({ setDisabledSaveButton 
     }: UploadChangeParam<UploadFile>) => {
         if (file?.error || file.status === 'error') {
             if (!isSizeValid(file)) {
-                setNode(<ErrorWrongImgSize />);
+                setNode(
+                    <ErrorProfile
+                        title={WRONG_SIZE_IMG.title}
+                        subTitle={WRONG_SIZE_IMG.subTitle}
+                        buttonKey={WRONG_SIZE_IMG.buttonKey}
+                        buttonText={WRONG_SIZE_IMG.buttonText}
+                        dataTestIdBtn={DATA_TEST_ID.bigFileErrorClose}
+                    />,
+                );
                 setWidthModal('clamp(328px, 100%, 416px)');
                 openModal();
             }
@@ -67,43 +82,47 @@ export const CustomUpload: FC<CustomUploadPropsType> = ({ setDisabledSaveButton 
             setPreviewImage('');
             setFileList([{ ...errorFile, name: file.name }]);
             setDisabledSaveButton(true);
+            setUploadStatus('error');
         } else if (file && file.status !== 'removed') {
             setFileList(newFileList);
             setPreviewTitle(newFileList[0].name || 'Noname.jpg');
-            console.log(file);
+
             if (file.response?.url) {
+                setUploadStatus('done');
                 setPreviewImage(`${API_IMGS_BASE}${file.response.url}`);
                 saveImgUploadData({ url: file.response.url, name: file.response.name });
                 setDisabledSaveButton(false);
-                console.log(file.response);
             }
         }
     };
 
     return (
         <Fragment>
-            <Upload
-                progress={loaderProgressStyle}
-                locale={{
-                    uploading: 'Загрузка',
-                }}
-                headers={{
-                    Authorization: `Bearer ${token}`,
-                }}
-                action={`${API_BASE_URL}upload-image`}
-                method='POST'
-                showUploadList={true}
-                onPreview={handlePreview}
-                listType={window.innerWidth >= 500 ? 'picture-card' : 'picture'}
-                maxCount={1}
-                className={classes.upload}
-                accept='image/*'
-                onChange={handleChange}
-                onRemove={handleRemove}
-                fileList={fileList}
-            >
-                {fileList.length === 0 && <NoAvatarButton />}
-            </Upload>
+            <Form.Item<FieldType> name='uploadFile' className={classes.upload__item}>
+                <Upload
+                    data-test-id={DATA_TEST_ID.profileAvatar}
+                    progress={loaderProgressStyle}
+                    locale={{
+                        uploading: 'Загрузка',
+                    }}
+                    headers={{
+                        Authorization: `Bearer ${token}`,
+                    }}
+                    action={`${API_BASE_URL}upload-image`}
+                    method='POST'
+                    showUploadList={true}
+                    onPreview={handlePreview}
+                    listType={window.innerWidth >= 500 ? 'picture-card' : 'picture'}
+                    maxCount={1}
+                    className={classes.upload}
+                    accept='image/*'
+                    onChange={handleChange}
+                    onRemove={handleRemove}
+                    fileList={fileList}
+                >
+                    {fileList.length === 0 && <NoAvatarButton />}
+                </Upload>
+            </Form.Item>
             <Modal
                 open={previewOpen}
                 title={previewTitle}

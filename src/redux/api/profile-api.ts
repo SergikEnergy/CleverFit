@@ -2,10 +2,11 @@ import { RootState } from '@redux/configure-store';
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 
 import { API_BASE_URL } from './api-data';
-import { ResponseUserInfoType } from './api-types';
+import { RequestUserInfoType, ResponseUserInfoType } from './api-types';
 
 export const profileAPI = createApi({
     reducerPath: 'profileAPI',
+    tagTypes: ['UserInfo'],
     baseQuery: fetchBaseQuery({
         baseUrl: API_BASE_URL,
         prepareHeaders: (headers, { getState }) => {
@@ -25,8 +26,18 @@ export const profileAPI = createApi({
                 url: 'user/me',
                 credentials: 'include',
             }),
+            providesTags: (result) => (result ? [{ type: 'UserInfo', id: 1 }] : ['UserInfo']),
+        }),
+        updateUserInfo: build.mutation<ResponseUserInfoType, RequestUserInfoType>({
+            query: (userData) => ({
+                url: 'user',
+                method: 'PUT',
+                body: userData,
+                credentials: 'include',
+            }),
+            invalidatesTags: ['UserInfo'],
         }),
     }),
 });
 
-export const { useGetUserInfoQuery } = profileAPI;
+export const { useGetUserInfoQuery, useUpdateUserInfoMutation } = profileAPI;

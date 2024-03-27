@@ -3,6 +3,7 @@ import { SettingOutlined } from '@ant-design/icons';
 import { Button } from 'antd';
 import classnames from 'classnames';
 
+import { DATA_TEST_ID } from '../../../data/data-test-ids';
 import { CollapsedContext } from '../../../react-contexts';
 
 import classes from './settings-button.module.css';
@@ -18,6 +19,7 @@ export const SettingsButton: FC<SettingsButtonPropsType> = ({ hiddenForCalendar,
     return (
         <Fragment>
             <Button
+                data-test-id={DATA_TEST_ID.headerSettings}
                 className={classnames(classes.mobile__button, classes.antFixed, {
                     [classes['calendar-mobile']]: hiddenForCalendar,
                     [classes.mobile__button_profile]: forProfile,

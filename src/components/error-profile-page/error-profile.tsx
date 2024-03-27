@@ -1,14 +1,26 @@
-import { FC, useContext } from 'react';
+import { FC, ReactNode, useContext } from 'react';
 import { CloseCircleTwoTone } from '@ant-design/icons';
 import { Button, Result } from 'antd';
 
 import { ModalReportContext } from '../../react-contexts';
 
-import { WRONG_SIZE_IMG } from './wrong-img-size.data';
+import classes from './error-profile.module.css';
 
-import classes from './wrong-img-size.module.css';
+type ErrorProfilePropsType = {
+    title?: string | ReactNode;
+    subTitle?: string | ReactNode;
+    buttonKey?: string;
+    buttonText?: string;
+    dataTestIdBtn?: string;
+};
 
-export const ErrorWrongImgSize: FC = () => {
+export const ErrorProfile: FC<ErrorProfilePropsType> = ({
+    title,
+    subTitle,
+    buttonKey,
+    buttonText,
+    dataTestIdBtn,
+}) => {
     const { closeModal, setNode } = useContext(ModalReportContext);
 
     const handleClickButton = () => {
@@ -24,18 +36,19 @@ export const ErrorWrongImgSize: FC = () => {
             <Result
                 icon={null}
                 className={classes.result}
-                title={WRONG_SIZE_IMG.title}
-                subTitle={WRONG_SIZE_IMG.subTitle}
+                title={title}
+                subTitle={subTitle}
                 extra={
                     <Button
+                        data-test-id={dataTestIdBtn}
                         color='#2f54eb'
                         onClick={handleClickButton}
                         size='large'
                         type='primary'
-                        key={WRONG_SIZE_IMG.buttonKey}
+                        key={buttonKey}
                         htmlType='button'
                     >
-                        {WRONG_SIZE_IMG.buttonText}
+                        {buttonText}
                     </Button>
                 }
             />

@@ -8,6 +8,7 @@ import { primaryLight } from '@utils/constants/colors';
 import { Button, Col, Row, Typography } from 'antd';
 import classnames from 'classnames';
 
+import { DATA_TEST_ID } from '../../data/data-test-ids';
 import { CollapsedContext } from '../../react-contexts';
 import { Paths } from '../../routes/pathes';
 
@@ -91,6 +92,7 @@ export const CardsSection: FC = () => {
                         body='Заполнить профиль'
                         action={
                             <Button
+                                data-test-id={DATA_TEST_ID.menuButtonProfile}
                                 block={true}
                                 onClick={handleMoveToProfilePage}
                                 type='text'

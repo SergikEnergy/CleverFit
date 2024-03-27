@@ -1,4 +1,4 @@
-const DATA_TEST_ID = {
+export const DATA_TEST_ID = {
     menuButtonProfile: 'menu-button-profile',
     profileName: 'profile-name',
     profileSurname: 'profile-surname',

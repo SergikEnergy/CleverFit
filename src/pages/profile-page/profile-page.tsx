@@ -1,4 +1,4 @@
-import { FC, useEffect, useLayoutEffect } from 'react';
+import { FC, useEffect } from 'react';
 import { Navigate, useNavigate } from 'react-router-dom';
 import { ProfileContent } from '@components/profile-content';
 import { ProfileHeader } from '@components/profile-header';
@@ -13,17 +13,16 @@ import {
 import { Paths } from '../../routes/pathes';
 
 export const ProfilePage: FC = () => {
-    const isUserData = useAppSelector((state) => !!state.personalInfo.email);
     const navigate = useNavigate();
     const token = useAppSelector((state) => state.auth.token);
     const dispatch = useAppDispatch();
     const { data: userPersonalInfo } = useGetUserInfoQuery();
 
-    useLayoutEffect(() => {
-        if (!isUserData && userPersonalInfo) {
+    useEffect(() => {
+        if (userPersonalInfo) {
             dispatch(savePersonalInfoAfterRegistration({ ...userPersonalInfo, url: '', name: '' }));
         }
-    }, [dispatch, userPersonalInfo, isUserData]);
+    }, [dispatch, userPersonalInfo]);
 
     useEffect(() => {
         if (!token) {

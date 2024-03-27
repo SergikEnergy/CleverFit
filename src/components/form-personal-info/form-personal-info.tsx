@@ -1,12 +1,21 @@
-import { FC, useState } from 'react';
+import { FC, Fragment, useContext, useState } from 'react';
 import { EyeInvisibleOutlined, EyeTwoTone } from '@ant-design/icons';
-import { useAppSelector } from '@hooks/typed-react-redux-hooks';
-import { dateDayMonthYearDotFormat } from '@utils/constants/date-formats';
+import { ErrorProfile } from '@components/error-profile-page';
+import { ERROR_UPDATE_PROFILE } from '@components/error-profile-page/error-messages.data';
+import { AlertNotification } from '@components/notifications/alert/alert-notification';
+import { useAppDispatch, useAppSelector } from '@hooks/typed-react-redux-hooks';
+import { API_IMGS_BASE } from '@redux/api/api-data';
+import { RequestUserInfoType } from '@redux/api/api-types';
+import { useUpdateUserInfoMutation } from '@redux/api/profile-api';
+import { savePersonalInfoAfterRegistration } from '@redux/reducers/personal-info-slice';
+import { dateDayMonthYearDotFormat, dateFullStringFormat } from '@utils/constants/date-formats';
 import { Button, DatePicker, Form, Input } from 'antd';
 import classnames from 'classnames';
 import moment from 'moment';
 
+import { DATA_TEST_ID } from '../../data/data-test-ids';
 import { ERRORS_MESSAGES } from '../../data/form-messages';
+import { ModalReportContext } from '../../react-contexts';
 
 import { CustomUpload } from './components';
 import { FieldType, FormPersonalInfoPropsType } from './form-personal-info.types';
@@ -14,176 +23,258 @@ import { FieldType, FormPersonalInfoPropsType } from './form-personal-info.types
 import classes from './form-personal-info.module.css';
 
 export const FormPersonalInfo: FC<FormPersonalInfoPropsType> = () => {
+    const { openModal, setNode, setWidthModal } = useContext(ModalReportContext);
     const {
         email: userEmail,
         firstName,
         lastName,
         birthday,
+        url: ImageUrl,
     } = useAppSelector((state) => state.personalInfo);
+    const dispatch = useAppDispatch();
+    const [updatePersonalInfo] = useUpdateUserInfoMutation();
     const [isPasswordHelperVisible, setIsPasswordHelperVisible] = useState(true);
     const [isPasswordRequired, setIsPasswordRequired] = useState(false);
     const [passPlaceholderVisible, setPassPlaceholderVisible] = useState(true);
     const [confirmPlaceholderVisible, setConfirmPlaceholderVisible] = useState(true);
     const [submitDisabled, setSubmitDisabled] = useState(true);
+    const [isAlertShowed, setIsAlertShowed] = useState(false);
+    const [uploadStatus, setUploadStatus] = useState<'error' | 'done'>('error');
     const [form] = Form.useForm();
 
-    const handleFormChanged = (values) => {
-        if (values.password || values.passwordConfirm) {
+    const handleFormChanged = (changedFields: FieldType) => {
+        if (changedFields.password || changedFields.passwordConfirm) {
             setIsPasswordRequired(true);
         }
         setSubmitDisabled(false);
-        console.log(values);
     };
 
-    const handleSubmit = (data: any) => {
-        console.log(data);
+    const handleSubmit = async (fieldValues: FieldType) => {
+        const formData = { ...fieldValues };
+
+        if (formData.passwordConfirm) {
+            delete formData.passwordConfirm;
+        }
+
+        Object.keys(fieldValues).map((key) => {
+            if (!fieldValues[key as keyof FieldType]) {
+                delete formData[key as keyof FieldType];
+            }
+
+            return key;
+        });
+
+        if (uploadStatus === 'error' && formData.uploadFile) {
+            delete formData.uploadFile;
+        }
+
+        if (formData.birthday) {
+            formData.birthday = moment(formData.birthday).format(dateFullStringFormat);
+        }
+
+        const body: RequestUserInfoType = { ...formData };
+
+        if (ImageUrl) {
+            body.imgSrc = `${API_IMGS_BASE}${ImageUrl}`;
+        }
+
+        try {
+            const info = await updatePersonalInfo(body).unwrap();
+
+            setIsAlertShowed(true);
+            dispatch(savePersonalInfoAfterRegistration({ ...info, url: '', name: '' }));
+            form.resetFields();
+        } catch (err) {
+            if (err) {
+                setNode(
+                    <ErrorProfile
+                        title={ERROR_UPDATE_PROFILE.title}
+                        subTitle={ERROR_UPDATE_PROFILE.subTitle}
+                        buttonKey={ERROR_UPDATE_PROFILE.buttonKey}
+                        buttonText={ERROR_UPDATE_PROFILE.buttonText}
+                    />,
+                );
+                setWidthModal('clamp(328px, 100%, 416px)');
+                openModal();
+            }
+        }
     };
 
     return (
-        <Form
-            onFieldsChange={handleFormChanged}
-            form={form}
-            name='personalInfoForm'
-            autoComplete='off'
-            onFinish={handleSubmit}
-            className={classes.form}
-        >
-            <p className={classes.title}>Личная информация</p>
-            <div className={classes.personal}>
-                <Form.Item<FieldType> name='uploadFile' className={classes.upload__item}>
-                    <CustomUpload setDisabledSaveButton={setSubmitDisabled} />
-                </Form.Item>
-                <div className={classes.personal__names}>
-                    <Form.Item<FieldType> name='userName' className={classes.wrapper__line}>
+        <Fragment>
+            <Form
+                onValuesChange={handleFormChanged}
+                form={form}
+                name='personalInfoForm'
+                autoComplete='off'
+                onFinish={handleSubmit}
+                className={classes.form}
+            >
+                <p className={classes.title}>Личная информация</p>
+                <div className={classes.personal}>
+                    <CustomUpload
+                        setDisabledSaveButton={setSubmitDisabled}
+                        setUploadStatus={setUploadStatus}
+                    />
+
+                    <div className={classes.personal__names}>
+                        <Form.Item<FieldType> name='firstName' className={classes.wrapper__line}>
+                            <Input
+                                data-test-id={DATA_TEST_ID.profileName}
+                                defaultValue={firstName}
+                                placeholder='Имя'
+                                size='large'
+                                style={{ outline: 'none' }}
+                                className={classnames(classes.input, classes.antFixed)}
+                            />
+                        </Form.Item>
+                        <Form.Item<FieldType> name='lastName' className={classes.wrapper__line}>
+                            <Input
+                                data-test-id={DATA_TEST_ID.profileSurname}
+                                defaultValue={lastName}
+                                placeholder='Фамилия'
+                                size='large'
+                                style={{ outline: 'none' }}
+                                className={classnames(classes.input, classes.antFixed)}
+                            />
+                        </Form.Item>
+                        <Form.Item<FieldType> name='birthday' className={classes.wrapper__line}>
+                            <DatePicker
+                                data-test-id={DATA_TEST_ID.profileBirthday}
+                                defaultValue={
+                                    birthday
+                                        ? moment(birthday, dateDayMonthYearDotFormat)
+                                        : undefined
+                                }
+                                size='large'
+                                placeholder='Дата рождения'
+                                format={dateDayMonthYearDotFormat}
+                                className={classes.birth}
+                            />
+                        </Form.Item>
+                    </div>
+                </div>
+                <p className={classes.title}>Приватность и авторизация</p>
+                <div className={classes.privacy}>
+                    <Form.Item<FieldType>
+                        name='email'
+                        className={classes.wrapper__line}
+                        initialValue={userEmail}
+                        rules={[
+                            {
+                                required: true,
+                                message: '',
+                                pattern: new RegExp(
+                                    /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
+                                ),
+                            },
+                        ]}
+                    >
                         <Input
-                            defaultValue={firstName}
-                            placeholder='Имя'
                             size='large'
+                            data-test-id={DATA_TEST_ID.profileEmail}
                             style={{ outline: 'none' }}
-                            className={classnames(classes.input, classes.antFixed)}
+                            className={classnames(classes.email, classes.input, classes.antFixed)}
+                            addonBefore='e-mail:'
                         />
                     </Form.Item>
-                    <Form.Item<FieldType> name='userLastName' className={classes.wrapper__line}>
-                        <Input
-                            defaultValue={lastName}
-                            placeholder='Фамилия'
+                    <Form.Item<FieldType>
+                        className={classes.wrapper__line}
+                        help={isPasswordHelperVisible ? ERRORS_MESSAGES.PASSWORD : ''}
+                        name='password'
+                        rules={[
+                            {
+                                required: isPasswordRequired,
+                                pattern: new RegExp(/^(?=.*[A-Z])(?=.*\d)[A-Za-z\d]{8,}$/),
+                                message: ERRORS_MESSAGES.PASSWORD,
+                            },
+                        ]}
+                    >
+                        <Input.Password
+                            data-test-id={DATA_TEST_ID.profilePassword}
                             size='large'
+                            autoComplete='off'
+                            placeholder={passPlaceholderVisible ? 'Пароль' : ''}
+                            onChange={() => {
+                                setPassPlaceholderVisible(false);
+                            }}
                             style={{ outline: 'none' }}
-                            className={classnames(classes.input, classes.antFixed)}
-                        />
-                    </Form.Item>
-                    <Form.Item<FieldType> name='userBirthDate' className={classes.wrapper__line}>
-                        <DatePicker
-                            defaultValue={
-                                birthday ? moment(birthday, dateDayMonthYearDotFormat) : undefined
+                            className={classnames(
+                                classes.password,
+                                classes.input,
+                                classes.antFixed,
+                            )}
+                            onFocus={() => {
+                                setIsPasswordHelperVisible(true);
+                            }}
+                            // eslint-disable-next-line react/no-unstable-nested-components
+                            iconRender={(visible) =>
+                                visible ? <EyeTwoTone /> : <EyeInvisibleOutlined />
                             }
+                        />
+                    </Form.Item>
+                    <Form.Item<FieldType>
+                        name='passwordConfirm'
+                        className={classnames(classes.antFixed, classes.wrapper__line)}
+                        rules={[
+                            {
+                                required: isPasswordRequired,
+                                message: '',
+                            },
+                            ({ getFieldValue }) => ({
+                                validator(_, value) {
+                                    if (!value || getFieldValue('password') === value) {
+                                        return Promise.resolve();
+                                    }
+
+                                    return Promise.reject(
+                                        new Error(ERRORS_MESSAGES.PASSWORD_CONFIRM),
+                                    );
+                                },
+                            }),
+                        ]}
+                    >
+                        <Input.Password
+                            data-test-id={DATA_TEST_ID.profileRepeatPassword}
                             size='large'
-                            placeholder='Дата рождения'
-                            format={dateDayMonthYearDotFormat}
-                            className={classes.birth}
+                            autoComplete='off'
+                            placeholder={confirmPlaceholderVisible ? 'Повторите пароль' : ''}
+                            style={{ outline: 'none' }}
+                            onChange={() => {
+                                setConfirmPlaceholderVisible(false);
+                            }}
+                            className={classnames(classes.confirm, classes.input, classes.antFixed)}
+                            // eslint-disable-next-line react/no-unstable-nested-components
+                            iconRender={(visible) =>
+                                visible ? <EyeTwoTone /> : <EyeInvisibleOutlined />
+                            }
                         />
                     </Form.Item>
                 </div>
-            </div>
-            <p className={classes.title}>Приватность и авторизация</p>
-            <div className={classes.privacy}>
-                <Form.Item<FieldType>
-                    name='email'
-                    className={classes.wrapper__line}
-                    initialValue={userEmail}
-                    rules={[
-                        {
-                            required: true,
-                            message: '',
-                            pattern: new RegExp(/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/),
-                        },
-                    ]}
-                >
-                    <Input
+                <Form.Item className={classnames(classes.antFixed, classes.wrapper__line)}>
+                    <Button
+                        data-test-id={DATA_TEST_ID.profileSubmit}
                         size='large'
-                        data-test-id='registration-email'
-                        style={{ outline: 'none' }}
-                        className={classnames(classes.email, classes.input, classes.antFixed)}
-                        addonBefore='e-mail:'
-                    />
+                        className={classnames(classes.submit, classes.antFixed)}
+                        type='primary'
+                        htmlType='submit'
+                        block={true}
+                        disabled={submitDisabled}
+                    >
+                        Сохранить изменения
+                    </Button>
                 </Form.Item>
-                <Form.Item<FieldType>
-                    className={classes.wrapper__line}
-                    help={isPasswordHelperVisible ? ERRORS_MESSAGES.PASSWORD : ''}
-                    name='password'
-                    rules={[
-                        {
-                            required: isPasswordRequired,
-                            pattern: new RegExp(/^(?=.*[A-Z])(?=.*\d)[A-Za-z\d]{8,}$/),
-                            message: ERRORS_MESSAGES.PASSWORD,
-                        },
-                    ]}
-                >
-                    <Input.Password
-                        size='large'
-                        autoComplete='off'
-                        placeholder={passPlaceholderVisible ? 'Пароль' : ''}
-                        onChange={() => {
-                            setPassPlaceholderVisible(false);
-                        }}
-                        style={{ outline: 'none' }}
-                        className={classnames(classes.password, classes.input, classes.antFixed)}
-                        onFocus={() => {
-                            setIsPasswordHelperVisible(true);
-                        }}
-                        // eslint-disable-next-line react/no-unstable-nested-components
-                        iconRender={(visible) =>
-                            visible ? <EyeTwoTone /> : <EyeInvisibleOutlined />
-                        }
-                    />
-                </Form.Item>
-                <Form.Item<FieldType>
-                    name='passwordConfirm'
-                    className={classnames(classes.antFixed, classes.wrapper__line)}
-                    rules={[
-                        {
-                            required: isPasswordRequired,
-                            message: '',
-                        },
-                        ({ getFieldValue }) => ({
-                            validator(_, value) {
-                                if (!value || getFieldValue('password') === value) {
-                                    return Promise.resolve();
-                                }
-
-                                return Promise.reject(new Error(ERRORS_MESSAGES.PASSWORD_CONFIRM));
-                            },
-                        }),
-                    ]}
-                >
-                    <Input.Password
-                        size='large'
-                        autoComplete='off'
-                        placeholder={confirmPlaceholderVisible ? 'Повторите пароль' : ''}
-                        style={{ outline: 'none' }}
-                        onChange={() => {
-                            setConfirmPlaceholderVisible(false);
-                        }}
-                        className={classnames(classes.confirm, classes.input, classes.antFixed)}
-                        // eslint-disable-next-line react/no-unstable-nested-components
-                        iconRender={(visible) =>
-                            visible ? <EyeTwoTone /> : <EyeInvisibleOutlined />
-                        }
-                    />
-                </Form.Item>
-            </div>
-            <Form.Item className={classnames(classes.antFixed, classes.wrapper__line)}>
-                <Button
-                    size='large'
-                    className={classnames(classes.submit, classes.antFixed)}
-                    type='primary'
-                    htmlType='submit'
-                    block={true}
-                    disabled={submitDisabled}
-                >
-                    Сохранить изменения
-                </Button>
-            </Form.Item>
-        </Form>
+            </Form>
+            {isAlertShowed && (
+                <AlertNotification
+                    dataTestId={DATA_TEST_ID.alert}
+                    type='success'
+                    message='Данные профиля успешно обновлены'
+                    handleCloseAlert={() => {
+                        setIsAlertShowed(false);
+                    }}
+                />
+            )}
+        </Fragment>
     );
 };

@@ -8,3 +8,11 @@ export const WRONG_SIZE_IMG: ResultProps & { buttonText: string; buttonKey: stri
     buttonText: 'Закрыть',
     buttonKey: 'wrong-file-size-modal',
 };
+
+export const ERROR_UPDATE_PROFILE: ResultProps & { buttonText: string; buttonKey: string } = {
+    title: 'При сохранении данных произошла ошибка',
+    subTitle: 'Придётся попробовать ещё раз',
+    status: 'error',
+    buttonText: 'Закрыть',
+    buttonKey: 'error-update-profile',
+};
