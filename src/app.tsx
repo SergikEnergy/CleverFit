@@ -16,8 +16,10 @@ export const App: FC = () => {
     const dispatch = useAppDispatch();
 
     useEffect(() => {
-        fetchUserInfo();
-    }, [fetchUserInfo]);
+        if (!userPersonalInfo) {
+            fetchUserInfo();
+        }
+    }, [fetchUserInfo, userPersonalInfo]);
 
     useEffect(() => {
         if (userPersonalInfo && isSuccessGetUserInfo) {
