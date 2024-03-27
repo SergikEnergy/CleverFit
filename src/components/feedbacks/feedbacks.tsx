@@ -1,10 +1,7 @@
-import { FC, useContext, useState } from 'react';
+import { FC, useState } from 'react';
+import { FeedbacksActionButtons } from '@components/feedback-action-buttons';
 import { FeedbacksList } from '@components/feedbacks-list';
-import { NewFeedback } from '@components/new-feedback';
 import { FeedbackResponseType } from '@redux/api/api-types';
-import { Button } from 'antd';
-
-import { ModalReportContext } from '../../react-contexts';
 
 import classes from './feedbacks.module.css';
 
@@ -15,7 +12,6 @@ type FeedbacksPropsType = {
 export const Feedbacks: FC<FeedbacksPropsType> = ({ feedbacks }) => {
     const hiddenCommentText = 'Свернуть все отзывы';
     const spreadCommentText = 'Развернуть все отзывы';
-    const { setNode, setWidthModal, openModal } = useContext(ModalReportContext);
     const [textButton, setTextButton] = useState<string>(spreadCommentText);
     const [limit, setLimit] = useState(4);
 
@@ -32,12 +28,6 @@ export const Feedbacks: FC<FeedbacksPropsType> = ({ feedbacks }) => {
         });
     };
 
-    const handleCreateButtonClick = () => {
-        setNode(<NewFeedback />);
-        setWidthModal('clamp(328px, 100%, 539px)');
-        openModal();
-    };
-
     const toggleAllComment = () => {
         setLimit((prev) => (prev === 4 && Array.isArray(feedbacks) ? feedbacks.length : 4));
         setTextButton((prev) =>
@@ -48,28 +38,7 @@ export const Feedbacks: FC<FeedbacksPropsType> = ({ feedbacks }) => {
     return (
         <div className={classes.feedbacks}>
             <FeedbacksList feedbacks={sortFeedbacksByDateAscend([...feedbacks])} limit={limit} />
-            <div className={classes.navigation}>
-                <Button
-                    data-test-id='write-review'
-                    onClick={handleCreateButtonClick}
-                    htmlType='button'
-                    type='primary'
-                    size='large'
-                    className={classes.button_filled}
-                >
-                    Написать отзыв
-                </Button>
-                <Button
-                    data-test-id='all-reviews-button'
-                    htmlType='button'
-                    className={classes.button_text}
-                    type='text'
-                    size='large'
-                    onClick={toggleAllComment}
-                >
-                    {textButton}
-                </Button>
-            </div>
+            <FeedbacksActionButtons allReviewAction={toggleAllComment} buttonText={textButton} />
         </div>
     );
 };

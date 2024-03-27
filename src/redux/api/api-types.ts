@@ -124,3 +124,15 @@ export type RequestUserInfoType = {
     readyForJointTraining?: boolean;
     sendNotification?: boolean;
 };
+
+export type TariffResponseType = {
+    _id: string;
+    name: string;
+    periods: [
+        {
+            text: string;
+            cost: number;
+            days: number;
+        },
+    ];
+};

@@ -1,4 +1,4 @@
-import { FC, useContext, useEffect, useLayoutEffect } from 'react';
+import { FC, useContext, useEffect } from 'react';
 import { Navigate, useNavigate } from 'react-router-dom';
 import { Footer } from '@components/footer';
 import { MainContent } from '@components/main-content';

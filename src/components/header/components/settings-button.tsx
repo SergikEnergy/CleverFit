@@ -21,7 +21,7 @@ export const SettingsButton: FC<SettingsButtonPropsType> = ({ hiddenForCalendar,
     const windowWidth = useWindowWidth();
     const isSmallSize = windowWidth < 800;
 
-    const handleClick = () => {
+    const handleClick = async () => {
         history.push(Paths.SETTINGS_PAGE);
     };
 

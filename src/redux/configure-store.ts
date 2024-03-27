@@ -6,9 +6,11 @@ import { authApi } from './api/auth-api';
 import { calendarAPI } from './api/calendar-api';
 import { feedbackApi } from './api/feedbacks-api';
 import { profileAPI } from './api/profile-api';
+import { settingsAPI } from './api/settings-api';
 import { authReducer } from './reducers/auth-slice';
 import { feedbackReducer } from './reducers/feedback-slice';
 import { personalInfoReducer } from './reducers/personal-info-slice';
+import { tariffInfoReducer } from './reducers/tariff-slice';
 import { uploadProgressReducer } from './reducers/upload-progress-slice';
 import { userReducer } from './reducers/user-slice';
 
@@ -24,11 +26,13 @@ export const store = configureStore({
         [feedbackApi.reducerPath]: feedbackApi.reducer,
         [calendarAPI.reducerPath]: calendarAPI.reducer,
         [profileAPI.reducerPath]: profileAPI.reducer,
+        [settingsAPI.reducerPath]: settingsAPI.reducer,
         auth: authReducer,
         user: userReducer,
         feedback: feedbackReducer,
         personalInfo: personalInfoReducer,
         uploadProgress: uploadProgressReducer,
+        tariffsList: tariffInfoReducer,
     },
     middleware: (getDefaultMiddleware) =>
         getDefaultMiddleware().concat([
@@ -37,6 +41,7 @@ export const store = configureStore({
             feedbackApi.middleware,
             calendarAPI.middleware,
             profileAPI.middleware,
+            settingsAPI.middleware,
         ]),
 });
 
