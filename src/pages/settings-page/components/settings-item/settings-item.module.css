@@ -24,3 +24,9 @@
 .text.disabled {
     color: var(--character-light-disable-25);
 }
+
+@media screen and (max-width: 440px) {
+    .content {
+        width: 65%;
+    }
+}

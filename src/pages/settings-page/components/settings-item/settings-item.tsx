@@ -46,7 +46,7 @@ export const SettingsItem: FC<SettingsItemPropsType> = ({
                 </p>
                 <Tooltip
                     destroyTooltipOnHide={true}
-                    align={{ offset: [-16, -5] }}
+                    align={windowWidth > 500 ? { offset: [-16, -5] } : { offset: [16, 5] }}
                     placement={windowWidth > 500 ? 'bottomLeft' : 'topRight'}
                     overlayStyle={{ width: tooltipWidth }}
                     title={textHint}

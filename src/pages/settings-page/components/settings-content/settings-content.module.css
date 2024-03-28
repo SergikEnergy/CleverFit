@@ -14,3 +14,10 @@
     margin-left: 3px;
     margin-bottom: var(--margin-little-size);
 }
+
+@media screen and (max-width: 800px) {
+    .wrapper {
+        width: 95%;
+        align-items: center;
+    }
+}

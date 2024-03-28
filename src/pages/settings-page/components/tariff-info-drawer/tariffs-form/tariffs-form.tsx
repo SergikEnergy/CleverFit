@@ -1,31 +1,82 @@
 import { FC, Fragment, useState } from 'react';
-import { useAppSelector } from '@hooks/typed-react-redux-hooks';
+import { useAppSelector, useAppDispatch } from '@hooks/typed-react-redux-hooks';
 import { useDrawerContext } from '@hooks/use-info-drawer';
 import { Button, Form, Radio } from 'antd';
+import { RequestChangeTariffType } from '@redux/api/api-types';
+import { useUpdateSelectedTariffMutation } from '@redux/api/settings-api';
+import { resetCredentials } from '@redux/reducers/auth-slice';
 
 import classes from './tariffs-form.module.css';
+import { useModalReportContext } from '@hooks/use-modal-report';
+import { SuccessSelectTariff } from '@components/success-select-tariff';
 
 type TariffsFormField = {
     selectedTariff: number;
 };
-type TariffsFormPropsType = {
-    //
+
+const SubTitleSuccessChangeTariff: FC = () => {
+    const { email } = useAppSelector((state) => state.personalInfo);
+
+    return (
+        <div className='tariff-success__change'>
+            <span className='tariff-success__change_main'>
+                Мы отправили инструкцию для оплаты вам на&nbsp;e-mail <strong>{email}</strong>.
+                После подтверждения оплаты войдите в&nbsp;приложение заново.
+            </span>
+            <span className='tariff-success__change_addon'>
+                Не&nbsp;пришло письмо? Проверьте папку Спам.
+            </span>
+        </div>
+    );
 };
 
-export const TariffsForm: FC<TariffsFormPropsType> = () => {
+export const TariffsForm: FC = () => {
+    const dispatch = useAppDispatch();
+    const { openModal, setNode, setWidthModal, closeModal } = useModalReportContext();
+    const [updateTariff] = useUpdateSelectedTariffMutation();
     const [disabledSubmit, setDisabledSubmit] = useState(true);
     const { open: isDrawerOpen, closeDrawer } = useDrawerContext();
     const tariffInfo = useAppSelector((state) => state.tariffsList.tariffs);
     const infoData = tariffInfo && tariffInfo[0] ? tariffInfo[0].periods : [];
     const [form] = Form.useForm();
 
+    const handleCloseSuccessWindow = () => {
+        closeModal();
+        dispatch(resetCredentials());
+    };
+
     if (!isDrawerOpen) {
         form.resetFields();
     }
 
-    const handleSubmit = (values: TariffsFormField) => {
+    const handleSubmit = async (values: TariffsFormField) => {
+        setDisabledSubmit(true);
         const selectedDays = values.selectedTariff;
+
         const tariffId = tariffInfo[0] && tariffInfo[0]._id ? tariffInfo[0]._id : null;
+        if (tariffId) {
+            const requestBody: RequestChangeTariffType = {
+                tariffId,
+                days: selectedDays,
+            };
+            try {
+                await updateTariff(requestBody).unwrap();
+                setNode(
+                    <SuccessSelectTariff
+                        closeAction={handleCloseSuccessWindow}
+                        title='Чек для оплаты у вас на почте'
+                        subTitle={<SubTitleSuccessChangeTariff />}
+                    />,
+                );
+                setWidthModal('clamp(328px, 100%, 539px)');
+                openModal();
+            } catch (err) {
+                //
+            } finally {
+                setDisabledSubmit(false);
+                closeDrawer();
+            }
+        }
     };
 
     const handleFieldsChange = () => {

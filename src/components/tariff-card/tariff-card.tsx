@@ -3,6 +3,7 @@ import { CheckOutlined } from '@ant-design/icons';
 import { Button, Card } from 'antd';
 
 import classes from './tarif-card.module.css';
+import classnames from 'classnames';
 
 import freeTariffImg from '/images/freeTariff.png';
 import proActiveImg from '/images/proActive.png';
@@ -59,9 +60,9 @@ export const TariffCard: FC<TariffCardPropsType> = ({
                 </div>
             )}
             {tariff === 'pro' && isPaid && (
-                <div className={classes.status}>
+                <div className={classnames(classes.status, classes.paid)}>
                     <span>активен</span>
-                    <span>{period}</span>
+                    <span>до&nbsp;{period}</span>
                 </div>
             )}
         </Card>

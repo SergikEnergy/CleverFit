@@ -16,6 +16,11 @@
     gap: var(--gap-extra-small);
 }
 
+.status.paid {
+    flex-direction: column;
+    gap: 0;
+}
+
 .status > span {
     font-size: var(--font-size-title);
     color: var(--primary-light-10);
@@ -50,4 +55,10 @@
     font-size: var(--font-size-main);
     line-height: 130%;
     font-weight: var(--font-weight-normal);
+}
+
+@media screen and (max-width: 800px) {
+    .card {
+        width: 312px;
+    }
 }

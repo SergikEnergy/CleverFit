@@ -91,3 +91,9 @@ button.button__submit {
     line-height: 130%;
     font-weight: var(--font-weight-medium);
 }
+
+@media screen and (max-width: 400px) {
+    .cost {
+        width: 45%;
+    }
+}

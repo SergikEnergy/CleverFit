@@ -49,10 +49,6 @@ button.mobile__button {
         width: 32px;
         background: transparent;
     }
-
-    button.settings__button {
-        display: none;
-    }
 }
 
 @media screen and (max-width: 500px) {
