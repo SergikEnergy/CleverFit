@@ -18,3 +18,9 @@
 .alert :global(.ant-alert-content) {
     text-align: left;
 }
+
+@media screen and (max-width: 500px) {
+    .alert:global(.ant-alert) {
+        max-width: 312px;
+    }
+}

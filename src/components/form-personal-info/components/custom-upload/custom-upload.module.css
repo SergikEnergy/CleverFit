@@ -2,3 +2,9 @@
     top: 0;
     left: 0;
 }
+
+@media screen and (max-width: 550px) {
+    .upload :global(.ant-upload) {
+        width: 100%;
+    }
+}
