@@ -8,6 +8,7 @@ import { SettingsHeader } from '@pages/settings-page/components/settings-header'
 import { useLazyGetTariffsListQuery } from '@redux/api/settings-api';
 import { saveAvailableTariffs } from '@redux/reducers/tariff-slice';
 
+import { TariffDrawerContextProvider } from '../../react-contexts';
 import { Paths } from '../../routes/pathes';
 
 import classes from './settings-page.module.css';
@@ -40,12 +41,14 @@ export const SettingsPage: FC = () => {
     }
 
     return (
-        <BasePagesLayout customHeader={true}>
-            <SettingsHeader />
-            <div className={classes.settings}>
-                <SettingsContent />
-                <SettingsFooter />
-            </div>
-        </BasePagesLayout>
+        <TariffDrawerContextProvider>
+            <BasePagesLayout customHeader={true}>
+                <SettingsHeader />
+                <div className={classes.settings}>
+                    <SettingsContent />
+                    <SettingsFooter />
+                </div>
+            </BasePagesLayout>
+        </TariffDrawerContextProvider>
     );
 };

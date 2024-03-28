@@ -136,3 +136,8 @@ export type TariffResponseType = {
         },
     ];
 };
+
+export type RequestChangeTariffType = {
+    tariffId: string;
+    days: number;
+};

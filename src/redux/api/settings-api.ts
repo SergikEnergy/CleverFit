@@ -2,11 +2,10 @@ import { RootState } from '@redux/configure-store';
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 
 import { API_BASE_URL } from './api-data';
-import { TariffResponseType } from './api-types';
+import { RequestChangeTariffType, TariffResponseType } from './api-types';
 
 export const settingsAPI = createApi({
     reducerPath: 'userSettings',
-    // tagTypes: ['UserInfo'],
     baseQuery: fetchBaseQuery({
         baseUrl: API_BASE_URL,
         prepareHeaders: (headers, { getState }) => {
@@ -26,18 +25,20 @@ export const settingsAPI = createApi({
                 url: 'catalogs/tariff-list',
                 credentials: 'include',
             }),
-            // providesTags: (result) => (result ? [{ type: 'UserInfo', id: 1 }] : ['UserInfo']),
         }),
-        // updateUserInfo: build.mutation<ResponseUserInfoType, RequestUserInfoType>({
-        //     query: (userData) => ({
-        //         url: 'user',
-        //         method: 'PUT',
-        //         body: userData,
-        //         credentials: 'include',
-        //     }),
-        //     invalidatesTags: ['UserInfo'],
-        // }),
+        updateSelectedTariff: build.mutation<void, RequestChangeTariffType>({
+            query: (body) => ({
+                url: 'tariff',
+                method: 'POST',
+                body,
+                credentials: 'include',
+            }),
+        }),
     }),
 });
 
-export const { useLazyGetTariffsListQuery, useGetTariffsListQuery } = settingsAPI;
+export const {
+    useLazyGetTariffsListQuery,
+    useGetTariffsListQuery,
+    useUpdateSelectedTariffMutation,
+} = settingsAPI;

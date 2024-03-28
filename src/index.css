@@ -154,10 +154,12 @@ body {
     --padding-small-top-bottom-frames: 16px 0;
     --padding-modal-error-main: 32px 32px 24px;
     --padding-error-get-trains-main: 24px 16px;
+    --label--padding: 4px 8px;
     --padding-small-size: 8px;
     --padding-little-size: 16px;
     --padding-medium-size: 24px;
     --padding-middle-size: 32px;
+    --padding-settings-big-size: 40px;
     --padding-big-size: 64px;
     --padding-calendar-page-main: 10px 24px 93px;
     --padding-calendar-page-tablet: 12px 24px 271px;
@@ -165,6 +167,7 @@ body {
     --padding-not-found-page-main: 24px 24px 42px;
     --margin-zero: 0;
     --margin-small-size: 8px;
+    --margin-small-additional-size: 12px;
     --margin-little-size: 16px;
     --margin-medium-size: 24px;
     --margin-middle-size: 32px;

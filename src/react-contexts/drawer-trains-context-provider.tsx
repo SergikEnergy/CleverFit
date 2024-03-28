@@ -1,4 +1,4 @@
-import { FC, ReactNode, useState } from 'react';
+import { FC, ReactNode, useMemo, useState } from 'react';
 import { AllowedTrainResponseType, ExerciseType } from '@redux/api/api-types';
 import { Moment } from 'moment';
 
@@ -68,30 +68,37 @@ export const DrawerTrainsContextProvider: FC<{ children: ReactNode }> = ({ child
         setTrainForEditName(newTrain);
     };
 
-    return (
-        <DrawerTrainsContext.Provider
-            // eslint-disable-next-line react/jsx-no-constructed-context-values
-            value={{
-                editedTrainID: trainForEditID,
-                editedTrainName: trainForEditName,
-                changeEditedTrainData,
-                date,
-                trainName: train,
-                setTrainName,
-                exercises: exercisesList,
-                setExercises,
-                drawerTitle: drawerHeader,
-                setDrawerTitle,
-                updateDate,
-                closeDrawer,
-                openDrawer,
-                allowedTrains,
-                isDrawerOpen,
-                updateAllowedTrains,
-                resetExercises,
-            }}
-        >
-            {children}
-        </DrawerTrainsContext.Provider>
+    const value = useMemo(
+        () => ({
+            editedTrainID: trainForEditID,
+            editedTrainName: trainForEditName,
+            changeEditedTrainData,
+            date,
+            trainName: train,
+            setTrainName,
+            exercises: exercisesList,
+            setExercises,
+            drawerTitle: drawerHeader,
+            setDrawerTitle,
+            updateDate,
+            closeDrawer,
+            openDrawer,
+            allowedTrains,
+            isDrawerOpen,
+            updateAllowedTrains,
+            resetExercises,
+        }),
+        [
+            allowedTrains,
+            date,
+            drawerHeader,
+            exercisesList,
+            isDrawerOpen,
+            train,
+            trainForEditID,
+            trainForEditName,
+        ],
     );
+
+    return <DrawerTrainsContext.Provider value={value}>{children}</DrawerTrainsContext.Provider>;
 };

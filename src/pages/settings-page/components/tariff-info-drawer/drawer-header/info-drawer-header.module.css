@@ -1,0 +1,27 @@
+.title {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.text {
+    font-family: var(--font-family);
+    font-size: var(--font-size-big-title);
+    color: var(--character-light-title-85);
+    line-height: 130%;
+    font-weight: var(--font-weight-medium);
+}
+
+.close {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all ease 0.2s;
+}
+
+.close:hover,
+.close:active,
+.close:target {
+    cursor: pointer;
+    transform: scale(1.03);
+}

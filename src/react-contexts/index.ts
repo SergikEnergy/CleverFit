@@ -7,3 +7,5 @@ export { CollapsedContextProvider } from './collapse-context-provider';
 export { DrawerTrainsContextProvider } from './drawer-trains-context-provider';
 export { LoaderContextProvider } from './loader-state-context-provider';
 export { ModalReportContextProvider } from './modal-report-context-provider';
+export { TariffDrawerContext } from './tariff-drawer-context';
+export { TariffDrawerContextProvider } from './tariff-drawer-provider';

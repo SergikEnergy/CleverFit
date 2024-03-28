@@ -1,4 +1,4 @@
-import { FC, ReactNode, useState } from 'react';
+import { FC, ReactNode, useMemo, useState } from 'react';
 
 import { ModalReportContext } from './modal-report-context';
 
@@ -27,20 +27,18 @@ export const ModalReportContextProvider: FC<ModalReportProviderPropsType> = ({ c
         setNodeForModal(node);
     };
 
-    return (
-        <ModalReportContext.Provider
-            // eslint-disable-next-line react/jsx-no-constructed-context-values
-            value={{
-                isOpenModal: isOpen,
-                closeModal,
-                openModal,
-                setNode,
-                node: nodeForModal,
-                widthModal: width,
-                setWidthModal,
-            }}
-        >
-            {children}
-        </ModalReportContext.Provider>
+    const value = useMemo(
+        () => ({
+            isOpenModal: isOpen,
+            closeModal,
+            openModal,
+            setNode,
+            node: nodeForModal,
+            widthModal: width,
+            setWidthModal,
+        }),
+        [isOpen, nodeForModal, width],
     );
+
+    return <ModalReportContext.Provider value={value}>{children}</ModalReportContext.Provider>;
 };

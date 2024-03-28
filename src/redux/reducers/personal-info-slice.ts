@@ -27,7 +27,16 @@ const slice = createSlice({
         savePersonalInfoAfterRegistration: (
             state,
             {
-                payload: { email, firstName, lastName, birthday, imgSrc, tariff },
+                payload: {
+                    email,
+                    firstName,
+                    lastName,
+                    birthday,
+                    imgSrc,
+                    tariff,
+                    readyForJointTraining,
+                    sendNotification,
+                },
             }: PayloadAction<Omit<PersonalUserInfoType, 'createdFrom'>>,
         ) => {
             state.email = email;
@@ -36,6 +45,8 @@ const slice = createSlice({
             if (firstName) state.firstName = firstName;
             if (lastName) state.lastName = lastName;
             if (tariff) state.tariff = tariff;
+            if (readyForJointTraining) state.readyForJointTraining = readyForJointTraining;
+            if (sendNotification) state.sendNotification = sendNotification;
         },
         setEntryPoint: (state, { payload: createdFrom }: PayloadAction<GoogleOrFormType>) => {
             state.createdFrom = createdFrom;

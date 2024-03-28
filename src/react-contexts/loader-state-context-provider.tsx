@@ -1,4 +1,4 @@
-import { FC, ReactNode, useState } from 'react';
+import { FC, ReactNode, useMemo, useState } from 'react';
 
 import { LoaderStateContext } from './loader-context';
 
@@ -13,10 +13,14 @@ export const LoaderContextProvider: FC<{ children: ReactNode }> = ({ children })
         setIsLoading(false);
     };
 
-    return (
-        // eslint-disable-next-line react/jsx-no-constructed-context-values
-        <LoaderStateContext.Provider value={{ isLoading, startLoader, stopLoader }}>
-            {children}
-        </LoaderStateContext.Provider>
+    const value = useMemo(
+        () => ({
+            isLoading,
+            startLoader,
+            stopLoader,
+        }),
+        [isLoading],
     );
+
+    return <LoaderStateContext.Provider value={value}>{children}</LoaderStateContext.Provider>;
 };
