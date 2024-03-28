@@ -113,7 +113,7 @@ export const TariffsForm: FC = () => {
                             <div key={data.text} className={classes.description}>
                                 <div className={classes.name}>{data.text}</div>
                                 <div className={classes.cost}>
-                                    {data.cost.toLocaleString()}&nbsp;$
+                                    {data.cost.toLocaleString('ru-RU')}&nbsp;$
                                 </div>
                                 <Radio
                                     value={data.days}
