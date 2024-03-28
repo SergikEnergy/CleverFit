@@ -24,10 +24,10 @@ export const MainPage: FC = () => {
     const dispatch = useAppDispatch();
 
     useEffect(() => {
-        if (!userPersonalInfo) {
+        if (token && !userPersonalInfo) {
             fetchUserInfo();
         }
-    }, [fetchUserInfo, userPersonalInfo]);
+    }, [fetchUserInfo, userPersonalInfo, token]);
 
     useEffect(() => {
         if (userPersonalInfo && isSuccessGetUserInfo) {

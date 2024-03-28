@@ -1,5 +1,6 @@
 import { FC } from 'react';
 import { CheckCircleOutlined } from '@ant-design/icons';
+import { useWindowWidth } from '@hooks/use-window-size';
 import classnames from 'classnames';
 
 import { CurrentTariffInfo } from '../cyrrent-tariff-info/current-tariff-info';
@@ -8,7 +9,6 @@ import { TariffLineInfo } from '../tariff-info-line/tariff-line-info';
 import { tariffsDescriptionsData } from './tariff-descriptions.data';
 
 import classes from './tariffs-description.module.css';
-import { useWindowWidth } from '@hooks/use-window-size';
 
 type TariffsDescriptionPropsType = {
     isPaid: boolean;

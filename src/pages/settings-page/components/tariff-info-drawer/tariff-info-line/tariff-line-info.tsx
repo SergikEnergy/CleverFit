@@ -1,5 +1,6 @@
 import { FC } from 'react';
 import { CheckCircleFilled, CloseCircleOutlined } from '@ant-design/icons';
+
 import classes from './tariff-line-info.module.css';
 
 type TariffLineInfoPropsType = {

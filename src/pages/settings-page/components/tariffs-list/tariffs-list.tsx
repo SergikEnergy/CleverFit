@@ -1,11 +1,13 @@
 import { FC } from 'react';
 import { TariffCard } from '@components/tariff-card';
-import { useDrawerContext } from '@hooks/use-info-drawer';
 import { useAppSelector } from '@hooks/typed-react-redux-hooks';
+import { useDrawerContext } from '@hooks/use-info-drawer';
+import { dateDayMonthFormat, dateFullStringFormat } from '@utils/constants/date-formats';
+import moment from 'moment';
+
+import { DATA_TEST_ID } from '../../../../data/data-test-ids';
 
 import classes from './tariffs-list.module.css';
-import moment from 'moment';
-import { dateFullStringFormat, dateDayMonthFormat } from '@utils/constants/date-formats';
 
 export const TariffsList: FC = () => {
     const { openDrawer } = useDrawerContext();
@@ -24,6 +26,7 @@ export const TariffsList: FC = () => {
                 }}
             />
             <TariffCard
+                dataTestId={DATA_TEST_ID.proTarifCard}
                 key='pro tariff'
                 tariff='pro'
                 isPaid={isPaidPro}
@@ -32,7 +35,7 @@ export const TariffsList: FC = () => {
                     openDrawer();
                 }}
                 activateClickHandler={() => {
-                    console.log('activated');
+                    //
                 }}
             />
         </div>

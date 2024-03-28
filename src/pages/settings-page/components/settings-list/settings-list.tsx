@@ -1,7 +1,9 @@
-import { FC, useState } from 'react';
+import { FC } from 'react';
 import { useAppSelector } from '@hooks/typed-react-redux-hooks';
 import { RequestUserInfoType } from '@redux/api/api-types';
 import { useUpdateUserInfoMutation } from '@redux/api/profile-api';
+import { dateFullStringFormat } from '@utils/constants/date-formats';
+import moment from 'moment';
 
 import { SettingsItem } from '../settings-item';
 
@@ -10,10 +12,11 @@ import { blackThemeKey, IdButtonType, settingsPropsListDefault } from './setting
 import classes from './settings-list.module.css';
 
 export const SettingsList: FC = () => {
-    const [disabledTheme, setDisabledTheme] = useState(true);
     const { readyForJointTraining, sendNotification, email } = useAppSelector(
         (state) => state.personalInfo,
     );
+    const expired = useAppSelector((state) => state.personalInfo.tariff?.expired) || undefined;
+    const isPaidPro = expired ? moment(expired, dateFullStringFormat).isAfter(moment()) : false;
     const [updateUserInfo] = useUpdateUserInfoMutation();
 
     const onChangeHandler = async (checked: boolean, id: IdButtonType | string) => {
@@ -36,7 +39,7 @@ export const SettingsList: FC = () => {
                 const props = { ...item };
 
                 if (item.key === blackThemeKey) {
-                    props.disabled = disabledTheme;
+                    props.disabled = isPaidPro;
                 } else if (item.key === 'readyForJointTraining') {
                     props.checkedSwitch = readyForJointTraining;
                 } else if (item.key === 'sendNotification') {

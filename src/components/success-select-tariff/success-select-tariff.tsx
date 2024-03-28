@@ -1,6 +1,8 @@
 import { FC, ReactNode } from 'react';
-import { Result, Button } from 'antd';
 import { CheckCircleFilled, CloseOutlined } from '@ant-design/icons';
+import { Button,Result } from 'antd';
+
+import { DATA_TEST_ID } from '../../data/data-test-ids';
 
 import classes from './success-select-tariff.module.css';
 
@@ -17,7 +19,7 @@ export const SuccessSelectTariff: FC<SuccessSelectTariffPropsType> = ({
     extraBlock = null,
     closeAction,
 }) => (
-    <div className={classes.success}>
+    <div className={classes.success} data-test-id={DATA_TEST_ID.tariffModalSuccess}>
         <Button
             onClick={() => {
                 closeAction();

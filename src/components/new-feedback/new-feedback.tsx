@@ -8,6 +8,7 @@ import { resetFeedback, setFeedback } from '@redux/reducers/feedback-slice';
 import { Button, Divider, Form, Input, Rate } from 'antd';
 import classnames from 'classnames';
 
+import { DATA_TEST_ID } from '../../data/data-test-ids';
 import { LoaderStateContext, ModalReportContext } from '../../react-contexts';
 
 import classes from './new-feedback.module.css';
@@ -147,7 +148,7 @@ export const NewFeedback: FC = () => {
                 <Divider style={{ margin: 0, height: '2px' }} />
                 <Form.Item className={classnames(classes.button, classes.antFixed)}>
                     <Button
-                        data-test-id='new-review-submit-button'
+                        data-test-id={DATA_TEST_ID.newReviewSubmitBtn}
                         disabled={submitDisabled}
                         htmlType='submit'
                         block={true}

@@ -6,20 +6,21 @@ import { history } from '@redux/configure-store';
 import { savePersonalInfoAfterRegistration } from '@redux/reducers/personal-info-slice';
 
 import { routes } from './routes/routes';
-import { useAppDispatch } from './hooks';
+import { useAppDispatch, useAppSelector } from './hooks';
 import { LoaderStateContext } from './react-contexts';
 
 export const App: FC = () => {
     const dispatch = useAppDispatch();
+    const token = useAppSelector((state) => state.auth.token);
     const { isLoading } = useContext(LoaderStateContext);
     const [fetchUserInfo, { data: userPersonalInfo, isSuccess: isSuccessGetUserInfo }] =
         useLazyGetUserInfoQuery();
 
     useLayoutEffect(() => {
-        if (!userPersonalInfo) {
+        if (!userPersonalInfo && token) {
             fetchUserInfo();
         }
-    }, [fetchUserInfo, userPersonalInfo]);
+    }, [fetchUserInfo, userPersonalInfo, token]);
 
     useEffect(() => {
         if (userPersonalInfo && isSuccessGetUserInfo) {

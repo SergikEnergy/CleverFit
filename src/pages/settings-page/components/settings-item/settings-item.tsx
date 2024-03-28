@@ -14,6 +14,8 @@ type SettingsItemPropsType = {
     tooltipWidth: string | number;
     textHint: string;
     checkedSwitch: boolean;
+    dataTestIdSwitcher?: string;
+    dataTestIdIconTooltip?: string;
     disabled?: boolean;
     onChangeHandler?: (checked: boolean, id: string) => Promise<void>;
 };
@@ -25,6 +27,8 @@ export const SettingsItem: FC<SettingsItemPropsType> = ({
     checkedSwitch,
     onChangeHandler,
     id,
+    dataTestIdSwitcher,
+    dataTestIdIconTooltip,
     disabled = false,
 }) => {
     const windowWidth = useWindowWidth();
@@ -53,10 +57,14 @@ export const SettingsItem: FC<SettingsItemPropsType> = ({
                     color='black'
                     className={classes.tooltip}
                 >
-                    <ExclamationCircleOutlined style={{ color: '#8C8C8C' }} />
+                    <ExclamationCircleOutlined
+                        data-test-id={dataTestIdIconTooltip}
+                        style={{ color: '#8C8C8C' }}
+                    />
                 </Tooltip>
             </div>
             <Switch
+                data-test-id={dataTestIdSwitcher}
                 checked={checkedSwitch}
                 onChange={onChangeSwitcher}
                 disabled={disabledSwitcher}

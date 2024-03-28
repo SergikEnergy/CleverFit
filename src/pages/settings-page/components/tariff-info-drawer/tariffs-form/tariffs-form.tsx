@@ -1,14 +1,16 @@
 import { FC, Fragment, useState } from 'react';
-import { useAppSelector, useAppDispatch } from '@hooks/typed-react-redux-hooks';
+import { SuccessSelectTariff } from '@components/success-select-tariff';
+import { useAppDispatch,useAppSelector } from '@hooks/typed-react-redux-hooks';
 import { useDrawerContext } from '@hooks/use-info-drawer';
-import { Button, Form, Radio } from 'antd';
+import { useModalReportContext } from '@hooks/use-modal-report';
 import { RequestChangeTariffType } from '@redux/api/api-types';
 import { useUpdateSelectedTariffMutation } from '@redux/api/settings-api';
 import { resetCredentials } from '@redux/reducers/auth-slice';
+import { Button, Form, Radio } from 'antd';
+
+import { DATA_TEST_ID } from '../../../../../data/data-test-ids';
 
 import classes from './tariffs-form.module.css';
-import { useModalReportContext } from '@hooks/use-modal-report';
-import { SuccessSelectTariff } from '@components/success-select-tariff';
 
 type TariffsFormField = {
     selectedTariff: number;
@@ -54,11 +56,13 @@ export const TariffsForm: FC = () => {
         const selectedDays = values.selectedTariff;
 
         const tariffId = tariffInfo[0] && tariffInfo[0]._id ? tariffInfo[0]._id : null;
+
         if (tariffId) {
             const requestBody: RequestChangeTariffType = {
                 tariffId,
                 days: selectedDays,
             };
+
             try {
                 await updateTariff(requestBody).unwrap();
                 setNode(
@@ -87,6 +91,7 @@ export const TariffsForm: FC = () => {
         <Fragment>
             <h4 className={classes.title}>Стоимость тарифа</h4>
             <Form<TariffsFormField>
+                data-test-id={DATA_TEST_ID.tariffCost}
                 form={form}
                 name='tariffSelectForm'
                 onFinish={handleSubmit}

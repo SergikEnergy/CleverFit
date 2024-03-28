@@ -26,13 +26,14 @@ module.exports = {
     ],
     rules: {
         'react-refresh/only-export-components': ['warn', { allowConstantExport: true }],
+
         'no-underscore-dangle': [
             'error',
             {
-                allowAfterThis: true,
-                allowed: ['_id'],
+                allow: ['_id'],
             },
         ],
+
         'import/no-absolute-path': 'off',
         'react/react-in-jsx-scope': 'off',
         'import/no-extraneous-dependencies': [
