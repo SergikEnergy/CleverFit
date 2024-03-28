@@ -70,6 +70,22 @@ const slice = createSlice({
                 state = initialUserInfoState;
             }
         },
+        updateSendNotification: (
+            state,
+            {
+                payload: { sendNotification },
+            }: PayloadAction<Pick<PersonalUserInfoType, 'sendNotification'>>,
+        ) => {
+            state.sendNotification = sendNotification;
+        },
+        updateReadyForTrain: (
+            state,
+            {
+                payload: { readyForJointTraining },
+            }: PayloadAction<Pick<PersonalUserInfoType, 'readyForJointTraining'>>,
+        ) => {
+            state.readyForJointTraining = readyForJointTraining;
+        },
     },
 });
 
@@ -80,5 +96,7 @@ export const {
     resetImgSrcUrl,
     resetImgUploadData,
     resetPersonalInfo,
+    updateReadyForTrain,
+    updateSendNotification,
 } = slice.actions;
 export const personalInfoReducer = slice.reducer;

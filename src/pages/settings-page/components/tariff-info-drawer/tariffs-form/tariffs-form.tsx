@@ -1,6 +1,6 @@
 import { FC, Fragment, useState } from 'react';
 import { SuccessSelectTariff } from '@components/success-select-tariff';
-import { useAppDispatch,useAppSelector } from '@hooks/typed-react-redux-hooks';
+import { useAppDispatch, useAppSelector } from '@hooks/typed-react-redux-hooks';
 import { useDrawerContext } from '@hooks/use-info-drawer';
 import { useModalReportContext } from '@hooks/use-modal-report';
 import { RequestChangeTariffType } from '@redux/api/api-types';
@@ -74,11 +74,11 @@ export const TariffsForm: FC = () => {
                 );
                 setWidthModal('clamp(328px, 100%, 539px)');
                 openModal();
+                closeDrawer();
             } catch (err) {
                 //
             } finally {
                 setDisabledSubmit(false);
-                closeDrawer();
             }
         }
     };
@@ -112,8 +112,14 @@ export const TariffsForm: FC = () => {
                         {infoData.map((data) => (
                             <div key={data.text} className={classes.description}>
                                 <div className={classes.name}>{data.text}</div>
-                                <div className={classes.cost}>{`${data.cost}\u00A0$`}</div>
-                                <Radio value={data.days} className={classes.radio} />
+                                <div
+                                    className={classes.cost}
+                                >{`${data.cost.toLocaleString()}\u00A0$`}</div>
+                                <Radio
+                                    value={data.days}
+                                    className={classes.radio}
+                                    data-test-id={`tariff-${data.cost}`}
+                                />
                             </div>
                         ))}
                     </Radio.Group>
@@ -121,6 +127,7 @@ export const TariffsForm: FC = () => {
 
                 <Form.Item className={classes.submit}>
                     <Button
+                        data-test-id={DATA_TEST_ID.tariffSubmit}
                         className={classes.button__submit}
                         size='large'
                         type='primary'

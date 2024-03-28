@@ -1,6 +1,6 @@
 import { FC } from 'react';
-import { useNavigate } from 'react-router-dom';
 import { FeedbacksActionButtons } from '@components/feedback-action-buttons';
+import { history } from '@redux/configure-store';
 import classnames from 'classnames';
 
 import { Paths } from '../../../../routes/pathes';
@@ -12,10 +12,8 @@ type SettingsFooterTypeProps = {
 };
 
 export const SettingsFooter: FC<SettingsFooterTypeProps> = () => {
-    const navigate = useNavigate();
-
     const moveToReviewsHandler = () => {
-        navigate(Paths.FEEDBACKS_PAGE, { replace: true });
+        history.push(Paths.FEEDBACKS_PAGE);
     };
 
     return (

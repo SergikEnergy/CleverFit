@@ -49,4 +49,8 @@ button.close {
         padding-right: var(--padding-little-size);
         padding-left: var(--padding-little-size);
     }
+    .success :global(.ant-result-title) {
+        font-family: var(--font-family);
+        font-size: var(--font-size-title);
+    }
 }

@@ -12,10 +12,10 @@ import classes from './tariffs-list.module.css';
 export const TariffsList: FC = () => {
     const { openDrawer } = useDrawerContext();
     const expired = useAppSelector((state) => state.personalInfo.tariff?.expired) || undefined;
-    const isPaidPro = expired ? moment(expired, dateFullStringFormat).isAfter(moment()) : false;
     const untilPaid = expired
         ? moment(expired, dateFullStringFormat).format(dateDayMonthFormat)
         : '';
+    const isPaidPro = !!untilPaid;
 
     return (
         <div className={classes.cards}>

@@ -41,23 +41,25 @@ export const SettingsButton: FC<SettingsButtonPropsType> = ({ hiddenForCalendar,
                 />
             )}
 
-            <Button
-                onClick={handleClick}
-                data-test-id={DATA_TEST_ID.headerSettings}
-                className={classnames(classes.settings__button, {
-                    [classes.settings__button_profile]: forProfile,
-                })}
-                type='text'
-                icon={<SettingOutlined />}
-            >
-                <span
-                    className={classnames(classes.button__text, {
-                        [classes.collapsed]: collapsed,
+            {!isSmallSize && (
+                <Button
+                    onClick={handleClick}
+                    data-test-id={DATA_TEST_ID.headerSettings}
+                    className={classnames(classes.settings__button, {
+                        [classes.settings__button_profile]: forProfile,
                     })}
+                    type='text'
+                    icon={<SettingOutlined />}
                 >
-                    Настройки
-                </span>
-            </Button>
+                    <span
+                        className={classnames(classes.button__text, {
+                            [classes.collapsed]: collapsed,
+                        })}
+                    >
+                        Настройки
+                    </span>
+                </Button>
+            )}
         </Fragment>
     );
 };
