@@ -112,9 +112,9 @@ export const TariffsForm: FC = () => {
                         {infoData.map((data) => (
                             <div key={data.text} className={classes.description}>
                                 <div className={classes.name}>{data.text}</div>
-                                <div
-                                    className={classes.cost}
-                                >{`${data.cost.toLocaleString()}\u00A0$`}</div>
+                                <div className={classes.cost}>
+                                    {data.cost.toLocaleString()}&nbsp;$
+                                </div>
                                 <Radio
                                     value={data.days}
                                     className={classes.radio}
