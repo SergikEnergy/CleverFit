@@ -1,0 +1,67 @@
+.form:global(.ant-form) {
+    padding: var(--padding-medium-size);
+    margin-right: 0;
+    max-width: 480px;
+    width: 100%;
+}
+
+.title {
+    font-family: var(--font-family);
+    font-size: var(--font-size-title);
+    color: var(--character-light-title-85);
+    line-height: 140%;
+    font-weight: var(--font-weight-medium);
+    padding-left: var(--padding-small-size);
+    text-align: left;
+    margin-bottom: var(--margin-medium-size);
+}
+
+.personal {
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+    gap: var(--gap-middle);
+}
+.personal__names,
+.privacy {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-content: flex-start;
+    gap: var(--gap-medium);
+}
+
+.wrapper__line:global(.ant-form-item) {
+    width: 100%;
+    margin-bottom: 0;
+}
+
+.wrapper__line:global(.ant-form-item):last-child {
+    margin-bottom: var(--margin-medium-size);
+}
+
+.wrapper__line :global(.ant-picker) {
+    width: 100%;
+}
+.privacy {
+    gap: var(--gap-main);
+}
+.privacy .wrapper__line:last-child {
+    margin-bottom: var(--margin-submit-profile-main);
+}
+:global(#personalInfoForm_password_help),
+:global(#personalInfoForm_passwordConfirm_help) {
+    text-align: left;
+    padding-left: 2px;
+    font-size: var(--font-size-mobile);
+    line-height: 130%;
+}
+
+@media screen and (max-width: 600px) {
+    .personal {
+        flex-direction: column-reverse;
+        align-items: stretch;
+        justify-content: flex-start;
+    }
+}

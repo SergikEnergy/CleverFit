@@ -1,0 +1,32 @@
+.item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.content {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+.text {
+    margin-bottom: 3px;
+    text-align: left;
+    font-family: var(--font-family);
+    font-size: var(--font-size-main);
+    color: var(--character-light-title-85);
+    line-height: 130%;
+    font-weight: var(--font-style-title);
+    margin-right: var(--margin-small-size);
+}
+
+.text.disabled {
+    color: var(--character-light-disable-25);
+}
+
+@media screen and (max-width: 440px) {
+    .content {
+        width: 70%;
+    }
+}

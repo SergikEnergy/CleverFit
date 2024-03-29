@@ -1,13 +1,17 @@
 import { FC, useContext, useEffect } from 'react';
 import { Navigate, useNavigate } from 'react-router-dom';
-import { CollapsedContext } from '../../reactContexts';
-import { useAppSelector } from '@hooks/typed-react-redux-hooks';
+import { Footer } from '@components/footer';
+import { MainContent } from '@components/main-content';
+import { useAppDispatch } from '@hooks/typed-react-redux-hooks';
+import { BasePagesLayout } from '@pages/base-pages-layout';
+import { useLazyGetUserInfoQuery } from '@redux/api/profile-api';
+import { savePersonalInfoAfterRegistration } from '@redux/reducers/personal-info-slice';
+import { useAuthSelector } from '@redux/selectors';
+import { Layout as AntLayout } from 'antd';
+
+import { CollapsedContext } from '../../react-contexts';
 import { Paths } from '../../routes/pathes';
 
-import { Footer } from '@components/footer';
-import { MainContent } from '@components/mainContent';
-import { BasePagesLayout } from '@pages/basePagesLayout';
-import { Layout as AntLayout } from 'antd';
 import './main-page.css';
 
 const { Footer: AntFooter } = AntLayout;
@@ -15,7 +19,22 @@ const { Footer: AntFooter } = AntLayout;
 export const MainPage: FC = () => {
     const { collapsed } = useContext(CollapsedContext);
     const navigate = useNavigate();
-    const token = useAppSelector((state) => state.auth.token);
+    const { token } = useAuthSelector();
+    const [fetchUserInfo, { data: userPersonalInfo, isSuccess: isSuccessGetUserInfo }] =
+        useLazyGetUserInfoQuery();
+    const dispatch = useAppDispatch();
+
+    useEffect(() => {
+        if (token && !userPersonalInfo) {
+            fetchUserInfo();
+        }
+    }, [fetchUserInfo, userPersonalInfo, token]);
+
+    useEffect(() => {
+        if (userPersonalInfo && isSuccessGetUserInfo) {
+            dispatch(savePersonalInfoAfterRegistration({ ...userPersonalInfo, url: '', name: '' }));
+        }
+    }, [dispatch, isSuccessGetUserInfo, userPersonalInfo]);
 
     useEffect(() => {
         if (!token) {
@@ -24,18 +43,18 @@ export const MainPage: FC = () => {
     }, [token, navigate]);
 
     if (!token) {
-        return <Navigate to={Paths.AUTH} replace />;
-    } else {
-        return (
-            <BasePagesLayout>
-                <MainContent />
-                <AntFooter
-                    className={!collapsed ? 'footer' : 'footer collapsed'}
-                    style={{ padding: 0, background: 'transparent' }}
-                >
-                    <Footer />
-                </AntFooter>
-            </BasePagesLayout>
-        );
+        return <Navigate to={Paths.AUTH} replace={true} />;
     }
+
+    return (
+        <BasePagesLayout>
+            <MainContent />
+            <AntFooter
+                className={collapsed ? 'footer collapsed' : 'footer'}
+                style={{ padding: 0, background: 'transparent' }}
+            >
+                <Footer />
+            </AntFooter>
+        </BasePagesLayout>
+    );
 };

@@ -1,0 +1,62 @@
+.button__text,
+span.button__text {
+    font-family: var(--font-family);
+    font-weight: var(--font-weight-normal);
+    font-size: var(--font-size-main);
+    line-height: var(--line-height-main);
+    color: var(--character-light-title-85);
+}
+
+button.settings__button {
+    border: none;
+}
+
+button.mobile__button {
+    display: none;
+    flex-grow: 0;
+}
+
+@media screen and (max-width: 1290px) {
+    .settings__button:not(.settings__button_profile) > span[role='img'] {
+        display: none;
+    }
+}
+
+@media screen and (max-width: 834px) {
+    button > span.button__text {
+        margin-left: var(--margin-zero);
+    }
+    button.settings__button {
+        padding-left: 2px;
+        padding-right: 2px;
+    }
+}
+
+@media screen and (max-width: 800px) {
+    .settings__button.settings__button_profile > span[role='img'] {
+        display: none;
+    }
+
+    button.mobile__button {
+        display: inline-block;
+        padding: var(--padding-zero);
+    }
+    button.mobile__button.antFixed:not(.calendar-mobile):not(.mobile__button_profile) {
+        width: 32px;
+        background: var(--neutral-gray-1);
+    }
+    button.mobile__button.antFixed.calendar-mobile {
+        width: 32px;
+        background: transparent;
+    }
+}
+
+@media screen and (max-width: 500px) {
+    button.mobile__button.antFixed.calendar-mobile {
+        background: transparent;
+    }
+    button.mobile__button.antFixed.calendar-mobile > span {
+        font-size: var(--font-size-main);
+        margin-right: var(--margin-little-size);
+    }
+}

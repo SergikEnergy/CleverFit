@@ -1,13 +1,13 @@
 import { FC, useContext } from 'react';
 import { useLocation } from 'react-router-dom';
 import { history } from '@redux/configure-store';
+import { Button } from 'antd';
+import classnames from 'classnames';
+
+import { CollapsedContext } from '../../react-contexts';
 import { Paths } from '../../routes/pathes';
 
-import { CollapsedContext } from '../../reactContexts';
-
-import { Button } from 'antd';
 import classes from './reviews.module.css';
-import classnames from 'classnames';
 
 export const Reviews: FC = () => {
     const location = useLocation();
@@ -23,7 +23,7 @@ export const Reviews: FC = () => {
                 data-test-id='see-reviews'
                 className=''
                 type='text'
-                block
+                block={true}
                 htmlType='button'
                 onClick={handleClick}
             >

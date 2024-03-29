@@ -1,0 +1,12 @@
+.modal {
+    position: absolute;
+    min-height: 120px;
+    width: calc(100% - 48px);
+    box-shadow: var(--modal-box-shadow);
+    border-radius: 2px;
+    background: var(--neutral-gray-1);
+}
+
+.modal.hidden {
+    display: none;
+}

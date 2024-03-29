@@ -1,1 +1,0 @@
-export { CardMainAction } from './cardMainAction';

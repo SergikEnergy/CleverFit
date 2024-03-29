@@ -1,0 +1,82 @@
+.title {
+    width: 63.5%;
+    box-shadow: var(--card-main-page-box-shadow);
+    background: var(--character-light-primary-inverse);
+    border-radius: 2px;
+    padding: 2.4rem 6.4rem 2.4rem 2.5rem;
+    align-items: flex-start;
+    justify-content: center;
+    margin-top: 0.8rem;
+}
+
+.title.collapsed {
+    width: 56.5%;
+    padding-right: 6rem;
+}
+
+h1.title__text.antFixed,
+.title__text {
+    font-family: var(--font-family);
+    margin-bottom: var(--margin-zero);
+    font-weight: 500;
+    font-style: normal;
+    text-align: left;
+    font-size: 2rem;
+    line-height: var(--line-height-main);
+    color: var(--character-light-title-85);
+}
+
+.cards {
+    width: 65%;
+}
+
+.cards.collapsed {
+    width: 57.9%;
+}
+
+@media screen and (max-width: 1100px) {
+    .title {
+        width: 96%;
+    }
+    .cards {
+        width: 98.5%;
+    }
+}
+
+@media screen and (max-width: 834px) {
+    .title {
+        padding-right: 3.5rem;
+        margin-left: 1.1rem;
+    }
+    .cards,
+    .cards.antFixed {
+        margin-left: 0.4rem !important;
+    }
+    .title.collapsed {
+        width: 97%;
+        padding-right: 2rem;
+    }
+    .cards.collapsed {
+        width: 99%;
+    }
+}
+
+@media screen and (max-width: 750px) {
+    .cards {
+        gap: var(--gap-medium);
+    }
+}
+@media screen and (max-width: 400px) {
+    .title.collapsed,
+    .title {
+        width: 95%;
+        margin-left: 1rem;
+        padding: 1.3rem 1.5rem 1.5rem;
+    }
+
+    .cards.collapsed,
+    .cards {
+        width: 98.5%;
+        gap: var(--gap-extra-small);
+    }
+}

@@ -1,0 +1,23 @@
+.wrapper {
+    padding-left: var(--padding-medium-size);
+    padding-top: var(--padding-medium-size);
+    align-self: flex-start;
+}
+
+.title {
+    font-family: var(--font-family);
+    font-size: var(--font-size-big-title);
+    color: var(--character-light-title-85);
+    line-height: 130%;
+    font-weight: var(--font-weight-medium);
+    text-align: left;
+    margin-left: 3px;
+    margin-bottom: var(--margin-little-size);
+}
+
+@media screen and (max-width: 800px) {
+    .wrapper {
+        width: 95%;
+        align-items: center;
+    }
+}

@@ -1,1 +1,1 @@
-export { LoaderAuth } from './loaderAuth';
+export { LoaderAuth } from './loader-auth';

@@ -1,0 +1,64 @@
+.navigation {
+    align-self: start;
+    margin-bottom: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 7px;
+}
+
+.navigation button {
+    display: block;
+}
+
+button.button_filled {
+    box-shadow: var(--card-main-page-box-shadow);
+    border-radius: 2px;
+}
+
+button.button_text {
+    font-family: var(--font-family);
+    font-weight: var(--font-weight-normal);
+    font-size: var(--font-size-title);
+    line-height: var(--line-height-main);
+    text-align: center;
+    color: var(--primary-light-6);
+}
+
+button.button_text:hover,
+button.button_text:target {
+    background-color: #fafafa8f;
+    color: var(--primary-light-6);
+}
+
+button.button_text:active,
+button.button_text:visited,
+button.button_text:focus {
+    color: var(--primary-light-6);
+    background-color: transparent;
+}
+
+.navigation :global(.ant-btn-primary) {
+    background: var(--primary-light-6);
+    border-color: var(--primary-light-6);
+    color: var(--character-light-primary-inverse);
+}
+
+@media screen and (max-width: 550px) {
+    .navigation {
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        margin-bottom: 40px;
+        width: 100%;
+    }
+    .navigation > button {
+        display: block;
+    }
+    .navigation > button {
+        width: 100%;
+    }
+    .navigation > button.button_filled {
+        margin-bottom: 16px;
+    }
+}

@@ -1,13 +1,18 @@
-import { configureStore } from '@reduxjs/toolkit';
 import { createReduxHistoryContext } from 'redux-first-history';
+import { configureStore } from '@reduxjs/toolkit';
 import { createBrowserHistory } from 'history';
-import { authApi } from './API/authAPI';
-import { feedbackApi } from './API/feedbacksAPI';
-import { authReducer } from './reducers/authSlice';
-import { userReducer } from './reducers/userSlice';
-import { calendarReducer } from './reducers/calendarSlice';
-import { feedbackReducer } from './reducers/feedbackSlice';
-import { calendarAPI } from './API/calendarAPI';
+
+import { authApi } from './api/auth-api';
+import { calendarAPI } from './api/calendar-api';
+import { feedbackApi } from './api/feedbacks-api';
+import { profileAPI } from './api/profile-api';
+import { settingsAPI } from './api/settings-api';
+import { authReducer } from './reducers/auth-slice';
+import { feedbackReducer } from './reducers/feedback-slice';
+import { personalInfoReducer } from './reducers/personal-info-slice';
+import { tariffInfoReducer } from './reducers/tariff-slice';
+import { uploadProgressReducer } from './reducers/upload-progress-slice';
+import { userReducer } from './reducers/user-slice';
 
 const { createReduxHistory, routerMiddleware, routerReducer } = createReduxHistoryContext({
     history: createBrowserHistory(),
@@ -20,10 +25,14 @@ export const store = configureStore({
         [authApi.reducerPath]: authApi.reducer,
         [feedbackApi.reducerPath]: feedbackApi.reducer,
         [calendarAPI.reducerPath]: calendarAPI.reducer,
+        [profileAPI.reducerPath]: profileAPI.reducer,
+        [settingsAPI.reducerPath]: settingsAPI.reducer,
         auth: authReducer,
         user: userReducer,
         feedback: feedbackReducer,
-        calendar: calendarReducer,
+        personalInfo: personalInfoReducer,
+        uploadProgress: uploadProgressReducer,
+        tariffsList: tariffInfoReducer,
     },
     middleware: (getDefaultMiddleware) =>
         getDefaultMiddleware().concat([
@@ -31,6 +40,8 @@ export const store = configureStore({
             authApi.middleware,
             feedbackApi.middleware,
             calendarAPI.middleware,
+            profileAPI.middleware,
+            settingsAPI.middleware,
         ]),
 });
 

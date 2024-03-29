@@ -1,15 +1,15 @@
 import React from 'react';
 import { createRoot } from 'react-dom/client';
 import { Provider } from 'react-redux';
-
 import { store } from '@redux/configure-store';
+
+import { App } from './app';
 import {
     CollapsedContextProvider,
     DrawerTrainsContextProvider,
     LoaderContextProvider,
     ModalReportContextProvider,
-} from './reactContexts';
-import { App } from './App';
+} from './react-contexts';
 
 import 'normalize.css';
 import 'antd/dist/antd.css';

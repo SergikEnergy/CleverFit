@@ -1,0 +1,29 @@
+.content {
+    width: 100%;
+    height: 100%;
+    padding: var(--padding-medium-size);
+}
+
+.profile {
+    width: 100%;
+    min-height: 886px;
+    background-color: var(--neutral-gray-1, #fff);
+    box-shadow: var(--card-main-page-box-shadow);
+    border-radius: var(--border-radius-small);
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+}
+
+@media screen and (max-width: 550px) {
+    .profile {
+        min-height: 900px;
+        justify-content: center;
+    }
+}
+
+@media screen and (max-width: 400px) {
+    .profile {
+        min-height: 670px;
+    }
+}

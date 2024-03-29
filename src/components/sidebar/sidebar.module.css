@@ -11,11 +11,19 @@
     .sidebar {
         min-height: 1194px;
     }
+    .sidebar.profile,
+    .sidebar.settings {
+        min-height: 1000px;
+    }
 }
 
 @media screen and (max-width: 680px) {
     .sidebar {
         min-height: 1300px;
+    }
+    .sidebar.profile,
+    .sidebar.settings {
+        min-height: 1000px;
     }
 }
 @media screen and (max-width: 500px) {
@@ -23,6 +31,10 @@
         min-height: 100vh;
     }
     .sidebar.calendar {
-        min-height: 640px;
+        min-height: 100vh;
+    }
+    .sidebar.profile,
+    .sidebar.settings {
+        min-height: 100vh;
     }
 }

@@ -1,0 +1,14 @@
+.current {
+    font-family: var(--second-family);
+    font-size: var(--font-size-title);
+    color: var(--primary-light-10);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    background-color: var(--primary-light-1);
+    min-height: 53px;
+    line-height: 130%;
+    font-weight: var(--font-weight-medium);
+    margin-bottom: var(--margin-small-size);
+}

@@ -1,1 +1,0 @@
-export { FeedbacksList } from './FeedbacksList';

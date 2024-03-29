@@ -1,0 +1,30 @@
+.header {
+    min-height: 70px;
+    background: var(--primary-light-1);
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+.header__wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+.button {
+    font-family: var(--font-family);
+    font-size: var(--font-size-big-title);
+    color: var(--character-light-title-85);
+    line-height: 130%;
+    font-weight: var(--font-weight-medium);
+}
+.button > button {
+    padding-left: 0;
+}
+
+@media screen and (max-width: 834px) {
+    .header {
+        min-height: 62px;
+    }
+}

@@ -1,1 +1,0 @@
-export { FormRegistration } from './FormRegistration';

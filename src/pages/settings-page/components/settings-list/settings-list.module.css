@@ -1,0 +1,9 @@
+.list {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    justify-content: flex-start;
+    gap: var(--gap-medium);
+    padding-bottom: var(--padding-settings-big-size);
+    padding-top: var(--padding-little-size);
+}

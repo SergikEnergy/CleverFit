@@ -1,0 +1,20 @@
+.drawer :global(.ant-drawer-header) {
+    border-bottom: 0;
+}
+
+.drawer :global(.ant-drawer-content) {
+    border-top-left-radius: var(--border-radius-middle);
+    border-bottom-left-radius: var(--border-radius-middle);
+}
+
+.drawer :global(.ant-drawer-body) {
+    overflow-y: hidden;
+}
+
+@media screen and (max-width: 480px) {
+    .drawer :global(.ant-drawer-content) {
+        border-top-left-radius: var(--border-radius-big);
+        border-top-right-radius: var(--border-radius-big);
+        border-bottom-left-radius: var(--border-radius-zero);
+    }
+}

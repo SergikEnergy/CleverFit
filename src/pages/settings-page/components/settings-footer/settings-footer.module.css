@@ -1,0 +1,11 @@
+.footer {
+    margin-top: var(--margin-big-size);
+}
+
+@media screen and (max-width: 800px) {
+    .footer {
+        width: 90%;
+        align-items: center;
+    }
+}
+
