@@ -7,6 +7,10 @@
     border-bottom-left-radius: var(--border-radius-middle);
 }
 
+.drawer :global(.ant-drawer-body) {
+    overflow-y: hidden;
+}
+
 @media screen and (max-width: 480px) {
     .drawer :global(.ant-drawer-content) {
         border-top-left-radius: var(--border-radius-big);
