@@ -1,9 +1,5 @@
 import { UploadFile } from 'antd';
 
-export type FormPersonalInfoPropsType = {
-    //
-};
-
 export type FieldType = {
     email: string;
     firstName?: string;

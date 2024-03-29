@@ -190,12 +190,8 @@ export const FormLogin: FC = () => {
                     size='large'
                     style={{ outline: 'none' }}
                     className={classnames(classes.input, classes.antFixed)}
-                    onChange={() => {
-                        setPassPlaceholderVisible(false);
-                    }}
-                    onFocus={() => {
-                        setIsPasswordHelperVisible(true);
-                    }}
+                    onChange={() => setPassPlaceholderVisible(false)}
+                    onFocus={() => setIsPasswordHelperVisible(true)}
                     iconRender={(visible) => getIconRender(visible)}
                 />
             </Form.Item>

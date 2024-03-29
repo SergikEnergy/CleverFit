@@ -71,9 +71,9 @@ export const FormDrawer = forwardRef<HTMLButtonElement, FormDrawerPropsType>(
                                                     <Checkbox
                                                         data-test-id={`modal-drawer-right-checkbox-exercise${index}`}
                                                         className={classes.checkbox}
-                                                        onChange={(event: CheckboxChangeEvent) => {
-                                                            checkboxChangeHandler(event, name);
-                                                        }}
+                                                        onChange={(event: CheckboxChangeEvent) =>
+                                                            checkboxChangeHandler(event, name)
+                                                        }
                                                     />
                                                 ) : null
                                             }

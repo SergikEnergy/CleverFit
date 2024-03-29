@@ -13,9 +13,7 @@ type SwitcherProps = {
 export const Switcher: FC<SwitcherProps> = ({ collapsed }) => {
     const { toggleCollapsed } = useContext(CollapsedContext);
 
-    const toggleSider = () => {
-        toggleCollapsed();
-    };
+    const toggleSider = () => toggleCollapsed();
 
     return (
         <div

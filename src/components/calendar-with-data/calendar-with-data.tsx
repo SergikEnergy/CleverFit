@@ -49,9 +49,8 @@ export const CalenDarWithData: FC<CalenDarWithDataPropsType> = ({
         }
     }, [hideCollapsed, windowWidth]);
 
-    const changeModalType = () => {
+    const changeModalType = () =>
         setModalType((prev) => (prev === TRAIN_MODE ? EXERCISE_MODE : TRAIN_MODE));
-    };
 
     useEffect(() => {
         const correctModalPosition = () => {
@@ -126,9 +125,7 @@ export const CalenDarWithData: FC<CalenDarWithDataPropsType> = ({
                 trains={selectedCellData}
                 modalPosition={modalPosition}
                 widthModal={isFullScreen ? '264px' : ''}
-                closeModal={() => {
-                    setIsModalVisible(false);
-                }}
+                closeModal={() => setIsModalVisible(false)}
             />
 
             <Calendar

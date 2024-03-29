@@ -20,11 +20,11 @@ import { getIconRender } from '../../helpers/get-password-icon';
 import { ModalReportContext } from '../../react-contexts';
 
 import { CustomUpload } from './components';
-import { FieldType, FormPersonalInfoPropsType } from './form-personal-info.types';
+import { FieldType } from './form-personal-info.types';
 
 import classes from './form-personal-info.module.css';
 
-export const FormPersonalInfo: FC<FormPersonalInfoPropsType> = () => {
+export const FormPersonalInfo: FC = () => {
     const { openModal, setNode, setWidthModal } = useContext(ModalReportContext);
     const {
         email: userEmail,
@@ -198,18 +198,14 @@ export const FormPersonalInfo: FC<FormPersonalInfoPropsType> = () => {
                             size='large'
                             autoComplete='off'
                             placeholder={passPlaceholderVisible ? 'Пароль' : ''}
-                            onChange={() => {
-                                setPassPlaceholderVisible(false);
-                            }}
+                            onChange={() => setPassPlaceholderVisible(false)}
                             style={{ outline: 'none' }}
                             className={classnames(
                                 classes.password,
                                 classes.input,
                                 classes.antFixed,
                             )}
-                            onFocus={() => {
-                                setIsPasswordHelperVisible(true);
-                            }}
+                            onFocus={() => setIsPasswordHelperVisible(true)}
                             iconRender={(visible) => getIconRender(visible)}
                         />
                     </Form.Item>
@@ -240,9 +236,7 @@ export const FormPersonalInfo: FC<FormPersonalInfoPropsType> = () => {
                             autoComplete='off'
                             placeholder={confirmPlaceholderVisible ? 'Повторите пароль' : ''}
                             style={{ outline: 'none' }}
-                            onChange={() => {
-                                setConfirmPlaceholderVisible(false);
-                            }}
+                            onChange={() => setConfirmPlaceholderVisible(false)}
                             className={classnames(classes.confirm, classes.input, classes.antFixed)}
                             iconRender={(visible) => getIconRender(visible)}
                         />

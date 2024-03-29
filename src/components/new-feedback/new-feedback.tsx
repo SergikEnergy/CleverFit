@@ -61,18 +61,15 @@ export const NewFeedback: FC = () => {
         }
     };
 
-    const handleCloseModal = () => {
-        closeModal();
-    };
+    const handleCloseModal = () => closeModal();
 
     const handleChangeRate = (value: number) => {
         setRateValue(value);
         setActiveIndex(value - 1);
     };
 
-    const handleChangeComment = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
+    const handleChangeComment = (event: React.ChangeEvent<HTMLTextAreaElement>) =>
         setTextValue(event.target.value);
-    };
 
     const handleSubmit = ({ rating, comment }: FieldType) => {
         dispatch(setFeedback({ rating, comment }));

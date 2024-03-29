@@ -41,14 +41,12 @@ export const ModalSelectExercise: FC<ModalSelectExercisePropsType> = ({
         if (date) {
             updateDate(date);
         }
-        if (trainForEdit) {
-            if (trains.length > 0) {
-                const trainsOnThisDate = trains.filter((elem) => elem.name === trainForEdit);
+        if (trainForEdit && trains.length > 0) {
+            const trainsOnThisDate = trains.filter((elem) => elem.name === trainForEdit);
 
-                if (Array.isArray(trainsOnThisDate) && trainsOnThisDate.length > 0) {
-                    setExercises(trainsOnThisDate[0].exercises, trainForEdit);
-                    setIsEditDisabled(trainsOnThisDate[0].isImplementation);
-                }
+            if (Array.isArray(trainsOnThisDate) && trainsOnThisDate.length > 0) {
+                setExercises(trainsOnThisDate[0].exercises, trainForEdit);
+                setIsEditDisabled(trainsOnThisDate[0].isImplementation);
             }
         }
     }, [trainForEdit, trains, date, updateDate, setExercises]);
@@ -107,9 +105,7 @@ export const ModalSelectExercise: FC<ModalSelectExercisePropsType> = ({
                     className={classes.close}
                     data-test-id='modal-exercise-training-button-close'
                     onKeyDown={() => {}}
-                    onClick={() => {
-                        changeMode();
-                    }}
+                    onClick={() => changeMode()}
                 >
                     <ArrowLeftOutlined style={{ color: '#262626' }} />
                 </div>

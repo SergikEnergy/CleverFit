@@ -16,9 +16,7 @@ export const AlertNotification: FC<AlertNotificationPropsType> = ({
     handleCloseAlert,
     dataTestId,
 }) => {
-    const handleClose = () => {
-        handleCloseAlert();
-    };
+    const handleClose = () => handleCloseAlert();
 
     return (
         <Alert

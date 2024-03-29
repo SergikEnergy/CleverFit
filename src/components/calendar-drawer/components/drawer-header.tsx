@@ -21,9 +21,7 @@ export const DrawerHeader: FC<DrawerHeaderPropsType> = ({ title, closeDrawer }) 
             aria-label='close-drawer'
             className={classes.close}
             data-test-id='modal-drawer-right-button-close'
-            onClick={() => {
-                closeDrawer();
-            }}
+            onClick={() => closeDrawer()}
         >
             <CloseOutlined />
         </div>

@@ -12,9 +12,7 @@ export const ErrorAddTrain: FC = () => {
     const subtitle = 'Придётся попробовать ещё раз.';
     const buttonText = 'Закрыть';
 
-    const handleCloseButtonClick = () => {
-        closeModal();
-    };
+    const handleCloseButtonClick = () => closeModal();
 
     return (
         <div className={classes.wrapper}>

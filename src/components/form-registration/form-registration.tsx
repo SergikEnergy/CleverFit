@@ -129,14 +129,10 @@ export const FormRegistration: FC = () => {
                 <Input.Password
                     data-test-id='registration-password'
                     placeholder={passPlaceholderVisible ? 'Пароль' : ''}
-                    onChange={() => {
-                        setPassPlaceholderVisible(false);
-                    }}
+                    onChange={() => setPassPlaceholderVisible(false)}
                     style={{ outline: 'none' }}
                     className={classnames(classes.input, classes.antFixed)}
-                    onFocus={() => {
-                        setIsPasswordHelperVisible(true);
-                    }}
+                    onFocus={() => setIsPasswordHelperVisible(true)}
                     iconRender={(visible) => getIconRender(visible)}
                 />
             </Form.Item>
@@ -163,9 +159,7 @@ export const FormRegistration: FC = () => {
                     data-test-id='registration-confirm-password'
                     placeholder={confirmPlaceholderVisible ? 'Повторите пароль' : ''}
                     style={{ outline: 'none' }}
-                    onChange={() => {
-                        setConfirmPlaceholderVisible(false);
-                    }}
+                    onChange={() => setConfirmPlaceholderVisible(false)}
                     className={classnames(classes.input, classes.antFixed)}
                     iconRender={(visible) => getIconRender(visible)}
                 />

@@ -89,9 +89,7 @@ export const ModalCreateTrain: FC<ModalCreateTrainPropsType> = ({
                     type='primary'
                     block={true}
                     className={classes.button__edit}
-                    onClick={() => {
-                        changeMode();
-                    }}
+                    onClick={() => changeMode()}
                 >
                     {buttonText}
                 </Button>

@@ -97,13 +97,9 @@ export const ActionsButtons: FC<ActionsButtonsPropsType> = ({
         await updateTrainRequestHandler(bodyRequest, idRequest);
     };
 
-    const handleSaveExercisesClick = () => {
-        addNewTrain();
-    };
+    const handleSaveExercisesClick = () => addNewTrain();
 
-    const handleUpdateTrainClick = () => {
-        updateSelectedTrain();
-    };
+    const handleUpdateTrainClick = () => updateSelectedTrain();
 
     return (
         <div className={classes.buttons}>

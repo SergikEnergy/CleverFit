@@ -24,9 +24,7 @@ export const CardsSection: FC = () => {
         history.push(Paths.CALENDAR_PAGE, { allowRequest: true });
     };
 
-    const handleMoveToProfilePage = () => {
-        navigate(Paths.PROFILE_PAGE, { replace: true });
-    };
+    const handleMoveToProfilePage = () => navigate(Paths.PROFILE_PAGE, { replace: true });
 
     const { collapsed } = useContext(CollapsedContext);
 
