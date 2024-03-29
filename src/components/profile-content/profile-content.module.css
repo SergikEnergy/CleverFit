@@ -8,7 +8,7 @@
     width: 100%;
     min-height: 886px;
     background-color: var(--neutral-gray-1, #fff);
-    box-shadow: 0 2px 0 0 rgba(0, 0, 0, 0.04);
+    box-shadow: var(--card-main-page-box-shadow);
     border-radius: var(--border-radius-small);
     display: flex;
     align-items: flex-start;

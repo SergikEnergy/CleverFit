@@ -4,19 +4,21 @@ import { WRONG_SIZE_IMG } from '@components/error-profile-page/error-messages.da
 import { API_BASE_URL } from '@redux/api/api-data';
 import { saveImgUploadData } from '@redux/reducers/personal-info-slice';
 import { setUploadProgress } from '@redux/reducers/upload-progress-slice';
+import { useAuthSelector } from '@redux/selectors';
 import axios, { AxiosError, AxiosRequestConfig, AxiosResponse } from 'axios';
 
 import { ModalReportContext } from '../react-contexts';
 import { ImageUpdateResponseType } from '../redux/api/api-types';
 
 import { useResetUser } from './reset-user';
-import { useAppDispatch, useAppSelector } from '.';
+import { useAppDispatch } from '.';
 
 export const useUploadPhoto = () => {
     const resetUser = useResetUser();
     const { openModal, setNode, setWidthModal } = useContext(ModalReportContext);
     const dispatch = useAppDispatch();
-    const token = useAppSelector((state) => state.auth.token);
+
+    const { token } = useAuthSelector();
     const [uploading, setUploading] = useState(false);
 
     const handleUploadError = (axiosError: AxiosError) => {

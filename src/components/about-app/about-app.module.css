@@ -1,7 +1,7 @@
 .about {
     margin-top: var(--margin-medium-size);
     width: 63.5%;
-    box-shadow: 0 2px 0 0 rgba(0, 0, 0, 0.04);
+    box-shadow: var(--card-main-page-box-shadow);
     background: var(--character-light-primary-inverse);
     border-radius: 2px;
     padding: 2.3rem 4.6rem 2.5rem 2.5rem;

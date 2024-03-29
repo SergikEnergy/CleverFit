@@ -1,7 +1,7 @@
 import { FC } from 'react';
-import { useAppSelector } from '@hooks/typed-react-redux-hooks';
 import { useDrawerContext } from '@hooks/use-info-drawer';
 import { useWindowWidth } from '@hooks/use-window-size';
+import { usePersonalInfoSelector } from '@redux/selectors';
 import { dateDayMonthFormat, dateFullStringFormat } from '@utils/constants/date-formats';
 import { Drawer } from 'antd';
 import moment from 'moment';
@@ -17,7 +17,8 @@ import classes from './tariff-info-drawer.module.css';
 export const TariffInfoDrawer: FC = () => {
     const innerWindowWidth = useWindowWidth();
     const { open: isDrawerOpen } = useDrawerContext();
-    const expired = useAppSelector((state) => state.personalInfo.tariff?.expired) || undefined;
+    const { tariff } = usePersonalInfoSelector();
+    const expired = tariff?.expired || undefined;
     const untilPaid = expired
         ? moment(expired, dateFullStringFormat).format(dateDayMonthFormat)
         : '';

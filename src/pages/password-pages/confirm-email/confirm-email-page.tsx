@@ -1,10 +1,10 @@
 import { FC, useContext, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import VerificationInput from 'react-verification-input';
-import { useAppSelector } from '@hooks/typed-react-redux-hooks';
 import { useConfirmEmailMutation } from '@redux/api/auth-api';
 import { isFetchBaseQueryError } from '@redux/api/errors-catching';
 import { history } from '@redux/configure-store';
+import { useUserSelector } from '@redux/selectors';
 import { Result } from 'antd';
 import classnames from 'classnames';
 
@@ -19,7 +19,8 @@ export const ConfirmEmailPage: FC = () => {
     const [confirmEmailRequest, { isLoading }] = useConfirmEmailMutation();
     const [isCorrect, setIsCorrect] = useState(true);
     const [value, setValue] = useState('');
-    const userEmail = useAppSelector((state) => state.user.email);
+
+    const { email: userEmail } = useUserSelector();
 
     if (isLoading) {
         startLoader();

@@ -1,9 +1,10 @@
 import { FC, useCallback, useContext, useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
-import { useAppDispatch, useAppSelector } from '@hooks/typed-react-redux-hooks';
+import { useAppDispatch } from '@hooks/typed-react-redux-hooks';
 import { useChangePasswordMutation } from '@redux/api/auth-api';
 import { history } from '@redux/configure-store';
 import { removeRegistrationData, saveRegistrationData } from '@redux/reducers/user-slice';
+import { useUserSelector } from '@redux/selectors';
 import { PASSWORD_VALIDATION } from '@utils/constants/patterns-reg-exp';
 import { Button, Form, Input } from 'antd';
 import classnames from 'classnames';
@@ -26,7 +27,7 @@ export const ChangePasswordPage: FC = () => {
         email: userEmail,
         password: userPassword,
         confirmPassword: userConfirmPassword,
-    } = useAppSelector((state) => state.user);
+    } = useUserSelector();
     const { startLoader, stopLoader } = useContext(LoaderStateContext);
     const [changeUserPassword, { isLoading }] = useChangePasswordMutation();
     const [isPasswordHelperVisible, setIsPasswordHelperVisible] = useState(false);

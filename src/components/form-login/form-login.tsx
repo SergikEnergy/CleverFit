@@ -1,13 +1,14 @@
 import { FC, useCallback, useContext, useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import { GooglePlusOutlined } from '@ant-design/icons';
-import { useAppDispatch, useAppSelector } from '@hooks/typed-react-redux-hooks';
+import { useAppDispatch } from '@hooks/typed-react-redux-hooks';
 import { ErrorDataType } from '@redux/api/api-types';
 import { useCheckEmailMutation, useLoginUserMutation } from '@redux/api/auth-api';
 import { isFetchBaseQueryError } from '@redux/api/errors-catching';
 import { history } from '@redux/configure-store';
 import { saveCredentialsToStorage, setCredentials } from '@redux/reducers/auth-slice';
 import { saveEmail } from '@redux/reducers/user-slice';
+import { useUserSelector } from '@redux/selectors';
 import { PASSWORD_ERROR_MESSAGE } from '@utils/constants/error-form-messages';
 import { EMAIL_VALIDATION, PASSWORD_VALIDATION } from '@utils/constants/patterns-reg-exp';
 import { Button, Checkbox, Form, Input } from 'antd';
@@ -32,7 +33,7 @@ export const FormLogin: FC = () => {
     const { startLoader, stopLoader } = useContext(LoaderStateContext);
     const location = useLocation();
     const dispatch = useAppDispatch();
-    const emailFromState = useAppSelector((state) => state.user.email);
+    const { email: emailFromState } = useUserSelector();
 
     useEffect(() => {
         if (isRTKLoading || isCheckEmailLoading) {

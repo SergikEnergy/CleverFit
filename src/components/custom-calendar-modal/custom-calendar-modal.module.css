@@ -2,7 +2,7 @@
     position: absolute;
     min-height: 120px;
     width: calc(100% - 48px);
-    box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.15);
+    box-shadow: var(--modal-box-shadow);
     border-radius: 2px;
     background: var(--neutral-gray-1);
 }

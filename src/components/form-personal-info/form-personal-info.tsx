@@ -2,11 +2,12 @@ import { FC, Fragment, useContext, useEffect, useState } from 'react';
 import { ErrorProfile } from '@components/error-profile-page';
 import { ERROR_UPDATE_PROFILE } from '@components/error-profile-page/error-messages.data';
 import { AlertNotification } from '@components/notifications/alert/alert-notification';
-import { useAppDispatch, useAppSelector } from '@hooks/typed-react-redux-hooks';
+import { useAppDispatch } from '@hooks/typed-react-redux-hooks';
 import { API_IMGS_BASE } from '@redux/api/api-data';
 import { RequestUserInfoType } from '@redux/api/api-types';
 import { useUpdateUserInfoMutation } from '@redux/api/profile-api';
 import { savePersonalInfoAfterRegistration } from '@redux/reducers/personal-info-slice';
+import { usePersonalInfoSelector } from '@redux/selectors';
 import { dateDayMonthYearDotFormat, dateFullStringFormat } from '@utils/constants/date-formats';
 import { EMAIL_VALIDATION, PASSWORD_VALIDATION } from '@utils/constants/patterns-reg-exp';
 import { Button, DatePicker, Form, Input } from 'antd';
@@ -25,8 +26,13 @@ import classes from './form-personal-info.module.css';
 
 export const FormPersonalInfo: FC<FormPersonalInfoPropsType> = () => {
     const { openModal, setNode, setWidthModal } = useContext(ModalReportContext);
-    const personalInfo = useAppSelector((state) => state.personalInfo);
-    const { email: userEmail, firstName, lastName, birthday, url: ImageUrl } = personalInfo;
+    const {
+        email: userEmail,
+        firstName,
+        lastName,
+        birthday,
+        url: ImageUrl,
+    } = usePersonalInfoSelector();
     const dispatch = useAppDispatch();
     const [updatePersonalInfo] = useUpdateUserInfoMutation();
     const [isPasswordHelperVisible, setIsPasswordHelperVisible] = useState(true);

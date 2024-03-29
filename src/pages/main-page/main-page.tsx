@@ -2,10 +2,11 @@ import { FC, useContext, useEffect } from 'react';
 import { Navigate, useNavigate } from 'react-router-dom';
 import { Footer } from '@components/footer';
 import { MainContent } from '@components/main-content';
-import { useAppDispatch, useAppSelector } from '@hooks/typed-react-redux-hooks';
+import { useAppDispatch } from '@hooks/typed-react-redux-hooks';
 import { BasePagesLayout } from '@pages/base-pages-layout';
 import { useLazyGetUserInfoQuery } from '@redux/api/profile-api';
 import { savePersonalInfoAfterRegistration } from '@redux/reducers/personal-info-slice';
+import { useAuthSelector } from '@redux/selectors';
 import { Layout as AntLayout } from 'antd';
 
 import { CollapsedContext } from '../../react-contexts';
@@ -18,7 +19,7 @@ const { Footer: AntFooter } = AntLayout;
 export const MainPage: FC = () => {
     const { collapsed } = useContext(CollapsedContext);
     const navigate = useNavigate();
-    const token = useAppSelector((state) => state.auth.token);
+    const { token } = useAuthSelector();
     const [fetchUserInfo, { data: userPersonalInfo, isSuccess: isSuccessGetUserInfo }] =
         useLazyGetUserInfoQuery();
     const dispatch = useAppDispatch();

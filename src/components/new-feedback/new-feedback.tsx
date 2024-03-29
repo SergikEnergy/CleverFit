@@ -1,10 +1,11 @@
 import { FC, useContext, useEffect, useState } from 'react';
 import { CloseOutlined } from '@ant-design/icons';
 import { AddFeedbackError, AddFeedbackSuccess } from '@components/add-feedback-results';
-import { useAppDispatch, useAppSelector } from '@hooks/typed-react-redux-hooks';
+import { useAppDispatch } from '@hooks/typed-react-redux-hooks';
 import { isFetchBaseQueryError } from '@redux/api/errors-catching';
 import { useAddNewFeedbackMutation } from '@redux/api/feedbacks-api';
 import { resetFeedback, setFeedback } from '@redux/reducers/feedback-slice';
+import { useFeedbackSelector } from '@redux/selectors';
 import { Button, Divider, Form, Input, Rate } from 'antd';
 import classnames from 'classnames';
 
@@ -21,9 +22,7 @@ type FieldType = {
 const { TextArea } = Input;
 
 export const NewFeedback: FC = () => {
-    const { comment: commentFromState, rating: ratingFromState } = useAppSelector(
-        (state) => state.feedback,
-    );
+    const { comment: commentFromState, rating: ratingFromState } = useFeedbackSelector();
     const [postComment, { isLoading: isQueryLoading }] = useAddNewFeedbackMutation();
     const dispatch = useAppDispatch();
     const [form] = Form.useForm();

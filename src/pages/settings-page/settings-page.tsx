@@ -1,6 +1,6 @@
 import { FC, useContext, useEffect, useLayoutEffect } from 'react';
 import { Navigate, useNavigate } from 'react-router-dom';
-import { useAppDispatch, useAppSelector } from '@hooks/typed-react-redux-hooks';
+import { useAppDispatch } from '@hooks/typed-react-redux-hooks';
 import { useWindowWidth } from '@hooks/use-window-size';
 import { BasePagesLayout } from '@pages/base-pages-layout';
 import { SettingsContent } from '@pages/settings-page/components/settings-content';
@@ -8,6 +8,7 @@ import { SettingsFooter } from '@pages/settings-page/components/settings-footer'
 import { SettingsHeader } from '@pages/settings-page/components/settings-header';
 import { useLazyGetTariffsListQuery } from '@redux/api/settings-api';
 import { saveAvailableTariffs } from '@redux/reducers/tariff-slice';
+import { useAuthSelector } from '@redux/selectors';
 
 import { CollapsedContext, TariffDrawerContextProvider } from '../../react-contexts';
 import { Paths } from '../../routes/pathes';
@@ -25,7 +26,7 @@ export const SettingsPage: FC = () => {
         useLazyGetTariffsListQuery();
     const dispatch = useAppDispatch();
     const navigate = useNavigate();
-    const token = useAppSelector((state) => state.auth.token);
+    const { token } = useAuthSelector();
 
     useLayoutEffect(() => {
         getAllTariffs();

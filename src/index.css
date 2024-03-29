@@ -192,6 +192,11 @@ body {
     --border-radius-big: 15px;
     --border-radius-small: 8px;
     --border-radius-zero: 0%;
+
+    /* box-shadows */
+
+    --modal-box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.15);
+    --card-main-page-box-shadow: 0 2px 0 0 rgba(0, 0, 0, 0.04);
 }
 
 html,

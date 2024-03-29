@@ -1,7 +1,7 @@
 import { FC } from 'react';
 import { TariffCard } from '@components/tariff-card';
-import { useAppSelector } from '@hooks/typed-react-redux-hooks';
 import { useDrawerContext } from '@hooks/use-info-drawer';
+import { usePersonalInfoSelector } from '@redux/selectors';
 import { dateDayMonthFormat, dateFullStringFormat } from '@utils/constants/date-formats';
 import moment from 'moment';
 
@@ -11,7 +11,8 @@ import classes from './tariffs-list.module.css';
 
 export const TariffsList: FC = () => {
     const { openDrawer } = useDrawerContext();
-    const expired = useAppSelector((state) => state.personalInfo.tariff?.expired) || undefined;
+    const { tariff } = usePersonalInfoSelector();
+    const expired = tariff?.expired || undefined;
     const untilPaid = expired
         ? moment(expired, dateFullStringFormat).format(dateDayMonthFormat)
         : '';

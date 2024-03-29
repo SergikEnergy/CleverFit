@@ -1,5 +1,5 @@
 .download {
-    box-shadow: 0 2px 0 0 rgba(0, 0, 0, 0.02);
+    box-shadow: var(--card-main-page-box-shadow);
     background: var(--character-light-primary-inverse);
     border-radius: 2px;
     padding: 0.5rem;

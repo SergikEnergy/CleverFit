@@ -1,8 +1,9 @@
 import { FC } from 'react';
-import { useAppDispatch, useAppSelector } from '@hooks/typed-react-redux-hooks';
+import { useAppDispatch } from '@hooks/typed-react-redux-hooks';
 import { RequestUserInfoType } from '@redux/api/api-types';
 import { useUpdateUserInfoMutation } from '@redux/api/profile-api';
 import { updateReadyForTrain, updateSendNotification } from '@redux/reducers/personal-info-slice';
+import { usePersonalInfoSelector, useTariffsListSelector } from '@redux/selectors';
 
 import { SettingsItem } from '../settings-item';
 
@@ -18,11 +19,14 @@ import classes from './settings-list.module.css';
 
 export const SettingsList: FC = () => {
     const dispatch = useAppDispatch();
-    const { readyForJointTraining, sendNotification, email } = useAppSelector(
-        (state) => state.personalInfo,
-    );
-    const userTariff = useAppSelector((state) => state.personalInfo.tariff);
-    const allTariffs = useAppSelector((state) => state.tariffsList.tariffs);
+
+    const {
+        readyForJointTraining,
+        sendNotification,
+        email,
+        tariff: userTariff,
+    } = usePersonalInfoSelector();
+    const { tariffs: allTariffs } = useTariffsListSelector();
     const isPaidPro = !allTariffs.some((tariff) => tariff._id === userTariff?.tariffId);
     const [updateUserInfo] = useUpdateUserInfoMutation();
 

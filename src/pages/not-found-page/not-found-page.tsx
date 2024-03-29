@@ -1,14 +1,14 @@
 import { FC, useEffect } from 'react';
 import { Navigate, useNavigate } from 'react-router-dom';
 import { NotFoundResult } from '@components/not-found-result';
-import { useAppSelector } from '@hooks/typed-react-redux-hooks';
 import { BasePagesLayout } from '@pages/base-pages-layout';
+import { useAuthSelector } from '@redux/selectors';
 
 import { Paths } from '../../routes/pathes';
 
 export const NotFoundPage: FC = () => {
     const navigate = useNavigate();
-    const token = useAppSelector((state) => state.auth.token);
+    const { token } = useAuthSelector();
 
     useEffect(() => {
         if (!token) {

@@ -2,10 +2,11 @@ import { FC, Fragment, useContext, useEffect, useState } from 'react';
 import { ErrorProfile } from '@components/error-profile-page';
 import { WRONG_SIZE_IMG } from '@components/error-profile-page/error-messages.data';
 import { FieldType } from '@components/form-personal-info/form-personal-info.types';
-import { useAppDispatch, useAppSelector } from '@hooks/typed-react-redux-hooks';
+import { useAppDispatch } from '@hooks/typed-react-redux-hooks';
 import { useWindowWidth } from '@hooks/use-window-size';
 import { API_BASE_URL, API_IMGS_BASE } from '@redux/api/api-data';
 import { resetImgUploadData, saveImgUploadData } from '@redux/reducers/personal-info-slice';
+import { useAuthSelector, usePersonalInfoSelector } from '@redux/selectors';
 import { Form, Modal, Upload } from 'antd';
 import type { UploadChangeParam, UploadProps } from 'antd/es/upload';
 import type { UploadFile } from 'antd/es/upload/interface';
@@ -29,9 +30,9 @@ export const CustomUpload: FC<CustomUploadPropsType> = ({
 }) => {
     const { openModal, setNode, setWidthModal } = useContext(ModalReportContext);
     const innerWindowWidth = useWindowWidth();
-    const { imgSrc: imageSrc } = useAppSelector((state) => state.personalInfo);
+    const { imgSrc: imageSrc } = usePersonalInfoSelector();
     const dispatch = useAppDispatch();
-    const token = useAppSelector((state) => state.auth.token);
+    const { token } = useAuthSelector();
 
     const [fileList, setFileList] = useState<UploadFile[]>([]);
     const [previewOpen, setPreviewOpen] = useState(false);

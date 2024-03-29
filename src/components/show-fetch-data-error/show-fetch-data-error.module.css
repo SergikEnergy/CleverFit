@@ -32,7 +32,7 @@
     font-size: var(--font-size-main);
     line-height: var(--line-height-main);
     color: var(--character-light-primary-inverse);
-    box-shadow: 0 2px 0 0 rgba(0, 0, 0, 0.04);
+    box-shadow: var(--card-main-page-box-shadow);
     border-radius: 2px;
 }
 

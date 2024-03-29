@@ -1,11 +1,12 @@
 import { FC, useCallback, useContext, useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import { GooglePlusOutlined } from '@ant-design/icons';
-import { useAppDispatch, useAppSelector } from '@hooks/typed-react-redux-hooks';
+import { useAppDispatch } from '@hooks/typed-react-redux-hooks';
 import { useRegisterUserMutation } from '@redux/api/auth-api';
 import { isFetchBaseQueryError } from '@redux/api/errors-catching';
 import { history } from '@redux/configure-store';
 import { removeRegistrationData, saveRegistrationData } from '@redux/reducers/user-slice';
+import { useUserSelector } from '@redux/selectors';
 import { EMAIL_VALIDATION, PASSWORD_VALIDATION } from '@utils/constants/patterns-reg-exp';
 import { Button, Form, Input } from 'antd';
 import classnames from 'classnames';
@@ -34,7 +35,7 @@ export const FormRegistration: FC = () => {
     const { startLoader, stopLoader } = useContext(LoaderStateContext);
     const location = useLocation();
     const dispatch = useAppDispatch();
-    const userData = useAppSelector((state) => state.user);
+    const userData = useUserSelector();
 
     useEffect(() => {
         if (isRTKLoading) {

@@ -1,11 +1,11 @@
 import { FC, Fragment, useState } from 'react';
 import { SuccessSelectTariff } from '@components/success-select-tariff';
 import { useResetUser } from '@hooks/reset-user';
-import { useAppSelector } from '@hooks/typed-react-redux-hooks';
 import { useDrawerContext } from '@hooks/use-info-drawer';
 import { useModalReportContext } from '@hooks/use-modal-report';
 import { RequestChangeTariffType } from '@redux/api/api-types';
 import { useUpdateSelectedTariffMutation } from '@redux/api/settings-api';
+import { usePersonalInfoSelector, useTariffsListSelector } from '@redux/selectors';
 import { Button, Form, Radio } from 'antd';
 
 import { DATA_TEST_ID } from '../../../../../data/data-test-ids';
@@ -17,7 +17,7 @@ type TariffsFormField = {
 };
 
 const SubTitleSuccessChangeTariff: FC = () => {
-    const { email } = useAppSelector((state) => state.personalInfo);
+    const { email } = usePersonalInfoSelector();
 
     return (
         <div className='tariff-success__change'>
@@ -38,7 +38,7 @@ export const TariffsForm: FC = () => {
     const [updateTariff] = useUpdateSelectedTariffMutation();
     const [disabledSubmit, setDisabledSubmit] = useState(true);
     const { open: isDrawerOpen, closeDrawer } = useDrawerContext();
-    const tariffInfo = useAppSelector((state) => state.tariffsList.tariffs);
+    const { tariffs: tariffInfo } = useTariffsListSelector();
     const infoData = tariffInfo && tariffInfo[0] ? tariffInfo[0].periods : [];
     const [form] = Form.useForm();
 

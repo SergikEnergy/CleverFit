@@ -3,12 +3,13 @@ import { useNavigate } from 'react-router-dom';
 import { Feedbacks } from '@components/feedbacks';
 import { ShowFetchDataError } from '@components/show-fetch-data-error';
 import { WithoutComments } from '@components/without-comments';
-import { useAppDispatch, useAppSelector } from '@hooks/typed-react-redux-hooks';
+import { useAppDispatch } from '@hooks/typed-react-redux-hooks';
 import { BasePagesLayout } from '@pages/base-pages-layout';
 import { LOCAL_STORAGE_AUTH_PARAM } from '@redux/api/api-data';
 import { isFetchBaseQueryError } from '@redux/api/errors-catching';
 import { useGetAllFeedbacksQuery } from '@redux/api/feedbacks-api';
 import { resetCredentials } from '@redux/reducers/auth-slice';
+import { useAuthSelector } from '@redux/selectors';
 
 import { LoaderStateContext, ModalReportContext } from '../../react-contexts';
 import { Paths } from '../../routes/pathes';
@@ -16,7 +17,7 @@ import { Paths } from '../../routes/pathes';
 export const FeedbacksPage: FC = () => {
     const dispatch = useAppDispatch();
     const navigate = useNavigate();
-    const token = useAppSelector((state) => state.auth.token);
+    const { token } = useAuthSelector();
     const { setNode, openModal, setWidthModal } = useContext(ModalReportContext);
     const { startLoader, stopLoader } = useContext(LoaderStateContext);
     const { data, isLoading: isQueryLoading, error, isError } = useGetAllFeedbacksQuery();

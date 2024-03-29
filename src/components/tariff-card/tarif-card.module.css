@@ -1,5 +1,5 @@
 .card {
-    box-shadow: 0 2px 8px 0 #00000026;
+    box-shadow: var(--modal-box-shadow);
     width: 240px;
 }
 
