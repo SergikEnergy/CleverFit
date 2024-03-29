@@ -1,15 +1,17 @@
-import { FC, useContext, useEffect, useState } from 'react';
+import { FC, useCallback, useContext, useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
-import { EyeInvisibleOutlined, EyeTwoTone, GooglePlusOutlined } from '@ant-design/icons';
+import { GooglePlusOutlined } from '@ant-design/icons';
 import { useAppDispatch, useAppSelector } from '@hooks/typed-react-redux-hooks';
 import { useRegisterUserMutation } from '@redux/api/auth-api';
 import { isFetchBaseQueryError } from '@redux/api/errors-catching';
 import { history } from '@redux/configure-store';
 import { removeRegistrationData, saveRegistrationData } from '@redux/reducers/user-slice';
+import { EMAIL_VALIDATION, PASSWORD_VALIDATION } from '@utils/constants/patterns-reg-exp';
 import { Button, Form, Input } from 'antd';
 import classnames from 'classnames';
 
 import { ERRORS_MESSAGES } from '../../data/form-messages';
+import { getIconRender } from '../../helpers/get-password-icon';
 import { LoaderStateContext } from '../../react-contexts';
 import { Paths } from '../../routes/pathes';
 
@@ -42,30 +44,32 @@ export const FormRegistration: FC = () => {
         }
     }, [isRTKLoading, startLoader, stopLoader]);
 
-    const sendRegisterData = async ({ email, password }: { email: string; password: string }) => {
-        try {
-            await registerUser({ email, password }).unwrap();
-            dispatch(removeRegistrationData());
-            history.push(Paths.SUCCESS_REGISTRATION, { fromPath: location.pathname });
-        } catch (error) {
-            if (isFetchBaseQueryError(error)) {
-                if (error.status === 409) {
-                    history.push(Paths.ERROR_NO_USER_409, { fromPath: location.pathname });
-                } else {
-                    dispatch(saveRegistrationData({ email, password, confirmPassword: '' }));
-                    history.push(Paths.ERROR_OTHERS, { fromPath: location.pathname });
+    const sendRegisterData = useCallback(
+        async ({ email, password }: { email: string; password: string }) => {
+            try {
+                await registerUser({ email, password }).unwrap();
+                dispatch(removeRegistrationData());
+                history.push(Paths.SUCCESS_REGISTRATION, { fromPath: location.pathname });
+            } catch (error) {
+                if (isFetchBaseQueryError(error)) {
+                    if (error.status === 409) {
+                        history.push(Paths.ERROR_NO_USER_409, { fromPath: location.pathname });
+                    } else {
+                        dispatch(saveRegistrationData({ email, password, confirmPassword: '' }));
+                        history.push(Paths.ERROR_OTHERS, { fromPath: location.pathname });
+                    }
                 }
             }
-        }
-    };
+        },
+        [dispatch, location.pathname, registerUser],
+    );
 
     useEffect(() => {
         if (location.state?.fromPath && location.state.fromPath === Paths.ERROR_OTHERS) {
             startLoader();
             sendRegisterData(userData).finally(() => stopLoader());
         }
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, []);
+    }, [location.state, sendRegisterData, startLoader, stopLoader, userData]);
 
     const handleSubmit = async (values: FieldType) => {
         const registrationData = {
@@ -99,7 +103,7 @@ export const FormRegistration: FC = () => {
                     {
                         required: true,
                         message: '',
-                        pattern: new RegExp(/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/),
+                        pattern: EMAIL_VALIDATION,
                     },
                 ]}
             >
@@ -116,7 +120,7 @@ export const FormRegistration: FC = () => {
                 rules={[
                     {
                         required: true,
-                        pattern: new RegExp(/^(?=.*[A-Z])(?=.*\d)[A-Za-z\d]{8,}$/),
+                        pattern: PASSWORD_VALIDATION,
                         message: ERRORS_MESSAGES.PASSWORD,
                     },
                 ]}
@@ -132,8 +136,7 @@ export const FormRegistration: FC = () => {
                     onFocus={() => {
                         setIsPasswordHelperVisible(true);
                     }}
-                    // eslint-disable-next-line react/no-unstable-nested-components
-                    iconRender={(visible) => (visible ? <EyeTwoTone /> : <EyeInvisibleOutlined />)}
+                    iconRender={(visible) => getIconRender(visible)}
                 />
             </Form.Item>
             <Form.Item<FieldType>
@@ -163,8 +166,7 @@ export const FormRegistration: FC = () => {
                         setConfirmPlaceholderVisible(false);
                     }}
                     className={classnames(classes.input, classes.antFixed)}
-                    // eslint-disable-next-line react/no-unstable-nested-components
-                    iconRender={(visible) => (visible ? <EyeTwoTone /> : <EyeInvisibleOutlined />)}
+                    iconRender={(visible) => getIconRender(visible)}
                 />
             </Form.Item>
             <Form.Item className={classnames(classes.antFixed, classes['submit-block'])}>

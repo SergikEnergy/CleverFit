@@ -40,7 +40,6 @@ export const filterDataByDaySortByDate = (
 export const getCellData = (filteredData: TrainingsResponseType[] | []): CellDataType[] | [] => {
     if (filteredData.length > 0) {
         return filteredData.map((train) => ({
-            // eslint-disable-next-line no-underscore-dangle
             id: train._id,
             color: getColorTrainByName(train.name),
             content: `${train.name}`,

@@ -1,8 +1,10 @@
 import { FC } from 'react';
-import { StarFilled, StarOutlined, UserOutlined } from '@ant-design/icons';
+import { UserOutlined } from '@ant-design/icons';
 import { CustomAvatar } from '@components/custom-avatar';
 import { FeedbackResponseType } from '@redux/api/api-types';
 import { Rate } from 'antd';
+
+import { getStarRateIcon } from '../../helpers/get-star-rate-icon';
 
 import { getFormattedDate } from './feedback-item.utils';
 
@@ -34,14 +36,9 @@ export const FeedbackItem: FC<FeedbackItemPropsType> = ({ feedbackContent }) => 
                             style={{ fontSize: '16px', height: '16px' }}
                             disabled={true}
                             value={feedbackContent.rating}
-                            // eslint-disable-next-line react/no-unstable-nested-components
-                            character={({ index }) => {
-                                if (index !== undefined && index < feedbackContent.rating) {
-                                    return <StarFilled style={{ color: '#d89614' }} />;
-                                }
-
-                                return <StarOutlined style={{ color: '#d89614' }} />;
-                            }}
+                            character={({ index }) =>
+                                getStarRateIcon({ value: index }, feedbackContent.rating)
+                            }
                         />
                     </div>
                     <div className={classes.date}>{dateFormatted}</div>

@@ -1,5 +1,4 @@
 import { FC } from 'react';
-// eslint-disable-next-line import/no-extraneous-dependencies
 import { useLocation } from 'react-router';
 import { ExitUser } from '@components/exit-user';
 import { Logo } from '@components/logo';

@@ -1,13 +1,14 @@
-import { FC, useContext, useEffect, useState } from 'react';
+import { FC, useCallback, useContext, useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
-import { EyeInvisibleOutlined, EyeTwoTone } from '@ant-design/icons';
 import { useAppDispatch, useAppSelector } from '@hooks/typed-react-redux-hooks';
 import { useChangePasswordMutation } from '@redux/api/auth-api';
 import { history } from '@redux/configure-store';
 import { removeRegistrationData, saveRegistrationData } from '@redux/reducers/user-slice';
+import { PASSWORD_VALIDATION } from '@utils/constants/patterns-reg-exp';
 import { Button, Form, Input } from 'antd';
 import classnames from 'classnames';
 
+import { getIconRender } from '../../../helpers/get-password-icon';
 import { LoaderStateContext } from '../../../react-contexts';
 import { Paths } from '../../../routes/pathes';
 
@@ -43,16 +44,19 @@ export const ChangePasswordPage: FC = () => {
         stopLoader();
     }
 
-    const sendChangePasswordRequest = async (password: string, confirmPassword: string) => {
-        try {
-            await changeUserPassword({ password, confirmPassword }).unwrap();
-            history.push(Paths.SUCCESS_CHANGE_PASSWORD, { fromPath: location.pathname });
-            dispatch(removeRegistrationData());
-        } catch (error) {
-            dispatch(saveRegistrationData({ email: userEmail, password, confirmPassword }));
-            history.push(Paths.ERROR_CHANGE_PASSWORD, { fromPath: location.pathname });
-        }
-    };
+    const sendChangePasswordRequest = useCallback(
+        async (password: string, confirmPassword: string) => {
+            try {
+                await changeUserPassword({ password, confirmPassword }).unwrap();
+                history.push(Paths.SUCCESS_CHANGE_PASSWORD, { fromPath: location.pathname });
+                dispatch(removeRegistrationData());
+            } catch (error) {
+                dispatch(saveRegistrationData({ email: userEmail, password, confirmPassword }));
+                history.push(Paths.ERROR_CHANGE_PASSWORD, { fromPath: location.pathname });
+            }
+        },
+        [changeUserPassword, dispatch, location.pathname, userEmail],
+    );
 
     useEffect(() => {
         if (location.state?.fromPath && location.state.fromPath === Paths.ERROR_CHANGE_PASSWORD) {
@@ -61,8 +65,14 @@ export const ChangePasswordPage: FC = () => {
                 stopLoader(),
             );
         }
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, []);
+    }, [
+        location.state,
+        sendChangePasswordRequest,
+        startLoader,
+        stopLoader,
+        userConfirmPassword,
+        userPassword,
+    ]);
 
     const handleSubmit = async (values: RebootPassFieldType) => {
         const dataForRequest = {
@@ -97,7 +107,7 @@ export const ChangePasswordPage: FC = () => {
                     rules={[
                         {
                             required: true,
-                            pattern: new RegExp(/^(?=.*[A-Z])(?=.*\d)[A-Za-z\d]{8,}$/),
+                            pattern: PASSWORD_VALIDATION,
                             message: passwordErrorMessage,
                         },
                     ]}
@@ -113,10 +123,7 @@ export const ChangePasswordPage: FC = () => {
                         onFocus={() => {
                             setIsPasswordHelperVisible(true);
                         }}
-                        // eslint-disable-next-line react/no-unstable-nested-components
-                        iconRender={(visible) =>
-                            visible ? <EyeTwoTone /> : <EyeInvisibleOutlined />
-                        }
+                        iconRender={(visible) => getIconRender(visible)}
                     />
                 </Form.Item>
                 <Form.Item<RebootPassFieldType>
@@ -146,10 +153,7 @@ export const ChangePasswordPage: FC = () => {
                         onChange={() => {
                             setConfirmPlaceholderVisible(false);
                         }}
-                        // eslint-disable-next-line react/no-unstable-nested-components
-                        iconRender={(visible) =>
-                            visible ? <EyeTwoTone /> : <EyeInvisibleOutlined />
-                        }
+                        iconRender={(visible) => getIconRender(visible)}
                     />
                 </Form.Item>
                 <Form.Item className={classnames(classes.antFixed, classes['submit-block'])}>

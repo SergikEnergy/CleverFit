@@ -1,4 +1,3 @@
-/* eslint-disable unicorn/filename-case */
 import { FC, ReactNode } from 'react';
 import { Navigate, useLocation } from 'react-router-dom';
 

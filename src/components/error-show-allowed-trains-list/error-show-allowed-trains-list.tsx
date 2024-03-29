@@ -1,5 +1,8 @@
 import { FC } from 'react';
+import { useLocation } from 'react-router';
 import { CloseCircleTwoTone, CloseOutlined } from '@ant-design/icons';
+import { useGetAllowedTrainingsLists } from '@hooks/use-get-allowed-trains-list';
+import { useModalReportContext } from '@hooks/use-modal-report';
 import { Button } from 'antd';
 
 import classes from './error-show-allowed-trains-list.module.css';
@@ -28,6 +31,10 @@ export const ErrorShowAllowedTrainsList: FC<ErrorShowAllowedTrainsListPropsType>
     closeClickAction,
     buttonActionClick,
 }) => {
+    const location = useLocation();
+    const { fetchAllowedTrainingsList } = useGetAllowedTrainingsLists();
+    const { closeModal, setNode } = useModalReportContext();
+    const isFromCalendarPage = location.pathname.includes('calendar');
     const title = 'При открытии данных произошла ошибка';
     const subtitle = 'Попробуйте ещё раз.';
     const buttonText = 'Обновить';
@@ -38,6 +45,11 @@ export const ErrorShowAllowedTrainsList: FC<ErrorShowAllowedTrainsListPropsType>
 
     const handleActionButtonClick = () => {
         if (buttonActionClick) buttonActionClick();
+        if (isFromCalendarPage) {
+            setNode(null);
+            closeModal();
+            if (fetchAllowedTrainingsList) fetchAllowedTrainingsList();
+        }
     };
 
     return (

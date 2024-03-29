@@ -1,6 +1,6 @@
-import { FC, useContext, useEffect, useState } from 'react';
+import { FC, useCallback, useContext, useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
-import { EyeInvisibleOutlined, EyeTwoTone, GooglePlusOutlined } from '@ant-design/icons';
+import { GooglePlusOutlined } from '@ant-design/icons';
 import { useAppDispatch, useAppSelector } from '@hooks/typed-react-redux-hooks';
 import { ErrorDataType } from '@redux/api/api-types';
 import { useCheckEmailMutation, useLoginUserMutation } from '@redux/api/auth-api';
@@ -8,22 +8,18 @@ import { isFetchBaseQueryError } from '@redux/api/errors-catching';
 import { history } from '@redux/configure-store';
 import { saveCredentialsToStorage, setCredentials } from '@redux/reducers/auth-slice';
 import { saveEmail } from '@redux/reducers/user-slice';
+import { PASSWORD_ERROR_MESSAGE } from '@utils/constants/error-form-messages';
+import { EMAIL_VALIDATION, PASSWORD_VALIDATION } from '@utils/constants/patterns-reg-exp';
 import { Button, Checkbox, Form, Input } from 'antd';
 import classnames from 'classnames';
 
+import { getIconRender } from '../../helpers/get-password-icon';
 import { LoaderStateContext } from '../../react-contexts';
 import { Paths } from '../../routes/pathes';
 
+import { FieldType, MouseEventOnClick } from './form-login.types';
+
 import classes from './form-login.module.css';
-
-type FieldType = {
-    userEmail?: string;
-    password?: string;
-    confirmPassword?: string;
-    remember?: boolean;
-};
-
-type MouseEventOnClick = React.MouseEvent<HTMLButtonElement>;
 
 export const FormLogin: FC = () => {
     const [isPasswordHelperVisible, setIsPasswordHelperVisible] = useState(false);
@@ -46,33 +42,37 @@ export const FormLogin: FC = () => {
         }
     }, [isCheckEmailLoading, isRTKLoading, startLoader, stopLoader]);
 
-    const sendCheckEmailRequest = async ({ email }: { email: string }) => {
-        try {
-            await checkEmailRequest({ email }).unwrap();
-            dispatch(saveEmail({ email }));
-            history.push(Paths.AUTH_CONFIRM_EMAIL, { fromPath: location.pathname });
-        } catch (error) {
-            if (isFetchBaseQueryError(error)) {
-                const errorData = error.data as ErrorDataType;
+    const sendCheckEmailRequest = useCallback(
+        async ({ email }: { email: string }) => {
+            try {
+                await checkEmailRequest({ email }).unwrap();
+                dispatch(saveEmail({ email }));
+                history.push(Paths.AUTH_CONFIRM_EMAIL, { fromPath: location.pathname });
+            } catch (error) {
+                if (isFetchBaseQueryError(error)) {
+                    const errorData = error.data as ErrorDataType;
 
-                if (error.status === 404 && errorData && errorData.message === 'Email не найден') {
-                    history.push(Paths.ERROR_NO_EMAIL_AND_404, { fromPath: location.pathname });
-                } else {
-                    history.push(Paths.ERROR_CHECK_EMAIL, { fromPath: location.pathname });
+                    if (
+                        error.status === 404 &&
+                        errorData &&
+                        errorData.message === 'Email не найден'
+                    ) {
+                        history.push(Paths.ERROR_NO_EMAIL_AND_404, { fromPath: location.pathname });
+                    } else {
+                        history.push(Paths.ERROR_CHECK_EMAIL, { fromPath: location.pathname });
+                    }
                 }
             }
-        }
-    };
+        },
+        [checkEmailRequest, dispatch, location.pathname],
+    );
 
     useEffect(() => {
         if (location.state?.fromPath && location.state.fromPath === Paths.ERROR_CHECK_EMAIL) {
             startLoader();
             sendCheckEmailRequest({ email: emailFromState }).finally(() => stopLoader());
         }
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, []);
-
-    const passwordErrorMessage = 'Пароль не менее 8 символов, с заглавной буквой и цифрой';
+    }, [emailFromState, location.state, sendCheckEmailRequest, startLoader, stopLoader]);
 
     const sendLoginData = async ({
         email,
@@ -159,7 +159,7 @@ export const FormLogin: FC = () => {
                     {
                         required: true,
                         message: '   ',
-                        pattern: new RegExp(/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/),
+                        pattern: EMAIL_VALIDATION,
                     },
                 ]}
             >
@@ -172,14 +172,14 @@ export const FormLogin: FC = () => {
                 />
             </Form.Item>
             <Form.Item<FieldType>
-                help={isPasswordHelperVisible ? passwordErrorMessage : ''}
+                help={isPasswordHelperVisible ? PASSWORD_ERROR_MESSAGE : ''}
                 className={classnames(classes['password-wrapper'], classes.antFixed)}
                 name='password'
                 rules={[
                     {
                         required: true,
-                        pattern: new RegExp(/^(?=.*[A-Z])(?=.*\d)[A-Za-z\d]{8,}$/),
-                        message: passwordErrorMessage,
+                        pattern: PASSWORD_VALIDATION,
+                        message: PASSWORD_ERROR_MESSAGE,
                     },
                 ]}
             >
@@ -195,8 +195,7 @@ export const FormLogin: FC = () => {
                     onFocus={() => {
                         setIsPasswordHelperVisible(true);
                     }}
-                    // eslint-disable-next-line react/no-unstable-nested-components
-                    iconRender={(visible) => (visible ? <EyeTwoTone /> : <EyeInvisibleOutlined />)}
+                    iconRender={(visible) => getIconRender(visible)}
                 />
             </Form.Item>
             <div className={classes['checkbox-wrapper']}>

@@ -1,11 +1,11 @@
 import { FC, Fragment, useState } from 'react';
 import { SuccessSelectTariff } from '@components/success-select-tariff';
-import { useAppDispatch, useAppSelector } from '@hooks/typed-react-redux-hooks';
+import { useResetUser } from '@hooks/reset-user';
+import { useAppSelector } from '@hooks/typed-react-redux-hooks';
 import { useDrawerContext } from '@hooks/use-info-drawer';
 import { useModalReportContext } from '@hooks/use-modal-report';
 import { RequestChangeTariffType } from '@redux/api/api-types';
 import { useUpdateSelectedTariffMutation } from '@redux/api/settings-api';
-import { resetCredentials } from '@redux/reducers/auth-slice';
 import { Button, Form, Radio } from 'antd';
 
 import { DATA_TEST_ID } from '../../../../../data/data-test-ids';
@@ -33,7 +33,7 @@ const SubTitleSuccessChangeTariff: FC = () => {
 };
 
 export const TariffsForm: FC = () => {
-    const dispatch = useAppDispatch();
+    const resetUser = useResetUser();
     const { openModal, setNode, setWidthModal, closeModal } = useModalReportContext();
     const [updateTariff] = useUpdateSelectedTariffMutation();
     const [disabledSubmit, setDisabledSubmit] = useState(true);
@@ -44,7 +44,7 @@ export const TariffsForm: FC = () => {
 
     const handleCloseSuccessWindow = () => {
         closeModal();
-        dispatch(resetCredentials());
+        resetUser();
     };
 
     if (!isDrawerOpen) {

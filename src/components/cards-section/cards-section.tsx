@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { CalendarTwoTone, HeartFilled } from '@ant-design/icons';
 import { CardMainAction } from '@components/card-main-action';
 import { ProfileIconComponent } from '@components/custom-icons/profile-icon';
-import { useGetAllUserTrainings } from '@hooks/useGetAllUserTrainings';
+import { useGetAllUserTrainings } from '@hooks/use-get-all-user-trainings';
 import { primaryLight } from '@utils/constants/colors';
 import { Button, Col, Row, Typography } from 'antd';
 import classnames from 'classnames';

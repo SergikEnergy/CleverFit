@@ -1,5 +1,6 @@
 import { MouseEvent } from 'react';
 import { TrainingsResponseType } from '@redux/api/api-types';
+import { TrainOrExerciseModeType } from '@utils/constants/train-modes';
 import { Moment } from 'moment';
 
 import { ModalPositionType } from '../calendar-with-data.types';
@@ -10,7 +11,7 @@ export type DataForCellsPropsType = {
     isFullScreen: boolean;
     hideCollapsed: () => void;
     resetExercises: () => void;
-    setModalType: (mode: 'train' | 'exercise') => void;
+    setModalType: (mode: TrainOrExerciseModeType) => void;
     changeEditedTrainData: (id: string, train: string) => void;
     setIsModalVisible: (state: boolean) => void;
     setSelectedDay: (day: Moment) => void;
@@ -27,7 +28,7 @@ export type HandleDateClickFuncType = (
     isFullScreen: boolean,
     hideCollapsed: VoidFuncType,
     resetExercises: VoidFuncType,
-    setModalType: (mode: 'train' | 'exercise') => void,
+    setModalType: (mode: TrainOrExerciseModeType) => void,
     changeEditedTrainData: (id: string, train: string) => void,
     setIsModalVisible: (state: boolean) => void,
     setSelectedDay: (day: Moment) => void,

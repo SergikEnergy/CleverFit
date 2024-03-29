@@ -1,32 +1,23 @@
-/* eslint-disable unicorn/filename-case */
 import { useContext, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
 import { ErrorProfile } from '@components/error-profile-page';
 import { WRONG_SIZE_IMG } from '@components/error-profile-page/error-messages.data';
-import { API_BASE_URL, LOCAL_STORAGE_AUTH_PARAM } from '@redux/api/api-data';
-import { resetCredentials } from '@redux/reducers/auth-slice';
+import { API_BASE_URL } from '@redux/api/api-data';
 import { saveImgUploadData } from '@redux/reducers/personal-info-slice';
 import { setUploadProgress } from '@redux/reducers/upload-progress-slice';
 import axios, { AxiosError, AxiosRequestConfig, AxiosResponse } from 'axios';
 
 import { ModalReportContext } from '../react-contexts';
 import { ImageUpdateResponseType } from '../redux/api/api-types';
-import { Paths } from '../routes/pathes';
 
+import { useResetUser } from './reset-user';
 import { useAppDispatch, useAppSelector } from '.';
 
 export const useUploadPhoto = () => {
+    const resetUser = useResetUser();
     const { openModal, setNode, setWidthModal } = useContext(ModalReportContext);
-    const navigate = useNavigate();
     const dispatch = useAppDispatch();
     const token = useAppSelector((state) => state.auth.token);
     const [uploading, setUploading] = useState(false);
-
-    const resetUser = () => {
-        localStorage.removeItem(LOCAL_STORAGE_AUTH_PARAM);
-        dispatch(resetCredentials());
-        navigate(Paths.AUTH, { replace: true });
-    };
 
     const handleUploadError = (axiosError: AxiosError) => {
         if (axiosError.response?.status === 403) {

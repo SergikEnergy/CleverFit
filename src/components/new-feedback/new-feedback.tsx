@@ -1,5 +1,5 @@
 import { FC, useContext, useEffect, useState } from 'react';
-import { CloseOutlined, StarFilled, StarOutlined } from '@ant-design/icons';
+import { CloseOutlined } from '@ant-design/icons';
 import { AddFeedbackError, AddFeedbackSuccess } from '@components/add-feedback-results';
 import { useAppDispatch, useAppSelector } from '@hooks/typed-react-redux-hooks';
 import { isFetchBaseQueryError } from '@redux/api/errors-catching';
@@ -9,6 +9,7 @@ import { Button, Divider, Form, Input, Rate } from 'antd';
 import classnames from 'classnames';
 
 import { DATA_TEST_ID } from '../../data/data-test-ids';
+import { getStarRateIcon } from '../../helpers/get-star-rate-icon';
 import { LoaderStateContext, ModalReportContext } from '../../react-contexts';
 
 import classes from './new-feedback.module.css';
@@ -119,18 +120,7 @@ export const NewFeedback: FC = () => {
                         className={classes.rateStars}
                         value={rateValue}
                         onChange={handleChangeRate}
-                        // eslint-disable-next-line react/no-unstable-nested-components
-                        character={({ index }) => {
-                            if (
-                                index !== undefined &&
-                                activeIndex !== null &&
-                                index <= activeIndex
-                            ) {
-                                return <StarFilled style={{ color: '#d89614' }} />;
-                            }
-
-                            return <StarOutlined style={{ color: '#d89614' }} />;
-                        }}
+                        character={({ index }) => getStarRateIcon({ value: index }, activeIndex)}
                     />
                 </Form.Item>
                 <Form.Item<FieldType>

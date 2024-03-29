@@ -1,5 +1,4 @@
 import { FC, Fragment, useContext, useEffect, useState } from 'react';
-import { EyeInvisibleOutlined, EyeTwoTone } from '@ant-design/icons';
 import { ErrorProfile } from '@components/error-profile-page';
 import { ERROR_UPDATE_PROFILE } from '@components/error-profile-page/error-messages.data';
 import { AlertNotification } from '@components/notifications/alert/alert-notification';
@@ -9,12 +8,14 @@ import { RequestUserInfoType } from '@redux/api/api-types';
 import { useUpdateUserInfoMutation } from '@redux/api/profile-api';
 import { savePersonalInfoAfterRegistration } from '@redux/reducers/personal-info-slice';
 import { dateDayMonthYearDotFormat, dateFullStringFormat } from '@utils/constants/date-formats';
+import { EMAIL_VALIDATION, PASSWORD_VALIDATION } from '@utils/constants/patterns-reg-exp';
 import { Button, DatePicker, Form, Input } from 'antd';
 import classnames from 'classnames';
 import moment from 'moment';
 
 import { DATA_TEST_ID } from '../../data/data-test-ids';
 import { ERRORS_MESSAGES } from '../../data/form-messages';
+import { getIconRender } from '../../helpers/get-password-icon';
 import { ModalReportContext } from '../../react-contexts';
 
 import { CustomUpload } from './components';
@@ -162,9 +163,7 @@ export const FormPersonalInfo: FC<FormPersonalInfoPropsType> = () => {
                             {
                                 required: true,
                                 message: '',
-                                pattern: new RegExp(
-                                    /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
-                                ),
+                                pattern: EMAIL_VALIDATION,
                             },
                         ]}
                     >
@@ -183,7 +182,7 @@ export const FormPersonalInfo: FC<FormPersonalInfoPropsType> = () => {
                         rules={[
                             {
                                 required: isPasswordRequired,
-                                pattern: new RegExp(/^(?=.*[A-Z])(?=.*\d)[A-Za-z\d]{8,}$/),
+                                pattern: PASSWORD_VALIDATION,
                                 message: ERRORS_MESSAGES.PASSWORD,
                             },
                         ]}
@@ -205,10 +204,7 @@ export const FormPersonalInfo: FC<FormPersonalInfoPropsType> = () => {
                             onFocus={() => {
                                 setIsPasswordHelperVisible(true);
                             }}
-                            // eslint-disable-next-line react/no-unstable-nested-components
-                            iconRender={(visible) =>
-                                visible ? <EyeTwoTone /> : <EyeInvisibleOutlined />
-                            }
+                            iconRender={(visible) => getIconRender(visible)}
                         />
                     </Form.Item>
                     <Form.Item<FieldType>
@@ -242,10 +238,7 @@ export const FormPersonalInfo: FC<FormPersonalInfoPropsType> = () => {
                                 setConfirmPlaceholderVisible(false);
                             }}
                             className={classnames(classes.confirm, classes.input, classes.antFixed)}
-                            // eslint-disable-next-line react/no-unstable-nested-components
-                            iconRender={(visible) =>
-                                visible ? <EyeTwoTone /> : <EyeInvisibleOutlined />
-                            }
+                            iconRender={(visible) => getIconRender(visible)}
                         />
                     </Form.Item>
                 </div>

@@ -1,5 +1,6 @@
-import { FC, useContext, useEffect } from 'react';
+import { FC, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useWindowWidth } from '@hooks/use-window-size';
 import { Button, Result } from 'antd';
 
 import { CollapsedContext } from '../../react-contexts';
@@ -10,24 +11,13 @@ import { NOT_FOUND } from './not-found.data';
 import classes from './not-found-result.module.css';
 
 export const NotFoundResult: FC = () => {
-    const { hideCollapsed: hide } = useContext(CollapsedContext);
+    const { hideCollapsed } = useContext(CollapsedContext);
     const navigate = useNavigate();
+    const innerWindowWidth = useWindowWidth();
 
-    const hideCollapsed = () => {
-        if (window.innerWidth < 570) {
-            hide();
-        }
-    };
-
-    useEffect(() => {
+    if (innerWindowWidth < 570) {
         hideCollapsed();
-        window.addEventListener('resize', hideCollapsed);
-
-        return () => {
-            window.removeEventListener('resize', hideCollapsed);
-        };
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, []);
+    }
 
     const handleClickButton = () => {
         navigate(Paths.MAIN_PAGE, { replace: true });

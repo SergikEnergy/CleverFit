@@ -2,7 +2,7 @@ import { FC, useContext } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { CalendarTwoTone, HeartFilled, TrophyFilled } from '@ant-design/icons';
 import { ProfileIconComponent } from '@components/custom-icons/profile-icon';
-import { useGetAllUserTrainings } from '@hooks/useGetAllUserTrainings';
+import { useGetAllUserTrainings } from '@hooks/use-get-all-user-trainings';
 import { Menu, Typography } from 'antd';
 import classnames from 'classnames';
 

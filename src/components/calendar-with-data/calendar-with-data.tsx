@@ -1,6 +1,8 @@
 import { FC, Fragment, useContext, useEffect, useState } from 'react';
 import { CustomCalendarModal } from '@components/custom-calendar-modal';
+import { useWindowWidth } from '@hooks/use-window-size';
 import { TrainingsResponseType } from '@redux/api/api-types';
+import { EXERCISE_MODE, TRAIN_MODE, TrainOrExerciseModeType } from '@utils/constants/train-modes';
 import { Calendar } from 'antd';
 import moment, { Moment } from 'moment';
 
@@ -29,24 +31,26 @@ export const CalenDarWithData: FC<CalenDarWithDataPropsType> = ({
     } = useContext(DrawerTrainsContext);
 
     const { hideCollapsed } = useContext(CollapsedContext);
+    const windowWidth = useWindowWidth();
 
     const [isFullScreen, setIsFullScreen] = useState(true);
     const [selectedCellData, setSelectedCellData] = useState<[] | TrainingsResponseType[]>([]);
     const [isModalVisible, setIsModalVisible] = useState(false);
-    const [modalType, setModalType] = useState<'train' | 'exercise'>('train');
+    const [modalType, setModalType] = useState<TrainOrExerciseModeType>(TRAIN_MODE);
     const [selectedDay, setSelectedDay] = useState<Moment>(moment());
     const [modalPosition, setModalPosition] = useState<ModalPositionType>(modalInitialPosition);
 
-    const listenChangeWidth = () => {
-        if (window.innerWidth < 670) {
+    useEffect(() => {
+        if (windowWidth < 670) {
             setIsFullScreen(false);
+            hideCollapsed();
         } else {
             setIsFullScreen(true);
         }
-    };
+    }, [hideCollapsed, windowWidth]);
 
     const changeModalType = () => {
-        setModalType((prev) => (prev === 'train' ? 'exercise' : 'train'));
+        setModalType((prev) => (prev === TRAIN_MODE ? EXERCISE_MODE : TRAIN_MODE));
     };
 
     useEffect(() => {
@@ -66,18 +70,13 @@ export const CalenDarWithData: FC<CalenDarWithDataPropsType> = ({
             }
         };
 
-        listenChangeWidth();
         correctModalPosition();
-        hideCollapsed();
-        window.addEventListener('resize', listenChangeWidth);
         window.addEventListener('resize', correctModalPosition);
 
         return () => {
-            window.removeEventListener('resize', listenChangeWidth);
             window.removeEventListener('resize', correctModalPosition);
         };
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, []);
+    }, [isModalVisible, selectedDay]);
 
     useEffect(() => {
         changeModalType();

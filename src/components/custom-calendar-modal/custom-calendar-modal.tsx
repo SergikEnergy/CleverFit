@@ -1,4 +1,5 @@
 import { FC, Fragment, useContext, useLayoutEffect, useState } from 'react';
+import { EXERCISE_MODE, TRAIN_MODE } from '@utils/constants/train-modes';
 import classnames from 'classnames';
 
 import { DrawerTrainsContext } from '../../react-contexts';
@@ -82,7 +83,7 @@ export const CustomCalendarModal: FC<CustomCalendarModalPropsType> = ({
 
     return (
         <Fragment>
-            {modalType === 'train' && (
+            {modalType === TRAIN_MODE && (
                 <div
                     data-test-id='modal-create-training'
                     style={
@@ -98,7 +99,7 @@ export const CustomCalendarModal: FC<CustomCalendarModalPropsType> = ({
                     />
                 </div>
             )}
-            {modalType === 'exercise' && (
+            {modalType === EXERCISE_MODE && (
                 <div
                     data-test-id='modal-create-exercise'
                     style={

@@ -19,7 +19,6 @@ export const TrainWithBadge: FC<TrainWithBadgePropsType> = ({ train, changeFlowT
     const { changeEditedTrainData } = useContext(DrawerTrainsContext);
     const handleEditClick = () => {
         if (!train.isImplementation) {
-            // eslint-disable-next-line no-underscore-dangle
             changeEditedTrainData(train._id, train.name);
             changeFlowToEdit();
         }

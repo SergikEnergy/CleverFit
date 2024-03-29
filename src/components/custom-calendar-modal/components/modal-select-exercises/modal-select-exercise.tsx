@@ -67,7 +67,6 @@ export const ModalSelectExercise: FC<ModalSelectExercisePropsType> = ({
                     if (Array.isArray(trainsOnThisDate) && trainsOnThisDate.length > 0) {
                         setExercises(trainsOnThisDate[0].exercises, value);
                         if (isPastDate) {
-                            // eslint-disable-next-line no-underscore-dangle
                             changeEditedTrainData(trainsOnThisDate[0]._id, value);
                         }
                     }
