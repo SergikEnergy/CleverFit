@@ -3,6 +3,7 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import { CalendarTwoTone, HeartFilled, TrophyFilled } from '@ant-design/icons';
 import { ProfileIconComponent } from '@components/custom-icons/profile-icon';
 import { useGetAllUserTrainings } from '@hooks/use-get-all-user-trainings';
+import { history } from '@redux/configure-store';
 import { Menu, Typography } from 'antd';
 import classnames from 'classnames';
 
@@ -23,6 +24,7 @@ export const MenuLinks: FC = () => {
 
     const handleMoveToCalendarPage = () => {
         fetchAllUserTrains();
+        history.push(Paths.CALENDAR_PAGE, { allowRequest: true });
     };
 
     const handleMoveToProfilePage = () => {

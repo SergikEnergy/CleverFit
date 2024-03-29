@@ -2,10 +2,8 @@ import { useContext, useEffect } from 'react';
 import { ShowFetchDataError } from '@components/show-fetch-data-error';
 import { useLazyGetAllTrainingsQuery } from '@redux/api/calendar-api';
 import { isFetchBaseQueryError } from '@redux/api/errors-catching';
-import { history } from '@redux/configure-store';
 
 import { LoaderStateContext, ModalReportContext } from '../react-contexts';
-import { Paths } from '../routes/pathes';
 
 import { useResetUser } from './reset-user';
 
@@ -37,7 +35,6 @@ export const useGetAllUserTrainings = () => {
     const fetchAllTrainings = async () => {
         try {
             await getAllTrainings().unwrap();
-            history.push(Paths.CALENDAR_PAGE, { allowRequest: true });
         } catch (error) {
             handleGetTrainingsError(error);
         } finally {

@@ -4,6 +4,7 @@ import { CalendarTwoTone, HeartFilled } from '@ant-design/icons';
 import { CardMainAction } from '@components/card-main-action';
 import { ProfileIconComponent } from '@components/custom-icons/profile-icon';
 import { useGetAllUserTrainings } from '@hooks/use-get-all-user-trainings';
+import { history } from '@redux/configure-store';
 import { primaryLight } from '@utils/constants/colors';
 import { Button, Col, Row, Typography } from 'antd';
 import classnames from 'classnames';
@@ -20,6 +21,7 @@ export const CardsSection: FC = () => {
 
     const handleCalendarPageClick = () => {
         fetchAllTrainings();
+        history.push(Paths.CALENDAR_PAGE, { allowRequest: true });
     };
 
     const handleMoveToProfilePage = () => {
