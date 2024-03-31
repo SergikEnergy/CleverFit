@@ -90,7 +90,7 @@ export const CustomUpload: FC<CustomUploadPropsType> = ({
             if (file.response?.url) {
                 setUploadStatus('done');
                 setPreviewImage(`${API_IMGS_BASE}${file.response.url}`);
-                saveImgUploadData({ url: file.response.url, name: file.response.name });
+                dispatch(saveImgUploadData({ url: file.response.url, name: file.response.name }));
                 setDisabledSaveButton(false);
             }
         }

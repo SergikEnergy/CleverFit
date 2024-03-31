@@ -61,40 +61,35 @@ export const FormPersonalInfo: FC = () => {
     };
 
     const handleSubmit = async (fieldValues: FieldType) => {
-        const formData = { ...fieldValues };
-
-        if (formData.passwordConfirm) {
-            delete formData.passwordConfirm;
-        }
+        const requestBody: RequestUserInfoType = {
+            email: fieldValues.email,
+            password: fieldValues.password,
+            firstName: fieldValues.firstName,
+            lastName: fieldValues.lastName,
+            birthday: fieldValues.birthday,
+        };
 
         Object.keys(fieldValues).map((key) => {
             if (!fieldValues[key as keyof FieldType]) {
-                delete formData[key as keyof FieldType];
+                delete requestBody[key as keyof RequestUserInfoType];
             }
 
             return key;
         });
 
-        if (uploadStatus === 'error' && formData.uploadFile) {
-            delete formData.uploadFile;
+        if (requestBody.birthday) {
+            requestBody.birthday = moment(requestBody.birthday).format(dateFullStringFormat);
         }
 
-        if (formData.birthday) {
-            formData.birthday = moment(formData.birthday).format(dateFullStringFormat);
-        }
-
-        const body: RequestUserInfoType = { ...formData };
-
-        if (ImageUrl) {
-            body.imgSrc = `${API_IMGS_BASE}${ImageUrl}`;
+        if (uploadStatus === 'done' && ImageUrl) {
+            requestBody.imgSrc = `${API_IMGS_BASE}${ImageUrl}`;
         }
 
         try {
-            const info = await updatePersonalInfo(body).unwrap();
+            const info = await updatePersonalInfo(requestBody).unwrap();
 
             setIsAlertShowed(true);
-            dispatch(savePersonalInfoAfterRegistration({ ...info, url: '', name: '' }));
-            form.resetFields();
+            dispatch(savePersonalInfoAfterRegistration(info));
             setSubmitDisabled(true);
             setIsPasswordRequired(false);
         } catch (err) {
@@ -261,9 +256,7 @@ export const FormPersonalInfo: FC = () => {
                     dataTestId={DATA_TEST_ID.alert}
                     type='success'
                     message='Данные профиля успешно обновлены'
-                    handleCloseAlert={() => {
-                        setIsAlertShowed(false);
-                    }}
+                    handleCloseAlert={() => setIsAlertShowed(false)}
                 />
             )}
         </Fragment>

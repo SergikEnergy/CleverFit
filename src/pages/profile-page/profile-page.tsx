@@ -28,7 +28,7 @@ export const ProfilePage: FC = () => {
 
     useEffect(() => {
         if (userPersonalInfo && isSuccessGetUserInfo) {
-            dispatch(savePersonalInfoAfterRegistration({ ...userPersonalInfo, url: '', name: '' }));
+            dispatch(savePersonalInfoAfterRegistration(userPersonalInfo));
         }
     }, [dispatch, isSuccessGetUserInfo, userPersonalInfo]);
 
