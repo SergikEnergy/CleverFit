@@ -1,9 +1,9 @@
-import { FC, Fragment, useContext, useLayoutEffect, useState } from 'react';
+import { FC, Fragment, useLayoutEffect, useState } from 'react';
 import { ArrowLeftOutlined } from '@ant-design/icons';
 import { Divider, Empty, Select } from 'antd';
 import moment from 'moment';
 
-import { DrawerTrainsContext } from '../../../../react-contexts';
+import { useCalendarTrainingsDrawerContext } from '../../../../react-contexts';
 import { ExerciseItem } from '..';
 
 import { ActionsButtons } from './actions-button/actions-buttons';
@@ -31,7 +31,7 @@ export const ModalSelectExercise: FC<ModalSelectExercisePropsType> = ({
         setTrainName,
         openDrawer,
         setExercises,
-    } = useContext(DrawerTrainsContext);
+    } = useCalendarTrainingsDrawerContext();
 
     const isPastDate = date.isSameOrBefore(moment());
     const [isEditDisabled, setIsEditDisabled] = useState(false);

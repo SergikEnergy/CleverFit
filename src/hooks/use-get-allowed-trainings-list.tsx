@@ -1,17 +1,21 @@
-import { useCallback, useContext } from 'react';
+import { useCallback } from 'react';
 import { ErrorShowAllowedTrainsList } from '@components/error-show-allowed-trains-list';
 import { useLazyGetAllowedTrainsListQuery } from '@redux/api/calendar-api';
 import { isFetchBaseQueryError } from '@redux/api/errors-catching';
 
-import { DrawerTrainsContext, LoaderStateContext, ModalReportContext } from '../react-contexts';
+import {
+    useCalendarTrainingsDrawerContext,
+    useLoaderContext,
+    useModalReportContext,
+} from '../react-contexts';
 
 import { useResetUser } from './reset-user';
 
 export const useGetAllowedTrainingsLists = () => {
     const resetUser = useResetUser();
-    const { stopLoader } = useContext(LoaderStateContext);
-    const { setNode, setWidthModal, openModal, closeModal } = useContext(ModalReportContext);
-    const { updateAllowedTrains } = useContext(DrawerTrainsContext);
+    const { stopLoader } = useLoaderContext();
+    const { setNode, setWidthModal, openModal, closeModal } = useModalReportContext();
+    const { updateAllowedTrains } = useCalendarTrainingsDrawerContext();
 
     const handlerErrorCloseAction = useCallback(() => {
         setNode(null);

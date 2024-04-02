@@ -1,16 +1,16 @@
-import { useContext, useEffect } from 'react';
+import { useEffect } from 'react';
 import { ShowFetchDataError } from '@components/show-fetch-data-error';
 import { useLazyGetAllTrainingsQuery } from '@redux/api/calendar-api';
 import { isFetchBaseQueryError } from '@redux/api/errors-catching';
 
-import { LoaderStateContext, ModalReportContext } from '../react-contexts';
+import { useLoaderContext, useModalReportContext } from '../react-contexts';
 
 import { useResetUser } from './reset-user';
 
 export const useGetAllUserTrainings = () => {
     const resetUser = useResetUser();
-    const { startLoader, stopLoader } = useContext(LoaderStateContext);
-    const { setNode, setWidthModal, openModal } = useContext(ModalReportContext);
+    const { startLoader, stopLoader } = useLoaderContext();
+    const { setNode, setWidthModal, openModal } = useModalReportContext();
 
     const [getAllTrainings, { isLoading }] = useLazyGetAllTrainingsQuery();
 

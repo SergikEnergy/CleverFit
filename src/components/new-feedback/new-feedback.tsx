@@ -1,4 +1,4 @@
-import { FC, useContext, useEffect, useState } from 'react';
+import { FC, useEffect, useState } from 'react';
 import { CloseOutlined } from '@ant-design/icons';
 import { AddFeedbackError, AddFeedbackSuccess } from '@components/add-feedback-results';
 import { useAppDispatch } from '@hooks/typed-react-redux-hooks';
@@ -11,7 +11,7 @@ import classnames from 'classnames';
 
 import { DATA_TEST_ID } from '../../data/data-test-ids';
 import { getStarRateIcon } from '../../helpers/get-star-rate-icon';
-import { LoaderStateContext, ModalReportContext } from '../../react-contexts';
+import { useLoaderContext, useModalReportContext } from '../../react-contexts';
 
 import classes from './new-feedback.module.css';
 
@@ -29,8 +29,8 @@ export const NewFeedback: FC = () => {
     const [submitDisabled, setSubmitDisabled] = useState(!ratingFromState);
     const [rateValue, setRateValue] = useState(ratingFromState ?? 0);
     const [textValue, setTextValue] = useState(commentFromState || '');
-    const { closeModal, setNode, setWidthModal, openModal } = useContext(ModalReportContext);
-    const { startLoader, stopLoader } = useContext(LoaderStateContext);
+    const { closeModal, setNode, setWidthModal, openModal } = useModalReportContext();
+    const { startLoader, stopLoader } = useLoaderContext();
 
     useEffect(() => {
         if (isQueryLoading) {

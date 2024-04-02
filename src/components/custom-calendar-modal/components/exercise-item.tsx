@@ -1,8 +1,8 @@
-import { FC, useContext } from 'react';
+import { FC } from 'react';
 import { EditOutlined } from '@ant-design/icons';
 import { ExerciseType } from '@redux/api/api-types';
 
-import { DrawerTrainsContext } from '../../../react-contexts';
+import { useCalendarTrainingsDrawerContext } from '../../../react-contexts';
 
 import classes from './exercise-item.module.css';
 
@@ -14,7 +14,7 @@ type ExerciseItemPropsType = {
 
 export const ExerciseItem: FC<ExerciseItemPropsType> = ({ exercise, index, disabledIcon }) => {
     const { openDrawer, editedTrainName, setDrawerTitle, setTrainName } =
-        useContext(DrawerTrainsContext);
+        useCalendarTrainingsDrawerContext();
 
     const handleEditTrainClick = () => {
         if (editedTrainName) {

@@ -1,4 +1,4 @@
-import { FC, Fragment, useContext, useEffect, useState } from 'react';
+import { FC, Fragment, useEffect, useState } from 'react';
 import { ErrorProfile } from '@components/error-profile-page';
 import { ERROR_UPDATE_PROFILE } from '@components/error-profile-page/error-messages.data';
 import { AlertNotification } from '@components/notifications/alert/alert-notification';
@@ -17,7 +17,7 @@ import moment from 'moment';
 import { DATA_TEST_ID } from '../../data/data-test-ids';
 import { ERRORS_MESSAGES } from '../../data/form-messages';
 import { getIconRender } from '../../helpers/get-password-icon';
-import { ModalReportContext } from '../../react-contexts';
+import { useModalReportContext } from '../../react-contexts';
 
 import { CustomUpload } from './components';
 import { FieldType } from './form-personal-info.types';
@@ -25,7 +25,7 @@ import { FieldType } from './form-personal-info.types';
 import classes from './form-personal-info.module.css';
 
 export const FormPersonalInfo: FC = () => {
-    const { openModal, setNode, setWidthModal } = useContext(ModalReportContext);
+    const { openModal, setNode, setWidthModal } = useModalReportContext();
     const {
         email: userEmail,
         firstName,

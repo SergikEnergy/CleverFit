@@ -1,8 +1,8 @@
-import { FC, useContext } from 'react';
+import { FC } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Button, Result } from 'antd';
 
-import { ModalReportContext } from '../../react-contexts';
+import { useModalReportContext } from '../../react-contexts';
 import { Paths } from '../../routes/pathes';
 
 import classes from './show-fetch-data-error.module.css';
@@ -13,7 +13,7 @@ type ShowFetchDataErrorPropsType = {
 
 export const ShowFetchDataError: FC<ShowFetchDataErrorPropsType> = ({ forPage }) => {
     const navigate = useNavigate();
-    const { closeModal, setNode } = useContext(ModalReportContext);
+    const { closeModal, setNode } = useModalReportContext();
     const handleClickButton = () => {
         closeModal();
         setNode(null);

@@ -1,4 +1,4 @@
-import { FC, Fragment, useContext, useEffect, useState, useRef } from 'react';
+import { FC, Fragment, useEffect, useRef, useState } from 'react';
 import { CustomCalendarModal } from '@components/custom-calendar-modal';
 import { useWindowWidth } from '@hooks/use-window-size';
 import { TrainingsResponseType } from '@redux/api/api-types';
@@ -6,7 +6,7 @@ import { EXERCISE_MODE, TRAIN_MODE, TrainOrExerciseModeType } from '@utils/const
 import { Calendar } from 'antd';
 import moment, { Moment } from 'moment';
 
-import { DrawerTrainsContext, useCollapseContext } from '../../react-contexts';
+import { useCalendarTrainingsDrawerContext, useCollapseContext } from '../../react-contexts';
 
 import { DataForCells } from './components/data-for-cells';
 import { getModalDimensions } from './components/data-for-cells.itils';
@@ -28,7 +28,7 @@ export const CalenDarWithData: FC<CalenDarWithDataPropsType> = ({
         date: dateFromContext,
         resetExercises,
         changeEditedTrainData,
-    } = useContext(DrawerTrainsContext);
+    } = useCalendarTrainingsDrawerContext();
 
     const { hideCollapsed } = useCollapseContext();
     const windowWidth = useWindowWidth();

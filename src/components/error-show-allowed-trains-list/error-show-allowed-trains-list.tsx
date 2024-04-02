@@ -1,9 +1,10 @@
 import { FC } from 'react';
 import { useLocation } from 'react-router';
 import { CloseCircleTwoTone, CloseOutlined } from '@ant-design/icons';
-import { useGetAllowedTrainingsLists } from '@hooks/use-get-allowed-trains-list';
-import { useModalReportContext } from '@hooks/use-modal-report';
+import { useGetAllowedTrainingsLists } from '@hooks/use-get-allowed-trainings-list';
 import { Button } from 'antd';
+
+import { useModalReportContext } from '../../react-contexts';
 
 import classes from './error-show-allowed-trains-list.module.css';
 

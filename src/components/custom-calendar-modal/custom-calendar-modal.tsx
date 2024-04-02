@@ -1,8 +1,8 @@
-import { FC, Fragment, useContext, useLayoutEffect, useState } from 'react';
+import { FC, Fragment, useLayoutEffect, useState } from 'react';
 import { EXERCISE_MODE, TRAIN_MODE } from '@utils/constants/train-modes';
 import classnames from 'classnames';
 
-import { DrawerTrainsContext } from '../../react-contexts';
+import { useCalendarTrainingsDrawerContext } from '../../react-contexts';
 
 import { ModalCreateTrain, ModalSelectExercise } from './components';
 import { CustomCalendarModalPropsType } from './custom-calendar-modal.types';
@@ -43,7 +43,7 @@ export const CustomCalendarModal: FC<CustomCalendarModalPropsType> = ({
         );
     }, [trains]);
 
-    const { allowedTrains, editedTrainName } = useContext(DrawerTrainsContext);
+    const { allowedTrains, editedTrainName } = useCalendarTrainingsDrawerContext();
 
     const allowedTrainingsForCellCorrected = getAllowedTrains(
         existingTrainingsFromCellData,

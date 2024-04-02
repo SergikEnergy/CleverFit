@@ -1,4 +1,4 @@
-import { FC, Fragment, useContext, useEffect, useState } from 'react';
+import { FC, Fragment, useEffect, useState } from 'react';
 import { ErrorProfile } from '@components/error-profile-page';
 import { WRONG_SIZE_IMG } from '@components/error-profile-page/error-messages.data';
 import { FieldType } from '@components/form-personal-info/form-personal-info.types';
@@ -12,7 +12,7 @@ import type { UploadChangeParam, UploadProps } from 'antd/es/upload';
 import type { UploadFile } from 'antd/es/upload/interface';
 
 import { DATA_TEST_ID } from '../../../../data/data-test-ids';
-import { ModalReportContext } from '../../../../react-contexts';
+import { useModalReportContext } from '../../../../react-contexts';
 import { NoAvatarButton } from '../no-avatar-button/no-avatar-button';
 
 import { errorFile, loaderProgressStyle } from './custom-upload.data';
@@ -28,7 +28,7 @@ export const CustomUpload: FC<CustomUploadPropsType> = ({
     setDisabledSaveButton,
     setUploadStatus,
 }) => {
-    const { openModal, setNode, setWidthModal } = useContext(ModalReportContext);
+    const { openModal, setNode, setWidthModal } = useModalReportContext();
     const innerWindowWidth = useWindowWidth();
     const { imgSrc: imageSrc } = usePersonalInfoSelector();
     const dispatch = useAppDispatch();

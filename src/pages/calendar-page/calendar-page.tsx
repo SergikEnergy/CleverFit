@@ -1,13 +1,13 @@
-import { FC, Fragment, useContext, useEffect } from 'react';
+import { FC, Fragment, useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { CalendarDrawer } from '@components/calendar-drawer';
 import { CalenDarWithData } from '@components/calendar-with-data';
-import { useGetAllowedTrainingsLists } from '@hooks/use-get-allowed-trains-list';
+import { useGetAllowedTrainingsLists } from '@hooks/use-get-allowed-trainings-list';
 import { BasePagesLayout } from '@pages/base-pages-layout';
 import { useGetAllTrainingsQuery } from '@redux/api/calendar-api';
 import { useAuthSelector } from '@redux/selectors';
 
-import { LoaderStateContext } from '../../react-contexts';
+import { useLoaderContext } from '../../react-contexts';
 import { Paths } from '../../routes/pathes';
 
 import classes from './calendar-page.module.css';
@@ -18,7 +18,7 @@ export const CalendarPage: FC = () => {
         useGetAllowedTrainingsLists();
     const location = useLocation();
     const { token } = useAuthSelector();
-    const { startLoader, stopLoader } = useContext(LoaderStateContext);
+    const { startLoader, stopLoader } = useLoaderContext();
 
     const { data: userTrainingsData } = useGetAllTrainingsQuery();
 

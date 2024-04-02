@@ -1,11 +1,11 @@
-import { FC, useContext } from 'react';
+import { FC } from 'react';
 import { ErrorAddTrain } from '@components/error-add-train';
 import { NewTrainRequestType } from '@redux/api/api-types';
 import { useAddNewTrainMutation, useChangeTrainMutation } from '@redux/api/calendar-api';
 import { Button } from 'antd';
 import moment, { Moment } from 'moment';
 
-import { DrawerTrainsContext, ModalReportContext } from '../../../../../react-contexts';
+import { useCalendarTrainingsDrawerContext, useModalReportContext } from '../../../../../react-contexts';
 
 import classes from './actions-buttons.module.css';
 
@@ -27,9 +27,9 @@ export const ActionsButtons: FC<ActionsButtonsPropsType> = ({
     const isPastDate = date.isSameOrBefore(moment());
 
     const { exercises, resetExercises, changeEditedTrainData, editedTrainID } =
-        useContext(DrawerTrainsContext);
+		useCalendarTrainingsDrawerContext();
 
-    const { openModal, setNode, setWidthModal } = useContext(ModalReportContext);
+    const { openModal, setNode, setWidthModal } = useModalReportContext();
 
     const [postNewTrain, { isLoading: isPostingTrain }] = useAddNewTrainMutation();
 

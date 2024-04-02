@@ -1,14 +1,13 @@
 import { FC, Fragment, useState } from 'react';
 import { SuccessSelectTariff } from '@components/success-select-tariff';
 import { useResetUser } from '@hooks/reset-user';
-import { useDrawerContext } from '@hooks/use-info-drawer';
-import { useModalReportContext } from '@hooks/use-modal-report';
 import { RequestChangeTariffType } from '@redux/api/api-types';
 import { useUpdateSelectedTariffMutation } from '@redux/api/settings-api';
 import { usePersonalInfoSelector, useTariffsListSelector } from '@redux/selectors';
 import { Button, Form, Radio } from 'antd';
 
 import { DATA_TEST_ID } from '../../../../../data/data-test-ids';
+import { useModalReportContext, useTariffDrawerContext } from '../../../../../react-contexts';
 
 import classes from './tariffs-form.module.css';
 
@@ -37,7 +36,7 @@ export const TariffsForm: FC = () => {
     const { openModal, setNode, setWidthModal, closeModal } = useModalReportContext();
     const [updateTariff] = useUpdateSelectedTariffMutation();
     const [disabledSubmit, setDisabledSubmit] = useState(true);
-    const { open: isDrawerOpen, closeDrawer } = useDrawerContext();
+    const { open: isDrawerOpen, closeDrawer } = useTariffDrawerContext();
     const { tariffs: tariffInfo } = useTariffsListSelector();
     const infoData = tariffInfo && tariffInfo[0] ? tariffInfo[0].periods : [];
     const [form] = Form.useForm();

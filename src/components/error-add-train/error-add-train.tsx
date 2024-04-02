@@ -1,13 +1,13 @@
-import { FC, useContext } from 'react';
+import { FC } from 'react';
 import { CloseCircleTwoTone } from '@ant-design/icons';
 import { Button } from 'antd';
 
-import { ModalReportContext } from '../../react-contexts';
+import { useModalReportContext } from '../../react-contexts';
 
 import classes from './error-add-train.module.css';
 
 export const ErrorAddTrain: FC = () => {
-    const { closeModal } = useContext(ModalReportContext);
+    const { closeModal } = useModalReportContext();
     const title = 'При сохранении данных произошла ошибка';
     const subtitle = 'Придётся попробовать ещё раз.';
     const buttonText = 'Закрыть';

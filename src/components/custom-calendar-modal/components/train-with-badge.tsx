@@ -1,11 +1,11 @@
-import { FC, useContext } from 'react';
+import { FC } from 'react';
 import { EditOutlined } from '@ant-design/icons';
 import { getColorTrainByName } from '@components/calendar-with-data/calendar-with-data.utils';
 import { TrainingsResponseType } from '@redux/api/api-types';
 import { Badge, Button } from 'antd';
 import classnames from 'classnames';
 
-import { DrawerTrainsContext } from '../../../react-contexts';
+import { useCalendarTrainingsDrawerContext } from '../../../react-contexts';
 
 import classes from './train-with-badge.module.css';
 
@@ -16,7 +16,7 @@ type TrainWithBadgePropsType = {
 };
 
 export const TrainWithBadge: FC<TrainWithBadgePropsType> = ({ train, changeFlowToEdit, index }) => {
-    const { changeEditedTrainData } = useContext(DrawerTrainsContext);
+    const { changeEditedTrainData } = useCalendarTrainingsDrawerContext();
     const handleEditClick = () => {
         if (!train.isImplementation) {
             changeEditedTrainData(train._id, train.name);

@@ -1,4 +1,4 @@
-import { FC, useCallback, useContext, useEffect, useState } from 'react';
+import { FC, useCallback, useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import { useAppDispatch } from '@hooks/typed-react-redux-hooks';
 import { useChangePasswordMutation } from '@redux/api/auth-api';
@@ -10,7 +10,7 @@ import { Button, Form, Input } from 'antd';
 import classnames from 'classnames';
 
 import { getIconRender } from '../../../helpers/get-password-icon';
-import { LoaderStateContext } from '../../../react-contexts';
+import { useLoaderContext } from '../../../react-contexts';
 import { Paths } from '../../../routes/pathes';
 
 import classes from './change-password-page.module.css';
@@ -28,7 +28,7 @@ export const ChangePasswordPage: FC = () => {
         password: userPassword,
         confirmPassword: userConfirmPassword,
     } = useUserSelector();
-    const { startLoader, stopLoader } = useContext(LoaderStateContext);
+    const { startLoader, stopLoader } = useLoaderContext();
     const [changeUserPassword, { isLoading }] = useChangePasswordMutation();
     const [isPasswordHelperVisible, setIsPasswordHelperVisible] = useState(false);
     const [passPlaceholderVisible, setPassPlaceholderVisible] = useState(true);

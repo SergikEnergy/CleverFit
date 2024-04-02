@@ -1,4 +1,4 @@
-import { useContext, useState } from 'react';
+import { useState } from 'react';
 import { ErrorProfile } from '@components/error-profile-page';
 import { WRONG_SIZE_IMG } from '@components/error-profile-page/error-messages.data';
 import { API_BASE_URL } from '@redux/api/api-data';
@@ -7,7 +7,7 @@ import { setUploadProgress } from '@redux/reducers/upload-progress-slice';
 import { useAuthSelector } from '@redux/selectors';
 import axios, { AxiosError, AxiosRequestConfig, AxiosResponse } from 'axios';
 
-import { ModalReportContext } from '../react-contexts';
+import { useModalReportContext } from '../react-contexts';
 import { ImageUpdateResponseType } from '../redux/api/api-types';
 
 import { useResetUser } from './reset-user';
@@ -15,7 +15,7 @@ import { useAppDispatch } from '.';
 
 export const useUploadPhoto = () => {
     const resetUser = useResetUser();
-    const { openModal, setNode, setWidthModal } = useContext(ModalReportContext);
+    const { openModal, setNode, setWidthModal } = useModalReportContext();
     const dispatch = useAppDispatch();
 
     const { token } = useAuthSelector();
