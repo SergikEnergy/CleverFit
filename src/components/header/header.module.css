@@ -151,6 +151,9 @@
 }
 
 @media screen and (max-width: 500px) {
+    header:global(.ant-layout-header) {
+        line-height: var(--header-line-height);
+    }
     .calendar__settings_wrapper {
         align-self: flex-end;
         margin-right: 1rem;

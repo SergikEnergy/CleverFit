@@ -9,7 +9,7 @@ export const EmptyTrainings: FC = () => {
 
     return (
         <div className={classes.empty}>
-            <div className={classes.title}>У вас ещё нет созданных тренировок</div>
+            <div className={classes.title}>У&nbsp;вас&nbsp;ещё&nbsp;нет созданных тренировок</div>
             {allowedTrainingsList.length > 0 && (
                 <div className={classes.action}>
                     <Button size='large' type='primary' style={{ backgroundColor: '#2F54EB' }}>

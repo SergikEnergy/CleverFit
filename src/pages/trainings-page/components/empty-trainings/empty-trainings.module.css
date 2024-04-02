@@ -22,3 +22,24 @@
     font-family: var(--font-family);
     font-weight: var(--font-weight-normal);
 }
+
+@media screen and (max-width: 834px) {
+    .title {
+        width: 60%;
+    }
+}
+
+@media screen and (max-width: 500px) {
+    .title {
+        width: 85%;
+        margin-top: 130px;
+        text-align: center;
+    }
+    .empty {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        flex-direction: column;
+        height: calc(100% - 20px);
+    }
+}
