@@ -20,6 +20,7 @@ import { ResultsPageLayout } from '@pages/results-pages/results-layout';
 import { SuccessChangePasswordPage } from '@pages/results-pages/success-change-password';
 import { SuccessRegisterPage } from '@pages/results-pages/success-register';
 import { SettingsPage } from '@pages/settings-page';
+import { TrainingsPage } from '@pages/trainings-page';
 
 import { ProtectedRoute } from '../hoc';
 
@@ -31,6 +32,7 @@ export const routes = (
         <Route path={Paths.MAIN_PAGE} element={<MainPage />} />
         <Route path={Paths.FEEDBACKS_PAGE} element={<FeedbacksPage />} />
         <Route path={Paths.CALENDAR_PAGE} element={<CalendarPage />} />
+        <Route path={Paths.TRAININGS_PAGE} element={<TrainingsPage />} />
         <Route path={Paths.PROFILE_PAGE} element={<ProfilePage />} />
         <Route path={Paths.SETTINGS_PAGE} element={<SettingsPage />} />
         <Route path={Paths.AUTH} element={<EntryPageLayout />}>

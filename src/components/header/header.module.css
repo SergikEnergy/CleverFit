@@ -3,6 +3,9 @@
     padding: var(--padding-zero);
     margin: var(--margin-zero);
 }
+.header:global(.ant-layout-header) {
+    line-height: var(--header-line-height);
+}
 
 .header__wrapper {
     display: flex;
@@ -50,7 +53,8 @@
     justify-content: flex-end;
 }
 
-.calendar__settings_wrapper {
+.calendar__settings_wrapper,
+.trainings__settings_wrapper {
     align-self: flex-end;
     margin-bottom: 6px;
     border-top: 8px;
@@ -156,6 +160,11 @@
     .greeting {
         margin-left: 1.8rem;
     }
+    .trainings__settings_wrapper {
+        margin-right: 1rem;
+        margin-left: 0;
+    }
+
     .greeting__text.collapsed {
         width: 85%;
     }

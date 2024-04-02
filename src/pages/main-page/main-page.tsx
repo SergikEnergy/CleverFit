@@ -1,4 +1,4 @@
-import { FC, useContext, useEffect } from 'react';
+import { FC, useEffect } from 'react';
 import { Navigate, useNavigate } from 'react-router-dom';
 import { Footer } from '@components/footer';
 import { MainContent } from '@components/main-content';
@@ -9,7 +9,7 @@ import { savePersonalInfoAfterRegistration } from '@redux/reducers/personal-info
 import { useAuthSelector } from '@redux/selectors';
 import { Layout as AntLayout } from 'antd';
 
-import { CollapsedContext } from '../../react-contexts';
+import { useCollapseContext } from '../../react-contexts';
 import { Paths } from '../../routes/pathes';
 
 import './main-page.css';
@@ -17,7 +17,8 @@ import './main-page.css';
 const { Footer: AntFooter } = AntLayout;
 
 export const MainPage: FC = () => {
-    const { collapsed } = useContext(CollapsedContext);
+    const { collapsed } = useCollapseContext();
+
     const navigate = useNavigate();
     const { token } = useAuthSelector();
     const [fetchUserInfo, { data: userPersonalInfo, isSuccess: isSuccessGetUserInfo }] =
@@ -32,7 +33,7 @@ export const MainPage: FC = () => {
 
     useEffect(() => {
         if (userPersonalInfo && isSuccessGetUserInfo) {
-            dispatch(savePersonalInfoAfterRegistration({ ...userPersonalInfo, url: '', name: '' }));
+            dispatch(savePersonalInfoAfterRegistration(userPersonalInfo));
         }
     }, [dispatch, isSuccessGetUserInfo, userPersonalInfo]);
 

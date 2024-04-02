@@ -1,4 +1,4 @@
-import { FC, Fragment, useContext } from 'react';
+import { FC, Fragment } from 'react';
 import Icon from '@ant-design/icons';
 import type { CustomIconComponentProps } from '@ant-design/icons/lib/components/Icon';
 import { useAppDispatch } from '@hooks/typed-react-redux-hooks';
@@ -7,7 +7,7 @@ import { resetCredentials } from '@redux/reducers/auth-slice';
 import { Divider, Menu, Typography } from 'antd';
 import classnames from 'classnames';
 
-import { CollapsedContext } from '../../react-contexts';
+import { useCollapseContext } from '../../react-contexts';
 import { ExitIcon } from '../custom-icons/exit-icon';
 
 import classes from './exit-user.module.css';
@@ -18,7 +18,7 @@ const CustomExitIcon = (props: Partial<CustomIconComponentProps>) => (
 
 export const ExitUser: FC = () => {
     const dispatch = useAppDispatch();
-    const { collapsed } = useContext(CollapsedContext);
+    const { collapsed } = useCollapseContext();
 
     const handleExitUser = () => {
         localStorage.removeItem(LOCAL_STORAGE_AUTH_PARAM);

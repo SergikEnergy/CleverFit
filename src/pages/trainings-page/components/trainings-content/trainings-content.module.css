@@ -1,0 +1,32 @@
+.trainings_tabs {
+    width: 100%;
+    height: 100%;
+    padding: var(--padding-medium-size);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.trainings_tabs :global(.ant-tabs-nav) {
+    width: 100%;
+    padding-right: var(--padding-medium-size);
+    margin-bottom: var(--margin-medium-size);
+}
+
+.trainings_tabs :global(.ant-tabs-nav-list) {
+    width: 100%;
+    justify-content: space-between;
+}
+.trainings_tabs :global(.ant-tabs-tab:last-child) {
+    margin-right: var(--margin-middle-size);
+}
+.trainings_tabs :global(.ant-tabs-tab:first-child) {
+    margin-left: var(--margin-small-size);
+}
+.trainings_tabs :global(.ant-tabs-tab) {
+    font-size: var(--font-size-tabs-trainings-main);
+    line-height: 130%;
+    font-family: var(--font-family);
+    font-style: var(--font-style-main);
+    font-weight: var(--font-weight-medium);
+}

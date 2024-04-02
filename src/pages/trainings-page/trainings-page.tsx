@@ -1,21 +1,28 @@
-import { FC, useContext, useEffect, useLayoutEffect } from 'react';
-
-import { CollapsedContext, TariffDrawerContextProvider } from '../../react-contexts';
-import { Paths } from '../../routes/pathes';
-import { useAuthSelector } from '@redux/selectors';
-import { useNavigate, Navigate } from 'react-router';
+import { FC, useEffect, useLayoutEffect, useRef } from 'react';
+import { Navigate, useNavigate } from 'react-router';
 import { useWindowWidth } from '@hooks/use-window-size';
 import { BasePagesLayout } from '@pages/base-pages-layout';
+import { useAuthSelector } from '@redux/selectors';
 
-import classes from './trtainings-page.module.css';
+import { useCollapseContext } from '../../react-contexts';
+import { Paths } from '../../routes/pathes';
+
+import { TrainingsContent } from './components';
+
+import classes from './trainings-page.module.css';
 
 export const TrainingsPage: FC = () => {
-    const { hideCollapsed } = useContext(CollapsedContext);
-    const innerWindowWidth = useWindowWidth();
+    const { hideCollapsed } = useCollapseContext();
 
-    if (innerWindowWidth < 500) {
-        hideCollapsed();
-    }
+    const innerWindowWidth = useWindowWidth();
+    const firstResize = useRef(true);
+
+    useEffect(() => {
+        if (innerWindowWidth < 500 && firstResize.current) {
+            hideCollapsed();
+            firstResize.current = false;
+        }
+    }, [hideCollapsed, innerWindowWidth]);
 
     const navigate = useNavigate();
     const { token } = useAuthSelector();
@@ -41,10 +48,12 @@ export const TrainingsPage: FC = () => {
     }
 
     return (
-        <TariffDrawerContextProvider>
-            <BasePagesLayout>
-                <div className={classes.trainings}>train</div>
+        <div className={classes.trainings__page}>
+            <BasePagesLayout isTrainingsPage={true}>
+                <div className={classes.trainings}>
+                    <TrainingsContent />
+                </div>
             </BasePagesLayout>
-        </TariffDrawerContextProvider>
+        </div>
     );
 };

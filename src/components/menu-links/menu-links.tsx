@@ -1,4 +1,4 @@
-import { FC, useContext } from 'react';
+import { FC } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { CalendarTwoTone, HeartFilled, TrophyFilled } from '@ant-design/icons';
 import { ProfileIconComponent } from '@components/custom-icons/profile-icon';
@@ -7,7 +7,7 @@ import { history } from '@redux/configure-store';
 import { Menu, Typography } from 'antd';
 import classnames from 'classnames';
 
-import { CollapsedContext } from '../../react-contexts';
+import { useCollapseContext } from '../../react-contexts';
 import { Paths } from '../../routes/pathes';
 import { primaryLight } from '../../utils/constants/colors';
 
@@ -18,7 +18,7 @@ import classes from './menu-links.module.css';
 
 export const MenuLinks: FC = () => {
     const fetchAllUserTrains = useGetAllUserTrainings();
-    const { collapsed } = useContext(CollapsedContext);
+    const { collapsed } = useCollapseContext();
     const location = useLocation();
     const navigate = useNavigate();
 

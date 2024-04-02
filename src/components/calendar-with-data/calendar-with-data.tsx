@@ -1,4 +1,4 @@
-import { FC, Fragment, useContext, useEffect, useState } from 'react';
+import { FC, Fragment, useContext, useEffect, useState, useRef } from 'react';
 import { CustomCalendarModal } from '@components/custom-calendar-modal';
 import { useWindowWidth } from '@hooks/use-window-size';
 import { TrainingsResponseType } from '@redux/api/api-types';
@@ -6,7 +6,7 @@ import { EXERCISE_MODE, TRAIN_MODE, TrainOrExerciseModeType } from '@utils/const
 import { Calendar } from 'antd';
 import moment, { Moment } from 'moment';
 
-import { CollapsedContext, DrawerTrainsContext } from '../../react-contexts';
+import { DrawerTrainsContext, useCollapseContext } from '../../react-contexts';
 
 import { DataForCells } from './components/data-for-cells';
 import { getModalDimensions } from './components/data-for-cells.itils';
@@ -30,7 +30,7 @@ export const CalenDarWithData: FC<CalenDarWithDataPropsType> = ({
         changeEditedTrainData,
     } = useContext(DrawerTrainsContext);
 
-    const { hideCollapsed } = useContext(CollapsedContext);
+    const { hideCollapsed } = useCollapseContext();
     const windowWidth = useWindowWidth();
 
     const [isFullScreen, setIsFullScreen] = useState(true);
@@ -39,11 +39,15 @@ export const CalenDarWithData: FC<CalenDarWithDataPropsType> = ({
     const [modalType, setModalType] = useState<TrainOrExerciseModeType>(TRAIN_MODE);
     const [selectedDay, setSelectedDay] = useState<Moment>(moment());
     const [modalPosition, setModalPosition] = useState<ModalPositionType>(modalInitialPosition);
+    const firstResize = useRef(true);
 
     useEffect(() => {
+        if (windowWidth < 670 && firstResize.current) {
+            hideCollapsed();
+            firstResize.current = false;
+        }
         if (windowWidth < 670) {
             setIsFullScreen(false);
-            hideCollapsed();
         } else {
             setIsFullScreen(true);
         }

@@ -1,7 +1,7 @@
-import { FC, ReactNode, useContext } from 'react';
+import { FC, ReactNode } from 'react';
 import classnames from 'classnames';
 
-import { CollapsedContext } from '../../react-contexts';
+import { useCollapseContext } from '../../react-contexts';
 
 import classes from './card-main-action.module.css';
 
@@ -11,7 +11,7 @@ type CardMainActionProps = {
 };
 
 export const CardMainAction: FC<CardMainActionProps> = ({ body, action }) => {
-    const { collapsed } = useContext(CollapsedContext);
+    const { collapsed } = useCollapseContext();
 
     return (
         <div className={classnames(classes.card, { [classes.collapsed]: collapsed })}>

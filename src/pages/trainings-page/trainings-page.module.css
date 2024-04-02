@@ -1,12 +1,19 @@
+.trainings__page {
+    width: 100%;
+    height: 100%;
+}
+
 .trainings {
-    margin: var(--padding-not-found-page-main);
-    min-height: 888px;
+    margin: var(--margin-trainings-page-main);
+    min-height: 862px;
     background-color: var(--neutral-gray-1, #fff);
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     border-radius: 4px;
+    width: calc(100% - 2 * var(--margin-medium-size));
+    height: calc(100% - var(--margin-medium-size) - var(--margin-extra-size));
 }
 
 @media screen and (max-width: 400px) {

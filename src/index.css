@@ -141,7 +141,9 @@ body {
     --font-size-big-title: 2rem;
     --font-size-mobile: 1.2rem;
     --font-size-title-result-main: 2.4rem;
+    --font-size-tabs-trainings-main: 2.4rem;
     --second-family: 'Roboto', Verdana, sans-serif;
+    --header-line-height: 22px;
 
     /* margins and paddings */
 
@@ -163,7 +165,8 @@ body {
     --padding-big-size: 64px;
     --padding-calendar-page-main: 10px 24px 93px;
     --padding-calendar-page-tablet: 12px 24px 271px;
-    --padding-calendar-page-mobile: 19px 24px 23px;
+    --padding-trainings-page-desktop: 19px 24px 23px;
+    --padding-calendar-page-mobile: 24px 24px 42px;
     --padding-not-found-page-main: 24px 24px 42px;
     --margin-zero: 0;
     --margin-small-size: 8px;
@@ -173,6 +176,7 @@ body {
     --margin-middle-size: 32px;
     --margin-extra-size: 42px;
     --margin-submit-profile-main: 54px;
+    --margin-trainings-page-main: 24px 24px 42px;
     --margin-big-size: 64px;
 
     /* gaps */
