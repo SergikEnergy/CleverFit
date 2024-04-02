@@ -9,13 +9,13 @@ import {
     TrainingsResponseType,
 } from './api-types';
 
-export const calendarAPI = createApi({
-    reducerPath: 'calendarAPI',
+export const trainingsAPI = createApi({
+    reducerPath: 'trainingsAPI',
     tagTypes: ['Trainings'],
     baseQuery: fetchBaseQuery({
         baseUrl: API_BASE_URL,
         prepareHeaders: (headers, { getState }) => {
-            const {token} = (getState() as RootState).auth;
+            const { token } = (getState() as RootState).auth;
 
             if (token) {
                 headers.set('authorization', `Bearer ${token}`);
@@ -73,4 +73,4 @@ export const {
     useLazyGetAllowedTrainsListQuery,
     useAddNewTrainMutation,
     useChangeTrainMutation,
-} = calendarAPI;
+} = trainingsAPI;

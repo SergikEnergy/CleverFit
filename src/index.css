@@ -130,6 +130,7 @@ body {
 
     --font-family: 'Inter', Verdana, sans-serif;
     --font-size-main: 1.4rem;
+    --button-font-size: 1.4rem;
     --line-height-main: 130%;
     --font-style-main: normal;
     --font-style-title: bold;
@@ -144,6 +145,7 @@ body {
     --font-size-tabs-trainings-main: 2.4rem;
     --second-family: 'Roboto', Verdana, sans-serif;
     --header-line-height: 22px;
+    --main-line-height: 130%;
 
     /* margins and paddings */
 

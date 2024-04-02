@@ -4,6 +4,7 @@ import { CloseCircleTwoTone, CloseOutlined } from '@ant-design/icons';
 import { useGetAllowedTrainingsLists } from '@hooks/use-get-allowed-trainings-list';
 import { Button } from 'antd';
 
+import { WORKOUT_DATA_TEST_ID } from '../../data/data-test-ids';
 import { useModalReportContext } from '../../react-contexts';
 
 import classes from './error-show-allowed-trains-list.module.css';
@@ -46,7 +47,7 @@ export const ErrorShowAllowedTrainsList: FC<ErrorShowAllowedTrainsListPropsType>
 
     const handleActionButtonClick = () => {
         if (buttonActionClick) buttonActionClick();
-        if (isFromCalendarPage) {
+        else if (isFromCalendarPage) {
             setNode(null);
             closeModal();
             if (fetchAllowedTrainingsList) fetchAllowedTrainingsList();
@@ -70,7 +71,7 @@ export const ErrorShowAllowedTrainsList: FC<ErrorShowAllowedTrainsListPropsType>
                 </div>
                 <div className={classes.close}>
                     <Button
-                        data-test-id='modal-error-user-training-button-close'
+                        data-test-id={WORKOUT_DATA_TEST_ID.modalErrorUserTrainingButtonClose}
                         onClick={handleCloseButtonClick}
                         icon={<CloseOutlined style={{ fontSize: '14px' }} />}
                         shape='circle'
@@ -81,7 +82,7 @@ export const ErrorShowAllowedTrainsList: FC<ErrorShowAllowedTrainsListPropsType>
             </div>
             <div className={classes.button}>
                 <Button
-                    data-test-id='modal-error-user-training-button'
+                    data-test-id={WORKOUT_DATA_TEST_ID.modalErrorUserTrainingButton}
                     type='primary'
                     htmlType='button'
                     onClick={handleActionButtonClick}

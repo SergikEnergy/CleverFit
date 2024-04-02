@@ -4,7 +4,7 @@ import { CalendarDrawer } from '@components/calendar-drawer';
 import { CalenDarWithData } from '@components/calendar-with-data';
 import { useGetAllowedTrainingsLists } from '@hooks/use-get-allowed-trainings-list';
 import { BasePagesLayout } from '@pages/base-pages-layout';
-import { useGetAllTrainingsQuery } from '@redux/api/calendar-api';
+import { useGetAllTrainingsQuery } from '@redux/api/trainings-api';
 import { useAuthSelector } from '@redux/selectors';
 
 import { useLoaderContext } from '../../react-contexts';

@@ -1,13 +1,16 @@
 import { useEffect } from 'react';
 import { ShowFetchDataError } from '@components/show-fetch-data-error';
-import { useLazyGetAllTrainingsQuery } from '@redux/api/calendar-api';
+import { PagesVariantsType } from '@components/show-fetch-data-error/show-fetch-data-error';
 import { isFetchBaseQueryError } from '@redux/api/errors-catching';
+import { useLazyGetAllTrainingsQuery } from '@redux/api/trainings-api';
 
 import { useLoaderContext, useModalReportContext } from '../react-contexts';
 
 import { useResetUser } from './reset-user';
 
-export const useGetAllUserTrainings = () => {
+type GetAllUserTrainingsArgumentsType = PagesVariantsType | undefined;
+
+export const useGetAllUserTrainings = (forPage: GetAllUserTrainingsArgumentsType = 'calendar') => {
     const resetUser = useResetUser();
     const { startLoader, stopLoader } = useLoaderContext();
     const { setNode, setWidthModal, openModal } = useModalReportContext();
@@ -26,7 +29,7 @@ export const useGetAllUserTrainings = () => {
         if (isFetchBaseQueryError(error) && error.status === 403) {
             resetUser();
         } else {
-            setNode(<ShowFetchDataError forPage='calendar' />);
+            setNode(<ShowFetchDataError forPage={forPage} />);
             setWidthModal('clamp(328px, 100%, 539px)');
             openModal();
         }
@@ -34,9 +37,13 @@ export const useGetAllUserTrainings = () => {
 
     const fetchAllTrainings = async () => {
         try {
-            await getAllTrainings().unwrap();
+            const userTrainings = await getAllTrainings().unwrap();
+
+            return userTrainings;
         } catch (error) {
             handleGetTrainingsError(error);
+
+            return null;
         } finally {
             stopLoader();
         }

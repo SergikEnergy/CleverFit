@@ -4,6 +4,7 @@
 }
 
 .trainings {
+    padding: var(--padding-medium-size);
     margin: var(--margin-trainings-page-main);
     min-height: 862px;
     background-color: var(--neutral-gray-1, #fff);

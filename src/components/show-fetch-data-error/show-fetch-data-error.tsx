@@ -7,8 +7,10 @@ import { Paths } from '../../routes/pathes';
 
 import classes from './show-fetch-data-error.module.css';
 
+export type PagesVariantsType = 'calendar' | 'feedback';
+
 type ShowFetchDataErrorPropsType = {
-    forPage: 'calendar' | 'feedback';
+    forPage: PagesVariantsType;
 };
 
 export const ShowFetchDataError: FC<ShowFetchDataErrorPropsType> = ({ forPage }) => {

@@ -3,14 +3,15 @@ import { configureStore } from '@reduxjs/toolkit';
 import { createBrowserHistory } from 'history';
 
 import { authApi } from './api/auth-api';
-import { calendarAPI } from './api/calendar-api';
 import { feedbackApi } from './api/feedbacks-api';
 import { profileAPI } from './api/profile-api';
 import { settingsAPI } from './api/settings-api';
+import { trainingsAPI } from './api/trainings-api';
 import { authReducer } from './reducers/auth-slice';
 import { feedbackReducer } from './reducers/feedback-slice';
 import { personalInfoReducer } from './reducers/personal-info-slice';
 import { tariffInfoReducer } from './reducers/tariff-slice';
+import { trainingsReducer } from './reducers/trainings-slice';
 import { uploadProgressReducer } from './reducers/upload-progress-slice';
 import { userReducer } from './reducers/user-slice';
 
@@ -24,7 +25,7 @@ export const store = configureStore({
         router: routerReducer,
         [authApi.reducerPath]: authApi.reducer,
         [feedbackApi.reducerPath]: feedbackApi.reducer,
-        [calendarAPI.reducerPath]: calendarAPI.reducer,
+        [trainingsAPI.reducerPath]: trainingsAPI.reducer,
         [profileAPI.reducerPath]: profileAPI.reducer,
         [settingsAPI.reducerPath]: settingsAPI.reducer,
         auth: authReducer,
@@ -33,13 +34,14 @@ export const store = configureStore({
         personalInfo: personalInfoReducer,
         uploadProgress: uploadProgressReducer,
         tariffsList: tariffInfoReducer,
+        userTrainings: trainingsReducer,
     },
     middleware: (getDefaultMiddleware) =>
         getDefaultMiddleware().concat([
             routerMiddleware,
             authApi.middleware,
             feedbackApi.middleware,
-            calendarAPI.middleware,
+            trainingsAPI.middleware,
             profileAPI.middleware,
             settingsAPI.middleware,
         ]),

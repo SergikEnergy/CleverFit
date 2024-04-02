@@ -24,6 +24,16 @@ export const CardsSection: FC = () => {
         history.push(Paths.CALENDAR_PAGE, { allowRequest: true });
     };
 
+    const handleMoveToTrainingsPage = async () => {
+        const result = await fetchAllTrainings();
+
+        console.log(result);
+
+        if (result) {
+            history.push(Paths.TRAININGS_PAGE, { allowRequest: true });
+        }
+    };
+
     const handleMoveToProfilePage = () => navigate(Paths.PROFILE_PAGE, { replace: true });
 
     const { collapsed } = useCollapseContext();
@@ -55,6 +65,7 @@ export const CardsSection: FC = () => {
                         action={
                             <Button
                                 block={true}
+                                onClick={handleMoveToTrainingsPage}
                                 type='text'
                                 icon={
                                     <HeartFilled
