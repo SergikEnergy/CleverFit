@@ -82,9 +82,7 @@ export const TariffsForm: FC = () => {
         }
     };
 
-    const handleFieldsChange = () => {
-        setDisabledSubmit(false);
-    };
+    const handleFieldsChange = () => setDisabledSubmit(false);
 
     return (
         <Fragment>
