@@ -3,7 +3,7 @@
 }
 
 .title {
-    font-family: var(--font-family);
+    font-family: var(--main-font-family);
     font-weight: 500;
     font-size: var(--font-size-title);
     line-height: var(--line-height-main);
@@ -52,7 +52,7 @@ form.form {
 }
 
 :global(#ratingForm_comment::placeholder) {
-    font-family: var(--font-family);
+    font-family: var(--main-font-family);
     font-weight: var(--font-weight-normal);
     font-size: var(--font-size-main);
     line-height: var(--line-height-main);
@@ -83,7 +83,7 @@ form.form {
 .button.antFixed button {
     box-shadow: var(--card-main-page-box-shadow);
     border-radius: 2px;
-    font-family: var(--font-family);
+    font-family: var(--main-font-family);
     font-weight: var(--font-weight-normal);
     font-size: var(--font-size-main);
     line-height: var(--line-height-main);

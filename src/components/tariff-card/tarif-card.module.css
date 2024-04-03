@@ -30,7 +30,7 @@
 
 .card :global(.ant-card-head) {
     padding: 0;
-    font-family: var(--font-family);
+    font-family: var(--main-font-family);
 }
 
 .card :global(.ant-card-head-wrapper) {

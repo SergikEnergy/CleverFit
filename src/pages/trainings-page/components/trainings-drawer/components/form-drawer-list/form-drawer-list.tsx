@@ -8,11 +8,7 @@ import { useTrainingsDrawerContext } from '../../../../../../react-contexts';
 
 import classes from './form-drawer-list.module.css';
 
-type FormDrawerListPropsType = {
-    //
-};
-
-export const FormDrawerList: FC<FormDrawerListPropsType> = () => {
+export const FormDrawerList: FC = () => {
     const [deletedIndexes, setDeletedIndexes] = useState<number[]>([]);
     const { modeDrawer } = useTrainingsDrawerContext();
     const isEditMode = modeDrawer === DRAWER_EDIT_MODE;

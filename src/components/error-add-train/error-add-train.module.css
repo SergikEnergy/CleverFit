@@ -23,7 +23,7 @@
 .title {
     width: 97%;
     margin-top: var(--margin-small-size);
-    font-family: var(--font-family);
+    font-family: var(--main-font-family);
     font-weight: var(--font-weight-normal);
     font-size: var(--font-size-title);
     line-height: var(--line-height-main);
@@ -33,7 +33,7 @@
 }
 
 .subtitle {
-    font-family: var(--font-family);
+    font-family: var(--main-font-family);
     font-weight: var(--font-weight-normal);
     font-size: var(--font-size-main);
     line-height: var(--line-height-main);
@@ -53,7 +53,7 @@
 .button :global(.ant-btn-primary) {
     background: var(--primary-light-6);
     border-color: var(--primary-light-6);
-    font-family: var(--font-family);
+    font-family: var(--main-font-family);
     font-weight: var(--font-weight-normal);
     font-size: var(--font-size-main);
     line-height: var(--line-height-main);

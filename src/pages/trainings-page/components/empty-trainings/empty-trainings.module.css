@@ -9,7 +9,7 @@
     margin-top: 204px;
     margin-bottom: 60px;
 
-    font-family: var(--font-family);
+    font-family: var(--main-font-family);
     font-size: var(--font-size-tabs-trainings-main);
     font-weight: var(--font-weight-medium);
     line-height: var(--main-line-height);
@@ -19,7 +19,7 @@
 .action > button {
     line-height: var(--main-line-height);
     font-size: var(--button-font-size);
-    font-family: var(--font-family);
+    font-family: var(--main-font-family);
     font-weight: var(--font-weight-normal);
 }
 

@@ -22,7 +22,7 @@
 }
 .title {
     margin-top: var(--margin-small-size);
-    font-family: var(--font-family);
+    font-family: var(--main-font-family);
     font-weight: var(--font-weight-normal);
     font-size: var(--font-size-title);
     line-height: var(--line-height-main);
@@ -32,7 +32,7 @@
 }
 
 .subtitle {
-    font-family: var(--font-family);
+    font-family: var(--main-font-family);
     font-weight: var(--font-weight-normal);
     font-size: var(--font-size-main);
     line-height: var(--line-height-main);
@@ -63,7 +63,7 @@
     background: var(--primary-light-6);
     border-color: var(--primary-light-6);
     color: var(--character-light-primary-inverse);
-    font-family: var(--font-family);
+    font-family: var(--main-font-family);
     font-weight: var(--font-weight-normal);
     font-size: var(--font-size-main);
     line-height: var(--line-height-main);

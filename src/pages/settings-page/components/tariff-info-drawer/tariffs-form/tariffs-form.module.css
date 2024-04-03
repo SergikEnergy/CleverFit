@@ -1,5 +1,5 @@
 .title {
-    font-family: var(--font-family);
+    font-family: var(--main-font-family);
     font-size: var(--font-size-main);
     color: var(--character-light-title-85);
     line-height: 130%;
@@ -53,7 +53,7 @@
 
 .name {
     width: 50%;
-    font-family: var(--font-family);
+    font-family: var(--main-font-family);
     font-size: var(--font-size-main);
     color: var(--character-light-title-85);
     line-height: 130%;
@@ -62,7 +62,7 @@
 
 .cost {
     width: 20%;
-    font-family: var(--font-family);
+    font-family: var(--main-font-family);
     font-size: var(--font-size-title);
     color: var(--character-light-title-85);
     line-height: 130%;
@@ -83,7 +83,7 @@
 }
 
 button.button__submit {
-    font-family: var(--font-family);
+    font-family: var(--main-font-family);
     font-size: var(--font-size-title);
     color: var(--character-light-primary-inverse);
     background-color: var(--primary-light-6);

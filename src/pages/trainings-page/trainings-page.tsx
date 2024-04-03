@@ -5,7 +5,10 @@ import { useGetAllowedTrainingsLists } from '@hooks/use-get-allowed-trainings-li
 import { useWindowWidth } from '@hooks/use-window-size';
 import { BasePagesLayout } from '@pages/base-pages-layout';
 import { useGetAllTrainingsQuery } from '@redux/api/trainings-api';
-import { setAllowedTrainingsList, setUserTrainsFromServer } from '@redux/reducers/trainings-slice';
+import {
+    setAllowedTrainingsList,
+    setUserTrainingsFromServer,
+} from '@redux/reducers/trainings-slice';
 import { useAuthSelector } from '@redux/selectors';
 
 import { TrainingsDrawerContextProvider, useCollapseContext } from '../../react-contexts';
@@ -37,7 +40,7 @@ export const TrainingsPage: FC = () => {
     useEffect(() => {
         if (isSuccessGettingAllTrainings && token && userTrainingsData) {
             console.log('SET_USER_Trainings_WORKED');
-            dispatch(setUserTrainsFromServer(userTrainingsData));
+            dispatch(setUserTrainingsFromServer(userTrainingsData));
         }
     }, [dispatch, isSuccessGettingAllTrainings, token, userTrainingsData]);
 

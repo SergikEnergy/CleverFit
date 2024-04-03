@@ -11,7 +11,7 @@
 button.button__add {
     background-color: var(--primary-light-6);
     border: none;
-    font-family: var(--font-family);
+    font-family: var(--main-font-family);
     font-weight: var(--font-weight-normal);
     font-size: var(--font-size-main);
     line-height: var(--line-height-main);
@@ -19,7 +19,7 @@ button.button__add {
 button.button__save {
     border: none;
     background-color: transparent;
-    font-family: var(--font-family);
+    font-family: var(--main-font-family);
     font-weight: var(--font-weight-normal);
     font-size: var(--font-size-main);
     line-height: var(--line-height-main);

@@ -28,7 +28,7 @@
 }
 
 label.checkbox {
-    font-family: var(--font-family);
+    font-family: var(--main-font-family);
     font-size: var(--font-size-main);
     font-weight: var(--font-weight-normal);
     line-height: var(--main-line-height);
@@ -44,7 +44,7 @@ label.checkbox {
 
 button.submit {
     background-color: var(--primary-light-6);
-    font-family: var(--font-family);
+    font-family: var(--main-font-family);
     font-size: var(--font-size-main);
     font-weight: var(--font-weight-normal);
     line-height: var(--main-line-height);

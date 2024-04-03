@@ -23,7 +23,7 @@
 }
 
 .navigation span.antFixed {
-    font-family: var(--font-family);
+    font-family: var(--main-font-family);
     font-weight: var(--font-weight-normal);
     font-size: var(--font-size-main);
     line-height: var(--line-height-main);
@@ -62,7 +62,7 @@
 
 .greeting__text {
     padding-top: 1.4rem;
-    font-family: var(--font-family);
+    font-family: var(--main-font-family);
     font-weight: 700;
     font-size: 3.8rem;
     line-height: var(--line-height-main);

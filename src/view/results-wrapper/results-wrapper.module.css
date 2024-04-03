@@ -13,7 +13,7 @@
 .statuses :global(.ant-result) {
     padding: var(--padding-zero);
     width: 368px;
-    font-family: var(--font-family);
+    font-family: var(--main-font-family);
     color: var(--character-light-title-85);
 }
 
@@ -21,7 +21,7 @@
     font-weight: 500;
     font-size: 2.4rem;
     line-height: var(--line-height-main);
-    font-family: var(--font-family);
+    font-family: var(--main-font-family);
 }
 
 .statuses :global(.ant-result-icon) {

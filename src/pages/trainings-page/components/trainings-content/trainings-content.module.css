@@ -26,7 +26,7 @@
 .trainings_tabs :global(.ant-tabs-tab) {
     font-size: var(--font-size-tabs-trainings-main);
     line-height: 130%;
-    font-family: var(--font-family);
+    font-family: var(--main-font-family);
     font-style: var(--font-style-main);
     font-weight: var(--font-weight-medium);
 }

@@ -86,7 +86,7 @@ export type AllowedTrainResponseType = {
 
 export type NewTrainRequestType = Pick<
     TrainingsResponseType,
-    'date' | 'exercises' | 'name' | 'isImplementation'
+    'date' | 'exercises' | 'name' | 'isImplementation' | 'parameters'
 >;
 
 export type ChangeFutureTrainRequestType = { body: NewTrainRequestType; id: string };

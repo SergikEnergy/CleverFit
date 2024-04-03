@@ -2,13 +2,13 @@ import { AllowedTrainResponseType, TrainingsResponseType } from '@redux/api/api-
 import type { PayloadAction } from '@reduxjs/toolkit';
 import { createSlice } from '@reduxjs/toolkit';
 
-type UserTrainsPropsType = {
-    userTrains: TrainingsResponseType[];
+type UserTrainingsPropsType = {
+    userTrainings: TrainingsResponseType[];
     allowedTrainingsList: AllowedTrainResponseType[];
 };
 
-const initialTrainingsState: UserTrainsPropsType = {
-    userTrains: [],
+const initialTrainingsState: UserTrainingsPropsType = {
+    userTrainings: [],
     allowedTrainingsList: [],
 };
 
@@ -16,13 +16,16 @@ const slice = createSlice({
     name: 'userTrainings',
     initialState: initialTrainingsState,
     reducers: {
-        setUserTrainsFromServer: (state, { payload }: PayloadAction<TrainingsResponseType[]>) => {
+        setUserTrainingsFromServer: (
+            state,
+            { payload }: PayloadAction<TrainingsResponseType[]>,
+        ) => {
             if (payload) {
-                state.userTrains = payload;
+                state.userTrainings = payload;
             }
         },
-        resetUserTrainsFromServer: (state) => {
-            state.userTrains = [];
+        resetUserTrainingsFromServer: (state) => {
+            state.userTrainings = [];
             state.allowedTrainingsList = [];
         },
         setAllowedTrainingsList: (
@@ -36,6 +39,6 @@ const slice = createSlice({
     },
 });
 
-export const { setUserTrainsFromServer, resetUserTrainsFromServer, setAllowedTrainingsList } =
+export const { setUserTrainingsFromServer, resetUserTrainingsFromServer, setAllowedTrainingsList } =
     slice.actions;
 export const trainingsReducer = slice.reducer;

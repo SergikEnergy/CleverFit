@@ -9,7 +9,7 @@
 }
 
 .title {
-    font-family: var(--font-family);
+    font-family: var(--main-font-family);
     font-weight: var(--font-weight-title);
     font-size: 1.5rem;
     line-height: var(--line-height-main);
@@ -17,7 +17,7 @@
 
 .subtitle {
     margin-top: var(--margin-small-size);
-    font-family: var(--font-family);
+    font-family: var(--main-font-family);
     font-weight: var(--font-weight-normal);
     font-size: var(--font-size-main);
     line-height: var(--line-height-main);
@@ -61,7 +61,7 @@
 button.button__edit {
     background-color: var(--primary-light-6);
     border: none;
-    font-family: var(--font-family);
+    font-family: var(--main-font-family);
     font-weight: var(--font-weight-normal);
     font-size: var(--font-size-main);
     line-height: var(--line-height-main);
