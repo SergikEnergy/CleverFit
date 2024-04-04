@@ -36,8 +36,20 @@ export const selectPeriodOptions: Array<{ value: number; label: string }> = [
         label: 'Через 3 дня',
     },
     {
-        value: 0,
-        label: 'День недели',
+        value: 4,
+        label: 'Через 4 дня',
+    },
+    {
+        value: 5,
+        label: 'Через 5 дней',
+    },
+    {
+        value: 6,
+        label: 'Через 6 дней',
+    },
+    {
+        value: 7,
+        label: '1 раз в неделю',
     },
 ];
 

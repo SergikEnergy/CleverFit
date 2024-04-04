@@ -1,6 +1,6 @@
 import { createContext } from 'react';
 
-export type EditOrCreateModeType = 'edit' | 'create';
+export type EditOrCreateModeType = 'edit' | 'create' | 'add';
 export type StatusSubmitType = 'success' | 'error';
 
 export type TrainingsDrawerContextType = {

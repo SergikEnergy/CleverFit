@@ -1,6 +1,6 @@
 import { FC, useEffect, useRef, useState } from 'react';
-import { getColorTrainByName } from '@components/calendar-with-data/calendar-with-data.utils';
 import { dateDayMonthYearDotFormat } from '@utils/constants/date-formats';
+import { getColorTrainByName } from '@utils/get-color-badge-by-name';
 import { Badge, Drawer } from 'antd';
 
 import { useCalendarTrainingsDrawerContext } from '../../react-contexts';

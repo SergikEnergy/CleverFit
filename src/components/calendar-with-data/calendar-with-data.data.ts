@@ -31,14 +31,6 @@ export const ruLocale = {
     ...CalendarLocale,
 };
 
-export enum ColorForTrain {
-    legs = 'pink',
-    hands = 'cyan',
-    strength = 'yellow',
-    back = 'orange',
-    chest = 'green',
-}
-
 export const modalInitialPosition: ModalPositionType = {
     top: 0,
     left: 0,

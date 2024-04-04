@@ -1,0 +1,26 @@
+.training {
+    display: flex;
+    width: 100%;
+    align-items: center;
+    justify-content: space-between;
+}
+p.name {
+    margin-bottom: 0;
+}
+
+.badge {
+    display: block;
+}
+
+.badge {
+    width: 80%;
+    text-align: left;
+    font-family: var(--main-font-family);
+    font-weight: var(--font-weight-normal);
+    font-size: var(--font-size-main);
+    line-height: var(--line-height-main);
+}
+
+.badge.implemented :global(.ant-badge-status-text) {
+    color: gray;
+}

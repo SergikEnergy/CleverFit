@@ -19,5 +19,4 @@ export type FormFieldsType = {
     trainingsDate?: Moment;
     withPeriodActivate?: boolean;
     periodSelect?: number;
-    dayWeekSelect?: number;
 };

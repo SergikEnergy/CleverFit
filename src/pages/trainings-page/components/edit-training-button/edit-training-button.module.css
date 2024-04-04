@@ -1,0 +1,35 @@
+.highlighter {
+    width: 15%;
+    text-align: right;
+    transition: all ease-in 0.3s;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+}
+
+button.highlighter > span.edit__icon {
+    justify-content: flex-end;
+}
+
+.highlighter.implemented:hover,
+.highlighter.implemented:target,
+.highlighter.implemented:focus {
+    cursor: none;
+}
+
+.highlighter:hover,
+.highlighter:target,
+.highlighter:focus {
+    transform: scale(1.03);
+    color: rgb(121, 121, 248);
+    cursor: pointer;
+}
+
+.icon:global(.anticon) {
+    font-size: 25px;
+    color: var(--primary-light-6);
+}
+
+.icon:global(.anticon:disabled) {
+    color: gray;
+}

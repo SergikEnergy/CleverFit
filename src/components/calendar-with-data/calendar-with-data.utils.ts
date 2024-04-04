@@ -1,24 +1,10 @@
 import { TrainingsResponseType } from '@redux/api/api-types';
 import { dateFullFormatWithDash } from '@utils/constants/date-formats';
+import { getColorTrainByName } from '@utils/get-color-badge-by-name';
 import moment, { Moment } from 'moment';
 
-import { ColorForTrain, shortMonthsRu } from './calendar-with-data.data';
+import { shortMonthsRu } from './calendar-with-data.data';
 import { CellDataType } from './calendar-with-data.types';
-
-export const getColorTrainByName = (trainName: string) => {
-    switch (trainName.toLowerCase()) {
-        case 'ноги':
-            return ColorForTrain.legs;
-        case 'руки':
-            return ColorForTrain.hands;
-        case 'силовая':
-            return ColorForTrain.strength;
-        case 'спина':
-            return ColorForTrain.back;
-        default:
-            return ColorForTrain.chest;
-    }
-};
 
 export const filterDataByDaySortByDate = (
     date: Moment,

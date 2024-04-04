@@ -1,7 +1,7 @@
 import { FC } from 'react';
 import { EditOutlined } from '@ant-design/icons';
-import { getColorTrainByName } from '@components/calendar-with-data/calendar-with-data.utils';
 import { TrainingsResponseType } from '@redux/api/api-types';
+import { getColorTrainByName } from '@utils/get-color-badge-by-name';
 import { Badge, Button } from 'antd';
 import classnames from 'classnames';
 

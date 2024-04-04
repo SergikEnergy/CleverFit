@@ -1,8 +1,9 @@
 import { FC, Fragment } from 'react';
 import { AlertNotification } from '@components/notifications/alert/alert-notification';
-import { SUBMIT_TRAIN_SUCCESS } from '@utils/constants/train-modes';
+import { DRAWER_EDIT_MODE, SUBMIT_TRAIN_SUCCESS } from '@utils/constants/train-modes';
 import { Tabs } from 'antd';
 
+import { WORKOUT_DATA_TEST_ID } from '../../../../data/data-test-ids';
 import { useTrainingsDrawerContext } from '../../../../react-contexts';
 import { TrainingsDrawer } from '../trainings-drawer';
 
@@ -11,7 +12,12 @@ import { dataForTabsTrainings } from './trainings-content.data';
 import classes from './trainings-content.module.css';
 
 export const TrainingsContent: FC = () => {
-    const { open: isDrawerOpened, statusSubmit, changeStatus } = useTrainingsDrawerContext();
+    const {
+        open: isDrawerOpened,
+        statusSubmit,
+        changeStatus,
+        modeDrawer,
+    } = useTrainingsDrawerContext();
 
     const onChange = (key: string) => {
         console.log(key);
@@ -29,8 +35,13 @@ export const TrainingsContent: FC = () => {
             {isDrawerOpened && <TrainingsDrawer />}
             {statusSubmit === SUBMIT_TRAIN_SUCCESS && (
                 <AlertNotification
+                    dataTestId={WORKOUT_DATA_TEST_ID.createTrainingSuccessAlert}
                     type='success'
-                    message='Тренировка успешно обновлена'
+                    message={
+                        modeDrawer === DRAWER_EDIT_MODE
+                            ? 'Тренировка успешно обновлена'
+                            : 'Новая тренировка успешно добавлена'
+                    }
                     handleCloseAlert={() => changeStatus('error')}
                 />
             )}

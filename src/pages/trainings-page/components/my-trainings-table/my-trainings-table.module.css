@@ -1,0 +1,53 @@
+.wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--gap-middle);
+}
+
+.table :global(.ant-table table) {
+    width: var(--table-trainings-desktop-width);
+    align-self: flex-start;
+}
+
+.header :global(.ant-table-cell) {
+    background-color: var(--neutral-gray-4);
+}
+
+.header :global() .table :global(.ant-table-thead) {
+    width: 100%;
+    font-family: var(--main-font-family);
+    font-size: var(--font-size-mobile);
+    font-weight: var(--font-weight-normal);
+    line-height: var(--main-line-height);
+}
+
+.header {
+    height: 36px;
+}
+
+.header:last-child {
+    height: 24px;
+}
+
+.table :global(.ant-table-cell) {
+    padding: 0;
+}
+.table :global(.ant-table-thead .ant-table-cell) {
+    padding: 8px;
+}
+.table :global(.ant-table-thead .ant-table-cell:last-child) {
+    padding: 2px 8px;
+}
+
+.table :global(.ant-table table) {
+    border-spacing: 12px 5px;
+}
+
+.table :global(.ant-table-tbody) {
+    width: 100%;
+    font-family: var(--main-font-family);
+    font-size: var(--font-size-main);
+    font-weight: var(--font-weight-normal);
+    line-height: var(--main-line-height);
+}

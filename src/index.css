@@ -203,6 +203,9 @@ body {
 
     --modal-box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.15);
     --card-main-page-box-shadow: 0 2px 0 0 rgba(0, 0, 0, 0.04);
+
+    /* sizes */
+    --table-trainings-desktop-width: 555px;
 }
 
 html,

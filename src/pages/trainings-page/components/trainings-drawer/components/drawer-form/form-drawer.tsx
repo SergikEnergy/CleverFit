@@ -8,14 +8,11 @@ import locale from 'antd/es/date-picker/locale/ru_RU';
 import classnames from 'classnames';
 import moment, { Moment } from 'moment';
 
+import { WORKOUT_DATA_TEST_ID } from '../../../../../../data/data-test-ids';
 import { useTrainingsDrawerContext } from '../../../../../../react-contexts';
 import { FormDrawerList } from '../form-drawer-list/form-drawer-list';
 
-import {
-    initialEmptyFormFields,
-    selectDayOfWeekOptions,
-    selectPeriodOptions,
-} from './form-drawer.data';
+import { initialEmptyFormFields, selectPeriodOptions } from './form-drawer.data';
 import { FormDrawerPropsType, FormFieldsType, FormFieldType } from './form-drawer.types';
 import { disabledDate, prepareDataRequest } from './form-drawer.utils';
 import { DataCellRender } from './form-drawer-cell-render';
@@ -30,7 +27,6 @@ export const FormDrawer: FC<FormDrawerPropsType> = () => {
     const { closeDrawer, open: isDrawerOpened } = useTrainingsDrawerContext();
     const [isSubmitDisabled, setIsSubmitDisabled] = useState(true);
     const [allowSelectPeriod, setAllowSelectPeriod] = useState(false);
-    const [allowSelectDay, setAllowSelectDay] = useState(false);
     const [form] = Form.useForm<FormFieldsType>();
     const { allowedTrainingsList } = useUserTrainingsSelector();
     const updateTrainingsRequest = useUpdateTrainings();
@@ -47,11 +43,7 @@ export const FormDrawer: FC<FormDrawerPropsType> = () => {
     }
 
     const selectPeriodChangeHandler = (value: number) => {
-        if (value === 0) {
-            setAllowSelectDay(true);
-        } else {
-            setAllowSelectDay(false);
-        }
+        console.log(value);
     };
 
     const activateAdditionalSelect = (event: CheckboxChangeEvent) =>
@@ -79,9 +71,10 @@ export const FormDrawer: FC<FormDrawerPropsType> = () => {
         const hasSelectTrainValue = !!form.getFieldValue('trainingsSelect');
         const isDateSelected = !!form.getFieldValue('trainingsDate');
         const hasExercises =
-            form.getFieldValue('exercises').filter((elem: FormFieldType) => !!elem.exercise)
+            form
+                .getFieldValue('exercises')
+                .filter((elem: FormFieldType | undefined) => elem && elem.exercise.length > 0)
                 .length > 0;
-
         setIsSubmitDisabled(!(hasSelectTrainValue && isDateSelected && hasExercises));
     };
 
@@ -99,8 +92,9 @@ export const FormDrawer: FC<FormDrawerPropsType> = () => {
             className={classes.form}
         >
             <div className={classes.body}>
-                <Form.Item name='trainingsSelect' initialValue={null}>
+                <Form.Item name='trainingsSelect' initialValue={null} className={classes.training}>
                     <Select
+                        data-test-id={WORKOUT_DATA_TEST_ID.modalCreateExerciseSelect}
                         placeholder='Выбор типа тренировки'
                         optionFilterProp='children'
                         onChange={onSelectChange}
@@ -113,6 +107,7 @@ export const FormDrawer: FC<FormDrawerPropsType> = () => {
                 <div className={classes.wrapper__fields_two}>
                     <Form.Item name='trainingsDate' className={classes.date}>
                         <DatePicker
+                            data-test-id={WORKOUT_DATA_TEST_ID.modalDrawerRightDatePicker}
                             className='trainings__drawer_date-picker'
                             dateRender={dateCellRender}
                             locale={locale}
@@ -128,6 +123,7 @@ export const FormDrawer: FC<FormDrawerPropsType> = () => {
                         className={classes.period__activate}
                     >
                         <Checkbox
+                            data-test-id={WORKOUT_DATA_TEST_ID.modalDrawerRightCheckboxPeriod}
                             className={classes.checkbox}
                             onChange={(event) => activateAdditionalSelect(event)}
                         >
@@ -138,8 +134,10 @@ export const FormDrawer: FC<FormDrawerPropsType> = () => {
 
                 {allowSelectPeriod && (
                     <div className={classnames(classes.period, classes.wrapper__fields_two)}>
-                        <Form.Item name='periodSelect' initialValue={1} className={classes.select}>
+                        <Form.Item name='periodSelect' className={classes.select}>
                             <Select
+                                data-test-id={WORKOUT_DATA_TEST_ID.modalDrawerRightSelectPeriod}
+                                placeholder='Периодичность'
                                 optionFilterProp='children'
                                 filterOption={(input, option) =>
                                     (option?.label.toLowerCase() ?? '').includes(
@@ -150,24 +148,6 @@ export const FormDrawer: FC<FormDrawerPropsType> = () => {
                                 onChange={selectPeriodChangeHandler}
                             />
                         </Form.Item>
-
-                        {allowSelectDay && (
-                            <Form.Item
-                                name='dayWeekSelect'
-                                className={(classes.select, classes.select__day)}
-                            >
-                                <Select
-                                    placeholder='Понедельник'
-                                    optionFilterProp='children'
-                                    filterOption={(input, option) =>
-                                        (option?.label.toLowerCase() ?? '').includes(
-                                            input.toLowerCase(),
-                                        )
-                                    }
-                                    options={selectDayOfWeekOptions}
-                                />
-                            </Form.Item>
-                        )}
                     </div>
                 )}
                 <FormDrawerList />
