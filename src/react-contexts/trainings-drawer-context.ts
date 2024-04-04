@@ -5,6 +5,8 @@ export type StatusSubmitType = 'success' | 'error';
 
 export type TrainingsDrawerContextType = {
     open: boolean;
+    activeTrainingId: string;
+    changeActiveTrainingId: (id: string) => void;
     openDrawer: () => void;
     closeDrawer: () => void;
     modeDrawer: EditOrCreateModeType;
@@ -15,8 +17,10 @@ export type TrainingsDrawerContextType = {
 
 export const TrainingsDrawerContext = createContext<TrainingsDrawerContextType>({
     open: false,
+    activeTrainingId: '',
     modeDrawer: 'create',
     statusSubmit: 'error',
+    changeActiveTrainingId: () => {},
     changeMode: () => {},
     changeStatus: () => {},
     openDrawer: () => {},

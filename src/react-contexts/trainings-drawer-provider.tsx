@@ -10,6 +10,7 @@ export const TrainingsDrawerContextProvider: FC<{ children: ReactNode }> = ({ ch
     const [isOpen, setIsOpen] = useState(false);
     const [modeDrawer, setModeDrawer] = useState<EditOrCreateModeType>('create');
     const [statusAnswer, setStatusAnswer] = useState<StatusSubmitType>('error');
+    const [activeTrainingId, setActiveTrainingId] = useState('');
 
     const openDrawer = () => {
         setIsOpen(true);
@@ -21,6 +22,8 @@ export const TrainingsDrawerContextProvider: FC<{ children: ReactNode }> = ({ ch
 
     const changeMode = (mode: EditOrCreateModeType) => setModeDrawer(mode);
 
+    const changeActiveTrainingId = (id: string) => setActiveTrainingId(id);
+
     const changeStatus = (status: StatusSubmitType) => setStatusAnswer(status);
 
     const value = useMemo(
@@ -29,11 +32,13 @@ export const TrainingsDrawerContextProvider: FC<{ children: ReactNode }> = ({ ch
             openDrawer,
             closeDrawer,
             modeDrawer,
+            activeTrainingId,
+            changeActiveTrainingId,
             changeMode,
             changeStatus,
             statusSubmit: statusAnswer,
         }),
-        [isOpen, modeDrawer, statusAnswer],
+        [activeTrainingId, isOpen, modeDrawer, statusAnswer],
     );
 
     return (

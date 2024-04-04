@@ -1,16 +1,16 @@
-import { FC } from 'react';
-import { DownOutlined } from '@ant-design/icons';
+import { FC, useRef } from 'react';
 import { TrainingsResponseType } from '@redux/api/api-types';
 import { getColorTrainByName } from '@utils/get-color-badge-by-name';
-import { Badge, Button } from 'antd';
+import { Badge } from 'antd';
 import classnames from 'classnames';
+
+import { TrainingsInfoPopover } from '../trainings-info-popup';
 
 import classes from './training-with-badge-cell.module.css';
 
 type TrainingCellPropsType = {
     training: TrainingsResponseType;
     isImplemented: boolean;
-    clickAction: () => void;
 };
 
 type TrainingBadgePropsType = {
@@ -28,15 +28,19 @@ export const TrainingsBadge: FC<TrainingBadgePropsType> = ({ trainingName, isImp
     />
 );
 
-export const TrainingCell: FC<TrainingCellPropsType> = ({
-    training,
-    isImplemented,
-    clickAction,
-}) => (
-    <div className={classes.training}>
-        <p className={classnames(classes.name, { [classes.implemented]: isImplemented })}>
-            {training.name}
-        </p>
-        <Button type='text' icon={<DownOutlined />} onClick={clickAction} />
-    </div>
-);
+export const TrainingCell: FC<TrainingCellPropsType> = ({ training, isImplemented }) => {
+    const refContainerPopover = useRef<HTMLDivElement>(null);
+
+    return (
+        <div className={classes.training} ref={refContainerPopover}>
+            <p className={classnames(classes.name, { [classes.implemented]: isImplemented })}>
+                {training.name}
+            </p>
+            <TrainingsInfoPopover
+                parentRef={refContainerPopover}
+                key={`${training.date}-popover`}
+                training={training}
+            />
+        </div>
+    );
+};

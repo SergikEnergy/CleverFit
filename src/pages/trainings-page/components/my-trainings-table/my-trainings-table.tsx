@@ -1,7 +1,7 @@
 import { FC } from 'react';
 import { PlusOutlined } from '@ant-design/icons';
 import { useUserTrainingsSelector } from '@redux/selectors';
-import { DRAWER_ADD_MODE } from '@utils/constants/train-modes';
+import { DRAWER_ADD_MODE, DRAWER_EDIT_MODE } from '@utils/constants/train-modes';
 import { Button, Table } from 'antd';
 
 import { WORKOUT_DATA_TEST_ID } from '../../../../data/data-test-ids';
@@ -16,10 +16,16 @@ import classes from './my-trainings-table.module.css';
 
 export const MyTrainingsTable: FC = () => {
     const { userTrainings } = useUserTrainingsSelector();
-    const { changeMode, openDrawer } = useTrainingsDrawerContext();
+    const { changeMode, openDrawer, changeActiveTrainingId } = useTrainingsDrawerContext();
 
     const handleCreateButtonClick = () => {
         changeMode(DRAWER_ADD_MODE);
+        openDrawer();
+    };
+
+    const setActiveTrain = (trainingId: string) => {
+        changeActiveTrainingId(trainingId);
+        changeMode(DRAWER_EDIT_MODE);
         openDrawer();
     };
 
@@ -38,10 +44,15 @@ export const MyTrainingsTable: FC = () => {
                 key={training.name}
                 training={training}
                 isImplemented={training.isImplementation}
-                clickAction={() => {}}
             />
         ),
-        action: <EditTrainingsButton index={index} isDisabled={training.isImplementation} />,
+        action: (
+            <EditTrainingsButton
+                index={index}
+                actionClick={() => setActiveTrain(training._id)}
+                isDisabled={training.isImplementation}
+            />
+        ),
     }));
 
     return (

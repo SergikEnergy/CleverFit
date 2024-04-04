@@ -38,13 +38,16 @@ label.checkbox {
     width: 44%;
 }
 
-.select :global(.ant-select-selection-placeholder),
-.training :global(.ant-select-selection-placeholder) {
+.select :global(.ant-select-selector) {
+    padding-right: 6px;
+}
+
+.select :global(.ant-select .ant-select-selector .ant-select-selection-placeholder),
+.training :global(.ant-select .ant-select-selector .ant-select-selection-placeholder) {
     color: var(--character-light-disable-25);
     font-family: var(--main-font-family);
     font-size: var(--font-size-main);
     font-weight: var(--font-weight-normal);
-    line-height: var(--main-line-height);
     padding-right: var(--padding-small-size);
 }
 
