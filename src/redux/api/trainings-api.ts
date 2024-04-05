@@ -6,12 +6,13 @@ import {
     AllowedTrainResponseType,
     ChangeFutureTrainRequestType,
     NewTrainRequestType,
+    PartnersResponseType,
     TrainingsResponseType,
 } from './api-types';
 
 export const trainingsAPI = createApi({
     reducerPath: 'trainingsAPI',
-    tagTypes: ['Trainings'],
+    tagTypes: ['Trainings', 'Partners'],
     baseQuery: fetchBaseQuery({
         baseUrl: API_BASE_URL,
         prepareHeaders: (headers, { getState }) => {
@@ -63,6 +64,19 @@ export const trainingsAPI = createApi({
             }),
             invalidatesTags: ['Trainings'],
         }),
+        getAllTrainingsPartners: build.query<PartnersResponseType[], void>({
+            query: () => ({
+                url: 'catalogs/training-pals',
+                credentials: 'include',
+            }),
+            providesTags: (result) =>
+                result
+                    ? [
+                          ...result.map(({ id }) => ({ type: 'Partners' as const, id })),
+                          { type: 'Partners', id: 'LIST' },
+                      ]
+                    : [{ type: 'Partners', id: 'LIST' }],
+        }),
     }),
 });
 
@@ -73,4 +87,6 @@ export const {
     useLazyGetAllowedTrainsListQuery,
     useAddNewTrainMutation,
     useChangeTrainMutation,
+    useLazyGetAllTrainingsPartnersQuery,
+    useGetAllTrainingsPartnersQuery,
 } = trainingsAPI;

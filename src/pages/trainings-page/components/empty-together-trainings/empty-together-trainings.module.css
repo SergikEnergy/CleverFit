@@ -1,0 +1,12 @@
+.empty {
+    margin-top: var(--margin-medium-size);
+    width: 100%;
+    padding: var(--padding-medium-size);
+}
+
+@media screen and (max-width: 500px) {
+    .empty {
+        width: 100%;
+        padding: var(--padding-little-size);
+    }
+}

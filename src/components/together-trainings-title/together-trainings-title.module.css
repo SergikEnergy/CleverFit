@@ -1,0 +1,40 @@
+.wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    background-color: var(--neutral-gray-2);
+    border: 1px solid var(--character-light-dividers);
+}
+
+.title {
+    font-family: var(--main-font-family);
+    font-style: var(--font-style-main);
+    font-size: var(--font-size-tabs-trainings-main);
+    font-weight: var(--font-weight-medium);
+    line-height: var(--main-line-height);
+    color: var(--primary-light-9);
+    text-align: center;
+    padding: var(--padding-middle-size) 0;
+    margin-bottom: 0;
+}
+
+.subtitle {
+    font-family: var(--main-font-family);
+    font-style: var(--font-style-main);
+    font-size: var(--font-size-main);
+    font-weight: var(--font-weight-normal);
+    line-height: var(--main-line-height);
+    color: var(--character-light-secondary-45);
+    width: 95%;
+}
+
+@media screen and (max-width: 900px) {
+    .title {
+        width: 94%;
+    }
+    .subtitle {
+        width: 94%;
+    }
+}

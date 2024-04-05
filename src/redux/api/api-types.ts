@@ -141,3 +141,13 @@ export type RequestChangeTariffType = {
     tariffId: string;
     days: number;
 };
+
+export type PartnersResponseType = {
+    id: string;
+    name: string;
+    trainingType: string;
+    imageSrc: string | null;
+    avgWeightInWeek: number;
+    inviteId: string;
+    status: string;
+};

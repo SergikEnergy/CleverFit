@@ -1,6 +1,7 @@
 import { ReactNode } from 'react';
 
 import { MyTrainingsContent } from '../my-trainings-content/my-trainings-content';
+import { TogetherTrainingsContent } from '../together-trainings-content';
 
 type TabType = {
     label: string | ReactNode;
@@ -8,20 +9,24 @@ type TabType = {
     children: ReactNode | string;
 };
 
+export const MY_TRAINING_KEY = 'main-trainings';
+export const TOGETHER_TRAINING_KEY = 'together-trinings';
+export const MARATHONS_KEY = 'marathon-trainings';
+
 export const dataForTabsTrainings: TabType[] = [
     {
         label: 'Мои тренировки',
-        key: 'main-trainings',
+        key: MY_TRAINING_KEY,
         children: <MyTrainingsContent />,
     },
     {
         label: 'Совместные тренировки',
-        key: 'together-trinings',
-        children: 'Content of Tab Pane 2',
+        key: TOGETHER_TRAINING_KEY,
+        children: <TogetherTrainingsContent />,
     },
     {
         label: 'Марафоны',
-        key: 'maraphon-trainings',
+        key: MARATHONS_KEY,
         children: 'Content of Tab Pane 3',
     },
 ];
