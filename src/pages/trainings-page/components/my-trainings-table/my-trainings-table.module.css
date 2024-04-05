@@ -2,7 +2,7 @@
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    gap: var(--gap-middle);
+    width: 100%;
 }
 
 .table :global(.ant-table table) {
@@ -50,4 +50,50 @@
     font-size: var(--font-size-main);
     font-weight: var(--font-weight-normal);
     line-height: var(--main-line-height);
+}
+
+.add__train {
+    margin-top: 0;
+}
+
+.table td:global(.training__column) {
+    width: 240px;
+}
+
+.table :global(.ant-table-pagination.ant-pagination) {
+    margin: var(--margin-pagination-table-desktop);
+}
+
+@media screen and (max-width: 950px) {
+    .table :global(.ant-table table) {
+        width: 100%;
+    }
+    .table td:global(.training__column) {
+        width: 216px;
+    }
+    .table:global(.ant-table-wrapper) {
+        width: 100%;
+        align-self: flex-start;
+    }
+    .table td:global(.training__action) {
+        width: 35px;
+        border-bottom: none;
+    }
+}
+
+@media screen and (max-width: 600px) {
+    .table td:global(.training__column) {
+        width: 100px;
+    }
+    .table :global(.ant-table-thead .ant-table-cell) {
+        padding: 6px 0;
+    }
+    .table :global(.ant-table table) {
+        border-spacing: 10px 5px;
+    }
+    .add__train {
+        width: 92%;
+        display: block;
+        margin: auto;
+    }
 }

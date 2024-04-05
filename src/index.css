@@ -16,6 +16,7 @@ body {
 
 :root {
     font-family: Inter, Verdana, Arial, sans-serif;
+
     --main-font-family: Inter, Verdana, Arial, sans-serif;
 
     line-height: 1.5;
@@ -182,6 +183,7 @@ body {
     --margin-submit-profile-main: 54px;
     --margin-trainings-page-main: 24px 24px 42px;
     --margin-big-size: 64px;
+    --margin-pagination-table-desktop: 20px 0 30px;
 
     /* gaps */
 
@@ -208,6 +210,7 @@ body {
 
     /* sizes */
     --table-trainings-desktop-width: 555px;
+    --table-trainings-tablet-width: 530px;
 }
 
 html,

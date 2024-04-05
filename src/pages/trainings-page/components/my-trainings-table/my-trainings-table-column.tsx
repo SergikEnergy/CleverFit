@@ -18,7 +18,7 @@ export const MyCustomColumns: ColumnsType<MyTrainingsTableDataType> = [
             },
             {
                 title: null,
-                width: 240,
+                className: 'training__column',
                 dataIndex: 'trainings',
                 key: 'trainings type',
                 colSpan: 0,
@@ -38,5 +38,12 @@ export const MyCustomColumns: ColumnsType<MyTrainingsTableDataType> = [
             return <span className='trainings__period_cell'>{stringedPeriod}</span>;
         },
     },
-    { colSpan: 0, rowSpan: 0, title: null, dataIndex: 'action', key: 'edit button' },
+    {
+        colSpan: 0,
+        rowSpan: 0,
+        title: null,
+        dataIndex: 'action',
+        key: 'edit button',
+        className: 'training__action',
+    },
 ];

@@ -1,4 +1,4 @@
-import { FC } from 'react';
+import { FC, useEffect } from 'react';
 import { PlusOutlined } from '@ant-design/icons';
 import { useWindowWidth } from '@hooks/use-window-size';
 import { useUserTrainingsSelector } from '@redux/selectors';
@@ -31,6 +31,12 @@ export const MyTrainingsTable: FC = () => {
         changeMode(DRAWER_EDIT_MODE);
         openDrawer();
     };
+
+    useEffect(() => {
+        if (innerWindowWidth < 600 && MyCustomColumns[1].colSpan !== 2) {
+            MyCustomColumns[1].colSpan = 2;
+        }
+    }, [innerWindowWidth]);
 
     const tableData: MyTrainingsTableDataType[] = userTrainings.map((training, index) => ({
         key: `${training._id}-${training.date}`,
@@ -67,7 +73,9 @@ export const MyTrainingsTable: FC = () => {
                 dataSource={tableData}
                 columns={MyCustomColumns}
                 pagination={{
+                    size: 'small',
                     defaultCurrent: 1,
+                    position: ['bottomLeft'],
                     hideOnSinglePage: true,
                     className: classes.pagination,
                     pageSize: innerWindowWidth > 600 ? 14 : 9,

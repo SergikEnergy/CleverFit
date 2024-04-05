@@ -1,4 +1,5 @@
 import { ReactNode } from 'react';
+
 import { MyTrainingsContent } from '../my-trainings-content/my-trainings-content';
 
 type TabType = {
@@ -9,18 +10,18 @@ type TabType = {
 
 export const dataForTabsTrainings: TabType[] = [
     {
-        label: `Мои тренировки`,
+        label: 'Мои тренировки',
         key: 'main-trainings',
         children: <MyTrainingsContent />,
     },
     {
-        label: `Совместные тренировки`,
+        label: 'Совместные тренировки',
         key: 'together-trinings',
-        children: `Content of Tab Pane 2`,
+        children: 'Content of Tab Pane 2',
     },
     {
-        label: `Марафоны`,
+        label: 'Марафоны',
         key: 'maraphon-trainings',
-        children: `Content of Tab Pane 3`,
+        children: 'Content of Tab Pane 3',
     },
 ];
