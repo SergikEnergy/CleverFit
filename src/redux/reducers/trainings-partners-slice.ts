@@ -4,10 +4,12 @@ import { createSlice } from '@reduxjs/toolkit';
 
 type TrainingPartnersType = {
     userPartners: PartnersResponseType[];
+    randomPartners: PartnersResponseType[];
 };
 
 const initialTrainingPartnersState: TrainingPartnersType = {
     userPartners: [],
+    randomPartners: [],
 };
 
 const slice = createSlice({
@@ -19,11 +21,17 @@ const slice = createSlice({
                 state.userPartners = payload;
             }
         },
+        setRandomPartners: (state, { payload }: PayloadAction<PartnersResponseType[]>) => {
+            if (payload) {
+                state.randomPartners = payload;
+            }
+        },
         resetTrainingPartners: (state) => {
             state.userPartners = [];
+            state.randomPartners = [];
         },
     },
 });
 
-export const { setTrainingPartners, resetTrainingPartners } = slice.actions;
+export const { setTrainingPartners, setRandomPartners, resetTrainingPartners } = slice.actions;
 export const partnersReducer = slice.reducer;

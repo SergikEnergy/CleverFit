@@ -77,6 +77,12 @@ export const trainingsAPI = createApi({
                       ]
                     : [{ type: 'Partners', id: 'LIST' }],
         }),
+        getAllRandomPartners: build.query<PartnersResponseType[], void>({
+            query: () => ({
+                url: 'catalogs/user-joint-training-list',
+                credentials: 'include',
+            }),
+        }),
     }),
 });
 
@@ -89,4 +95,6 @@ export const {
     useChangeTrainMutation,
     useLazyGetAllTrainingsPartnersQuery,
     useGetAllTrainingsPartnersQuery,
+    useLazyGetAllRandomPartnersQuery,
+    useGetAllRandomPartnersQuery,
 } = trainingsAPI;

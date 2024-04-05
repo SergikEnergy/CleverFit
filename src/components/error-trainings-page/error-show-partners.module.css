@@ -1,0 +1,70 @@
+.wrapper {
+    padding: var(--padding-error-get-trains-main);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+.main {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: var(--gap-medium);
+}
+
+.content {
+    width: 75%;
+}
+
+.status {
+    margin-top: var(--margin-small-size);
+}
+.title {
+    margin-top: var(--margin-small-size);
+    font-family: var(--main-font-family);
+    font-weight: var(--font-weight-normal);
+    font-size: var(--font-size-title);
+    line-height: var(--line-height-main);
+    text-align: start;
+    color: var(--character-light-title-85);
+    margin-bottom: var(--margin-small-size);
+}
+
+.subtitle {
+    font-family: var(--main-font-family);
+    font-weight: var(--font-weight-normal);
+    font-size: var(--font-size-main);
+    line-height: var(--line-height-main);
+    text-align: start;
+    color: var(--character-light-secondary-45);
+    margin-bottom: var(--margin-little-size);
+}
+
+.button {
+    align-self: flex-end;
+}
+
+.close {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.close > button {
+    display: block;
+}
+
+.button > button {
+    box-shadow: var(--card-main-page-box-shadow);
+    border-radius: 2px;
+}
+.button :global(.ant-btn-primary) {
+    background: var(--primary-light-6);
+    border-color: var(--primary-light-6);
+    color: var(--character-light-primary-inverse);
+    font-family: var(--main-font-family);
+    font-weight: var(--font-weight-normal);
+    font-size: var(--font-size-main);
+    line-height: var(--line-height-main);
+}

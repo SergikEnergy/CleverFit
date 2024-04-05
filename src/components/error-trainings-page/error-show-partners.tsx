@@ -1,30 +1,29 @@
 import { FC } from 'react';
-import { useLocation } from 'react-router';
 import { CloseOutlined } from '@ant-design/icons';
-import { useGetAllowedTrainingsLists } from '@hooks/use-get-allowed-trainings-list';
+import { useGetRandomPartners } from '@hooks/use-get-random-partners';
 import { getIconFromStatus, StatusMessageType } from '@utils/get-icon-from-status';
 import { Button } from 'antd';
 
 import { WORKOUT_DATA_TEST_ID } from '../../data/data-test-ids';
 import { useModalReportContext } from '../../react-contexts';
 
-import classes from './error-show-allowed-trains-list.module.css';
+import classes from './error-show-partners.module.css';
 
-type ErrorShowAllowedTrainsListPropsType = {
+type ErrorShowPartnersPropsType = {
     status?: StatusMessageType;
     closeClickAction?: () => void;
     buttonActionClick?: () => void;
+    random?: boolean;
 };
 
-export const ErrorShowAllowedTrainsList: FC<ErrorShowAllowedTrainsListPropsType> = ({
+export const ErrorShowPartners: FC<ErrorShowPartnersPropsType> = ({
     status,
     closeClickAction,
     buttonActionClick,
+    random = false,
 }) => {
-    const location = useLocation();
-    const { fetchAllowedTrainingsList } = useGetAllowedTrainingsLists();
     const { closeModal, setNode } = useModalReportContext();
-    const isFromCalendarPage = location.pathname.includes('calendar');
+    const fetchRandomPartners = useGetRandomPartners();
     const title = 'При открытии данных произошла ошибка';
     const subtitle = 'Попробуйте ещё раз.';
     const buttonText = 'Обновить';
@@ -35,11 +34,11 @@ export const ErrorShowAllowedTrainsList: FC<ErrorShowAllowedTrainsListPropsType>
 
     const handleActionButtonClick = () => {
         if (buttonActionClick) buttonActionClick();
-        else if (isFromCalendarPage) {
-            setNode(null);
-            closeModal();
-            if (fetchAllowedTrainingsList) fetchAllowedTrainingsList();
+        if (random) {
+            fetchRandomPartners();
         }
+        setNode(null);
+        closeModal();
     };
 
     return (
