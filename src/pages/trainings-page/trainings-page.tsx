@@ -32,14 +32,12 @@ export const TrainingsPage: FC = () => {
 
     useEffect(() => {
         if (Array.isArray(trainingsList)) {
-            console.log('SET USER TRAININGS LIST WORKED');
             dispatch(setAllowedTrainingsList(trainingsList));
         }
     }, [dispatch, trainingsList]);
 
     useEffect(() => {
         if (isSuccessGettingAllTrainings && token && userTrainingsData) {
-            console.log('SET_USER_Trainings_WORKED');
             dispatch(setUserTrainingsFromServer(userTrainingsData));
         }
     }, [dispatch, isSuccessGettingAllTrainings, token, userTrainingsData]);
@@ -53,7 +51,6 @@ export const TrainingsPage: FC = () => {
 
     useLayoutEffect(() => {
         if (location.state && 'allowRequest' in location.state && location.state.allowRequest) {
-            console.log('FETCHING_ALLOWED_TRAININGS_LIST');
             fetchAllowedTrainingsList();
         }
     }, [fetchAllowedTrainingsList, location.state, userTrainingsData]);

@@ -18,9 +18,7 @@ export const TrainingsInfoPopover: FC<TrainingsInfoPopoverPropsType> = ({
 }) => {
     const [isVisible, setIsVisible] = useState(false);
 
-    const handleOpenChange = (newOpen: boolean) => {
-        setIsVisible(newOpen);
-    };
+    const handleOpenPopover = () => setIsVisible(true);
 
     return (
         <Popover
@@ -28,8 +26,8 @@ export const TrainingsInfoPopover: FC<TrainingsInfoPopoverPropsType> = ({
             align={{ offset: [0, -32] }}
             destroyTooltipOnHide={true}
             overlayStyle={{ boxShadow: '0px 2px 8px 0px #00000026', width: 241, padding: 0 }}
+            overlayInnerStyle={{ padding: 0, width: '100%' }}
             getPopupContainer={() => parentRef.current as HTMLDivElement}
-            onOpenChange={handleOpenChange}
             className={classes.popover}
             content={
                 <CustomOverlay
@@ -38,13 +36,13 @@ export const TrainingsInfoPopover: FC<TrainingsInfoPopoverPropsType> = ({
                     closeAction={() => setIsVisible(false)}
                 />
             }
-            trigger={['click']}
+            trigger='click'
             open={isVisible}
             placement='bottomRight'
             overlayClassName={classes.overlay}
             zIndex={3}
         >
-            <Button type='text' icon={<DownOutlined />} />
+            <Button onClick={handleOpenPopover} type='text' icon={<DownOutlined />} />
         </Popover>
     );
 };

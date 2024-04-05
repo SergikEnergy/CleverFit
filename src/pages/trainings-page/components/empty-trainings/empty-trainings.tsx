@@ -10,10 +10,11 @@ import classes from './empty-trainings.module.css';
 
 export const EmptyTrainings: FC = () => {
     const { allowedTrainingsList } = useUserTrainingsSelector();
-    const { openDrawer, changeMode } = useTrainingsDrawerContext();
+    const { openDrawer, changeMode, changeActiveTrainingId } = useTrainingsDrawerContext();
 
     const handleCreateTrain = () => {
         changeMode(DRAWER_CREATE_MODE);
+        changeActiveTrainingId('');
         openDrawer();
     };
 

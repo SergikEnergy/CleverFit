@@ -11,7 +11,7 @@ import {
     useTrainingsDrawerContext,
 } from '../react-contexts';
 
-export const useUpdateTrainings = () => {
+export const useAddNewTraining = () => {
     const { startLoader, stopLoader } = useLoaderContext();
     const { setNode, setWidthModal, openModal } = useModalReportContext();
     const { changeStatus } = useTrainingsDrawerContext();
@@ -29,7 +29,7 @@ export const useUpdateTrainings = () => {
         [openModal, setNode, setWidthModal],
     );
 
-    const updateUserTrainings = useCallback(
+    const addNewUserTraining = useCallback(
         async (body: NewTrainRequestType) => {
             try {
                 await updateTrainings(body).unwrap();
@@ -54,5 +54,5 @@ export const useUpdateTrainings = () => {
         }
     }, [isLoading, startLoader, stopLoader]);
 
-    return updateUserTrainings;
+    return addNewUserTraining;
 };

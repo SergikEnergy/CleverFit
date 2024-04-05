@@ -19,6 +19,16 @@ export const TrainingsDrawer: FC = () => {
     const [drawerWidth, setDrawerWidth] = useState(408);
     const innerWindowWidth = useWindowWidth();
 
+    let headerTitle = '';
+
+    if (modeDrawer === DRAWER_CREATE_MODE) {
+        headerTitle = 'Новая тренировка';
+    } else if (modeDrawer === DRAWER_EDIT_MODE) {
+        headerTitle = 'Редактирование';
+    } else if (modeDrawer === DRAWER_ADD_MODE) {
+        headerTitle = 'Добавление упражнений';
+    }
+
     useEffect(() => {
         if (innerWindowWidth < 550) {
             setDrawerWidth(360);
@@ -33,16 +43,7 @@ export const TrainingsDrawer: FC = () => {
         <Drawer
             className={classes.drawer}
             data-test-id='modal-drawer-right'
-            title={
-                <DrawerHeader
-                    title={
-                        (modeDrawer === DRAWER_ADD_MODE && 'Добавление упражнений') ||
-                        (DRAWER_CREATE_MODE && 'Новая тренировка') ||
-                        (DRAWER_EDIT_MODE && 'Редактировать тренировку')
-                    }
-                    closeDrawer={closeDrawerWithCheckingData}
-                />
-            }
+            title={<DrawerHeader title={headerTitle} closeDrawer={closeDrawerWithCheckingData} />}
             width={drawerWidth}
             maskClosable={false}
             closeIcon={null}

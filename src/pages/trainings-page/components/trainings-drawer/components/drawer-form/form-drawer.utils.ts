@@ -1,9 +1,10 @@
 import { ExerciseType, NewTrainRequestType } from '@redux/api/api-types';
 import { dateFullStringFormat } from '@utils/constants/date-formats';
 import type { RangePickerProps } from 'antd/es/date-picker';
+import { FormInstance } from 'antd/es/form/Form';
 import moment from 'moment';
 
-import { FormFieldsType } from './form-drawer.types';
+import { FormFieldsType, FormFieldType } from './form-drawer.types';
 
 export const disabledDate: RangePickerProps['disabledDate'] = (current) =>
     !current.isSameOrAfter(moment());
@@ -41,4 +42,16 @@ export const prepareDataRequest = (values: FormFieldsType) => {
     }
 
     return null;
+};
+
+export const checkDisabledSubmit = (form: FormInstance<FormFieldsType>): boolean => {
+    const hasSelectTrainValue = !!form.getFieldValue('trainingsSelect');
+    const isDateSelected = !!form.getFieldValue('trainingsDate');
+    const hasExercises =
+        form
+            .getFieldValue('exercises')
+            .filter((elem: FormFieldType | undefined) => elem && elem.exercise.length > 0).length >
+        0;
+
+    return !(hasSelectTrainValue && isDateSelected && hasExercises);
 };

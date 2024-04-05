@@ -27,8 +27,6 @@ export const CardsSection: FC = () => {
     const handleMoveToTrainingsPage = async () => {
         const result = await fetchAllTrainings();
 
-        console.log(result);
-
         if (result) {
             history.push(Paths.TRAININGS_PAGE, { allowRequest: true });
         }

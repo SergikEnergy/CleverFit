@@ -2,6 +2,7 @@ import { FC } from 'react';
 import { ArrowLeftOutlined } from '@ant-design/icons';
 import { TrainingsResponseType } from '@redux/api/api-types';
 import { DRAWER_EDIT_MODE } from '@utils/constants/train-modes';
+import { getColorTrainByName } from '@utils/get-color-badge-by-name';
 import { Button, Divider } from 'antd';
 import moment from 'moment';
 
@@ -36,7 +37,13 @@ export const CustomOverlay: FC<CustomOverlayPropsType> = ({ training, closeActio
                 />
                 <div className={classes.name}>{training.name}</div>
             </div>
-            <Divider style={{ marginTop: 10, marginBottom: 12, color: '#FADB14' }} />
+            <Divider
+                style={{
+                    marginTop: 0,
+                    marginBottom: 16,
+                    borderColor: `${getColorTrainByName(training.name)}`,
+                }}
+            />
             <ul className={classes.exercises__list}>
                 {training.exercises.map((exercise, index) => (
                     <li key={`${exercise.name}-${index + 1}`} className={classes.exercise}>
@@ -44,8 +51,14 @@ export const CustomOverlay: FC<CustomOverlayPropsType> = ({ training, closeActio
                     </li>
                 ))}
             </ul>
-            <Divider style={{ marginTop: 12, marginBottom: 12 }} />
-            <Button disabled={disabledAddButton} type='ghost' onClick={handleAddExercisesClick}>
+            <Divider style={{ marginTop: 2, marginBottom: 16 }} />
+            <Button
+                className={classes.button}
+                block={true}
+                disabled={disabledAddButton}
+                type='ghost'
+                onClick={handleAddExercisesClick}
+            >
                 Добавить упражнения
             </Button>
         </div>

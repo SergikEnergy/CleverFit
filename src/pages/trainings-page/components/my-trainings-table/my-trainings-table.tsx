@@ -1,5 +1,6 @@
 import { FC } from 'react';
 import { PlusOutlined } from '@ant-design/icons';
+import { useWindowWidth } from '@hooks/use-window-size';
 import { useUserTrainingsSelector } from '@redux/selectors';
 import { DRAWER_ADD_MODE, DRAWER_EDIT_MODE } from '@utils/constants/train-modes';
 import { Button, Table } from 'antd';
@@ -15,11 +16,13 @@ import { MyCustomColumns } from './my-trainings-table-column';
 import classes from './my-trainings-table.module.css';
 
 export const MyTrainingsTable: FC = () => {
+    const innerWindowWidth = useWindowWidth();
     const { userTrainings } = useUserTrainingsSelector();
     const { changeMode, openDrawer, changeActiveTrainingId } = useTrainingsDrawerContext();
 
     const handleCreateButtonClick = () => {
         changeMode(DRAWER_ADD_MODE);
+        changeActiveTrainingId('');
         openDrawer();
     };
 
@@ -67,7 +70,7 @@ export const MyTrainingsTable: FC = () => {
                     defaultCurrent: 1,
                     hideOnSinglePage: true,
                     className: classes.pagination,
-                    pageSize: 14,
+                    pageSize: innerWindowWidth > 600 ? 14 : 9,
                 }}
             />
             <Button

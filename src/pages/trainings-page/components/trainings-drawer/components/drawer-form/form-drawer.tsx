@@ -1,7 +1,9 @@
-import { FC, useState } from 'react';
-import { useUpdateTrainings } from '@hooks/use-update-trainings';
+import { FC, useLayoutEffect, useState } from 'react';
+import { useAddNewTraining } from '@hooks/use-add-new-training';
+import { useUpdateUserTraining } from '@hooks/use-update-user-training';
 import { useUserTrainingsSelector } from '@redux/selectors';
-import { dateFullFormatWithDot } from '@utils/constants/date-formats';
+import { dateFullFormatWithDot, dateFullStringFormat } from '@utils/constants/date-formats';
+import { DRAWER_EDIT_MODE } from '@utils/constants/train-modes';
 import { Button, Checkbox, DatePicker, Form, Select } from 'antd';
 import type { CheckboxChangeEvent } from 'antd/es/checkbox';
 import locale from 'antd/es/date-picker/locale/ru_RU';
@@ -13,8 +15,8 @@ import { useTrainingsDrawerContext } from '../../../../../../react-contexts';
 import { FormDrawerList } from '../form-drawer-list/form-drawer-list';
 
 import { initialEmptyFormFields, selectPeriodOptions } from './form-drawer.data';
-import { FormDrawerPropsType, FormFieldsType, FormFieldType } from './form-drawer.types';
-import { disabledDate, prepareDataRequest } from './form-drawer.utils';
+import { FormDrawerPropsType, FormFieldsType } from './form-drawer.types';
+import { checkDisabledSubmit, disabledDate, prepareDataRequest } from './form-drawer.utils';
 import { DataCellRender } from './form-drawer-cell-render';
 
 import classes from './form-drawer.module.css';
@@ -24,12 +26,45 @@ import 'moment/dist/locale/ru';
 moment.locale('ru');
 
 export const FormDrawer: FC<FormDrawerPropsType> = () => {
-    const { closeDrawer, open: isDrawerOpened } = useTrainingsDrawerContext();
-    const [isSubmitDisabled, setIsSubmitDisabled] = useState(true);
-    const [allowSelectPeriod, setAllowSelectPeriod] = useState(false);
     const [form] = Form.useForm<FormFieldsType>();
-    const { allowedTrainingsList } = useUserTrainingsSelector();
-    const updateTrainingsRequest = useUpdateTrainings();
+    const {
+        closeDrawer,
+        open: isDrawerOpened,
+        activeTrainingId,
+        modeDrawer,
+    } = useTrainingsDrawerContext();
+    const [isSubmitDisabled, setIsSubmitDisabled] = useState(true);
+    const { allowedTrainingsList, userTrainings } = useUserTrainingsSelector();
+    const addNewUserTrainingRequest = useAddNewTraining();
+    const updateUserTrainingInfo = useUpdateUserTraining();
+    const activeTraining = userTrainings.filter((elem) => elem._id === activeTrainingId);
+    const isShowedPeriodSelect =
+        activeTraining.length > 0 && activeTraining[0].parameters
+            ? activeTraining[0].parameters.repeat
+            : false;
+    const [allowSelectPeriod, setAllowSelectPeriod] = useState(isShowedPeriodSelect);
+
+    const initialFormValues =
+        activeTraining.length > 0
+            ? {
+                  exercises: activeTraining[0].exercises.map((exercise) => ({
+                      key: exercise.name,
+                      name: exercise.name,
+                      exercise: exercise.name,
+                      replays: exercise.replays,
+                      weight: exercise.weight,
+                      approaches: exercise.approaches,
+                  })),
+                  trainingsSelect: activeTraining[0].name,
+                  trainingsDate: moment(activeTraining[0].date, dateFullStringFormat),
+                  withPeriodActivate: activeTraining[0].parameters
+                      ? activeTraining[0].parameters.repeat
+                      : false,
+                  periodSelect: activeTraining[0].parameters
+                      ? activeTraining[0].parameters.period
+                      : undefined,
+              }
+            : initialEmptyFormFields;
 
     const allowedOptions: Array<{ value: string; label: string }> = allowedTrainingsList.map(
         (elem) => ({
@@ -39,12 +74,12 @@ export const FormDrawer: FC<FormDrawerPropsType> = () => {
     );
 
     if (!isDrawerOpened) {
-        // form.resetFields();
+        form.resetFields();
     }
 
-    const selectPeriodChangeHandler = (value: number) => {
-        console.log(value);
-    };
+    useLayoutEffect(() => {
+        setIsSubmitDisabled(checkDisabledSubmit(form));
+    }, [form]);
 
     const activateAdditionalSelect = (event: CheckboxChangeEvent) =>
         event.target.checked ? setAllowSelectPeriod(true) : setAllowSelectPeriod(false);
@@ -52,30 +87,20 @@ export const FormDrawer: FC<FormDrawerPropsType> = () => {
     const finishFunc = async (values: FormFieldsType) => {
         const requestBody = prepareDataRequest(values);
 
-        if (requestBody) updateTrainingsRequest(requestBody);
+        if (requestBody && modeDrawer !== DRAWER_EDIT_MODE) {
+            addNewUserTrainingRequest(requestBody);
+        }
+        if (requestBody && modeDrawer === DRAWER_EDIT_MODE && activeTraining.length > 0) {
+            updateUserTrainingInfo(requestBody, activeTraining[0]._id);
+        }
 
         closeDrawer();
     };
 
-    const onSelectChange = (value: string) => {
-        console.log(value, 'select value');
-    };
-
-    const onSelectedDateChange = (value: Moment | null) => {
-        if (value) {
-            console.log(value, 'selectedDate');
-        }
-    };
-
     const formFieldsChangeHandler = () => {
-        const hasSelectTrainValue = !!form.getFieldValue('trainingsSelect');
-        const isDateSelected = !!form.getFieldValue('trainingsDate');
-        const hasExercises =
-            form
-                .getFieldValue('exercises')
-                .filter((elem: FormFieldType | undefined) => elem && elem.exercise.length > 0)
-                .length > 0;
-        setIsSubmitDisabled(!(hasSelectTrainValue && isDateSelected && hasExercises));
+        const isDisabled = checkDisabledSubmit(form);
+
+        setIsSubmitDisabled(isDisabled);
     };
 
     const dateCellRender = (date: Moment) => <DataCellRender date={date} />;
@@ -88,16 +113,15 @@ export const FormDrawer: FC<FormDrawerPropsType> = () => {
             name='formUserPersonalTrainings'
             onFinish={finishFunc}
             autoComplete='off'
-            initialValues={initialEmptyFormFields}
+            initialValues={initialFormValues}
             className={classes.form}
         >
             <div className={classes.body}>
-                <Form.Item name='trainingsSelect' initialValue={null} className={classes.training}>
+                <Form.Item name='trainingsSelect' className={classes.training}>
                     <Select
                         data-test-id={WORKOUT_DATA_TEST_ID.modalCreateExerciseSelect}
                         placeholder='Выбор типа тренировки'
                         optionFilterProp='children'
-                        onChange={onSelectChange}
                         filterOption={(input, option) =>
                             (option?.label.toLowerCase() ?? '').includes(input.toLowerCase())
                         }
@@ -112,7 +136,6 @@ export const FormDrawer: FC<FormDrawerPropsType> = () => {
                             dateRender={dateCellRender}
                             locale={locale}
                             format={dateFullFormatWithDot}
-                            onChange={onSelectedDateChange}
                             disabledDate={disabledDate}
                         />
                     </Form.Item>
@@ -145,7 +168,6 @@ export const FormDrawer: FC<FormDrawerPropsType> = () => {
                                     )
                                 }
                                 options={selectPeriodOptions}
-                                onChange={selectPeriodChangeHandler}
                             />
                         </Form.Item>
                     </div>

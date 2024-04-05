@@ -31,7 +31,6 @@ export const MyCustomColumns: ColumnsType<MyTrainingsTableDataType> = [
         rowSpan: 1,
         dataIndex: 'period',
         key: 'sorted period',
-        defaultSortOrder: 'descend',
         sorter: (training1, training2) => training1.period - training2.period,
         render: (period) => {
             const stringedPeriod = setPeriodToString(period);

@@ -156,10 +156,12 @@ body {
     --padding-big-top-bottom-frames: 64px 0;
     --padding-middle-top-bottom-frames: 32px 0;
     --padding-small-top-bottom-frames: 16px 0;
+    --padding-popup-card: 16px 12px;
     --padding-modal-error-main: 32px 32px 24px;
     --padding-error-get-trains-main: 24px 16px;
     --label--padding: 4px 8px;
     --padding-small-size: 8px;
+    --padding-card-main: 12px;
     --padding-little-size: 16px;
     --padding-medium-size: 24px;
     --padding-middle-size: 32px;
