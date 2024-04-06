@@ -2,14 +2,18 @@ import { PartnersResponseType } from '@redux/api/api-types';
 import type { PayloadAction } from '@reduxjs/toolkit';
 import { createSlice } from '@reduxjs/toolkit';
 
+export type TogetherTrainingsMode = 'random' | 'user';
+
 type TrainingPartnersType = {
     userPartners: PartnersResponseType[];
     randomPartners: PartnersResponseType[];
+    togetherMode: TogetherTrainingsMode;
 };
 
 const initialTrainingPartnersState: TrainingPartnersType = {
     userPartners: [],
     randomPartners: [],
+    togetherMode: 'user',
 };
 
 const slice = createSlice({
@@ -29,9 +33,20 @@ const slice = createSlice({
         resetTrainingPartners: (state) => {
             state.userPartners = [];
             state.randomPartners = [];
+            state.togetherMode = 'user';
+        },
+        changeTrainingsMode: (state, { payload }: PayloadAction<TogetherTrainingsMode>) => {
+            if (payload) {
+                state.togetherMode = payload;
+            }
         },
     },
 });
 
-export const { setTrainingPartners, setRandomPartners, resetTrainingPartners } = slice.actions;
+export const {
+    setTrainingPartners,
+    setRandomPartners,
+    resetTrainingPartners,
+    changeTrainingsMode,
+} = slice.actions;
 export const partnersReducer = slice.reducer;

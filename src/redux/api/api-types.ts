@@ -151,3 +151,5 @@ export type PartnersResponseType = {
     inviteId: string;
     status: string;
 };
+
+export type InviteStatusType = 'accepted' | 'rejected' | null;

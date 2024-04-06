@@ -1,0 +1,25 @@
+.line {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.title {
+    font-family: var(--main-font-family);
+    font-size: var(--font-size-mobile);
+    line-height: var(--main-line-height);
+    color: var(--character-light-secondary-45);
+    width: 50%;
+    text-align: left;
+}
+
+.description {
+    width: 45%;
+    font-family: var(--main-font-family);
+    font-size: var(--font-size-main);
+    font-weight: var(--font-weight-medium);
+    line-height: var(--main-line-height);
+    color: var(--primary-light-6);
+    text-align: center;
+}

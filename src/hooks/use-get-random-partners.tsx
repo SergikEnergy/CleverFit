@@ -53,9 +53,13 @@ export const useGetRandomPartners = () => {
                 dispatch(setRandomPartners(randomPartners));
             }
             stopLoader();
+
+            return true;
         } catch (error) {
             handleGetTrainingsError(error);
             stopLoader();
+
+            return false;
         }
     }, [dispatch, getAllRandomPartners, handleGetTrainingsError, stopLoader]);
 

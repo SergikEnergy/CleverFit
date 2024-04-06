@@ -1,6 +1,8 @@
 import { FC, Fragment, useEffect, useState } from 'react';
 import { AlertNotification } from '@components/notifications/alert/alert-notification';
+import { useAppDispatch } from '@hooks/typed-react-redux-hooks';
 import { useGetAllTrainingPartners } from '@hooks/use-get-all-training-partners';
+import { changeTrainingsMode } from '@redux/reducers/trainings-partners-slice';
 import { DRAWER_EDIT_MODE, SUBMIT_TRAIN_SUCCESS } from '@utils/constants/train-modes';
 import { Tabs } from 'antd';
 
@@ -21,6 +23,7 @@ export const TrainingsContent: FC = () => {
         modeDrawer,
     } = useTrainingsDrawerContext();
     const [activeKey, setActiveKey] = useState('');
+    const dispatch = useAppDispatch();
 
     const onChange = (key: string) => {
         setActiveKey(key);
@@ -29,8 +32,9 @@ export const TrainingsContent: FC = () => {
     useEffect(() => {
         if (activeKey === TOGETHER_TRAINING_KEY) {
             fetchUserTrainingPartners();
+            dispatch(changeTrainingsMode('user'));
         }
-    }, [activeKey, fetchUserTrainingPartners]);
+    }, [activeKey, dispatch, fetchUserTrainingPartners]);
 
     return (
         <Fragment>

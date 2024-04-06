@@ -1,11 +1,13 @@
 import { createContext } from 'react';
 
-export type EditOrCreateModeType = 'edit' | 'create' | 'add';
+export type EditOrCreateModeType = 'edit' | 'create' | 'add' | 'join';
 export type StatusSubmitType = 'success' | 'error';
 
 export type TrainingsDrawerContextType = {
     open: boolean;
     activeTrainingId: string;
+    activePartnerTrainingId: string;
+    changeActivePartnerTrainingId: (id: string) => void;
     changeActiveTrainingId: (id: string) => void;
     openDrawer: () => void;
     closeDrawer: () => void;
@@ -18,6 +20,8 @@ export type TrainingsDrawerContextType = {
 export const TrainingsDrawerContext = createContext<TrainingsDrawerContextType>({
     open: false,
     activeTrainingId: '',
+    activePartnerTrainingId: '',
+    changeActivePartnerTrainingId: () => {},
     modeDrawer: 'create',
     statusSubmit: 'error',
     changeActiveTrainingId: () => {},

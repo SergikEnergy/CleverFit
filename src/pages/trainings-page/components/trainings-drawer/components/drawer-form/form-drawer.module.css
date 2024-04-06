@@ -59,3 +59,9 @@ button.submit {
     line-height: var(--main-line-height);
     border: none;
 }
+
+@media screen and (max-width: 600px) {
+    .date {
+        width: 44%;
+    }
+}

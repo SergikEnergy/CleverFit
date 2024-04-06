@@ -1,0 +1,35 @@
+.info {
+    width: 100%;
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    margin-bottom: var(--margin-small-additional-size);
+}
+
+.avatar {
+    width: 42px;
+    height: 42px;
+}
+
+.avatar > span {
+    width: 100%;
+    height: 100%;
+    display: inline-block;
+}
+
+.user {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: var(--gap-extra-small);
+    width: 49%;
+}
+
+.name {
+    width: 50%;
+    font-family: var(--main-font-family);
+    font-size: var(--font-size-main);
+    font-weight: var(--font-weight-normal);
+    line-height: var(--main-line-height);
+    text-align: left;
+}

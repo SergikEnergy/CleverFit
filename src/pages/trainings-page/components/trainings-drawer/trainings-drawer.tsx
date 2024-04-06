@@ -4,6 +4,7 @@ import {
     DRAWER_ADD_MODE,
     DRAWER_CREATE_MODE,
     DRAWER_EDIT_MODE,
+    DRAWER_JOIN_MODE,
 } from '@utils/constants/train-modes';
 import { Drawer } from 'antd';
 
@@ -27,6 +28,8 @@ export const TrainingsDrawer: FC = () => {
         headerTitle = 'Редактирование';
     } else if (modeDrawer === DRAWER_ADD_MODE) {
         headerTitle = 'Добавление упражнений';
+    } else if (modeDrawer === DRAWER_JOIN_MODE) {
+        headerTitle = 'Совместная тренировка';
     }
 
     useEffect(() => {
@@ -48,7 +51,7 @@ export const TrainingsDrawer: FC = () => {
             maskClosable={false}
             closeIcon={null}
             open={isDrawerOpen}
-            bodyStyle={{ padding: '24px 32px' }}
+            bodyStyle={innerWindowWidth > 550 ? { padding: '24px 32px' } : { padding: '16px 24px' }}
         >
             {isDrawerOpen && <FormDrawer />}
         </Drawer>

@@ -15,6 +15,8 @@ export const DRAWER_CREATE_MODE: EditOrCreateModeType = 'create';
 
 export const DRAWER_ADD_MODE: EditOrCreateModeType = 'add';
 
+export const DRAWER_JOIN_MODE: EditOrCreateModeType = 'join';
+
 export const SUBMIT_TRAIN_SUCCESS: StatusSubmitType = 'success';
 
 export const SUBMIT_TRAIN_ERROR: StatusSubmitType = 'error';

@@ -1,9 +1,10 @@
-import { FC, useLayoutEffect, useState } from 'react';
+import { FC, Fragment, useLayoutEffect, useState } from 'react';
+import { PartnerTrainingShortInfo } from '@components/partner-training-short-info';
 import { useAddNewTraining } from '@hooks/use-add-new-training';
 import { useUpdateUserTraining } from '@hooks/use-update-user-training';
-import { useUserTrainingsSelector } from '@redux/selectors';
+import { usePartnersSelector, useUserTrainingsSelector } from '@redux/selectors';
 import { dateFullFormatWithDot, dateFullStringFormat } from '@utils/constants/date-formats';
-import { DRAWER_EDIT_MODE } from '@utils/constants/train-modes';
+import { DRAWER_EDIT_MODE, DRAWER_JOIN_MODE } from '@utils/constants/train-modes';
 import { Button, Checkbox, DatePicker, Form, Select } from 'antd';
 import type { CheckboxChangeEvent } from 'antd/es/checkbox';
 import locale from 'antd/es/date-picker/locale/ru_RU';
@@ -31,10 +32,12 @@ export const FormDrawer: FC<FormDrawerPropsType> = () => {
         closeDrawer,
         open: isDrawerOpened,
         activeTrainingId,
+        activePartnerTrainingId,
         modeDrawer,
     } = useTrainingsDrawerContext();
     const [isSubmitDisabled, setIsSubmitDisabled] = useState(true);
     const { allowedTrainingsList, userTrainings } = useUserTrainingsSelector();
+    const { randomPartners } = usePartnersSelector();
     const addNewUserTrainingRequest = useAddNewTraining();
     const updateUserTrainingInfo = useUpdateUserTraining();
     const activeTraining = userTrainings.filter((elem) => elem._id === activeTrainingId);
@@ -43,6 +46,8 @@ export const FormDrawer: FC<FormDrawerPropsType> = () => {
             ? activeTraining[0].parameters.repeat
             : false;
     const [allowSelectPeriod, setAllowSelectPeriod] = useState(isShowedPeriodSelect);
+    const selectedPartner =
+        randomPartners.filter((user) => user.id === activePartnerTrainingId)[0] || null;
 
     const initialFormValues =
         activeTraining.length > 0
@@ -93,6 +98,10 @@ export const FormDrawer: FC<FormDrawerPropsType> = () => {
         if (requestBody && modeDrawer === DRAWER_EDIT_MODE && activeTraining.length > 0) {
             updateUserTrainingInfo(requestBody, activeTraining[0]._id);
         }
+        if (requestBody && modeDrawer === DRAWER_JOIN_MODE) {
+            //
+            console.log(requestBody);
+        }
 
         closeDrawer();
     };
@@ -105,88 +114,103 @@ export const FormDrawer: FC<FormDrawerPropsType> = () => {
 
     const dateCellRender = (date: Moment) => <DataCellRender date={date} />;
 
+    if (modeDrawer === DRAWER_JOIN_MODE && selectedPartner) {
+        form.setFieldValue('trainingsSelect', selectedPartner.trainingType);
+    }
+
     return (
-        <Form
-            onFieldsChange={formFieldsChangeHandler}
-            form={form}
-            layout='vertical'
-            name='formUserPersonalTrainings'
-            onFinish={finishFunc}
-            autoComplete='off'
-            initialValues={initialFormValues}
-            className={classes.form}
-        >
-            <div className={classes.body}>
-                <Form.Item name='trainingsSelect' className={classes.training}>
-                    <Select
-                        data-test-id={WORKOUT_DATA_TEST_ID.modalCreateExerciseSelect}
-                        placeholder='Выбор типа тренировки'
-                        optionFilterProp='children'
-                        filterOption={(input, option) =>
-                            (option?.label.toLowerCase() ?? '').includes(input.toLowerCase())
+        <Fragment>
+            {modeDrawer === DRAWER_JOIN_MODE && selectedPartner && <PartnerTrainingShortInfo />}
+            <Form
+                onFieldsChange={formFieldsChangeHandler}
+                form={form}
+                layout='vertical'
+                name='formUserPersonalTrainings'
+                onFinish={finishFunc}
+                autoComplete='off'
+                initialValues={initialFormValues}
+                className={classes.form}
+            >
+                <div className={classes.body}>
+                    <Form.Item
+                        style={
+                            modeDrawer === DRAWER_JOIN_MODE && selectedPartner
+                                ? { display: 'none' }
+                                : { display: 'block' }
                         }
-                        options={allowedOptions}
-                    />
-                </Form.Item>
-                <div className={classes.wrapper__fields_two}>
-                    <Form.Item name='trainingsDate' className={classes.date}>
-                        <DatePicker
-                            data-test-id={WORKOUT_DATA_TEST_ID.modalDrawerRightDatePicker}
-                            className='trainings__drawer_date-picker'
-                            dateRender={dateCellRender}
-                            locale={locale}
-                            format={dateFullFormatWithDot}
-                            disabledDate={disabledDate}
+                        name='trainingsSelect'
+                        className={classes.training}
+                    >
+                        <Select
+                            data-test-id={WORKOUT_DATA_TEST_ID.modalCreateExerciseSelect}
+                            placeholder='Выбор типа тренировки'
+                            optionFilterProp='children'
+                            filterOption={(input, option) =>
+                                (option?.label.toLowerCase() ?? '').includes(input.toLowerCase())
+                            }
+                            options={allowedOptions}
                         />
                     </Form.Item>
-
-                    <Form.Item
-                        name='withPeriodActivate'
-                        valuePropName='checked'
-                        className={classes.period__activate}
-                    >
-                        <Checkbox
-                            data-test-id={WORKOUT_DATA_TEST_ID.modalDrawerRightCheckboxPeriod}
-                            className={classes.checkbox}
-                            onChange={(event) => activateAdditionalSelect(event)}
-                        >
-                            С периодичностью
-                        </Checkbox>
-                    </Form.Item>
-                </div>
-
-                {allowSelectPeriod && (
-                    <div className={classnames(classes.period, classes.wrapper__fields_two)}>
-                        <Form.Item name='periodSelect' className={classes.select}>
-                            <Select
-                                data-test-id={WORKOUT_DATA_TEST_ID.modalDrawerRightSelectPeriod}
-                                placeholder='Периодичность'
-                                optionFilterProp='children'
-                                filterOption={(input, option) =>
-                                    (option?.label.toLowerCase() ?? '').includes(
-                                        input.toLowerCase(),
-                                    )
-                                }
-                                options={selectPeriodOptions}
+                    <div className={classes.wrapper__fields_two}>
+                        <Form.Item name='trainingsDate' className={classes.date}>
+                            <DatePicker
+                                data-test-id={WORKOUT_DATA_TEST_ID.modalDrawerRightDatePicker}
+                                className='trainings__drawer_date-picker'
+                                dateRender={dateCellRender}
+                                locale={locale}
+                                format={dateFullFormatWithDot}
+                                disabledDate={disabledDate}
                             />
                         </Form.Item>
-                    </div>
-                )}
-                <FormDrawerList />
-            </div>
 
-            <Form.Item className={classes.button_block}>
-                <Button
-                    disabled={isSubmitDisabled}
-                    size='large'
-                    htmlType='submit'
-                    block={true}
-                    type='primary'
-                    className={classes.submit}
-                >
-                    Сохранить
-                </Button>
-            </Form.Item>
-        </Form>
+                        <Form.Item
+                            name='withPeriodActivate'
+                            valuePropName='checked'
+                            className={classes.period__activate}
+                        >
+                            <Checkbox
+                                data-test-id={WORKOUT_DATA_TEST_ID.modalDrawerRightCheckboxPeriod}
+                                className={classes.checkbox}
+                                onChange={(event) => activateAdditionalSelect(event)}
+                            >
+                                С периодичностью
+                            </Checkbox>
+                        </Form.Item>
+                    </div>
+
+                    {allowSelectPeriod && (
+                        <div className={classnames(classes.period, classes.wrapper__fields_two)}>
+                            <Form.Item name='periodSelect' className={classes.select}>
+                                <Select
+                                    data-test-id={WORKOUT_DATA_TEST_ID.modalDrawerRightSelectPeriod}
+                                    placeholder='Периодичность'
+                                    optionFilterProp='children'
+                                    filterOption={(input, option) =>
+                                        (option?.label.toLowerCase() ?? '').includes(
+                                            input.toLowerCase(),
+                                        )
+                                    }
+                                    options={selectPeriodOptions}
+                                />
+                            </Form.Item>
+                        </div>
+                    )}
+                    <FormDrawerList />
+                </div>
+
+                <Form.Item className={classes.button_block}>
+                    <Button
+                        disabled={isSubmitDisabled}
+                        size='large'
+                        htmlType='submit'
+                        block={true}
+                        type='primary'
+                        className={classes.submit}
+                    >
+                        {modeDrawer === DRAWER_JOIN_MODE ? 'Отправить приглашение' : 'Сохранить'}
+                    </Button>
+                </Form.Item>
+            </Form>
+        </Fragment>
     );
 };

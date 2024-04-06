@@ -1,4 +1,4 @@
-import { FC, useEffect, useState } from 'react';
+import { FC, useEffect } from 'react';
 import { useAppDispatch } from '@hooks/typed-react-redux-hooks';
 import { useGetAllRandomPartnersQuery } from '@redux/api/trainings-api';
 import { setRandomPartners } from '@redux/reducers/trainings-partners-slice';
@@ -11,13 +11,10 @@ import { RandomPartnersBlock } from '../random-partners-block';
 
 import classes from './together-trainings-content.module.css';
 
-type MyOrRandomPartnersType = 'random' | 'user';
-
 export const TogetherTrainingsContent: FC = () => {
     const dispatch = useAppDispatch();
-    const [selection, setSelection] = useState<MyOrRandomPartnersType>('user');
     const { data: randomPartners, isSuccess } = useGetAllRandomPartnersQuery();
-    const { userPartners } = usePartnersSelector();
+    const { userPartners, togetherMode } = usePartnersSelector();
 
     useEffect(() => {
         if (randomPartners && isSuccess) {
@@ -27,13 +24,13 @@ export const TogetherTrainingsContent: FC = () => {
 
     return (
         <div className={classes.content}>
-            <BaseLayoutTogether setRandomSelection={() => setSelection('random')}>
-                {selection === 'user' && userPartners.length === 0 && <EmptyPartnersBlock />}
-                {selection === 'user' && userPartners.length > 0 && <MyPartnersBlock />}
-                {selection === 'random' && randomPartners && randomPartners.length > 0 && (
-                    <RandomPartnersBlock />
-                )}
-            </BaseLayoutTogether>
+            {togetherMode === 'user' && (
+                <BaseLayoutTogether>
+                    {userPartners.length === 0 && <EmptyPartnersBlock />}
+                    {userPartners.length > 0 && <MyPartnersBlock />}
+                </BaseLayoutTogether>
+            )}
+            {togetherMode === 'random' && <RandomPartnersBlock />}
         </div>
     );
 };

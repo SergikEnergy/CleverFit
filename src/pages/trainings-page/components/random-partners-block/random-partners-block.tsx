@@ -1,15 +1,53 @@
-import { FC } from 'react';
+import { FC, useCallback, useState } from 'react';
+import { SearchByNameBlock } from '@components/search-by-name-block';
 import { usePartnersSelector } from '@redux/selectors';
+import { Pagination } from 'antd';
 
 import { EmptyPartnersBlock } from '../empty-partners-block';
 import { RandomPartnersCards } from '../random-partners-cards/random-partners-cards';
 
+import classes from './random-partners-block.module.css';
+
 export const RandomPartnersBlock: FC = () => {
     const { randomPartners } = usePartnersSelector();
+    const [currentPage, setCurrentPage] = useState(1);
+    const [selectedName, setSelectedName] = useState('');
+    const pageSize = 16;
+
+    const filteredPartners = randomPartners.filter((partner) =>
+        selectedName
+            ? partner.name.toLowerCase().trim().includes(selectedName.toLowerCase().trim())
+            : true,
+    );
+
+    const startIndex = (currentPage - 1) * pageSize;
+    const endIndex = startIndex + pageSize;
+    const currentPartners = filteredPartners.slice(startIndex, endIndex);
+
+    const onPageChange = (page: number) => setCurrentPage(page);
+
+    const changeSelection = useCallback((selected: string) => {
+        setSelectedName(selected);
+    }, []);
 
     if (!randomPartners || (randomPartners && randomPartners.length === 0)) {
         return <EmptyPartnersBlock />;
     }
 
-    return <RandomPartnersCards />;
+    return (
+        <div className={classes.wrapper}>
+            <SearchByNameBlock action={() => {}} changeSelection={changeSelection} />
+            <RandomPartnersCards partners={currentPartners} selectedPhrase={selectedName} />
+            <Pagination
+                style={{ textAlign: 'left', marginTop: 16 }}
+                className={classes.pagination}
+                current={currentPage}
+                pageSize={16}
+                total={filteredPartners.length}
+                onChange={onPageChange}
+                hideOnSinglePage={true}
+                size='small'
+            />
+        </div>
+    );
 };
