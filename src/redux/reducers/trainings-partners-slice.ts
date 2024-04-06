@@ -2,18 +2,22 @@ import { PartnersResponseType } from '@redux/api/api-types';
 import type { PayloadAction } from '@reduxjs/toolkit';
 import { createSlice } from '@reduxjs/toolkit';
 
-export type TogetherTrainingsMode = 'random' | 'user';
+export type TogetherTrainingsMode = 'random' | 'user' | 'similar';
 
 type TrainingPartnersType = {
     userPartners: PartnersResponseType[];
     randomPartners: PartnersResponseType[];
+    similarPartners: PartnersResponseType[];
     togetherMode: TogetherTrainingsMode;
+    trainingType: string;
 };
 
 const initialTrainingPartnersState: TrainingPartnersType = {
     userPartners: [],
     randomPartners: [],
+    similarPartners: [],
     togetherMode: 'user',
+    trainingType: '',
 };
 
 const slice = createSlice({
@@ -25,7 +29,17 @@ const slice = createSlice({
                 state.userPartners = payload;
             }
         },
+        setTrainingType: (state, { payload }: PayloadAction<string>) => {
+            if (payload) {
+                state.trainingType = payload;
+            }
+        },
         setRandomPartners: (state, { payload }: PayloadAction<PartnersResponseType[]>) => {
+            if (payload) {
+                state.randomPartners = payload;
+            }
+        },
+        setSimilarPartners: (state, { payload }: PayloadAction<PartnersResponseType[]>) => {
             if (payload) {
                 state.randomPartners = payload;
             }
@@ -33,6 +47,7 @@ const slice = createSlice({
         resetTrainingPartners: (state) => {
             state.userPartners = [];
             state.randomPartners = [];
+            state.similarPartners = [];
             state.togetherMode = 'user';
         },
         changeTrainingsMode: (state, { payload }: PayloadAction<TogetherTrainingsMode>) => {
@@ -45,8 +60,11 @@ const slice = createSlice({
 
 export const {
     setTrainingPartners,
+    setTrainingType,
     setRandomPartners,
+    setSimilarPartners,
     resetTrainingPartners,
     changeTrainingsMode,
 } = slice.actions;
+
 export const partnersReducer = slice.reducer;

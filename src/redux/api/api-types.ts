@@ -151,5 +151,10 @@ export type PartnersResponseType = {
     inviteId: string;
     status: string;
 };
+export type QueryPartnersTrainingType = {
+    trainingType: string;
+};
 
 export type InviteStatusType = 'accepted' | 'rejected' | null;
+
+export type RequestPartnersByInterestType = 'random' | 'similar';

@@ -7,6 +7,7 @@ import {
     ChangeFutureTrainRequestType,
     NewTrainRequestType,
     PartnersResponseType,
+    QueryPartnersTrainingType,
     TrainingsResponseType,
 } from './api-types';
 
@@ -83,6 +84,17 @@ export const trainingsAPI = createApi({
                 credentials: 'include',
             }),
         }),
+        getAllSimilarPartners: build.query<PartnersResponseType[], QueryPartnersTrainingType>({
+            query: (arg) => {
+                const { trainingType } = arg;
+
+                return {
+                    url: 'catalogs/user-joint-training-list',
+                    credentials: 'include',
+                    params: { trainingType },
+                };
+            },
+        }),
     }),
 });
 
@@ -97,4 +109,5 @@ export const {
     useGetAllTrainingsPartnersQuery,
     useLazyGetAllRandomPartnersQuery,
     useGetAllRandomPartnersQuery,
+    useLazyGetAllSimilarPartnersQuery,
 } = trainingsAPI;

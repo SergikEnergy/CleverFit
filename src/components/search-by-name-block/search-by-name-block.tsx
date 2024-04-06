@@ -4,6 +4,8 @@ import { useAppDispatch } from '@hooks/typed-react-redux-hooks';
 import { changeTrainingsMode } from '@redux/reducers/trainings-partners-slice';
 import { Button, Input } from 'antd';
 
+import { WORKOUT_DATA_TEST_ID } from '../../data/data-test-ids';
+
 import classes from './search-by-name-block.module.css';
 
 type SearchByNameBlockPropsType = {
@@ -42,6 +44,7 @@ export const SearchByNameBlock: FC<SearchByNameBlockPropsType> = ({
                 Назад
             </Button>
             <Input.Search
+                data-test-id={WORKOUT_DATA_TEST_ID.searchInput}
                 onSearch={onSearch}
                 placeholder='Поиск по имени'
                 onChange={onChange}

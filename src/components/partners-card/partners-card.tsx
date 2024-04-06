@@ -21,8 +21,9 @@ type PartnersCardType = {
 export const PartnersCard: FC<PartnersCardType> = ({ partner, index, selectedPhrase }) => {
     const { avgWeightInWeek, status, trainingType, imageSrc, name, id: partnerId } = partner;
     const { changeMode, changeActivePartnerTrainingId, openDrawer } = useTrainingsDrawerContext();
-    const isApproved = status === INVITE_STATUS.agree;
-    const isRejected = status === INVITE_STATUS.reject;
+    const isApproved = status === INVITE_STATUS.accepted;
+    const isRejected = status === INVITE_STATUS.rejected;
+    const isPending = status === INVITE_STATUS.pending;
     const buttonText = (isApproved && 'Отменить тренировку') || 'Создать тренировку';
 
     const addPartnerClickHandler = () => {
@@ -54,7 +55,7 @@ export const PartnersCard: FC<PartnersCardType> = ({ partner, index, selectedPhr
                 />
             </div>
             <Button
-                disabled={isRejected}
+                disabled={isRejected || isPending}
                 onClick={addPartnerClickHandler}
                 type={isApproved ? 'default' : 'primary'}
                 className={classnames(classes.button, {
@@ -67,6 +68,7 @@ export const PartnersCard: FC<PartnersCardType> = ({ partner, index, selectedPhr
             <div className={classes.label}>
                 {isApproved && <span>тренировка одобрена</span>}
                 {isRejected && <span>тренировка отклонена</span>}
+                {isPending && <span>ожидает подтверждения</span>}
                 {(isApproved || isRejected) && (
                     <span>
                         {isApproved && <CheckCircleFilled style={{ color: '#52C41A' }} />}

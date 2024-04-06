@@ -1,6 +1,6 @@
 import { FC, useState } from 'react';
 import { MinusOutlined, PlusOutlined } from '@ant-design/icons';
-import { DRAWER_EDIT_MODE } from '@utils/constants/train-modes';
+import { DRAWER_EDIT_MODE, DRAWER_JOIN_MODE } from '@utils/constants/train-modes';
 import { Button, Checkbox, Form, Input, InputNumber } from 'antd';
 import type { CheckboxChangeEvent } from 'antd/es/checkbox';
 
@@ -11,7 +11,7 @@ import classes from './form-drawer-list.module.css';
 export const FormDrawerList: FC = () => {
     const [deletedIndexes, setDeletedIndexes] = useState<number[]>([]);
     const { modeDrawer } = useTrainingsDrawerContext();
-    const isEditMode = modeDrawer === DRAWER_EDIT_MODE;
+    const isEditMode = modeDrawer === DRAWER_EDIT_MODE || modeDrawer === DRAWER_JOIN_MODE;
 
     const checkboxChangeHandler = (e: CheckboxChangeEvent, name: number) => {
         if (e.target.checked) {

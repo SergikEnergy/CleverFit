@@ -5,11 +5,13 @@ import { useGetAllowedTrainingsLists } from '@hooks/use-get-allowed-trainings-li
 import { useWindowWidth } from '@hooks/use-window-size';
 import { BasePagesLayout } from '@pages/base-pages-layout';
 import { useGetAllTrainingsQuery } from '@redux/api/trainings-api';
+import { setTrainingType } from '@redux/reducers/trainings-partners-slice';
 import {
     setAllowedTrainingsList,
     setUserTrainingsFromServer,
 } from '@redux/reducers/trainings-slice';
 import { useAuthSelector } from '@redux/selectors';
+import { getUserTrainingsType } from '@utils/get-user-trainings-type';
 
 import { TrainingsDrawerContextProvider, useCollapseContext } from '../../react-contexts';
 import { Paths } from '../../routes/pathes';
@@ -41,6 +43,17 @@ export const TrainingsPage: FC = () => {
             dispatch(setUserTrainingsFromServer(userTrainingsData));
         }
     }, [dispatch, isSuccessGettingAllTrainings, token, userTrainingsData]);
+
+    useEffect(() => {
+        if (
+            userTrainingsData &&
+            userTrainingsData.length > 0 &&
+            trainingsList &&
+            trainingsList.length > 0
+        ) {
+            dispatch(setTrainingType(getUserTrainingsType(userTrainingsData, trainingsList)));
+        }
+    }, [dispatch, trainingsList, userTrainingsData]);
 
     useEffect(() => {
         if (innerWindowWidth < 500 && firstRender.current) {

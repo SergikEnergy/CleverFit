@@ -1,3 +1,5 @@
+import { RequestPartnersByInterestType } from '@redux/api/api-types';
+
 import {
     EditOrCreateModeType,
     StatusSubmitType,
@@ -20,3 +22,5 @@ export const DRAWER_JOIN_MODE: EditOrCreateModeType = 'join';
 export const SUBMIT_TRAIN_SUCCESS: StatusSubmitType = 'success';
 
 export const SUBMIT_TRAIN_ERROR: StatusSubmitType = 'error';
+
+export const REQUEST_SIMILAR: RequestPartnersByInterestType = 'similar';

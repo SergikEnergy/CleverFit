@@ -1,6 +1,8 @@
 import { FC } from 'react';
 import { CloseOutlined } from '@ant-design/icons';
 import { useGetRandomPartners } from '@hooks/use-get-random-partners';
+import { useGetSimilarPartners } from '@hooks/use-get-similar-partners';
+import { usePartnersSelector } from '@redux/selectors';
 import { getIconFromStatus, StatusMessageType } from '@utils/get-icon-from-status';
 import { Button } from 'antd';
 
@@ -23,7 +25,9 @@ export const ErrorShowPartners: FC<ErrorShowPartnersPropsType> = ({
     random = false,
 }) => {
     const { closeModal, setNode } = useModalReportContext();
+    const { trainingType } = usePartnersSelector();
     const fetchRandomPartners = useGetRandomPartners();
+    const fetchSimilarPartners = useGetSimilarPartners();
     const title = 'При открытии данных произошла ошибка';
     const subtitle = 'Попробуйте ещё раз.';
     const buttonText = 'Обновить';
@@ -36,7 +40,10 @@ export const ErrorShowPartners: FC<ErrorShowPartnersPropsType> = ({
         if (buttonActionClick) buttonActionClick();
         if (random) {
             fetchRandomPartners();
+        } else if (trainingType) {
+            fetchSimilarPartners({ trainingType });
         }
+
         setNode(null);
         closeModal();
     };
