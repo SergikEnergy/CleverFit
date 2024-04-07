@@ -138,6 +138,7 @@ body {
     --font-weight-normal: 400;
     --font-weight-medium: 500;
     --font-weight-title: 600;
+    --font-weight-message: 700;
     --font-weight-title-result: 500;
     --font-size-title: 1.6rem;
     --font-size-big-title: 2rem;
@@ -158,6 +159,8 @@ body {
     --padding-middle-top-bottom-frames: 32px 0;
     --padding-small-top-bottom-frames: 16px 0;
     --padding-popup-card: 16px 12px;
+    --padding-messages-group-desktop: 16px 24px;
+    --padding-messages-group-mobile: 16px 24px;
     --padding-modal-error-main: 32px 32px 24px;
     --padding-error-get-trains-main: 24px 16px;
     --label--padding: 4px 8px;
@@ -173,6 +176,7 @@ body {
     --padding-trainings-page-desktop: 19px 24px 23px;
     --padding-calendar-page-mobile: 24px 24px 42px;
     --padding-not-found-page-main: 24px 24px 42px;
+    --padding-message-card-desktop: 20px 20px 20px 12px;
     --margin-zero: 0;
     --margin-small-size: 8px;
     --margin-small-additional-size: 12px;
@@ -202,6 +206,7 @@ body {
     --border-radius-big: 15px;
     --border-radius-small: 8px;
     --border-radius-zero: 0%;
+    --border-message-card-desktop: 2px 16px 16px 16px;
 
     /* box-shadows */
 

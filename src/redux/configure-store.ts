@@ -15,6 +15,7 @@ import { tariffInfoReducer } from './reducers/tariff-slice';
 import { partnersReducer } from './reducers/trainings-partners-slice';
 import { trainingsReducer } from './reducers/trainings-slice';
 import { uploadProgressReducer } from './reducers/upload-progress-slice';
+import { userInvitationsReducer } from './reducers/user-invitations-slice';
 import { userReducer } from './reducers/user-slice';
 
 const { createReduxHistory, routerMiddleware, routerReducer } = createReduxHistoryContext({
@@ -39,6 +40,7 @@ export const store = configureStore({
         tariffsList: tariffInfoReducer,
         userTrainings: trainingsReducer,
         trainingPartners: partnersReducer,
+        invitationsForUser: userInvitationsReducer,
     },
     middleware: (getDefaultMiddleware) =>
         getDefaultMiddleware().concat([

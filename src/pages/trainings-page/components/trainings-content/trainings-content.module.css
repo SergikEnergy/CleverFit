@@ -27,13 +27,19 @@
 .trainings_tabs :global(.ant-tabs-tab:first-child) {
     margin-left: var(--margin-small-size);
 }
-.trainings_tabs :global(.ant-tabs-tab) {
+.trainings_tabs :global(.ant-tabs-tab),
+.trainings_tabs :global(.ant-tabs-tab .ant-badge) {
     font-size: var(--font-size-tabs-trainings-main);
     line-height: 130%;
     font-family: var(--main-font-family);
     font-style: var(--font-style-main);
     font-weight: var(--font-weight-medium);
 }
+
+.trainings_tabs :global(.ant-tabs-tab:has([aria-selected='true']) .ant-badge) {
+    color: #1890ff;
+}
+
 .trainings > :global(.ant-tabs-content),
 .trainings > :global(.ant-tabs-tabpane) {
     height: 100%;

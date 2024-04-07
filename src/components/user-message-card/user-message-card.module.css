@@ -1,0 +1,114 @@
+.card {
+    padding: var(--padding-message-card-desktop);
+    box-shadow: var(--card-main-page-box-shadow);
+    border-radius: var(--border-message-card-desktop);
+    background-color: var(--neutral-gray-1);
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: var(--gap-extra-small);
+}
+
+.title {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    gap: var(--gap-extra-small);
+    width: 20%;
+}
+
+.avatar {
+    width: 42px;
+    height: 42px;
+}
+.avatar > span {
+    width: 100%;
+    height: 100%;
+}
+
+.name {
+    font-family: var(--main-font-family);
+    color: var(--character-light-title-85);
+    font-size: var(--font-size-title);
+    font-weight: var(--font-weight-normal);
+    line-height: var(--main-line-height);
+}
+
+.info {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    gap: var(--gap-extra-small);
+}
+
+.date {
+    font-family: var(--main-font-family);
+    color: var(--neutral-gray-6);
+    font-size: var(--font-size-mobile);
+    font-weight: var(--font-weight-normal);
+    line-height: var(--main-line-height);
+}
+
+.description {
+    color: var(--primary-light-9);
+    font-family: var(--main-font-family);
+    font-size: var(--font-size-title);
+    font-weight: var(--font-weight-message);
+    line-height: var(--main-line-height);
+    text-align: left;
+}
+
+.link {
+    font-family: var(--main-font-family);
+    color: var(--primary-light-6);
+    font-size: var(--font-size-main);
+    font-weight: var(--font-weight-normal);
+    line-height: var(--main-line-height);
+}
+
+.actions {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--gap-medium);
+}
+
+.button {
+    font-family: var(--main-font-family);
+    font-size: var(--font-size-main);
+    font-weight: var(--font-weight-normal);
+    line-height: var(--main-line-height);
+}
+
+@media screen and (max-width: 900px) {
+    .card {
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: flex-start;
+        width: 100%;
+        border-radius: 2px;
+    }
+
+    .title {
+        flex-direction: row;
+        align-items: center;
+        justify-content: flex-start;
+        gap: var(--gap-medium);
+        width: 100%;
+        margin-bottom: var(--margin-small-additional-size);
+    }
+    .avatar {
+        margin-right: var(--margin-small-additional-size);
+    }
+    .name {
+        text-align: left;
+    }
+    .link {
+        margin-bottom: var(--margin-little-size);
+    }
+    .actions {
+        width: 100%;
+    }
+}

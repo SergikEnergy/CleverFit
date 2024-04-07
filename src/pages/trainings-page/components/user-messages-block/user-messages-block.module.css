@@ -1,0 +1,41 @@
+.wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    padding: var(--padding-messages-group-desktop);
+    min-height: 248px;
+    gap: var(--gap-medium);
+    box-shadow: var(--card-main-page-box-shadow);
+    background-color: var(--neutral-gray-2);
+}
+
+.title {
+    font-family: var(--main-font-family);
+    color: var(--character-light-secondary-45);
+    font-size: var(--font-size-main);
+    font-weight: var(--font-weight-normal);
+    line-height: var(--main-line-height);
+    text-align: left;
+}
+
+.messages {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    gap: var(--gap-extra-small);
+}
+
+.link {
+    font-family: var(--main-font-family);
+    font-size: var(--font-size-main);
+    font-weight: var(--font-weight-normal);
+    line-height: var(--main-line-height);
+}
+
+@media screen and (max-width: 600px) {
+    .wrapper {
+        padding: var(--padding-messages-group-mobile);
+    }
+}

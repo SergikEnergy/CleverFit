@@ -1,9 +1,11 @@
 import { FC, Fragment, useLayoutEffect, useState } from 'react';
 import { PartnerTrainingShortInfo } from '@components/partner-training-short-info';
+import { useAppDispatch } from '@hooks/typed-react-redux-hooks';
 import { useAddNewTraining } from '@hooks/use-add-new-training';
 import { useUpdateUserTraining } from '@hooks/use-update-user-training';
 import { InvitationRequestType } from '@redux/api/api-types';
 import { useSendInvitationMutation } from '@redux/api/invitations-api';
+import { changeTrainingsMode } from '@redux/reducers/trainings-partners-slice';
 import { usePartnersSelector, useUserTrainingsSelector } from '@redux/selectors';
 import { dateFullFormatWithDot, dateFullStringFormat } from '@utils/constants/date-formats';
 import {
@@ -34,6 +36,7 @@ import 'moment/dist/locale/ru';
 moment.locale('ru');
 
 export const FormDrawer: FC<FormDrawerPropsType> = () => {
+    const dispatch = useAppDispatch();
     const [form] = Form.useForm<FormFieldsType>();
     const {
         closeDrawer,
@@ -135,6 +138,7 @@ export const FormDrawer: FC<FormDrawerPropsType> = () => {
                     };
 
                     await sendInvitationToUser(userInvitation).unwrap();
+                    dispatch(changeTrainingsMode('user'));
                 } catch (err) {
                     console.log(err);
                 }

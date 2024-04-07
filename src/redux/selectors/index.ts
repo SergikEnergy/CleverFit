@@ -11,3 +11,5 @@ export { useFeedbackSelector } from './feedback-selector';
 export { useUserTrainingsSelector } from './user-trainings-selector';
 
 export { usePartnersSelector } from './partners-selector';
+
+export { useInvitationsSelector } from './user-invitations-selector';

@@ -9,6 +9,7 @@ import { EmptyPartnersBlock } from '../empty-partners-block';
 import { MyPartnersBlock } from '../my-partners-block';
 import { RandomPartnersBlock } from '../random-partners-block';
 import { SimilarPartnersBlock } from '../similar-partners-block';
+import { UserMessagesBlock } from '../user-messages-block/user-messages-block';
 
 import classes from './together-trainings-content.module.css';
 
@@ -25,10 +26,12 @@ export const TogetherTrainingsContent: FC = () => {
 
     return (
         <div className={classes.content}>
+            {togetherMode === 'user' && <UserMessagesBlock />}
             {togetherMode === 'user' && (
                 <BaseLayoutTogether>
-                    {userPartners.length === 0 && <EmptyPartnersBlock />}
-                    {userPartners.length > 0 && <MyPartnersBlock />}
+                    {/* {userPartners.length === 0 && <EmptyPartnersBlock />} */}
+                    {/* {userPartners.length > 0 && <MyPartnersBlock />} */}
+                    <MyPartnersBlock />
                 </BaseLayoutTogether>
             )}
             {togetherMode === 'random' && <RandomPartnersBlock />}

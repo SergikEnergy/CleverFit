@@ -42,4 +42,8 @@ export const invitationsAPI = createApi({
     }),
 });
 
-export const { useSendInvitationMutation, useGetAllInvitationsQuery } = invitationsAPI;
+export const {
+    useSendInvitationMutation,
+    useGetAllInvitationsQuery,
+    useLazyGetAllInvitationsQuery,
+} = invitationsAPI;

@@ -4,7 +4,8 @@ import { CalendarTwoTone, HeartFilled, TrophyFilled } from '@ant-design/icons';
 import { ProfileIconComponent } from '@components/custom-icons/profile-icon';
 import { useGetAllUserTrainings } from '@hooks/use-get-all-user-trainings';
 import { history } from '@redux/configure-store';
-import { Menu, Typography } from 'antd';
+import { useInvitationsSelector } from '@redux/selectors';
+import { Badge, Menu, Typography } from 'antd';
 import classnames from 'classnames';
 
 import { WORKOUT_DATA_TEST_ID } from '../../data/data-test-ids';
@@ -18,6 +19,7 @@ import { menuItemsKeys } from './menu-links.data';
 import classes from './menu-links.module.css';
 
 export const MenuLinks: FC = () => {
+    const { userInvitations } = useInvitationsSelector();
     const fetchAllTrainings = useGetAllUserTrainings();
     const { collapsed } = useCollapseContext();
     const location = useLocation();
@@ -75,10 +77,12 @@ export const MenuLinks: FC = () => {
                 key={menuItemsKeys['/trains']}
                 onClick={handleMoveToTrainingsPage}
                 icon={
-                    <HeartFilled
-                        style={{ color: `${primaryLight.primaryLight9}` }}
-                        className={classnames(classes.menu__item_icon, classes.antFixed)}
-                    />
+                    <Badge size='small' count={userInvitations.length}>
+                        <HeartFilled
+                            style={{ color: `${primaryLight.primaryLight9}` }}
+                            className={classnames(classes.menu__item_icon, classes.antFixed)}
+                        />
+                    </Badge>
                 }
             >
                 <Typography.Text className={classes.menu__item_text}>Тренировки</Typography.Text>
