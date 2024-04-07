@@ -8,6 +8,7 @@ import { BaseLayoutTogether } from '../base-layout-together';
 import { EmptyPartnersBlock } from '../empty-partners-block';
 import { MyPartnersBlock } from '../my-partners-block';
 import { RandomPartnersBlock } from '../random-partners-block';
+import { SimilarPartnersBlock } from '../similar-partners-block';
 
 import classes from './together-trainings-content.module.css';
 
@@ -31,6 +32,7 @@ export const TogetherTrainingsContent: FC = () => {
                 </BaseLayoutTogether>
             )}
             {togetherMode === 'random' && <RandomPartnersBlock />}
+            {togetherMode === 'similar' && <SimilarPartnersBlock />}
         </div>
     );
 };

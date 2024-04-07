@@ -149,12 +149,35 @@ export type PartnersResponseType = {
     imageSrc: string | null;
     avgWeightInWeek: number;
     inviteId: string;
-    status: string;
+    status: InviteStatusType | null;
 };
 export type QueryPartnersTrainingType = {
     trainingType: string;
 };
 
-export type InviteStatusType = 'accepted' | 'rejected' | null;
+export type InviteStatusType = 'accepted' | 'rejected' | 'pending' | null;
 
 export type RequestPartnersByInterestType = 'random' | 'similar';
+
+export type UserShortDataType = {
+    _id: string;
+    firstName: string | null;
+    lastName: string | null;
+    imageSrc: string | null;
+};
+
+export type InvitationResponseType = {
+    _id: string;
+    from: UserShortDataType;
+    training: TrainingsResponseType;
+    status: InviteStatusType;
+    createdAt: string;
+    to: UserShortDataType;
+};
+
+export type InvitationRequestType = {
+    to: string;
+    trainingId: string;
+};
+
+export type AllInvitationsResponseType = Omit<InvitationResponseType, 'to'>;

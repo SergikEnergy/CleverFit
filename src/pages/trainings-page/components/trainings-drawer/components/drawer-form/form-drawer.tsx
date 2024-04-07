@@ -2,9 +2,16 @@ import { FC, Fragment, useLayoutEffect, useState } from 'react';
 import { PartnerTrainingShortInfo } from '@components/partner-training-short-info';
 import { useAddNewTraining } from '@hooks/use-add-new-training';
 import { useUpdateUserTraining } from '@hooks/use-update-user-training';
+import { InvitationRequestType } from '@redux/api/api-types';
+import { useSendInvitationMutation } from '@redux/api/invitations-api';
 import { usePartnersSelector, useUserTrainingsSelector } from '@redux/selectors';
 import { dateFullFormatWithDot, dateFullStringFormat } from '@utils/constants/date-formats';
-import { DRAWER_EDIT_MODE, DRAWER_JOIN_MODE } from '@utils/constants/train-modes';
+import {
+    DRAWER_ADD_MODE,
+    DRAWER_CREATE_MODE,
+    DRAWER_EDIT_MODE,
+    DRAWER_JOIN_MODE,
+} from '@utils/constants/train-modes';
 import { Button, Checkbox, DatePicker, Form, Select } from 'antd';
 import type { CheckboxChangeEvent } from 'antd/es/checkbox';
 import locale from 'antd/es/date-picker/locale/ru_RU';
@@ -37,6 +44,7 @@ export const FormDrawer: FC<FormDrawerPropsType> = () => {
     } = useTrainingsDrawerContext();
     const [isSubmitDisabled, setIsSubmitDisabled] = useState(true);
     const { allowedTrainingsList, userTrainings } = useUserTrainingsSelector();
+    const [sendInvitationToUser] = useSendInvitationMutation();
     const { randomPartners } = usePartnersSelector();
     const addNewUserTrainingRequest = useAddNewTraining();
     const updateUserTrainingInfo = useUpdateUserTraining();
@@ -92,15 +100,45 @@ export const FormDrawer: FC<FormDrawerPropsType> = () => {
     const finishFunc = async (values: FormFieldsType) => {
         const requestBody = prepareDataRequest(values);
 
-        if (requestBody && modeDrawer !== DRAWER_EDIT_MODE) {
+        if (requestBody && (modeDrawer === DRAWER_ADD_MODE || modeDrawer === DRAWER_CREATE_MODE)) {
             addNewUserTrainingRequest(requestBody);
         }
+
         if (requestBody && modeDrawer === DRAWER_EDIT_MODE && activeTraining.length > 0) {
             updateUserTrainingInfo(requestBody, activeTraining[0]._id);
         }
-        if (requestBody && modeDrawer === DRAWER_JOIN_MODE) {
-            //
-            console.log(requestBody);
+        if (requestBody && modeDrawer === DRAWER_JOIN_MODE && selectedPartner) {
+            if (!requestBody.parameters) {
+                requestBody.parameters = {
+                    repeat: false,
+                    period: 0,
+                    jointTraining: false,
+                    participants: [],
+                };
+            }
+            requestBody.parameters.jointTraining = true;
+
+            if (!requestBody.parameters.participants) {
+                requestBody.parameters.participants = [selectedPartner.id];
+            }
+
+            if (!requestBody.parameters?.participants.includes(selectedPartner.id)) {
+                requestBody.parameters?.participants.push(selectedPartner.id);
+            }
+            const result = await addNewUserTrainingRequest(requestBody);
+
+            if (result) {
+                try {
+                    const userInvitation: InvitationRequestType = {
+                        to: selectedPartner.id,
+                        trainingId: result._id,
+                    };
+
+                    await sendInvitationToUser(userInvitation).unwrap();
+                } catch (err) {
+                    console.log(err);
+                }
+            }
         }
 
         closeDrawer();
@@ -142,6 +180,7 @@ export const FormDrawer: FC<FormDrawerPropsType> = () => {
                         className={classes.training}
                     >
                         <Select
+                            disabled={modeDrawer === DRAWER_EDIT_MODE}
                             data-test-id={WORKOUT_DATA_TEST_ID.modalCreateExerciseSelect}
                             placeholder='Выбор типа тренировки'
                             optionFilterProp='children'

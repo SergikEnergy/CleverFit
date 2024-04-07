@@ -6,15 +6,15 @@ import { Pagination } from 'antd';
 import { EmptyPartnersBlock } from '../empty-partners-block';
 import { PartnersCards } from '../partners-cards';
 
-import classes from './random-partners-block.module.css';
+import classes from './similar-partners-block.module.css';
 
-export const RandomPartnersBlock: FC = () => {
-    const { randomPartners } = usePartnersSelector();
+export const SimilarPartnersBlock: FC = () => {
+    const { similarPartners } = usePartnersSelector();
     const [currentPage, setCurrentPage] = useState(1);
     const [selectedName, setSelectedName] = useState('');
     const pageSize = 16;
 
-    const filteredPartners = randomPartners.filter((partner) =>
+    const filteredPartners = similarPartners.filter((partner) =>
         selectedName
             ? partner.name.toLowerCase().trim().includes(selectedName.toLowerCase().trim())
             : true,
@@ -30,7 +30,7 @@ export const RandomPartnersBlock: FC = () => {
         setSelectedName(selected);
     }, []);
 
-    if (!randomPartners || (randomPartners && randomPartners.length === 0)) {
+    if (!similarPartners || (similarPartners && similarPartners.length === 0)) {
         return <EmptyPartnersBlock />;
     }
 

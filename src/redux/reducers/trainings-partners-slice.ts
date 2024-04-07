@@ -41,7 +41,7 @@ const slice = createSlice({
         },
         setSimilarPartners: (state, { payload }: PayloadAction<PartnersResponseType[]>) => {
             if (payload) {
-                state.randomPartners = payload;
+                state.similarPartners = payload;
             }
         },
         resetTrainingPartners: (state) => {

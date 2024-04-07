@@ -64,6 +64,10 @@
     margin: var(--margin-pagination-table-desktop);
 }
 
+.table td:global(.training__action) {
+    width: 40px;
+}
+
 @media screen and (max-width: 950px) {
     .table :global(.ant-table table) {
         width: 100%;

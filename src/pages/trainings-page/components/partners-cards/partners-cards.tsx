@@ -3,17 +3,14 @@ import { PartnersCard } from '@components/partners-card';
 import { PartnersResponseType } from '@redux/api/api-types';
 import { Col, Row } from 'antd';
 
-import classes from './random-partners-cards.module.css';
+import classes from './partners-cards.module.css';
 
-type RandomPartnersCardsPropsType = {
+type PartnersCardsPropsType = {
     partners: PartnersResponseType[];
     selectedPhrase: string;
 };
 
-export const RandomPartnersCards: FC<RandomPartnersCardsPropsType> = ({
-    partners,
-    selectedPhrase,
-}) => (
+export const PartnersCards: FC<PartnersCardsPropsType> = ({ partners, selectedPhrase }) => (
     <div className={classes.cards}>
         <Row gutter={[16, 16]}>
             {partners.map((partner, index) => (

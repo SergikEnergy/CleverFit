@@ -4,6 +4,7 @@ import { createBrowserHistory } from 'history';
 
 import { authApi } from './api/auth-api';
 import { feedbackApi } from './api/feedbacks-api';
+import { invitationsAPI } from './api/invitations-api';
 import { profileAPI } from './api/profile-api';
 import { settingsAPI } from './api/settings-api';
 import { trainingsAPI } from './api/trainings-api';
@@ -29,6 +30,7 @@ export const store = configureStore({
         [trainingsAPI.reducerPath]: trainingsAPI.reducer,
         [profileAPI.reducerPath]: profileAPI.reducer,
         [settingsAPI.reducerPath]: settingsAPI.reducer,
+        [invitationsAPI.reducerPath]: invitationsAPI.reducer,
         auth: authReducer,
         user: userReducer,
         feedback: feedbackReducer,
@@ -46,6 +48,7 @@ export const store = configureStore({
             trainingsAPI.middleware,
             profileAPI.middleware,
             settingsAPI.middleware,
+            invitationsAPI.middleware,
         ]),
 });
 

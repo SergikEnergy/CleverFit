@@ -16,7 +16,7 @@ export const useAddNewTraining = () => {
     const { setNode, setWidthModal, openModal } = useModalReportContext();
     const { changeStatus } = useTrainingsDrawerContext();
 
-    const [updateTrainings, { isLoading }] = useAddNewTrainMutation();
+    const [addNewTraining, { isLoading }] = useAddNewTrainMutation();
 
     const handleErrorUpdateUser = useCallback(
         (error: unknown) => {
@@ -32,8 +32,11 @@ export const useAddNewTraining = () => {
     const addNewUserTraining = useCallback(
         async (body: NewTrainRequestType) => {
             try {
-                await updateTrainings(body).unwrap();
+                const result = await addNewTraining(body).unwrap();
+
                 changeStatus(SUBMIT_TRAIN_SUCCESS);
+
+                return result;
             } catch (error) {
                 if (isFetchBaseQueryError(error)) {
                     handleErrorUpdateUser(error);
@@ -41,9 +44,11 @@ export const useAddNewTraining = () => {
                 }
                 stopLoader();
                 changeStatus(SUBMIT_TRAIN_ERROR);
+
+                return null;
             }
         },
-        [changeStatus, handleErrorUpdateUser, stopLoader, updateTrainings],
+        [addNewTraining, changeStatus, handleErrorUpdateUser, stopLoader],
     );
 
     useEffect(() => {

@@ -20,7 +20,8 @@ type PartnersCardType = {
 
 export const PartnersCard: FC<PartnersCardType> = ({ partner, index, selectedPhrase }) => {
     const { avgWeightInWeek, status, trainingType, imageSrc, name, id: partnerId } = partner;
-    const { changeMode, changeActivePartnerTrainingId, openDrawer } = useTrainingsDrawerContext();
+    const { changeMode, changeActivePartnerTrainingId, openDrawer, changeActiveTrainingId } =
+        useTrainingsDrawerContext();
     const isApproved = status === INVITE_STATUS.accepted;
     const isRejected = status === INVITE_STATUS.rejected;
     const isPending = status === INVITE_STATUS.pending;
@@ -28,6 +29,7 @@ export const PartnersCard: FC<PartnersCardType> = ({ partner, index, selectedPhr
 
     const addPartnerClickHandler = () => {
         changeMode(DRAWER_JOIN_MODE);
+        changeActiveTrainingId('');
         changeActivePartnerTrainingId(partnerId);
         openDrawer();
     };

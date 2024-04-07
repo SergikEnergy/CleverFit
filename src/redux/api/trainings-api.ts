@@ -47,7 +47,7 @@ export const trainingsAPI = createApi({
                 credentials: 'include',
             }),
         }),
-        addNewTrain: build.mutation<void, NewTrainRequestType>({
+        addNewTrain: build.mutation<TrainingsResponseType, NewTrainRequestType>({
             query: (body) => ({
                 url: 'training',
                 body,
@@ -56,7 +56,7 @@ export const trainingsAPI = createApi({
             }),
             invalidatesTags: ['Trainings'],
         }),
-        changeTrain: build.mutation<void, ChangeFutureTrainRequestType>({
+        changeTrain: build.mutation<TrainingsResponseType, ChangeFutureTrainRequestType>({
             query: (data) => ({
                 url: `training/${data.id}`,
                 body: data.body,
