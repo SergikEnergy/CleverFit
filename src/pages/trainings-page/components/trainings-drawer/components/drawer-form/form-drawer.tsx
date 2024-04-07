@@ -48,7 +48,7 @@ export const FormDrawer: FC<FormDrawerPropsType> = () => {
     const [isSubmitDisabled, setIsSubmitDisabled] = useState(true);
     const { allowedTrainingsList, userTrainings } = useUserTrainingsSelector();
     const [sendInvitationToUser] = useSendInvitationMutation();
-    const { randomPartners } = usePartnersSelector();
+    const { randomPartners, similarPartners } = usePartnersSelector();
     const addNewUserTrainingRequest = useAddNewTraining();
     const updateUserTrainingInfo = useUpdateUserTraining();
     const activeTraining = userTrainings.filter((elem) => elem._id === activeTrainingId);
@@ -57,8 +57,12 @@ export const FormDrawer: FC<FormDrawerPropsType> = () => {
             ? activeTraining[0].parameters.repeat
             : false;
     const [allowSelectPeriod, setAllowSelectPeriod] = useState(isShowedPeriodSelect);
-    const selectedPartner =
-        randomPartners.filter((user) => user.id === activePartnerTrainingId)[0] || null;
+
+    const randomPartner = randomPartners.filter((user) => user.id === activePartnerTrainingId)[0];
+
+    const similarPartner = similarPartners.filter((user) => user.id === activePartnerTrainingId)[0];
+
+    const selectedPartner = randomPartner || similarPartner || null;
 
     const initialFormValues =
         activeTraining.length > 0
@@ -88,6 +92,10 @@ export const FormDrawer: FC<FormDrawerPropsType> = () => {
             label: elem.name,
         }),
     );
+
+    if (modeDrawer === DRAWER_JOIN_MODE && selectedPartner) {
+        form.setFieldValue('trainingsSelect', selectedPartner.trainingType);
+    }
 
     if (!isDrawerOpened) {
         form.resetFields();
@@ -129,13 +137,14 @@ export const FormDrawer: FC<FormDrawerPropsType> = () => {
                 requestBody.parameters?.participants.push(selectedPartner.id);
             }
             const result = await addNewUserTrainingRequest(requestBody);
-
+            console.log(result);
             if (result) {
                 try {
                     const userInvitation: InvitationRequestType = {
                         to: selectedPartner.id,
                         trainingId: result._id,
                     };
+                    console.log(userInvitation, 'invite');
 
                     await sendInvitationToUser(userInvitation).unwrap();
                     dispatch(changeTrainingsMode('user'));
@@ -155,10 +164,6 @@ export const FormDrawer: FC<FormDrawerPropsType> = () => {
     };
 
     const dateCellRender = (date: Moment) => <DataCellRender date={date} />;
-
-    if (modeDrawer === DRAWER_JOIN_MODE && selectedPartner) {
-        form.setFieldValue('trainingsSelect', selectedPartner.trainingType);
-    }
 
     return (
         <Fragment>

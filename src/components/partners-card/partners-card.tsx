@@ -28,14 +28,14 @@ export const PartnersCard: FC<PartnersCardType> = ({ partner, index, selectedPhr
     const buttonText = (isApproved && 'Отменить тренировку') || 'Создать тренировку';
 
     const addPartnerClickHandler = () => {
-        changeMode(DRAWER_JOIN_MODE);
-        changeActiveTrainingId('');
         changeActivePartnerTrainingId(partnerId);
+        changeActiveTrainingId('');
+        changeMode(DRAWER_JOIN_MODE);
         openDrawer();
     };
 
     return (
-        <Card className={classes.partner}>
+        <Card className={classes.partner} data-test-id={`joint-training-cards${index}`}>
             <Card.Meta
                 title={getHighlightedName(name, selectedPhrase)}
                 avatar={

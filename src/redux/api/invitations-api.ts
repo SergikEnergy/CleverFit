@@ -4,12 +4,14 @@ import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import { API_BASE_URL } from './api-data';
 import {
     AllInvitationsResponseType,
+    InvitationAnswerRequestType,
     InvitationRequestType,
     InvitationResponseType,
 } from './api-types';
 
 export const invitationsAPI = createApi({
     reducerPath: 'userInvitations',
+    tagTypes: ['Invitations'],
     baseQuery: fetchBaseQuery({
         baseUrl: API_BASE_URL,
         prepareHeaders: (headers, { getState }) => {
@@ -30,6 +32,13 @@ export const invitationsAPI = createApi({
                 method: 'GET',
                 credentials: 'include',
             }),
+            providesTags: (result) =>
+                result
+                    ? [
+                          ...result.map(({ _id }) => ({ type: 'Invitations' as const, _id })),
+                          'Invitations',
+                      ]
+                    : ['Invitations'],
         }),
         sendInvitation: build.mutation<InvitationResponseType, InvitationRequestType>({
             query: (body) => ({
@@ -39,6 +48,23 @@ export const invitationsAPI = createApi({
                 credentials: 'include',
             }),
         }),
+        acceptInvitation: build.mutation<InvitationResponseType, InvitationAnswerRequestType>({
+            query: (body) => ({
+                url: 'invite',
+                method: 'PUT',
+                body,
+                credentials: 'include',
+                invalidatesTags: ['Invitations'],
+            }),
+        }),
+        rejectInvitation: build.mutation<void, { id: string }>({
+            query: (data) => ({
+                url: `invite/${data.id}`,
+                method: 'DELETE',
+                credentials: 'include',
+                invalidatesTags: ['Invitations'],
+            }),
+        }),
     }),
 });
 
@@ -46,4 +72,6 @@ export const {
     useSendInvitationMutation,
     useGetAllInvitationsQuery,
     useLazyGetAllInvitationsQuery,
+    useAcceptInvitationMutation,
+    useRejectInvitationMutation,
 } = invitationsAPI;

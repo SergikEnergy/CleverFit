@@ -2,6 +2,8 @@ import { FC, RefObject, useState } from 'react';
 import { TrainingsResponseType } from '@redux/api/api-types';
 import { Button, Popover } from 'antd';
 
+import { WORKOUT_DATA_TEST_ID } from '../../../data/data-test-ids';
+
 import { CustomOverlayMessage } from './custom-overlay-message';
 
 import classes from './user-message-popup.module.css';
@@ -16,15 +18,19 @@ export const UserMessagePopover: FC<TrainingsInfoPopoverPropsType> = ({ training
 
     const handleOpenPopover = () => setIsVisible(true);
 
+    const handleOpenChange = (newOpen: boolean) => setIsVisible(newOpen);
+
     return (
         <Popover
+            data-test-id={WORKOUT_DATA_TEST_ID.jointTrainingReviewCard}
             showArrow={false}
-            align={{ offset: [0, -32] }}
+            align={{ offset: [0, -20] }}
             destroyTooltipOnHide={true}
             overlayStyle={{ boxShadow: '0px 2px 8px 0px #00000026', width: 312, padding: 0 }}
             overlayInnerStyle={{ padding: 0, width: '100%' }}
             getPopupContainer={() => parentRef.current as HTMLDivElement}
             className={classes.popover}
+            onOpenChange={handleOpenChange}
             content={
                 <CustomOverlayMessage
                     key={`${training.date}${training.name}-message`}
@@ -34,7 +40,7 @@ export const UserMessagePopover: FC<TrainingsInfoPopoverPropsType> = ({ training
             }
             trigger='click'
             open={isVisible}
-            placement='bottomRight'
+            placement='bottomLeft'
             overlayClassName={classes.overlay}
             zIndex={3}
         >

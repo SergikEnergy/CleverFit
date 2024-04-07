@@ -159,6 +159,7 @@ body {
     --padding-middle-top-bottom-frames: 32px 0;
     --padding-small-top-bottom-frames: 16px 0;
     --padding-popup-card: 16px 12px;
+    --padding-popup-message-card: 12px 16px;
     --padding-messages-group-desktop: 16px 24px;
     --padding-messages-group-mobile: 16px 24px;
     --padding-modal-error-main: 32px 32px 24px;

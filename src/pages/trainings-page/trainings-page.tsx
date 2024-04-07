@@ -1,4 +1,4 @@
-import { FC, useEffect, useLayoutEffect, useRef } from 'react';
+import { FC, useEffect, useRef } from 'react';
 import { useLocation, useNavigate } from 'react-router';
 import { useAppDispatch } from '@hooks/typed-react-redux-hooks';
 import { useGetAllowedTrainingsLists } from '@hooks/use-get-allowed-trainings-list';
@@ -33,7 +33,7 @@ export const TrainingsPage: FC = () => {
     const firstRender = useRef(true);
 
     useEffect(() => {
-        if (Array.isArray(trainingsList)) {
+        if (trainingsList && Array.isArray(trainingsList)) {
             dispatch(setAllowedTrainingsList(trainingsList));
         }
     }, [dispatch, trainingsList]);
@@ -45,12 +45,7 @@ export const TrainingsPage: FC = () => {
     }, [dispatch, isSuccessGettingAllTrainings, token, userTrainingsData]);
 
     useEffect(() => {
-        if (
-            userTrainingsData &&
-            userTrainingsData.length > 0 &&
-            trainingsList &&
-            trainingsList.length > 0
-        ) {
+        if (Array.isArray(userTrainingsData) && Array.isArray(trainingsList)) {
             dispatch(setTrainingType(getUserTrainingsType(userTrainingsData, trainingsList)));
         }
     }, [dispatch, trainingsList, userTrainingsData]);
@@ -62,11 +57,12 @@ export const TrainingsPage: FC = () => {
         }
     }, [hideCollapsed, innerWindowWidth]);
 
-    useLayoutEffect(() => {
+    useEffect(() => {
         if (location.state && 'allowRequest' in location.state && location.state.allowRequest) {
             fetchAllowedTrainingsList();
+            location.state.allowRequest = false;
         }
-    }, [fetchAllowedTrainingsList, location.state, userTrainingsData]);
+    }, [fetchAllowedTrainingsList, location.state]);
 
     useEffect(() => {
         if (!token) {

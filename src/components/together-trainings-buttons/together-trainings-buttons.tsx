@@ -31,7 +31,7 @@ export const TogetherTrainingButtons: FC<TogetherTrainingButtonsPropsType> = ({
             className={classes.button}
             style={{ color: '#262626' }}
         >
-            Выбор друга по моим видам тренировок
+            Выбор друга по моим тренировкам
         </Button>
     </div>
 );

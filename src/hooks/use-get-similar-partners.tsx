@@ -45,9 +45,8 @@ export const useGetSimilarPartners = () => {
             try {
                 const similarPartners = await getAllSimilarPartners(trainingType).unwrap();
 
-                if (similarPartners) {
-                    dispatch(setSimilarPartners(similarPartners));
-                }
+                dispatch(setSimilarPartners(similarPartners));
+
                 stopLoader();
 
                 return true;

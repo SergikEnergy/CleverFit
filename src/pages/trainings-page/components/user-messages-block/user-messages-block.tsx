@@ -8,9 +8,9 @@ import { Button } from 'antd';
 import classes from './user-messages-block.module.css';
 
 export const UserMessagesBlock: FC = () => {
-    // const { userInvitations } = useInvitationsSelector();
+    const { userInvitations } = useInvitationsSelector();
     const [showAll, setShowAll] = useState(false);
-    const userInvitations: AllInvitationsResponseType[] = [
+    /* const userInvitations: AllInvitationsResponseType[] = [
         {
             _id: '6603fd9268b4b7f6e631d0bb',
             from: {
@@ -82,6 +82,7 @@ export const UserMessagesBlock: FC = () => {
             createdAt: '2024-04-14T13:36:08.665Z',
         },
     ];
+    */
 
     const toggleShowed = () => setShowAll((prev) => !prev);
 

@@ -180,4 +180,9 @@ export type InvitationRequestType = {
     trainingId: string;
 };
 
+export type InvitationAnswerRequestType = {
+    id: string;
+    status: InviteStatusType;
+};
+
 export type AllInvitationsResponseType = Omit<InvitationResponseType, 'to'>;

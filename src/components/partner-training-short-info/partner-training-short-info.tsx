@@ -10,10 +10,11 @@ import classes from './partner-training-short-info.module.css';
 
 export const PartnerTrainingShortInfo: FC = () => {
     const { activePartnerTrainingId } = useTrainingsDrawerContext();
-    const { randomPartners } = usePartnersSelector();
+    const { randomPartners, similarPartners } = usePartnersSelector();
 
-    const selectedUser =
-        randomPartners.filter((user) => user.id === activePartnerTrainingId)[0] || null;
+    const randomUser = randomPartners.filter((user) => user.id === activePartnerTrainingId)[0];
+    const similarUser = similarPartners.filter((user) => user.id === activePartnerTrainingId)[0];
+    const selectedUser = randomUser || similarUser || null;
 
     return (
         <div className={classes.info}>

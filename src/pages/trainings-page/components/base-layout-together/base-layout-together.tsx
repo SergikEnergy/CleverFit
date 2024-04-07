@@ -19,13 +19,13 @@ export const BaseLayoutTogether: FC<BaseLayoutTogetherPropsType> = ({ children }
     const getSimilarPartners = useGetSimilarPartners();
     const dispatch = useAppDispatch();
 
-    const randomClickHandler = () => {
-        getRandomPartners();
+    const randomClickHandler = async () => {
+        await getRandomPartners();
         dispatch(changeTrainingsMode('random'));
     };
 
-    const similarClickHandler = () => {
-        getSimilarPartners({ trainingType });
+    const similarClickHandler = async () => {
+        await getSimilarPartners({ trainingType });
         dispatch(changeTrainingsMode('similar'));
     };
 

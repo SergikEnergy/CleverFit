@@ -49,9 +49,8 @@ export const useGetRandomPartners = () => {
         try {
             const randomPartners = await getAllRandomPartners().unwrap();
 
-            if (randomPartners) {
-                dispatch(setRandomPartners(randomPartners));
-            }
+            dispatch(setRandomPartners(randomPartners));
+
             stopLoader();
 
             return true;

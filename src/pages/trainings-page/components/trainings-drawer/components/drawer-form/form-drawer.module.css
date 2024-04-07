@@ -3,7 +3,7 @@
     flex-direction: column;
     align-items: flex-start;
     justify-content: space-between;
-    min-height: calc(93vh - 16px);
+    min-height: calc(90vh - 20px);
 }
 
 .body {

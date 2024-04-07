@@ -13,6 +13,7 @@ type PartnersCardType = {
 
 export const PartnersShortCard: FC<PartnersCardType> = ({ partner, index }) => {
     const { avgWeightInWeek, trainingType, imageSrc, name } = partner;
+    console.log(name, `--${index}--`);
 
     return (
         <Card className={classes.partner} data-test-id={`joint-training-cards${index}`}>

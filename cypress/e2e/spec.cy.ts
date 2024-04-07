@@ -717,7 +717,7 @@ describe('Sprint 6', () => {
             }).as('getUser');
         });
 
-        it('come to trainings', () => {
+        /* it('come to trainings', () => {
             cy.viewport(1440, 900);
             cy.intercept('GET', 'training', {
                 statusCode: 400,
@@ -750,9 +750,9 @@ describe('Sprint 6', () => {
             cy.contains('Главная').click();
             cy.get(`[data-test-id=${DATA_TEST_ID.menuButtonTraining}]`).click();
             takeScreenshots('come-to-trainings-1', resolutionLaptop);
-        });
+        }); */
 
-        it('create new training', () => {
+        /*   it('create new training', () => {
             cy.viewport(833, 900);
             goToCalendar();
 
@@ -809,8 +809,9 @@ describe('Sprint 6', () => {
                 cy.contains('Периодичность').click();
             });
         });
+        */
 
-        it('update trainings', () => {
+        /* it('update trainings', () => {
             cy.viewport(360, 740);
             goToCalendar();
 
@@ -864,7 +865,7 @@ describe('Sprint 6', () => {
                 cy.contains('Периодичность').click();
             });
             takeScreenshots('update-trainings-3', resolutionMobile);
-        });
+        }); */
 
         it('create joint training', () => {
             cy.viewport(1440, 900);

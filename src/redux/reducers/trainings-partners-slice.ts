@@ -2,7 +2,7 @@ import { PartnersResponseType } from '@redux/api/api-types';
 import type { PayloadAction } from '@reduxjs/toolkit';
 import { createSlice } from '@reduxjs/toolkit';
 
-export type TogetherTrainingsMode = 'random' | 'user' | 'similar';
+export type TogetherTrainingsMode = 'random' | 'user' | 'similar' | 'partners';
 
 type TrainingPartnersType = {
     userPartners: PartnersResponseType[];

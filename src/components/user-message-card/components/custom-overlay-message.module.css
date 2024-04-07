@@ -12,26 +12,55 @@
     width: 100%;
     display: flex;
     align-items: center;
-    justify-content: flex-start;
-    gap: var(--gap-little);
+    justify-content: space-between;
 }
 
-.name {
+.body {
+    padding-left: var(--padding-card-main);
+    padding-right: var(--padding-card-main);
     font-family: var(--main-font-family);
+    line-height: var(--line-height-main);
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+.name,
+.train {
     font-weight: var(--font-weight-normal);
     font-size: var(--font-size-main);
-    line-height: var(--line-height-main);
+}
+
+.period {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    margin-bottom: var(--margin-small-additional-size);
+}
+
+.interval {
+    font-size: var(--font-size-title);
+    font-weight: var(--font-weight-medium);
+    text-align: left;
+    color: var(--character-light-primary-85);
+}
+
+.date {
+    color: var(--character-light-primary-85);
+    font-size: var(--font-size-main);
+    font-weight: var(--font-weight-normal);
 }
 
 .exercises__list {
     display: flex;
-    margin-bottom: 0;
     flex-direction: column;
     align-items: flex-start;
     justify-content: flex-start;
     gap: var(--gap-extra-small);
     width: 100%;
-    padding-left: var(--padding-card-main);
     height: 115px;
     overflow-y: auto;
 }
@@ -67,11 +96,19 @@
     background-color: #b4b4b4;
 }
 
-button.button:global(.ant-btn) {
-    margin-bottom: var(--margin-little-size);
-    width: calc(100% - var(--margin-little-size) * 2);
-    font-family: var(--main-font-family);
+.exercise {
+    align-self: stretch;
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+}
+
+.train {
+    color: var(--character-light-secondary-45);
+}
+
+.info {
+    color: var(--primary-light-6);
+    font-size: var(--font-size-mobile);
     font-weight: var(--font-weight-normal);
-    font-size: var(--font-size-main);
-    line-height: var(--line-height-main);
 }

@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useCallback, useEffect } from 'react';
 import { ShowFetchDataError } from '@components/show-fetch-data-error';
 import { PagesVariantsType } from '@components/show-fetch-data-error/show-fetch-data-error';
 import { isFetchBaseQueryError } from '@redux/api/errors-catching';
@@ -25,17 +25,20 @@ export const useGetAllUserTrainings = (forPage: GetAllUserTrainingsArgumentsType
         }
     }, [isLoading, startLoader, stopLoader]);
 
-    const handleGetTrainingsError = (error: unknown) => {
-        if (isFetchBaseQueryError(error) && error.status === 403) {
-            resetUser();
-        } else {
-            setNode(<ShowFetchDataError forPage={forPage} />);
-            setWidthModal('clamp(328px, 100%, 539px)');
-            openModal();
-        }
-    };
+    const handleGetTrainingsError = useCallback(
+        (error: unknown) => {
+            if (isFetchBaseQueryError(error) && error.status === 403) {
+                resetUser();
+            } else {
+                setNode(<ShowFetchDataError forPage={forPage} />);
+                setWidthModal('clamp(328px, 100%, 539px)');
+                openModal();
+            }
+        },
+        [forPage, openModal, resetUser, setNode, setWidthModal],
+    );
 
-    const fetchAllTrainings = async () => {
+    const fetchAllTrainings = useCallback(async () => {
         try {
             const userTrainings = await getAllTrainings().unwrap();
 
@@ -47,7 +50,7 @@ export const useGetAllUserTrainings = (forPage: GetAllUserTrainingsArgumentsType
         } finally {
             stopLoader();
         }
-    };
+    }, [getAllTrainings, handleGetTrainingsError, stopLoader]);
 
     return fetchAllTrainings;
 };

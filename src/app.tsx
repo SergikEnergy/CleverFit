@@ -29,7 +29,7 @@ export const App: FC = () => {
         }
     }, [fetchUserInfo, userPersonalInfo, token]);
 
-    useLayoutEffect(() => {
+    useEffect(() => {
         if (!userInvitations && token) {
             fetchUserInvitations();
         }
