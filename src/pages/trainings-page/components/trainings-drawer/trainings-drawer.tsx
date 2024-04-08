@@ -38,9 +38,7 @@ export const TrainingsDrawer: FC = () => {
         }
     }, [innerWindowWidth]);
 
-    const closeDrawerWithCheckingData = () => {
-        closeDrawer();
-    };
+    const closeDrawerWithCheckingData = () => closeDrawer();
 
     return (
         <Drawer

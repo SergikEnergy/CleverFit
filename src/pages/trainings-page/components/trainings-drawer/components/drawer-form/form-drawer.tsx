@@ -119,38 +119,41 @@ export const FormDrawer: FC<FormDrawerPropsType> = () => {
             updateUserTrainingInfo(requestBody, activeTraining[0]._id);
         }
         if (requestBody && modeDrawer === DRAWER_JOIN_MODE && selectedPartner) {
-            if (!requestBody.parameters) {
-                requestBody.parameters = {
-                    repeat: false,
-                    period: 0,
-                    jointTraining: false,
-                    participants: [],
-                };
-            }
-            requestBody.parameters.jointTraining = true;
+            try {
+                if (!requestBody.parameters) {
+                    requestBody.parameters = {
+                        repeat: false,
+                        period: 0,
+                        jointTraining: false,
+                        participants: [],
+                    };
+                }
+                // requestBody.parameters.jointTraining = true;
 
-            if (!requestBody.parameters.participants) {
-                requestBody.parameters.participants = [selectedPartner.id];
-            }
+                // if (!requestBody.parameters.participants) {
+                //     requestBody.parameters.participants = [selectedPartner.id];
+                // }
 
-            if (!requestBody.parameters?.participants.includes(selectedPartner.id)) {
-                requestBody.parameters?.participants.push(selectedPartner.id);
-            }
-            const result = await addNewUserTrainingRequest(requestBody);
-            console.log(result);
-            if (result) {
-                try {
+                // if (!requestBody.parameters?.participants.includes(selectedPartner.id)) {
+                //     requestBody.parameters?.participants.push(selectedPartner.id);
+                // }
+
+                console.log(requestBody);
+                const result = await addNewUserTrainingRequest(requestBody);
+
+                console.log(result);
+                if (result) {
                     const userInvitation: InvitationRequestType = {
                         to: selectedPartner.id,
                         trainingId: result._id,
                     };
                     console.log(userInvitation, 'invite');
 
-                    await sendInvitationToUser(userInvitation).unwrap();
-                    dispatch(changeTrainingsMode('user'));
-                } catch (err) {
-                    console.log(err);
+                    sendInvitationToUser(userInvitation).unwrap();
                 }
+            } catch (err) {
+                console.log(err);
+                closeDrawer();
             }
         }
 

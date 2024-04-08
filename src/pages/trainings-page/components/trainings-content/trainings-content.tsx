@@ -32,6 +32,7 @@ export const TrainingsContent: FC = () => {
     useEffect(() => {
         if (activeKey === TOGETHER_TRAINING_KEY) {
             fetchUserTrainingPartners();
+            console.log('fetched users');
             dispatch(changeTrainingsMode('user'));
         }
     }, [activeKey, dispatch, fetchUserTrainingPartners]);

@@ -57,7 +57,7 @@ export type TrainingsResponseType = {
     _id: string;
     name: string;
     date: string;
-    isImplementation: boolean;
+    isImplementation?: boolean;
     userId: string;
     exercises: ExerciseType[];
     parameters?: ParametersTrainingType;

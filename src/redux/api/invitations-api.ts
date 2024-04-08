@@ -35,10 +35,10 @@ export const invitationsAPI = createApi({
             providesTags: (result) =>
                 result
                     ? [
-                          ...result.map(({ _id }) => ({ type: 'Invitations' as const, _id })),
+                          ...result.map(({ _id }) => ({ type: 'Invitations' as const, id: _id })),
                           'Invitations',
                       ]
-                    : ['Invitations'],
+                    : [{ type: 'Invitations', id: 'LIST' }],
         }),
         sendInvitation: build.mutation<InvitationResponseType, InvitationRequestType>({
             query: (body) => ({
@@ -54,7 +54,7 @@ export const invitationsAPI = createApi({
                 method: 'PUT',
                 body,
                 credentials: 'include',
-                invalidatesTags: ['Invitations'],
+                invalidatesTags: [{ type: 'Invitations', id: 'LIST' }],
             }),
         }),
         rejectInvitation: build.mutation<void, { id: string }>({
@@ -62,7 +62,7 @@ export const invitationsAPI = createApi({
                 url: `invite/${data.id}`,
                 method: 'DELETE',
                 credentials: 'include',
-                invalidatesTags: ['Invitations'],
+                invalidatesTags: [{ type: 'Invitations', id: 'LIST' }],
             }),
         }),
     }),

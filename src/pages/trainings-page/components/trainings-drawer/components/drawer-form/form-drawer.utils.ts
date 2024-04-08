@@ -22,12 +22,18 @@ export const prepareDataRequest = (values: FormFieldsType) => {
             approaches: elem.approaches,
         }));
 
-        const requestBody: NewTrainRequestType = {
-            date: values.trainingsDate.format(dateFullStringFormat),
-            isImplementation: isPast,
-            name: values.trainingsSelect,
-            exercises,
-        };
+        const requestBody: NewTrainRequestType = isPast
+            ? {
+                  date: values.trainingsDate.format(dateFullStringFormat),
+                  isImplementation: isPast,
+                  name: values.trainingsSelect,
+                  exercises,
+              }
+            : {
+                  date: values.trainingsDate.format(dateFullStringFormat),
+                  name: values.trainingsSelect,
+                  exercises,
+              };
 
         if (values.withPeriodActivate && values.periodSelect) {
             requestBody.parameters = {

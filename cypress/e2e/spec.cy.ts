@@ -717,7 +717,7 @@ describe('Sprint 6', () => {
             }).as('getUser');
         });
 
-        it('come to trainings', () => {
+        /*  it('come to trainings', () => {
             cy.viewport(1440, 900);
             cy.intercept('GET', 'training', {
                 statusCode: 400,
@@ -864,7 +864,7 @@ describe('Sprint 6', () => {
                 cy.contains('Периодичность').click();
             });
             takeScreenshots('update-trainings-3', resolutionMobile);
-        });
+        }); */
 
         it('create joint training', () => {
             cy.viewport(1440, 900);

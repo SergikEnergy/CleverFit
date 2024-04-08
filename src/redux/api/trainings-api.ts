@@ -54,7 +54,7 @@ export const trainingsAPI = createApi({
                 method: 'POST',
                 credentials: 'include',
             }),
-            invalidatesTags: ['Trainings'],
+            invalidatesTags: [{ type: 'Trainings', id: 'LIST' }],
         }),
         changeTrain: build.mutation<TrainingsResponseType, ChangeFutureTrainRequestType>({
             query: (data) => ({
@@ -63,7 +63,7 @@ export const trainingsAPI = createApi({
                 method: 'PUT',
                 credentials: 'include',
             }),
-            invalidatesTags: ['Trainings'],
+            invalidatesTags: [{ type: 'Trainings', id: 'LIST' }],
         }),
         getAllTrainingsPartners: build.query<PartnersResponseType[], void>({
             query: () => ({
