@@ -13,7 +13,9 @@ type DataCellRenderType = {
 export const DataCellRender: FC<DataCellRenderType> = ({ date }) => {
     const { userTrainings } = useUserTrainingsSelector();
     const dateToString = date.format(dateFullFormatWithDash);
-    const existingDates = userTrainings.map((training) => training.date);
+    const existingDates = userTrainings.map((training) =>
+        moment(training.date).format(dateFullFormatWithDash),
+    );
     const isToday = moment().format(dateFullFormatWithDash) === dateToString;
     const isExistingTrainingsNotToday = existingDates.includes(dateToString) && !isToday;
 

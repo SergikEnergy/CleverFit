@@ -112,7 +112,7 @@ export const FormDrawer: FC<FormDrawerPropsType> = () => {
         const requestBody = prepareDataRequest(values);
 
         if (requestBody && (modeDrawer === DRAWER_ADD_MODE || modeDrawer === DRAWER_CREATE_MODE)) {
-            addNewUserTrainingRequest(requestBody);
+            await addNewUserTrainingRequest(requestBody);
         }
 
         if (requestBody && modeDrawer === DRAWER_EDIT_MODE && activeTraining.length > 0) {
@@ -120,14 +120,6 @@ export const FormDrawer: FC<FormDrawerPropsType> = () => {
         }
         if (requestBody && modeDrawer === DRAWER_JOIN_MODE && selectedPartner) {
             try {
-                if (!requestBody.parameters) {
-                    requestBody.parameters = {
-                        repeat: false,
-                        jointTraining: false,
-                        participants: [],
-                    };
-                }
-
                 const result = await addNewUserTrainingRequest(requestBody);
 
                 if (result) {
