@@ -1,6 +1,6 @@
 import { AllowedTrainResponseType, TrainingsResponseType } from '@redux/api/api-types';
 import type { PayloadAction } from '@reduxjs/toolkit';
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice, current } from '@reduxjs/toolkit';
 
 type UserTrainingsPropsType = {
     userTrainings: TrainingsResponseType[];
@@ -24,6 +24,9 @@ const slice = createSlice({
                 state.userTrainings = payload;
             }
         },
+        updateUserTrainings: (state, { payload }: PayloadAction<TrainingsResponseType>) => {
+            state.userTrainings = current(state.userTrainings).concat(payload);
+        },
         resetUserTrainingsFromServer: (state) => {
             state.userTrainings = [];
             state.allowedTrainingsList = [];
@@ -39,6 +42,10 @@ const slice = createSlice({
     },
 });
 
-export const { setUserTrainingsFromServer, resetUserTrainingsFromServer, setAllowedTrainingsList } =
-    slice.actions;
+export const {
+    setUserTrainingsFromServer,
+    resetUserTrainingsFromServer,
+    setAllowedTrainingsList,
+    updateUserTrainings,
+} = slice.actions;
 export const trainingsReducer = slice.reducer;
