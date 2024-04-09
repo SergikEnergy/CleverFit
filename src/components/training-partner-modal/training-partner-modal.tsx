@@ -9,6 +9,7 @@ import { changeTrainingsMode, deleteMyPartner } from '@redux/reducers/trainings-
 import { INVITE_STATUS } from '@utils/constants/statuses-invitation';
 import { Avatar, Button } from 'antd';
 
+import { WORKOUT_DATA_TEST_ID } from '../../data/data-test-ids';
 import { useModalReportContext } from '../../react-contexts';
 
 import classes from './training-partner-modal.module.css';
@@ -45,7 +46,11 @@ export const TrainingPartnerModal: FC<TrainingPartnerModalPropsType> = ({ user }
     };
 
     return (
-        <div className={classes.modal} style={{ backgroundColor: '#FAFAFA' }}>
+        <div
+            className={classes.modal}
+            style={{ backgroundColor: '#FAFAFA' }}
+            data-test-id={WORKOUT_DATA_TEST_ID.partnerModal}
+        >
             <Button
                 type='text'
                 icon={<CloseOutlined style={{ fontSize: 14, color: '#8C8C8C' }} />}
