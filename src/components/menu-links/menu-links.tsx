@@ -77,7 +77,11 @@ export const MenuLinks: FC = () => {
                 key={menuItemsKeys['/trains']}
                 onClick={handleMoveToTrainingsPage}
                 icon={
-                    <Badge size='small' count={userInvitations.length}>
+                    <Badge
+                        size='small'
+                        count={userInvitations.length}
+                        data-test-id={WORKOUT_DATA_TEST_ID.notificationAboutJointTraining}
+                    >
                         <HeartFilled
                             style={{ color: `${primaryLight.primaryLight9}` }}
                             className={classnames(classes.menu__item_icon, classes.antFixed)}

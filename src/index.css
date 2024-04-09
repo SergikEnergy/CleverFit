@@ -164,6 +164,7 @@ body {
     --padding-messages-group-mobile: 16px 24px;
     --padding-modal-error-main: 32px 32px 24px;
     --padding-error-get-trains-main: 24px 16px;
+    --padding-card-modal-partner-desktop: 30px 16px;
     --label--padding: 4px 8px;
     --padding-small-size: 8px;
     --padding-card-main: 12px;
@@ -188,7 +189,7 @@ body {
     --margin-submit-profile-main: 54px;
     --margin-trainings-page-main: 24px 24px 42px;
     --margin-big-size: 64px;
-    --margin-pagination-table-desktop: 20px 0 30px;
+    --margin-pagination-table-desktop: 20px 0 0 0;
 
     /* gaps */
 

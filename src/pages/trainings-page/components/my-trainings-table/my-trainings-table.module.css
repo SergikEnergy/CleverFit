@@ -53,7 +53,7 @@
 }
 
 .add__train {
-    margin-top: 0;
+    margin-top: var(--margin-middle-size);
 }
 
 .table td:global(.training__column) {

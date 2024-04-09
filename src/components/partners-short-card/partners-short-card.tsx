@@ -1,8 +1,11 @@
 import { FC } from 'react';
 import { UserOutlined } from '@ant-design/icons';
+import { TrainingPartnerModal } from '@components/training-partner-modal';
 import { UserTrainingInfoLine } from '@components/user-training-info-line';
 import { PartnersResponseType } from '@redux/api/api-types';
 import { Avatar, Card } from 'antd';
+
+import { useModalReportContext } from '../../react-contexts';
 
 import classes from './partners-short-card.module.css';
 
@@ -13,10 +16,20 @@ type PartnersCardType = {
 
 export const PartnersShortCard: FC<PartnersCardType> = ({ partner, index }) => {
     const { avgWeightInWeek, trainingType, imageSrc, name } = partner;
-    console.log(name, `--${index}--`);
+    const { setNode, setWidthModal, openModal } = useModalReportContext();
+
+    const handleOpenCardModal = () => {
+        setNode(<TrainingPartnerModal user={partner} />);
+        setWidthModal('clamp(312px, 100%, 539px)');
+        openModal();
+    };
 
     return (
-        <Card className={classes.partner} data-test-id={`joint-training-cards${index}`}>
+        <Card
+            className={classes.partner}
+            data-test-id={`joint-training-cards${index}`}
+            onClick={handleOpenCardModal}
+        >
             <Card.Meta
                 title={name}
                 avatar={
@@ -25,13 +38,11 @@ export const PartnersShortCard: FC<PartnersCardType> = ({ partner, index }) => {
             />
             <div className={classes.info}>
                 <UserTrainingInfoLine
-                    index={1}
                     key='type'
                     title='Тип тренировки'
                     description={trainingType}
                 />
                 <UserTrainingInfoLine
-                    index={2}
                     key='avrgWeight'
                     title='Средняя нагрузка'
                     description={`${avgWeightInWeek} кг/нед`}

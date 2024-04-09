@@ -2,6 +2,7 @@ import { FC } from 'react';
 import { CheckCircleFilled, InfoCircleOutlined, UserOutlined } from '@ant-design/icons';
 import { UserTrainingInfoLine } from '@components/user-training-info-line';
 import { PartnersResponseType } from '@redux/api/api-types';
+import { useRejectInvitationMutation } from '@redux/api/invitations-api';
 import { INVITE_STATUS } from '@utils/constants/statuses-invitation';
 import { DRAWER_JOIN_MODE } from '@utils/constants/train-modes';
 import { getHighlightedName } from '@utils/get-highlighted-name';
@@ -16,9 +17,16 @@ type PartnersCardType = {
     partner: PartnersResponseType;
     index: number;
     selectedPhrase: string;
+    colorBgModal?: string;
 };
 
-export const PartnersCard: FC<PartnersCardType> = ({ partner, index, selectedPhrase }) => {
+export const PartnersCard: FC<PartnersCardType> = ({
+    partner,
+    index,
+    selectedPhrase,
+    colorBgModal,
+}) => {
+    const [declineUserTraining] = useRejectInvitationMutation();
     const { avgWeightInWeek, status, trainingType, imageSrc, name, id: partnerId } = partner;
     const { changeMode, changeActivePartnerTrainingId, openDrawer, changeActiveTrainingId } =
         useTrainingsDrawerContext();
@@ -34,9 +42,12 @@ export const PartnersCard: FC<PartnersCardType> = ({ partner, index, selectedPhr
         openDrawer();
     };
 
+    const cancelTrainingHandler = () => declineUserTraining({ id: partner.inviteId });
+    const bgCardColor = colorBgModal || (partner.status === 'rejected' ? '#FAFAFA' : '#F0F5FF');
+
     return (
         <Card
-            style={{ backgroundColor: partner.status === 'rejected' ? '#FAFAFA' : '#F0F5FF' }}
+            style={{ backgroundColor: bgCardColor, border: colorBgModal && 'none' }}
             className={classes.partner}
             data-test-id={`joint-training-cards${index}`}
         >
@@ -58,9 +69,10 @@ export const PartnersCard: FC<PartnersCardType> = ({ partner, index, selectedPhr
                     description={`${avgWeightInWeek} кг/нед`}
                 />
             </div>
+
             <Button
                 disabled={isRejected || isPending}
-                onClick={addPartnerClickHandler}
+                onClick={isApproved ? cancelTrainingHandler : addPartnerClickHandler}
                 type={isApproved ? 'default' : 'primary'}
                 className={classnames(classes.button, {
                     [classes.default]: isApproved,

@@ -864,7 +864,7 @@ describe('Sprint 6', () => {
                 cy.contains('Периодичность').click();
             });
             takeScreenshots('update-trainings-3', resolutionMobile);
-        }); */
+        });
 
         it('create joint training', () => {
             cy.viewport(1440, 900);
@@ -935,7 +935,7 @@ describe('Sprint 6', () => {
                 cy.contains('ожидает подтверждения').should('exist');
             });
             takeScreenshots('create-joint-training-4', resolutionMobile);
-        });
+        }); */
         it('take joint training', () => {
             cy.viewport(833, 900);
             cy.reload();

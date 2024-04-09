@@ -1,12 +1,13 @@
 import { FC, useRef } from 'react';
 import { UserOutlined } from '@ant-design/icons';
 import { useAppDispatch } from '@hooks/typed-react-redux-hooks';
-import { AllInvitationsResponseType } from '@redux/api/api-types';
+import { AllInvitationsResponseType, PartnersResponseType } from '@redux/api/api-types';
 import {
     useAcceptInvitationMutation,
     useRejectInvitationMutation,
 } from '@redux/api/invitations-api';
-import { changeTrainingsMode } from '@redux/reducers/trainings-partners-slice';
+import { addMyPartner, changeTrainingsMode } from '@redux/reducers/trainings-partners-slice';
+import { updateInvitations } from '@redux/reducers/user-invitations-slice';
 import { dateFullFormatWithDot, dateFullStringFormat } from '@utils/constants/date-formats';
 import { Avatar, Button } from 'antd';
 import classnames from 'classnames';
@@ -28,12 +29,29 @@ export const UserMessagesCard: FC<UserMessagesCardPropsType> = ({ user }) => {
     const date = moment(createdAt, dateFullStringFormat).format(dateFullFormatWithDot);
     const parentRef = useRef<HTMLDivElement>(null);
 
-    const handleCancelTrainingClick = async () => {
-        await rejectInvitation({ id: user._id });
+    const handleCancelTrainingClick = () => {
+        dispatch(updateInvitations({ id: user.from._id }));
+        rejectInvitation({ id: user.from._id });
     };
 
-    const handleJoinTrainingClick = async () => {
-        await acceptInvitation({ id: user._id, status: 'accepted' });
+    const handleJoinTrainingClick = () => {
+        dispatch(updateInvitations({ id: user.from._id }));
+        acceptInvitation({ id: user.from._id, status: 'accepted' });
+        const data: PartnersResponseType = {
+            id: user.from._id,
+            inviteId: user._id,
+            name: `${user.from.lastName} ${user.from.firstName}`,
+            trainingType: user.training.name,
+            imageSrc: user.from.imageSrc,
+            avgWeightInWeek: user.training.exercises.reduce((sum, elem) => {
+                const newSum = sum + elem.weight / user.training.exercises.length;
+
+                return Math.round(newSum);
+            }, 0),
+            status: 'accepted',
+        };
+
+        dispatch(addMyPartner(data));
         dispatch(changeTrainingsMode('partners'));
     };
 

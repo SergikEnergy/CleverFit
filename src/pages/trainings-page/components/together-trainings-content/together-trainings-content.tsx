@@ -47,7 +47,6 @@ export const TogetherTrainingsContent: FC = () => {
             dispatch(setTrainingPartners(allUserPartners));
         }
     }, [dispatch, isSuccessFetchedAllPartners, allUserPartners]);
-    console.log(togetherMode);
 
     return (
         <div className={classes.content}>

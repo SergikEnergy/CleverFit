@@ -1,4 +1,5 @@
 import { FC, RefObject, useState } from 'react';
+import { useWindowWidth } from '@hooks/use-window-size';
 import { TrainingsResponseType } from '@redux/api/api-types';
 import { Button, Popover } from 'antd';
 
@@ -15,6 +16,7 @@ type TrainingsInfoPopoverPropsType = {
 
 export const UserMessagePopover: FC<TrainingsInfoPopoverPropsType> = ({ training, parentRef }) => {
     const [isVisible, setIsVisible] = useState(false);
+    const windowInnerWidth = useWindowWidth();
 
     const handleOpenPopover = () => setIsVisible(true);
 
@@ -24,7 +26,7 @@ export const UserMessagePopover: FC<TrainingsInfoPopoverPropsType> = ({ training
         <Popover
             data-test-id={WORKOUT_DATA_TEST_ID.jointTrainingReviewCard}
             showArrow={false}
-            align={{ offset: [0, -20] }}
+            align={{ offset: windowInnerWidth < 900 ? [0, 50] : [0, -20] }}
             destroyTooltipOnHide={true}
             overlayStyle={{ boxShadow: '0px 2px 8px 0px #00000026', width: 312, padding: 0 }}
             overlayInnerStyle={{ padding: 0, width: '100%' }}

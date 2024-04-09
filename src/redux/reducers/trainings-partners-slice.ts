@@ -51,6 +51,18 @@ const slice = createSlice({
                     user.id === payload.userId ? { ...user, status: 'pending' } : user,
                 );
         },
+        deleteMyPartner: (state, { payload }: PayloadAction<{ id: string }>) => {
+            const indexUser = state.userPartners.findIndex((user) => user.id === payload.id);
+
+            if (indexUser !== -1) {
+                state.userPartners = current(state.userPartners).filter(
+                    (_, index) => indexUser !== index,
+                );
+            }
+        },
+        addMyPartner: (state, { payload: user }: PayloadAction<PartnersResponseType>) => {
+            state.userPartners = current(state.userPartners).concat(user);
+        },
         setRandomPartners: (state, { payload }: PayloadAction<PartnersResponseType[]>) => {
             if (payload) {
                 state.randomPartners = payload;
@@ -83,6 +95,8 @@ export const {
     resetTrainingPartners,
     changeTrainingsMode,
     updatePartnerStatus,
+    deleteMyPartner,
+    addMyPartner,
 } = slice.actions;
 
 export const partnersReducer = slice.reducer;

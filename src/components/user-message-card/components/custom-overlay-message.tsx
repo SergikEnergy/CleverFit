@@ -1,11 +1,13 @@
 import { FC } from 'react';
 import { CloseOutlined } from '@ant-design/icons';
 import { TrainingsResponseType } from '@redux/api/api-types';
-import { dateFullFormatWithDot, dateFullStringFormat } from '@utils/constants/date-formats';
+import { dateDayMonthYearDotFormat } from '@utils/constants/date-formats';
 import { getColorTrainByName } from '@utils/get-color-badge-by-name';
 import { getPeriodByValue } from '@utils/get-period';
 import { Badge, Button, Divider } from 'antd';
 import moment from 'moment';
+
+import { WORKOUT_DATA_TEST_ID } from '../../../data/data-test-ids';
 
 import classes from './custom-overlay-message.module.css';
 
@@ -18,10 +20,13 @@ export const CustomOverlayMessage: FC<CustomOverlayMessagePropsType> = ({
     training,
     closeAction,
 }) => {
-    const date = moment(training.date, dateFullStringFormat).format(dateFullFormatWithDot);
+    const date = moment(training.date).format(dateDayMonthYearDotFormat);
 
     return (
-        <div className={classes.overlay}>
+        <div
+            className={classes.overlay}
+            data-test-id={WORKOUT_DATA_TEST_ID.jointTrainingReviewCard}
+        >
             <div className={classes.header}>
                 <Badge
                     className={classes.name}
