@@ -112,7 +112,7 @@ export const FormDrawer: FC<FormDrawerPropsType> = () => {
         const requestBody = prepareDataRequest(values);
 
         if (requestBody && (modeDrawer === DRAWER_ADD_MODE || modeDrawer === DRAWER_CREATE_MODE)) {
-            await addNewUserTrainingRequest(requestBody);
+            addNewUserTrainingRequest(requestBody);
         }
 
         if (requestBody && modeDrawer === DRAWER_EDIT_MODE && activeTraining.length > 0) {
