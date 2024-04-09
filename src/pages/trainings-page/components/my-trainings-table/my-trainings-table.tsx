@@ -78,7 +78,7 @@ export const MyTrainingsTable: FC = () => {
                     position: ['bottomLeft'],
                     hideOnSinglePage: true,
                     className: classes.pagination,
-                    pageSize: innerWindowWidth > 600 ? 14 : 9,
+                    pageSize: innerWindowWidth > 600 ? 10 : 9,
                 }}
             />
             <Button

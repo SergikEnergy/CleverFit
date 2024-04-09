@@ -25,7 +25,20 @@ const slice = createSlice({
             }
         },
         updateUserTrainings: (state, { payload }: PayloadAction<TrainingsResponseType>) => {
-            state.userTrainings = current(state.userTrainings).concat(payload);
+            state.userTrainings = current(state.userTrainings)
+                .concat(payload)
+                .sort((item1, item2) => {
+                    if (
+                        item1.parameters &&
+                        item1.parameters.period &&
+                        item2.parameters &&
+                        item2.parameters.period
+                    ) {
+                        return item1.parameters.period - item2.parameters.period;
+                    }
+
+                    return 0;
+                });
         },
         resetUserTrainingsFromServer: (state) => {
             state.userTrainings = [];
