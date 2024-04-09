@@ -5,7 +5,7 @@ import { useAddNewTraining } from '@hooks/use-add-new-training';
 import { useUpdateUserTraining } from '@hooks/use-update-user-training';
 import { InvitationRequestType } from '@redux/api/api-types';
 import { useSendInvitationMutation } from '@redux/api/invitations-api';
-import { changeTrainingsMode } from '@redux/reducers/trainings-partners-slice';
+import { updatePartnerStatus } from '@redux/reducers/trainings-partners-slice';
 import { usePartnersSelector, useUserTrainingsSelector } from '@redux/selectors';
 import { dateFullFormatWithDot, dateFullStringFormat } from '@utils/constants/date-formats';
 import {
@@ -123,36 +123,24 @@ export const FormDrawer: FC<FormDrawerPropsType> = () => {
                 if (!requestBody.parameters) {
                     requestBody.parameters = {
                         repeat: false,
-                        period: 0,
                         jointTraining: false,
                         participants: [],
                     };
                 }
-                // requestBody.parameters.jointTraining = true;
 
-                // if (!requestBody.parameters.participants) {
-                //     requestBody.parameters.participants = [selectedPartner.id];
-                // }
-
-                // if (!requestBody.parameters?.participants.includes(selectedPartner.id)) {
-                //     requestBody.parameters?.participants.push(selectedPartner.id);
-                // }
-
-                console.log(requestBody);
                 const result = await addNewUserTrainingRequest(requestBody);
 
-                console.log(result);
                 if (result) {
+                    dispatch(updatePartnerStatus({ userId: selectedPartner.id }));
+
                     const userInvitation: InvitationRequestType = {
                         to: selectedPartner.id,
                         trainingId: result._id,
                     };
-                    console.log(userInvitation, 'invite');
 
                     sendInvitationToUser(userInvitation).unwrap();
                 }
             } catch (err) {
-                console.log(err);
                 closeDrawer();
             }
         }

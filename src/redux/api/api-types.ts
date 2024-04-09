@@ -61,13 +61,14 @@ export type TrainingsResponseType = {
     userId: string;
     exercises: ExerciseType[];
     parameters?: ParametersTrainingType;
+    id?: string;
 };
 
 export type ParametersTrainingType = {
     repeat: boolean;
-    period: number;
-    jointTraining: boolean;
-    participants: string[];
+    period?: number;
+    jointTraining?: boolean;
+    participants?: string[];
 };
 
 export type ExerciseType = {

@@ -5,7 +5,6 @@ import classes from './user-training-info-line.module.css';
 type UserTrainingInfoLinePropsType = {
     title: string;
     description: string;
-    index?: number;
 };
 
 export const UserTrainingInfoLine: FC<UserTrainingInfoLinePropsType> = ({ title, description }) => (

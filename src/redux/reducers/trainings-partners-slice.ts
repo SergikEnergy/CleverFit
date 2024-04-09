@@ -1,6 +1,6 @@
 import { PartnersResponseType } from '@redux/api/api-types';
 import type { PayloadAction } from '@reduxjs/toolkit';
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice, current } from '@reduxjs/toolkit';
 
 export type TogetherTrainingsMode = 'random' | 'user' | 'similar' | 'partners';
 
@@ -34,6 +34,23 @@ const slice = createSlice({
                 state.trainingType = payload;
             }
         },
+        updatePartnerStatus: (state, { payload }: PayloadAction<{ userId: string }>) => {
+            let indexUser;
+
+            indexUser = state.randomPartners.findIndex((user) => user.id === payload.userId);
+
+            if (indexUser !== -1)
+                state.randomPartners = current(state.randomPartners).map((user) =>
+                    user.id === payload.userId ? { ...user, status: 'pending' } : user,
+                );
+
+            indexUser = state.similarPartners.findIndex((user) => user.id === payload.userId);
+
+            if (indexUser !== -1)
+                state.similarPartners = current(state.similarPartners).map((user) =>
+                    user.id === payload.userId ? { ...user, status: 'pending' } : user,
+                );
+        },
         setRandomPartners: (state, { payload }: PayloadAction<PartnersResponseType[]>) => {
             if (payload) {
                 state.randomPartners = payload;
@@ -65,6 +82,7 @@ export const {
     setSimilarPartners,
     resetTrainingPartners,
     changeTrainingsMode,
+    updatePartnerStatus,
 } = slice.actions;
 
 export const partnersReducer = slice.reducer;

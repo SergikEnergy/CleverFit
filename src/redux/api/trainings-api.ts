@@ -39,7 +39,7 @@ export const trainingsAPI = createApi({
                           ...result.map(({ _id }) => ({ type: 'Trainings' as const, _id })),
                           { type: 'Trainings', id: 'LIST' },
                       ]
-                    : [{ type: 'Trainings', id: 'LIST' }],
+                    : ['Trainings'],
         }),
         getAllowedTrainsList: build.query<AllowedTrainResponseType[], void>({
             query: () => ({
@@ -54,7 +54,7 @@ export const trainingsAPI = createApi({
                 method: 'POST',
                 credentials: 'include',
             }),
-            invalidatesTags: [{ type: 'Trainings', id: 'LIST' }],
+            invalidatesTags: ['Trainings', 'Partners'],
         }),
         changeTrain: build.mutation<TrainingsResponseType, ChangeFutureTrainRequestType>({
             query: (data) => ({
@@ -63,7 +63,7 @@ export const trainingsAPI = createApi({
                 method: 'PUT',
                 credentials: 'include',
             }),
-            invalidatesTags: [{ type: 'Trainings', id: 'LIST' }],
+            invalidatesTags: ['Trainings'],
         }),
         getAllTrainingsPartners: build.query<PartnersResponseType[], void>({
             query: () => ({
@@ -76,13 +76,20 @@ export const trainingsAPI = createApi({
                           ...result.map(({ id }) => ({ type: 'Partners' as const, id })),
                           { type: 'Partners', id: 'LIST' },
                       ]
-                    : [{ type: 'Partners', id: 'LIST' }],
+                    : ['Partners'],
         }),
         getAllRandomPartners: build.query<PartnersResponseType[], void>({
             query: () => ({
                 url: 'catalogs/user-joint-training-list',
                 credentials: 'include',
             }),
+            providesTags: (result) =>
+                result
+                    ? [
+                          ...result.map(({ id }) => ({ type: 'Partners' as const, id })),
+                          { type: 'Partners', id: 'LIST' },
+                      ]
+                    : ['Partners'],
         }),
         getAllSimilarPartners: build.query<PartnersResponseType[], QueryPartnersTrainingType>({
             query: (arg) => {
@@ -94,6 +101,13 @@ export const trainingsAPI = createApi({
                     params: { trainingType },
                 };
             },
+            providesTags: (result) =>
+                result
+                    ? [
+                          ...result.map(({ id }) => ({ type: 'Partners' as const, id })),
+                          { type: 'Partners', id: 'LIST' },
+                      ]
+                    : ['Partners'],
         }),
     }),
 });

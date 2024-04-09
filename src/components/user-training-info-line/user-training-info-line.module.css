@@ -23,3 +23,12 @@
     color: var(--primary-light-6);
     text-align: center;
 }
+
+@media screen and (max-width: 550px) {
+    .description {
+        text-align: left;
+    }
+    .title {
+        width: 40%;
+    }
+}

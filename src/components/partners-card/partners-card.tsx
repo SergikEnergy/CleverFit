@@ -35,7 +35,11 @@ export const PartnersCard: FC<PartnersCardType> = ({ partner, index, selectedPhr
     };
 
     return (
-        <Card className={classes.partner} data-test-id={`joint-training-cards${index}`}>
+        <Card
+            style={{ backgroundColor: partner.status === 'rejected' ? '#FAFAFA' : '#F0F5FF' }}
+            className={classes.partner}
+            data-test-id={`joint-training-cards${index}`}
+        >
             <Card.Meta
                 title={getHighlightedName(name, selectedPhrase)}
                 avatar={
@@ -44,13 +48,11 @@ export const PartnersCard: FC<PartnersCardType> = ({ partner, index, selectedPhr
             />
             <div className={classes.info}>
                 <UserTrainingInfoLine
-                    index={1}
                     key='type'
                     title='Тип тренировки'
                     description={trainingType}
                 />
                 <UserTrainingInfoLine
-                    index={2}
                     key='avrgWeight'
                     title='Средняя нагрузка'
                     description={`${avgWeightInWeek} кг/нед`}

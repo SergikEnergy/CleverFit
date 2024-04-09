@@ -1,8 +1,10 @@
 import { FC, useCallback, useState } from 'react';
 import { SearchByNameBlock } from '@components/search-by-name-block';
+import { useWindowWidth } from '@hooks/use-window-size';
 import { usePartnersSelector } from '@redux/selectors';
 import { Pagination } from 'antd';
 
+import { useCollapseContext } from '../../../../react-contexts';
 import { EmptyPartnersBlock } from '../empty-partners-block';
 import { PartnersCards } from '../partners-cards';
 
@@ -12,7 +14,12 @@ export const SimilarPartnersBlock: FC = () => {
     const { similarPartners } = usePartnersSelector();
     const [currentPage, setCurrentPage] = useState(1);
     const [selectedName, setSelectedName] = useState('');
-    const pageSize = 16;
+    const { collapsed } = useCollapseContext();
+    const innerWindowWidth = useWindowWidth();
+    let pageSize = 16;
+
+    if (collapsed && innerWindowWidth > 1100) pageSize = 15;
+    if (innerWindowWidth < 1100) pageSize = 8;
 
     const filteredPartners = similarPartners.filter((partner) =>
         selectedName
@@ -42,7 +49,7 @@ export const SimilarPartnersBlock: FC = () => {
                 style={{ textAlign: 'left', marginTop: 16 }}
                 className={classes.pagination}
                 current={currentPage}
-                pageSize={16}
+                pageSize={pageSize}
                 total={filteredPartners.length}
                 onChange={onPageChange}
                 hideOnSinglePage={true}
