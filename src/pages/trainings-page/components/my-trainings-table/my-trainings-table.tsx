@@ -40,11 +40,11 @@ export const MyTrainingsTable: FC = () => {
 
     const tableData: MyTrainingsTableDataType[] = userTrainings.map((training, index) => ({
         key: `${training._id}-${training.date}`,
-        period: training.parameters ? training.parameters.period : 0,
+        period: training.parameters && training.parameters.period ? training.parameters.period : 0,
         badge: (
             <TrainingsBadge
                 key={`${training.name}${training.date}-badge`}
-                isImplemented={training.isImplementation}
+                isImplemented={training.isImplementation ?? false}
                 trainingName={training.name}
             />
         ),
@@ -52,14 +52,14 @@ export const MyTrainingsTable: FC = () => {
             <TrainingCell
                 key={training.name}
                 training={training}
-                isImplemented={training.isImplementation}
+                isImplemented={training.isImplementation ?? false}
             />
         ),
         action: (
             <EditTrainingsButton
                 index={index}
                 actionClick={() => setActiveTrain(training._id)}
-                isDisabled={training.isImplementation}
+                isDisabled={training.isImplementation ?? false}
             />
         ),
     }));
