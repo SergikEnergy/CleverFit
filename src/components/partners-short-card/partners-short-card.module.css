@@ -1,4 +1,5 @@
 .partner:global(.ant-card) {
+    padding: var(--padding-card-main);
     min-height: 114px;
     border: 1px solid #f0f0f0;
     box-shadow: var(--card-main-page-box-shadow);
@@ -8,7 +9,7 @@
 }
 
 .partner :global(.ant-card-body) {
-    padding: var(--padding-little-size) 0;
+    padding: 0;
     display: flex;
     flex-direction: column;
     align-items: stretch;
@@ -63,8 +64,10 @@
 }
 
 @media screen and (max-width: 550px) {
-    .partner :global(.ant-card-body) {
+    .partner:global(.ant-card) {
         padding: var(--padding-little-size);
+    }
+    .partner :global(.ant-card-body) {
         width: 100%;
         margin: auto;
         justify-content: center;

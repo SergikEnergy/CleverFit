@@ -7,6 +7,7 @@ import { useWindowWidth } from '@hooks/use-window-size';
 import { API_BASE_URL, API_IMGS_BASE } from '@redux/api/api-data';
 import { resetImgUploadData, saveImgUploadData } from '@redux/reducers/personal-info-slice';
 import { useAuthSelector, usePersonalInfoSelector } from '@redux/selectors';
+import { UPLOAD_STATUSES, UploadStatusType } from '@utils/constants/statuses-upload';
 import { Form, Modal, Upload } from 'antd';
 import type { UploadChangeParam, UploadProps } from 'antd/es/upload';
 import type { UploadFile } from 'antd/es/upload/interface';
@@ -21,7 +22,7 @@ import classes from './custom-upload.module.css';
 
 type CustomUploadPropsType = {
     setDisabledSaveButton: (value: boolean) => void;
-    setUploadStatus: (status: 'error' | 'done') => void;
+    setUploadStatus: (status: UploadStatusType) => void;
 };
 
 export const CustomUpload: FC<CustomUploadPropsType> = ({
@@ -82,13 +83,13 @@ export const CustomUpload: FC<CustomUploadPropsType> = ({
             setPreviewImage('');
             setFileList([{ ...errorFile, name: file.name }]);
             setDisabledSaveButton(true);
-            setUploadStatus('error');
+            setUploadStatus(UPLOAD_STATUSES.error);
         } else if (file && file.status !== 'removed') {
             setFileList(newFileList);
             setPreviewTitle(newFileList[0].name || 'Noname.jpg');
 
             if (file.response?.url) {
-                setUploadStatus('done');
+                setUploadStatus(UPLOAD_STATUSES.done);
                 setPreviewImage(`${API_IMGS_BASE}${file.response.url}`);
                 dispatch(saveImgUploadData({ url: file.response.url, name: file.response.name }));
                 setDisabledSaveButton(false);

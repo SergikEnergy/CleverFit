@@ -25,7 +25,11 @@ export const PartnersCards: FC<PartnersCardsPropsType> = ({ partners, selectedPh
 
     return (
         <div className={classes.cards}>
-            <Row gutter={[16, 16]} justify={innerWidth > 550 ? 'start' : 'center'}>
+            <Row
+                style={{ width: '100%' }}
+                gutter={[16, 16]}
+                justify={innerWidth > 550 ? 'start' : 'center'}
+            >
                 {partners.map((partner, index) => (
                     <Col style={{ width: colWidth }} key={`${partner}-${index + 1}`}>
                         <PartnersCard

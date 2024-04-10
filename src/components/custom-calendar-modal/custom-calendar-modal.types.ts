@@ -3,7 +3,7 @@ import { AllowedTrainResponseType, TrainingsResponseType } from '@redux/api/api-
 import { TrainOrExerciseModeType } from '@utils/constants/train-modes';
 import { Moment } from 'moment';
 
-type TrainsNameImplementedType = { name: string; isImplemented: boolean };
+type TrainsNameImplementedType = { name: string; isImplemented: boolean | undefined };
 
 export type CheckAllowedOrExistingTrainsType = (
     existingTrains: TrainsNameImplementedType[],

@@ -13,13 +13,9 @@ export const TrainingsDrawerContextProvider: FC<{ children: ReactNode }> = ({ ch
     const [activeTrainingId, setActiveTrainingId] = useState('');
     const [activePartnerTrainingId, setActivePartnerTrainingId] = useState('');
 
-    const openDrawer = () => {
-        setIsOpen(true);
-    };
+    const openDrawer = () => setIsOpen(true);
 
-    const closeDrawer = () => {
-        setIsOpen(false);
-    };
+    const closeDrawer = () => setIsOpen(false);
 
     const changeMode = (mode: EditOrCreateModeType) => setModeDrawer(mode);
 

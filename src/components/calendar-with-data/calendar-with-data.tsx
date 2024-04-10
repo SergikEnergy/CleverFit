@@ -1,4 +1,4 @@
-import { FC, Fragment, useEffect, useRef, useState } from 'react';
+import { FC, Fragment, useCallback, useEffect, useRef, useState } from 'react';
 import { CustomCalendarModal } from '@components/custom-calendar-modal';
 import { useWindowWidth } from '@hooks/use-window-size';
 import { TrainingsResponseType } from '@redux/api/api-types';
@@ -53,8 +53,10 @@ export const CalenDarWithData: FC<CalenDarWithDataPropsType> = ({
         }
     }, [hideCollapsed, windowWidth]);
 
-    const changeModalType = () =>
-        setModalType((prev) => (prev === TRAIN_MODE ? EXERCISE_MODE : TRAIN_MODE));
+    const changeModalType = useCallback(
+        () => setModalType((prev) => (prev === TRAIN_MODE ? EXERCISE_MODE : TRAIN_MODE)),
+        [],
+    );
 
     useEffect(() => {
         const correctModalPosition = () => {
@@ -82,7 +84,6 @@ export const CalenDarWithData: FC<CalenDarWithDataPropsType> = ({
     }, [isModalVisible, selectedDay]);
 
     useEffect(() => {
-        changeModalType();
         if (dateFromContext) {
             const updatedData = filterDataByDaySortByDate(dateFromContext, dataForRender);
 

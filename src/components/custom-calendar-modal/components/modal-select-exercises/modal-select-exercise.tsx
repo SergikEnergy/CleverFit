@@ -1,4 +1,4 @@
-import { FC, Fragment, useLayoutEffect, useState } from 'react';
+import { FC, Fragment, useEffect, useState } from 'react';
 import { ArrowLeftOutlined } from '@ant-design/icons';
 import { Divider, Empty, Select } from 'antd';
 import moment from 'moment';
@@ -37,7 +37,7 @@ export const ModalSelectExercise: FC<ModalSelectExercisePropsType> = ({
     const [isEditDisabled, setIsEditDisabled] = useState(false);
     const [trainSelect, setTrainSelect] = useState(trainForEdit.length > 0 ? trainForEdit : '');
 
-    useLayoutEffect(() => {
+    useEffect(() => {
         if (date) {
             updateDate(date);
         }
@@ -46,7 +46,7 @@ export const ModalSelectExercise: FC<ModalSelectExercisePropsType> = ({
 
             if (Array.isArray(trainsOnThisDate) && trainsOnThisDate.length > 0) {
                 setExercises(trainsOnThisDate[0].exercises, trainForEdit);
-                setIsEditDisabled(trainsOnThisDate[0].isImplementation);
+                setIsEditDisabled(trainsOnThisDate[0].isImplementation ?? false);
             }
         }
     }, [trainForEdit, trains, date, updateDate, setExercises]);
@@ -131,7 +131,7 @@ export const ModalSelectExercise: FC<ModalSelectExercisePropsType> = ({
                             disabledIcon={isEditDisabled}
                             index={index}
                             exercise={exercise}
-                            key={exercise.name}
+                            key={`${exercise.name}-${index + 1}`}
                         />
                     ))}
                 </ul>

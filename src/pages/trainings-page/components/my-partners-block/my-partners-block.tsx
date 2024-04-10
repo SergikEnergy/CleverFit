@@ -15,9 +15,12 @@ export const MyPartnersBlock: FC = () => {
     return (
         <div className={classes.wrapper}>
             <p className={classes.title}>Мои партнёры по тренировкам</p>
-            <Row gutter={[16, 16]} className={classes.cards}>
+            <Row style={{ width: '100%' }} gutter={[16, 16]} className={classes.cards}>
                 {sortedPartners.map((user, index) => (
-                    <Col style={innerWindowWidth > 600 ? { width: '234px' } : { width: '316px' }}>
+                    <Col
+                        key={`${user.id}-col`}
+                        style={innerWindowWidth > 600 ? { width: '234px' } : { width: '316px' }}
+                    >
                         <PartnersShortCard index={index} key={user.id} partner={user} />
                     </Col>
                 ))}

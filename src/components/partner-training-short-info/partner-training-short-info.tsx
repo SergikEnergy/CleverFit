@@ -17,8 +17,8 @@ export const PartnerTrainingShortInfo: FC = () => {
     const selectedUser = randomUser || similarUser || null;
 
     return (
-        <div className={classes.info}>
-            {selectedUser && (
+        selectedUser && (
+            <div className={classes.info}>
                 <div className={classes.user}>
                     <div className={classes.avatar}>
                         {selectedUser.imageSrc ? (
@@ -29,15 +29,14 @@ export const PartnerTrainingShortInfo: FC = () => {
                     </div>
                     <div className={classes.name}>{selectedUser.name}</div>
                 </div>
-            )}
-            {selectedUser && (
+
                 <div className={classes.badge}>
                     <Badge
                         color={getColorTrainByName(selectedUser.trainingType)}
                         text={selectedUser.trainingType}
                     />
                 </div>
-            )}
-        </div>
+            </div>
+        )
     );
 };

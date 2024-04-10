@@ -10,12 +10,12 @@
     font-size: var(--font-size-mobile);
     line-height: var(--main-line-height);
     color: var(--character-light-secondary-45);
-    width: 50%;
+    width: 60%;
     text-align: left;
 }
 
 .description {
-    width: 45%;
+    width: 40%;
     font-family: var(--main-font-family);
     font-size: var(--font-size-main);
     font-weight: var(--font-weight-medium);
@@ -29,6 +29,6 @@
         text-align: left;
     }
     .title {
-        width: 40%;
+        width: 50%;
     }
 }

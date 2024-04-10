@@ -10,6 +10,7 @@ import { savePersonalInfoAfterRegistration } from '@redux/reducers/personal-info
 import { usePersonalInfoSelector } from '@redux/selectors';
 import { dateDayMonthYearDotFormat, dateFullStringFormat } from '@utils/constants/date-formats';
 import { EMAIL_VALIDATION, PASSWORD_VALIDATION } from '@utils/constants/patterns-reg-exp';
+import { UPLOAD_STATUSES, UploadStatusType } from '@utils/constants/statuses-upload';
 import { Button, DatePicker, Form, Input } from 'antd';
 import classnames from 'classnames';
 import moment from 'moment';
@@ -41,7 +42,7 @@ export const FormPersonalInfo: FC = () => {
     const [confirmPlaceholderVisible, setConfirmPlaceholderVisible] = useState(true);
     const [submitDisabled, setSubmitDisabled] = useState(true);
     const [isAlertShowed, setIsAlertShowed] = useState(false);
-    const [uploadStatus, setUploadStatus] = useState<'error' | 'done'>('error');
+    const [uploadStatus, setUploadStatus] = useState<UploadStatusType>(UPLOAD_STATUSES.error);
     const [form] = Form.useForm();
 
     useEffect(() => {
@@ -49,7 +50,7 @@ export const FormPersonalInfo: FC = () => {
             email: userEmail,
             firstName,
             lastName,
-            birthday: birthday ? moment(birthday, dateDayMonthYearDotFormat) : undefined,
+            birthday: birthday ? moment(birthday, dateFullStringFormat) : undefined,
         });
     }, [birthday, firstName, form, lastName, userEmail]);
 
@@ -81,7 +82,7 @@ export const FormPersonalInfo: FC = () => {
             requestBody.birthday = moment(requestBody.birthday).format(dateFullStringFormat);
         }
 
-        if (uploadStatus === 'done' && ImageUrl) {
+        if (uploadStatus === UPLOAD_STATUSES.done && ImageUrl) {
             requestBody.imgSrc = `${API_IMGS_BASE}${ImageUrl}`;
         }
 

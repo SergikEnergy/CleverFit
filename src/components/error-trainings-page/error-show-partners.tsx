@@ -3,6 +3,7 @@ import { CloseOutlined } from '@ant-design/icons';
 import { useGetRandomPartners } from '@hooks/use-get-random-partners';
 import { useGetSimilarPartners } from '@hooks/use-get-similar-partners';
 import { usePartnersSelector } from '@redux/selectors';
+import { ERROR_MODAL_WITHOUT_UPDATE } from '@utils/constants/errors-messages';
 import { getIconFromStatus, StatusMessageType } from '@utils/get-icon-from-status';
 import { Button } from 'antd';
 
@@ -28,9 +29,6 @@ export const ErrorShowPartners: FC<ErrorShowPartnersPropsType> = ({
     const { trainingType } = usePartnersSelector();
     const fetchRandomPartners = useGetRandomPartners();
     const fetchSimilarPartners = useGetSimilarPartners();
-    const title = 'При открытии данных произошла ошибка';
-    const subtitle = 'Попробуйте ещё раз.';
-    const buttonText = 'Обновить';
 
     const handleCloseButtonClick = () => {
         if (closeClickAction) closeClickAction();
@@ -40,7 +38,8 @@ export const ErrorShowPartners: FC<ErrorShowPartnersPropsType> = ({
         if (buttonActionClick) buttonActionClick();
         if (random) {
             fetchRandomPartners();
-        } else if (trainingType) {
+        }
+        if (!random && trainingType) {
             fetchSimilarPartners({ trainingType });
         }
 
@@ -54,13 +53,13 @@ export const ErrorShowPartners: FC<ErrorShowPartnersPropsType> = ({
                 <div className={classes.status}>{getIconFromStatus(status)}</div>
                 <div className={classes.content}>
                     <div data-test-id='modal-error-user-training-title' className={classes.title}>
-                        {title}
+                        {ERROR_MODAL_WITHOUT_UPDATE.title}
                     </div>
                     <div
                         data-test-id='modal-error-user-training-subtitle'
                         className={classes.subtitle}
                     >
-                        {subtitle}
+                        {ERROR_MODAL_WITHOUT_UPDATE.subTitle}
                     </div>
                 </div>
                 <div className={classes.close}>
@@ -81,7 +80,7 @@ export const ErrorShowPartners: FC<ErrorShowPartnersPropsType> = ({
                     htmlType='button'
                     onClick={handleActionButtonClick}
                 >
-                    {buttonText}
+                    {ERROR_MODAL_WITHOUT_UPDATE.buttonText}
                 </Button>
             </div>
         </div>
