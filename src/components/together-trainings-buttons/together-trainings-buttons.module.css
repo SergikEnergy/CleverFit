@@ -1,0 +1,55 @@
+.wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--gap-medium);
+    width: 100%;
+    box-shadow: var(--trainings-buttons-shadow);
+    border: 1px solid var(--character-light-dividers);
+    border-top: none;
+    background-color: var(--neutral-gray-2);
+}
+
+.button {
+    display: block;
+    width: 40%;
+    margin-top: var(--margin-little-size);
+    margin-bottom: var(--margin-little-size);
+    font-family: var(--main-font-family);
+    font-style: var(--font-style-main);
+    font-size: var(--font-size-main);
+    font-weight: var(--font-weight-normal);
+    line-height: var(--main-line-height);
+}
+
+.button:active,
+.button:visited {
+    background-color: transparent;
+}
+
+@media screen and (max-width: 1100px) {
+    .wrapper {
+        flex-direction: column;
+        gap: 0;
+        width: 100%;
+    }
+
+    .button {
+        width: 90%;
+        margin-top: var(--margin-little-size);
+        margin-bottom: var(--margin-little-size);
+    }
+    .button:last-child {
+        margin-top: 0;
+    }
+}
+
+@media screen and (max-width: 500px) {
+    .button {
+        width: 100%;
+    }
+    button.button {
+        padding-left: 0;
+        padding-right: 0;
+    }
+}

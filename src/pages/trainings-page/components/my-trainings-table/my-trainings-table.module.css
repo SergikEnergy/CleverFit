@@ -1,0 +1,103 @@
+.wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    width: 100%;
+}
+
+.table :global(.ant-table table) {
+    width: var(--table-trainings-desktop-width);
+    align-self: flex-start;
+}
+
+.header :global(.ant-table-cell) {
+    background-color: var(--neutral-gray-4);
+}
+
+.header :global() .table :global(.ant-table-thead) {
+    width: 100%;
+    font-family: var(--main-font-family);
+    font-size: var(--font-size-mobile);
+    font-weight: var(--font-weight-normal);
+    line-height: var(--main-line-height);
+}
+
+.header {
+    height: 36px;
+}
+
+.header:last-child {
+    height: 24px;
+}
+
+.table :global(.ant-table-cell) {
+    padding: 0;
+}
+.table :global(.ant-table-thead .ant-table-cell) {
+    padding: 8px;
+}
+.table :global(.ant-table-thead .ant-table-cell:last-child) {
+    padding: 2px 8px;
+}
+
+.table :global(.ant-table table) {
+    border-spacing: 12px 5px;
+}
+
+.table :global(.ant-table-tbody) {
+    width: 100%;
+    font-family: var(--main-font-family);
+    font-size: var(--font-size-main);
+    font-weight: var(--font-weight-normal);
+    line-height: var(--main-line-height);
+}
+
+.add__train {
+    margin-top: var(--margin-middle-size);
+}
+
+.table td:global(.training__column) {
+    width: 240px;
+}
+
+.table :global(.ant-table-pagination.ant-pagination) {
+    margin: var(--margin-pagination-table-desktop);
+}
+
+.table td:global(.training__action) {
+    width: 40px;
+}
+
+@media screen and (max-width: 950px) {
+    .table :global(.ant-table table) {
+        width: 100%;
+    }
+    .table td:global(.training__column) {
+        width: 216px;
+    }
+    .table:global(.ant-table-wrapper) {
+        width: 100%;
+        align-self: flex-start;
+    }
+    .table td:global(.training__action) {
+        width: 35px;
+        border-bottom: none;
+    }
+}
+
+@media screen and (max-width: 600px) {
+    .table td:global(.training__column) {
+        width: 100px;
+    }
+    .table :global(.ant-table-thead .ant-table-cell) {
+        padding: 6px 0;
+    }
+    .table :global(.ant-table table) {
+        border-spacing: 10px 5px;
+    }
+    .add__train {
+        width: 92%;
+        display: block;
+        margin: auto;
+    }
+}

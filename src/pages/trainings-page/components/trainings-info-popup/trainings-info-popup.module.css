@@ -1,0 +1,7 @@
+.overlay {
+    width: 100%;
+}
+.overlay :global(.ant-popover-inner-content) {
+    padding: 0;
+    width: 100%;
+}

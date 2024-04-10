@@ -1,4 +1,4 @@
-import { FC, Fragment, useContext, useEffect, useState } from 'react';
+import { FC, Fragment, useEffect, useState } from 'react';
 import { ErrorProfile } from '@components/error-profile-page';
 import { ERROR_UPDATE_PROFILE } from '@components/error-profile-page/error-messages.data';
 import { AlertNotification } from '@components/notifications/alert/alert-notification';
@@ -10,6 +10,7 @@ import { savePersonalInfoAfterRegistration } from '@redux/reducers/personal-info
 import { usePersonalInfoSelector } from '@redux/selectors';
 import { dateDayMonthYearDotFormat, dateFullStringFormat } from '@utils/constants/date-formats';
 import { EMAIL_VALIDATION, PASSWORD_VALIDATION } from '@utils/constants/patterns-reg-exp';
+import { UPLOAD_STATUSES, UploadStatusType } from '@utils/constants/statuses-upload';
 import { Button, DatePicker, Form, Input } from 'antd';
 import classnames from 'classnames';
 import moment from 'moment';
@@ -17,7 +18,7 @@ import moment from 'moment';
 import { DATA_TEST_ID } from '../../data/data-test-ids';
 import { ERRORS_MESSAGES } from '../../data/form-messages';
 import { getIconRender } from '../../helpers/get-password-icon';
-import { ModalReportContext } from '../../react-contexts';
+import { useModalReportContext } from '../../react-contexts';
 
 import { CustomUpload } from './components';
 import { FieldType } from './form-personal-info.types';
@@ -25,7 +26,7 @@ import { FieldType } from './form-personal-info.types';
 import classes from './form-personal-info.module.css';
 
 export const FormPersonalInfo: FC = () => {
-    const { openModal, setNode, setWidthModal } = useContext(ModalReportContext);
+    const { openModal, setNode, setWidthModal } = useModalReportContext();
     const {
         email: userEmail,
         firstName,
@@ -41,7 +42,7 @@ export const FormPersonalInfo: FC = () => {
     const [confirmPlaceholderVisible, setConfirmPlaceholderVisible] = useState(true);
     const [submitDisabled, setSubmitDisabled] = useState(true);
     const [isAlertShowed, setIsAlertShowed] = useState(false);
-    const [uploadStatus, setUploadStatus] = useState<'error' | 'done'>('error');
+    const [uploadStatus, setUploadStatus] = useState<UploadStatusType>(UPLOAD_STATUSES.error);
     const [form] = Form.useForm();
 
     useEffect(() => {
@@ -49,7 +50,7 @@ export const FormPersonalInfo: FC = () => {
             email: userEmail,
             firstName,
             lastName,
-            birthday: birthday ? moment(birthday, dateDayMonthYearDotFormat) : undefined,
+            birthday: birthday ? moment(birthday, dateFullStringFormat) : undefined,
         });
     }, [birthday, firstName, form, lastName, userEmail]);
 
@@ -61,40 +62,35 @@ export const FormPersonalInfo: FC = () => {
     };
 
     const handleSubmit = async (fieldValues: FieldType) => {
-        const formData = { ...fieldValues };
-
-        if (formData.passwordConfirm) {
-            delete formData.passwordConfirm;
-        }
+        const requestBody: RequestUserInfoType = {
+            email: fieldValues.email,
+            password: fieldValues.password,
+            firstName: fieldValues.firstName,
+            lastName: fieldValues.lastName,
+            birthday: fieldValues.birthday,
+        };
 
         Object.keys(fieldValues).map((key) => {
             if (!fieldValues[key as keyof FieldType]) {
-                delete formData[key as keyof FieldType];
+                delete requestBody[key as keyof RequestUserInfoType];
             }
 
             return key;
         });
 
-        if (uploadStatus === 'error' && formData.uploadFile) {
-            delete formData.uploadFile;
+        if (requestBody.birthday) {
+            requestBody.birthday = moment(requestBody.birthday).format(dateFullStringFormat);
         }
 
-        if (formData.birthday) {
-            formData.birthday = moment(formData.birthday).format(dateFullStringFormat);
-        }
-
-        const body: RequestUserInfoType = { ...formData };
-
-        if (ImageUrl) {
-            body.imgSrc = `${API_IMGS_BASE}${ImageUrl}`;
+        if (uploadStatus === UPLOAD_STATUSES.done && ImageUrl) {
+            requestBody.imgSrc = `${API_IMGS_BASE}${ImageUrl}`;
         }
 
         try {
-            const info = await updatePersonalInfo(body).unwrap();
+            const info = await updatePersonalInfo(requestBody).unwrap();
 
             setIsAlertShowed(true);
-            dispatch(savePersonalInfoAfterRegistration({ ...info, url: '', name: '' }));
-            form.resetFields();
+            dispatch(savePersonalInfoAfterRegistration(info));
             setSubmitDisabled(true);
             setIsPasswordRequired(false);
         } catch (err) {
@@ -261,9 +257,7 @@ export const FormPersonalInfo: FC = () => {
                     dataTestId={DATA_TEST_ID.alert}
                     type='success'
                     message='Данные профиля успешно обновлены'
-                    handleCloseAlert={() => {
-                        setIsAlertShowed(false);
-                    }}
+                    handleCloseAlert={() => setIsAlertShowed(false)}
                 />
             )}
         </Fragment>

@@ -13,7 +13,7 @@
 .badge {
     width: 80%;
     text-align: left;
-    font-family: var(--font-family);
+    font-family: var(--main-font-family);
     font-weight: var(--font-weight-normal);
     font-size: var(--font-size-main);
     line-height: var(--line-height-main);

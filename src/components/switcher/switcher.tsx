@@ -1,8 +1,8 @@
-import { FC, useContext } from 'react';
+import { FC } from 'react';
 import { MenuFoldOutlined, MenuUnfoldOutlined } from '@ant-design/icons';
 import classnames from 'classnames';
 
-import { CollapsedContext } from '../../react-contexts';
+import { useCollapseContext } from '../../react-contexts';
 
 import classes from './switcher.module.css';
 
@@ -11,7 +11,7 @@ type SwitcherProps = {
 };
 
 export const Switcher: FC<SwitcherProps> = ({ collapsed }) => {
-    const { toggleCollapsed } = useContext(CollapsedContext);
+    const { toggleCollapsed } = useCollapseContext();
 
     const toggleSider = () => toggleCollapsed();
 

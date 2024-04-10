@@ -1,24 +1,14 @@
 import { FC } from 'react';
 import { useLocation } from 'react-router';
-import { CloseCircleTwoTone, CloseOutlined } from '@ant-design/icons';
-import { useGetAllowedTrainingsLists } from '@hooks/use-get-allowed-trains-list';
-import { useModalReportContext } from '@hooks/use-modal-report';
+import { CloseOutlined } from '@ant-design/icons';
+import { useGetAllowedTrainingsLists } from '@hooks/use-get-allowed-trainings-list';
+import { getIconFromStatus, StatusMessageType } from '@utils/get-icon-from-status';
 import { Button } from 'antd';
 
+import { WORKOUT_DATA_TEST_ID } from '../../data/data-test-ids';
+import { useModalReportContext } from '../../react-contexts';
+
 import classes from './error-show-allowed-trains-list.module.css';
-
-type StatusMessageType = 'success' | 'error' | 'info';
-
-const getIconFromStatus = (status: StatusMessageType = 'error') => {
-    switch (status) {
-        case 'success':
-            return <CloseCircleTwoTone style={{ fontSize: '24px' }} />;
-        case 'error':
-            return <CloseCircleTwoTone twoToneColor='red' style={{ fontSize: '24px' }} />;
-        default:
-            return <CloseCircleTwoTone twoToneColor='#2f54eb' style={{ fontSize: '24px' }} />;
-    }
-};
 
 type ErrorShowAllowedTrainsListPropsType = {
     status?: StatusMessageType;
@@ -45,7 +35,7 @@ export const ErrorShowAllowedTrainsList: FC<ErrorShowAllowedTrainsListPropsType>
 
     const handleActionButtonClick = () => {
         if (buttonActionClick) buttonActionClick();
-        if (isFromCalendarPage) {
+        else if (isFromCalendarPage) {
             setNode(null);
             closeModal();
             if (fetchAllowedTrainingsList) fetchAllowedTrainingsList();
@@ -69,7 +59,7 @@ export const ErrorShowAllowedTrainsList: FC<ErrorShowAllowedTrainsListPropsType>
                 </div>
                 <div className={classes.close}>
                     <Button
-                        data-test-id='modal-error-user-training-button-close'
+                        data-test-id={WORKOUT_DATA_TEST_ID.modalErrorUserTrainingButtonClose}
                         onClick={handleCloseButtonClick}
                         icon={<CloseOutlined style={{ fontSize: '14px' }} />}
                         shape='circle'
@@ -80,7 +70,7 @@ export const ErrorShowAllowedTrainsList: FC<ErrorShowAllowedTrainsListPropsType>
             </div>
             <div className={classes.button}>
                 <Button
-                    data-test-id='modal-error-user-training-button'
+                    data-test-id={WORKOUT_DATA_TEST_ID.modalErrorUserTrainingButton}
                     type='primary'
                     htmlType='button'
                     onClick={handleActionButtonClick}

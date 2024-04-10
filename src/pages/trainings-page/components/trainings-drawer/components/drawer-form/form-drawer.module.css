@@ -1,0 +1,67 @@
+.form {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: space-between;
+    min-height: calc(90vh - 20px);
+}
+
+.body {
+    margin-bottom: auto;
+}
+
+.button_block {
+    margin-top: auto;
+    width: 100%;
+    margin-bottom: 0;
+}
+
+.wrapper__fields_two {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex: 1;
+}
+
+.wrapper__fields_two > :global(.ant-form-item) {
+    margin-bottom: var(--margin-small-size);
+}
+
+label.checkbox {
+    font-family: var(--main-font-family);
+    font-size: var(--font-size-main);
+    font-weight: var(--font-weight-normal);
+    line-height: var(--main-line-height);
+}
+
+.select {
+    width: 44%;
+}
+
+.select :global(.ant-select-selector) {
+    padding-right: 6px;
+}
+
+.select :global(.ant-select .ant-select-selector .ant-select-selection-placeholder),
+.training :global(.ant-select .ant-select-selector .ant-select-selection-placeholder) {
+    color: var(--character-light-disable-25);
+    font-family: var(--main-font-family);
+    font-size: var(--font-size-main);
+    font-weight: var(--font-weight-normal);
+    padding-right: var(--padding-small-size);
+}
+
+button.submit {
+    background-color: var(--primary-light-6);
+    font-family: var(--main-font-family);
+    font-size: var(--font-size-main);
+    font-weight: var(--font-weight-normal);
+    line-height: var(--main-line-height);
+    border: none;
+}
+
+@media screen and (max-width: 600px) {
+    .date {
+        width: 44%;
+    }
+}

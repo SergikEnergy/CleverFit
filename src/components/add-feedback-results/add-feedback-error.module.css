@@ -8,14 +8,14 @@
     width: 77%;
 }
 .error :global(.ant-result-title) {
-    font-family: var(--font-family);
+    font-family: var(--main-font-family);
     font-weight: 500;
     font-size: 2.4rem;
     line-height: var(--line-height-main);
     color: var(--character-light-title-85);
 }
 .error :global(.ant-result-subtitle) {
-    font-family: var(--font-family);
+    font-family: var(--main-font-family);
     font-weight: var(--font-weight-normal);
     font-size: var(--font-size-main);
     line-height: var(--line-height-main);
@@ -33,7 +33,7 @@
 }
 
 .error :global(.ant-result-extra) button {
-    font-family: var(--font-family);
+    font-family: var(--main-font-family);
     font-weight: var(--font-weight-normal);
     font-size: var(--font-size-main);
     line-height: var(--line-height-main);

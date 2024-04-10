@@ -1,8 +1,8 @@
-import { FC, ReactNode, useContext } from 'react';
+import { FC, ReactNode } from 'react';
 import { CloseCircleTwoTone } from '@ant-design/icons';
 import { Button, Result } from 'antd';
 
-import { ModalReportContext } from '../../react-contexts';
+import { useModalReportContext } from '../../react-contexts';
 
 import classes from './error-profile.module.css';
 
@@ -21,7 +21,7 @@ export const ErrorProfile: FC<ErrorProfilePropsType> = ({
     buttonText,
     dataTestIdBtn,
 }) => {
-    const { closeModal, setNode } = useContext(ModalReportContext);
+    const { closeModal, setNode } = useModalReportContext();
 
     const handleClickButton = () => {
         closeModal();

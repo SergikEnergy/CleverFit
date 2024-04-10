@@ -66,7 +66,7 @@ export const ModalCreateTrain: FC<ModalCreateTrainPropsType> = ({
                         <TrainWithBadge
                             changeFlowToEdit={changeMode}
                             train={train}
-                            key={`${train.name} badged`}
+                            key={`${train.name}-${index + 1} badged`}
                             index={index}
                         />
                     ))}

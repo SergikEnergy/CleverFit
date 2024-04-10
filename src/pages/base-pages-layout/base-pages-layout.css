@@ -37,16 +37,26 @@ header.calendar-header {
     min-height: 80px;
     height: 80px;
 }
+header.trainings-header {
+    min-height: 96px;
+    height: 96px;
+}
 
 @media screen and (max-width: 834px) {
     header.header {
         height: 194px;
+    }
+    header.trainings-header,
+    header.trainings-header.header.collapsed {
+        height: 96px;
+        min-height: 96px;
     }
     header.feedback-header,
     header.feedback-header.header.collapsed {
         min-height: 50px;
         height: 50px;
     }
+
     header.header.collapsed {
         height: 132px;
         min-height: 100px;
@@ -69,6 +79,11 @@ header.calendar-header {
         min-height: 66px;
         height: 66px;
     }
+    header.calendar-header,
+    header.calendar-header.header.collapsed {
+        min-height: 66px;
+        height: 66px;
+    }
 }
 
 @media screen and (max-width: 400px) {
@@ -82,10 +97,10 @@ header.calendar-header {
     header.header.collapsed {
         height: 166px;
     }
-    header.feedback-header,
-    header.feedback-header.header.collapsed {
-        min-height: 50px;
-        height: 50px;
+    header.trainings-header,
+    header.trainings-header.header.collapsed {
+        height: 82px;
+        min-height: 82px;
     }
     header.calendar-header,
     header.calendar-header.header.collapsed {

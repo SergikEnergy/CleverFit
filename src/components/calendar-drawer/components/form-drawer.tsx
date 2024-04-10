@@ -1,9 +1,9 @@
-import { forwardRef, useContext, useState } from 'react';
+import { forwardRef, useState } from 'react';
 import { MinusOutlined, PlusOutlined } from '@ant-design/icons';
 import { Button, Checkbox, Form, Input, InputNumber } from 'antd';
 import type { CheckboxChangeEvent } from 'antd/es/checkbox';
 
-import { DrawerTrainsContext } from '../../../react-contexts';
+import { useCalendarTrainingsDrawerContext } from '../../../react-contexts';
 
 import { emptyFields } from './form-drawer.data';
 import { FormDrawerPropsType, FormFieldsType } from './form-drawer.types';
@@ -13,7 +13,7 @@ import classes from './form-drawer.module.css';
 
 export const FormDrawer = forwardRef<HTMLButtonElement, FormDrawerPropsType>(
     ({ editMode }, ref) => {
-        const { exercises, setExercises, trainName } = useContext(DrawerTrainsContext);
+        const { exercises, setExercises, trainName } = useCalendarTrainingsDrawerContext();
         const [deletedIndexes, setDeletedIndexes] = useState<number[]>([]);
         const [form] = Form.useForm<FormFieldsType>();
         const initialFormValuesFiltered =

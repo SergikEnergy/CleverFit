@@ -1,9 +1,9 @@
-import { FC, useContext, useEffect, useState } from 'react';
+import { FC, useEffect, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { Breadcrumb } from 'antd';
 import classnames from 'classnames';
 
-import { CollapsedContext } from '../../react-contexts';
+import { useCollapseContext } from '../../react-contexts';
 
 import { SettingsButton } from './components';
 import { breadcrumbsInitialItems } from './header.data';
@@ -14,10 +14,11 @@ import classes from './header.module.css';
 type HeaderPropsType = {
     hideElement?: boolean;
     hideForCalendar?: boolean;
+    hideForTrainings?: boolean;
 };
 
-export const Header: FC<HeaderPropsType> = ({ hideElement, hideForCalendar }) => {
-    const { collapsed } = useContext(CollapsedContext);
+export const Header: FC<HeaderPropsType> = ({ hideElement, hideForCalendar, hideForTrainings }) => {
+    const { collapsed } = useCollapseContext();
     const [breadCrumbsItems, setBreadCrumbsItems] = useState(breadcrumbsInitialItems);
     const location = useLocation();
 
@@ -45,9 +46,10 @@ export const Header: FC<HeaderPropsType> = ({ hideElement, hideForCalendar }) =>
                     className={classnames(classes.greeting, {
                         [classes.collapsed]: collapsed,
                         [classes.calendar__settings_wrapper]: hideForCalendar,
+                        [classes.trainings__settings_wrapper]: hideForTrainings,
                     })}
                 >
-                    {!hideForCalendar && (
+                    {!hideForCalendar && !hideForTrainings && (
                         <div
                             className={classnames(classes.greeting__text, {
                                 [classes.collapsed]: collapsed,
@@ -69,7 +71,10 @@ export const Header: FC<HeaderPropsType> = ({ hideElement, hideForCalendar }) =>
                             [classes.collapsed]: collapsed,
                         })}
                     >
-                        <SettingsButton hiddenForCalendar={hideForCalendar} />
+                        <SettingsButton
+                            hiddenForCalendar={hideForCalendar}
+                            hideForTrainings={hideForTrainings}
+                        />
                     </div>
                 </div>
             )}

@@ -1,0 +1,28 @@
+:global(.trainings__drawer_date-picker .ant-picker-cell) {
+    padding: 0;
+}
+
+.cell {
+    width: 100%;
+    height: 100%;
+    font-family: var(--main-font-family);
+    font-size: var(--font-size-main);
+    font-weight: var(--font-weight-normal);
+    line-height: var(--main-line-height);
+    padding-top: 3px;
+    padding-bottom: 3px;
+}
+
+.existing {
+    background-color: var(--primary-light-1);
+}
+
+:global(.trainings__drawer_date-picker .ant-picker-cell-disabled) .existing {
+    background-color: var(--primary-light-1);
+}
+
+.today {
+    background-color: transparent;
+    border: 1px solid var(--primary-light-6);
+    border-radius: 3px;
+}

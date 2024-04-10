@@ -1,13 +1,15 @@
-import { FC, useContext } from 'react';
+import { FC } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { CalendarTwoTone, HeartFilled, TrophyFilled } from '@ant-design/icons';
 import { ProfileIconComponent } from '@components/custom-icons/profile-icon';
 import { useGetAllUserTrainings } from '@hooks/use-get-all-user-trainings';
 import { history } from '@redux/configure-store';
-import { Menu, Typography } from 'antd';
+import { useInvitationsSelector } from '@redux/selectors';
+import { Badge, Menu, Typography } from 'antd';
 import classnames from 'classnames';
 
-import { CollapsedContext } from '../../react-contexts';
+import { WORKOUT_DATA_TEST_ID } from '../../data/data-test-ids';
+import { useCollapseContext } from '../../react-contexts';
 import { Paths } from '../../routes/pathes';
 import { primaryLight } from '../../utils/constants/colors';
 
@@ -17,19 +19,26 @@ import { menuItemsKeys } from './menu-links.data';
 import classes from './menu-links.module.css';
 
 export const MenuLinks: FC = () => {
-    const fetchAllUserTrains = useGetAllUserTrainings();
-    const { collapsed } = useContext(CollapsedContext);
+    const { userInvitations } = useInvitationsSelector();
+    const fetchAllTrainings = useGetAllUserTrainings();
+    const { collapsed } = useCollapseContext();
     const location = useLocation();
     const navigate = useNavigate();
 
     const handleMoveToCalendarPage = () => {
-        fetchAllUserTrains();
+        fetchAllTrainings();
         history.push(Paths.CALENDAR_PAGE, { allowRequest: true });
     };
 
-    const handleMoveToProfilePage = () => {
-        navigate(Paths.PROFILE_PAGE, { replace: true });
+    const handleMoveToTrainingsPage = async () => {
+        const result = await fetchAllTrainings();
+
+        if (result) {
+            history.push(Paths.TRAININGS_PAGE, { allowRequest: true });
+        }
     };
+
+    const handleMoveToProfilePage = () => navigate(Paths.PROFILE_PAGE, { replace: true });
 
     return (
         <Menu
@@ -64,12 +73,20 @@ export const MenuLinks: FC = () => {
                 className={classnames(classes.menu__item, {
                     [classes.collapsed]: collapsed,
                 })}
+                data-test-id={WORKOUT_DATA_TEST_ID.menuButtonTraining}
                 key={menuItemsKeys['/trains']}
+                onClick={handleMoveToTrainingsPage}
                 icon={
-                    <HeartFilled
-                        style={{ color: `${primaryLight.primaryLight9}` }}
-                        className={classnames(classes.menu__item_icon, classes.antFixed)}
-                    />
+                    <Badge
+                        size='small'
+                        count={userInvitations.length}
+                        data-test-id={WORKOUT_DATA_TEST_ID.notificationAboutJointTraining}
+                    >
+                        <HeartFilled
+                            style={{ color: `${primaryLight.primaryLight9}` }}
+                            className={classnames(classes.menu__item_icon, classes.antFixed)}
+                        />
+                    </Badge>
                 }
             >
                 <Typography.Text className={classes.menu__item_text}>Тренировки</Typography.Text>

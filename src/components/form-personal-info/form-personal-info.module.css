@@ -6,7 +6,7 @@
 }
 
 .title {
-    font-family: var(--font-family);
+    font-family: var(--main-font-family);
     font-size: var(--font-size-title);
     color: var(--character-light-title-85);
     line-height: 140%;

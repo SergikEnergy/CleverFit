@@ -1,13 +1,13 @@
-import { FC, useContext } from 'react';
+import { FC } from 'react';
 import { Typography } from 'antd';
 import classnames from 'classnames';
 
-import { CollapsedContext } from '../../react-contexts';
+import { useCollapseContext } from '../../react-contexts';
 
 import classes from './about-app.module.css';
 
 export const AboutApp: FC = () => {
-    const { collapsed } = useContext(CollapsedContext);
+    const { collapsed } = useCollapseContext();
 
     return (
         <div className={classnames(classes.about, { [classes.collapsed]: collapsed })}>

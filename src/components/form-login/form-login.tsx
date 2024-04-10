@@ -1,4 +1,4 @@
-import { FC, useCallback, useContext, useEffect, useState } from 'react';
+import { FC, useCallback, useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import { GooglePlusOutlined } from '@ant-design/icons';
 import { useAppDispatch } from '@hooks/typed-react-redux-hooks';
@@ -15,7 +15,7 @@ import { Button, Checkbox, Form, Input } from 'antd';
 import classnames from 'classnames';
 
 import { getIconRender } from '../../helpers/get-password-icon';
-import { LoaderStateContext } from '../../react-contexts';
+import { useLoaderContext } from '../../react-contexts';
 import { Paths } from '../../routes/pathes';
 
 import { FieldType, MouseEventOnClick } from './form-login.types';
@@ -30,7 +30,7 @@ export const FormLogin: FC = () => {
     const emailValue = Form.useWatch('userEmail', form);
     const [loginUser, { isLoading: isRTKLoading }] = useLoginUserMutation();
     const [checkEmailRequest, { isLoading: isCheckEmailLoading }] = useCheckEmailMutation();
-    const { startLoader, stopLoader } = useContext(LoaderStateContext);
+    const { startLoader, stopLoader } = useLoaderContext();
     const location = useLocation();
     const dispatch = useAppDispatch();
     const { email: emailFromState } = useUserSelector();

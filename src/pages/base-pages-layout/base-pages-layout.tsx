@@ -1,4 +1,4 @@
-import { FC, Fragment, ReactNode, useContext, useEffect, useState } from 'react';
+import { FC, Fragment, ReactNode, useEffect, useState } from 'react';
 import { Header } from '@components/header';
 import { ModalPopUp } from '@components/modal-popup';
 import { SideBar } from '@components/sidebar';
@@ -6,7 +6,7 @@ import { Switcher } from '@components/switcher/switcher';
 import { Layout as AntLayout } from 'antd';
 import classnames from 'classnames';
 
-import { CollapsedContext } from '../../react-contexts';
+import { useCollapseContext } from '../../react-contexts';
 import { primaryLight } from '../../utils/constants/colors';
 
 import './base-pages-layout.css';
@@ -19,6 +19,7 @@ type BasePagesLayoutPropsType = {
     children: ReactNode;
     isFeedbackPage?: boolean;
     isCalendarPage?: boolean;
+    isTrainingsPage?: boolean;
     customHeader?: boolean;
 };
 
@@ -26,9 +27,10 @@ export const BasePagesLayout: FC<BasePagesLayoutPropsType> = ({
     children,
     isFeedbackPage,
     isCalendarPage,
+    isTrainingsPage,
     customHeader,
 }) => {
-    const { collapsed } = useContext(CollapsedContext);
+    const { collapsed } = useCollapseContext();
     const [width, setWidth] = useState(208);
     const [collapseWidth, setCollapseWidth] = useState(64);
 
@@ -48,6 +50,7 @@ export const BasePagesLayout: FC<BasePagesLayoutPropsType> = ({
                 className={classnames('base-page', {
                     'feedback-page': isFeedbackPage,
                     'calendar-page': isCalendarPage,
+                    'trainings-page': isTrainingsPage,
                 })}
                 style={{ background: `center / cover url(${BgImg}) no-repeat` }}
             >
@@ -87,13 +90,18 @@ export const BasePagesLayout: FC<BasePagesLayoutPropsType> = ({
                                 collapsed,
                                 'feedback-header': isFeedbackPage,
                                 'calendar-header': isCalendarPage,
+                                'trainings-header': isTrainingsPage,
                             })}
                             style={{
                                 padding: 0,
                                 background: `${primaryLight.primaryLight1}`,
                             }}
                         >
-                            <Header hideElement={isFeedbackPage} hideForCalendar={isCalendarPage} />
+                            <Header
+                                hideElement={isFeedbackPage}
+                                hideForCalendar={isCalendarPage}
+                                hideForTrainings={isTrainingsPage}
+                            />
                         </AntHeader>
                     )}
                     <Content style={{ background: 'transparent' }}>{children}</Content>

@@ -1,5 +1,4 @@
 import { FC } from 'react';
-import { useDrawerContext } from '@hooks/use-info-drawer';
 import { useWindowWidth } from '@hooks/use-window-size';
 import { usePersonalInfoSelector } from '@redux/selectors';
 import { dateDayMonthFormat, dateFullStringFormat } from '@utils/constants/date-formats';
@@ -7,6 +6,7 @@ import { Drawer } from 'antd';
 import moment from 'moment';
 
 import { DATA_TEST_ID } from '../../../../data/data-test-ids';
+import { useTariffDrawerContext } from '../../../../react-contexts';
 
 import { DrawerHeader } from './drawer-header/info-drawer-header';
 import { TariffsForm } from './tariffs-form/tariffs-form';
@@ -16,7 +16,7 @@ import classes from './tariff-info-drawer.module.css';
 
 export const TariffInfoDrawer: FC = () => {
     const innerWindowWidth = useWindowWidth();
-    const { open: isDrawerOpen } = useDrawerContext();
+    const { open: isDrawerOpen } = useTariffDrawerContext();
     const { tariff } = usePersonalInfoSelector();
     const expired = tariff?.expired || undefined;
     const untilPaid = expired

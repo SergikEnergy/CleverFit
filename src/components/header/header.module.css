@@ -3,6 +3,9 @@
     padding: var(--padding-zero);
     margin: var(--margin-zero);
 }
+.header:global(.ant-layout-header) {
+    line-height: var(--header-line-height);
+}
 
 .header__wrapper {
     display: flex;
@@ -20,7 +23,7 @@
 }
 
 .navigation span.antFixed {
-    font-family: var(--font-family);
+    font-family: var(--main-font-family);
     font-weight: var(--font-weight-normal);
     font-size: var(--font-size-main);
     line-height: var(--line-height-main);
@@ -50,7 +53,8 @@
     justify-content: flex-end;
 }
 
-.calendar__settings_wrapper {
+.calendar__settings_wrapper,
+.trainings__settings_wrapper {
     align-self: flex-end;
     margin-bottom: 6px;
     border-top: 8px;
@@ -58,7 +62,7 @@
 
 .greeting__text {
     padding-top: 1.4rem;
-    font-family: var(--font-family);
+    font-family: var(--main-font-family);
     font-weight: 700;
     font-size: 3.8rem;
     line-height: var(--line-height-main);
@@ -147,6 +151,9 @@
 }
 
 @media screen and (max-width: 500px) {
+    header:global(.ant-layout-header) {
+        line-height: var(--header-line-height);
+    }
     .calendar__settings_wrapper {
         align-self: flex-end;
         margin-right: 1rem;
@@ -156,6 +163,11 @@
     .greeting {
         margin-left: 1.8rem;
     }
+    .trainings__settings_wrapper {
+        margin-right: 1rem;
+        margin-left: 0;
+    }
+
     .greeting__text.collapsed {
         width: 85%;
     }

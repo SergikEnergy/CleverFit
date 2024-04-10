@@ -1,0 +1,114 @@
+.overlay {
+    padding: 0;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+.header {
+    padding: var(--padding-popup-card);
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.body {
+    padding-left: var(--padding-card-main);
+    padding-right: var(--padding-card-main);
+    font-family: var(--main-font-family);
+    line-height: var(--line-height-main);
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+.name,
+.train {
+    font-weight: var(--font-weight-normal);
+    font-size: var(--font-size-main);
+}
+
+.period {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    margin-bottom: var(--margin-small-additional-size);
+}
+
+.interval {
+    font-size: var(--font-size-title);
+    font-weight: var(--font-weight-medium);
+    text-align: left;
+    color: var(--character-light-primary-85);
+}
+
+.date {
+    color: var(--character-light-primary-85);
+    font-size: var(--font-size-main);
+    font-weight: var(--font-weight-normal);
+}
+
+.exercises__list {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    gap: var(--gap-extra-small);
+    width: 100%;
+    height: 115px;
+    overflow-y: auto;
+}
+
+.exercises__list::-webkit-scrollbar {
+    width: 2px;
+}
+
+.exercises__list::-webkit-scrollbar-thumb {
+    background-color: #888;
+    border-radius: 4px;
+}
+
+.exercises__list::-webkit-scrollbar-thumb:hover {
+    background-color: #555;
+}
+
+.exercises__list {
+    scrollbar-width: thin;
+    scrollbar-color: #888 #b4b4b4;
+}
+
+.exercises__list::-moz-scrollbar-thumb {
+    background-color: #888;
+    border-radius: 4px;
+}
+
+.exercises__list::-moz-scrollbar-thumb:hover {
+    background-color: #555;
+}
+
+.exercises__list::-moz-scrollbar-track {
+    background-color: #b4b4b4;
+}
+
+.exercise {
+    align-self: stretch;
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+}
+
+.train {
+    color: var(--character-light-secondary-45);
+}
+
+.info {
+    color: var(--primary-light-6);
+    font-size: var(--font-size-mobile);
+    font-weight: var(--font-weight-normal);
+}

@@ -1,8 +1,8 @@
-import { FC, useContext } from 'react';
+import { FC } from 'react';
 import { NewFeedback } from '@components/new-feedback';
 import { Button } from 'antd';
 
-import { ModalReportContext } from '../../react-contexts';
+import { useModalReportContext } from '../../react-contexts';
 
 import classes from './feedback-action-buttons.module.css';
 
@@ -15,7 +15,7 @@ export const FeedbacksActionButtons: FC<FeedbacksActionButtonsType> = ({
     allReviewAction,
     buttonText,
 }) => {
-    const { setNode, setWidthModal, openModal } = useContext(ModalReportContext);
+    const { setNode, setWidthModal, openModal } = useModalReportContext();
 
     const handleCreateButtonClick = () => {
         setNode(<NewFeedback />);

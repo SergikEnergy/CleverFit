@@ -1,17 +1,17 @@
-import { FC, useContext } from 'react';
+import { FC } from 'react';
 import { useLocation } from 'react-router-dom';
 import { history } from '@redux/configure-store';
 import { Button } from 'antd';
 import classnames from 'classnames';
 
-import { CollapsedContext } from '../../react-contexts';
+import { useCollapseContext } from '../../react-contexts';
 import { Paths } from '../../routes/pathes';
 
 import classes from './reviews.module.css';
 
 export const Reviews: FC = () => {
     const location = useLocation();
-    const { collapsed } = useContext(CollapsedContext);
+    const { collapsed } = useCollapseContext();
 
     const handleClick = () => {
         history.push(Paths.FEEDBACKS_PAGE, { fromPage: location.pathname });

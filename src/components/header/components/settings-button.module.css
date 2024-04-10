@@ -1,6 +1,6 @@
 .button__text,
 span.button__text {
-    font-family: var(--font-family);
+    font-family: var(--main-font-family);
     font-weight: var(--font-weight-normal);
     font-size: var(--font-size-main);
     line-height: var(--line-height-main);
@@ -17,7 +17,8 @@ button.mobile__button {
 }
 
 @media screen and (max-width: 1290px) {
-    .settings__button:not(.settings__button_profile) > span[role='img'] {
+    .settings__button:not(.settings__button_profile, .settings__button_trainings)
+        > span[role='img'] {
         display: none;
     }
 }
@@ -30,6 +31,10 @@ button.mobile__button {
         padding-left: 2px;
         padding-right: 2px;
     }
+    button.settings__button_trainings {
+        padding-right: var(--padding-medium-size);
+        padding-bottom: var(--padding-small-size);
+    }
 }
 
 @media screen and (max-width: 800px) {
@@ -41,7 +46,9 @@ button.mobile__button {
         display: inline-block;
         padding: var(--padding-zero);
     }
-    button.mobile__button.antFixed:not(.calendar-mobile):not(.mobile__button_profile) {
+    button.mobile__button.antFixed:not(.calendar-mobile):not(.mobile__button_profile):not(
+            .mobile__button_trainings
+        ) {
         width: 32px;
         background: var(--neutral-gray-1);
     }

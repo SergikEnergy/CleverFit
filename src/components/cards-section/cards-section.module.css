@@ -16,7 +16,7 @@
 
 h1.title__text.antFixed,
 .title__text {
-    font-family: var(--font-family);
+    font-family: var(--main-font-family);
     margin-bottom: var(--margin-zero);
     font-weight: 500;
     font-style: normal;

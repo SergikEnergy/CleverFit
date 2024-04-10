@@ -57,17 +57,18 @@ export type TrainingsResponseType = {
     _id: string;
     name: string;
     date: string;
-    isImplementation: boolean;
+    isImplementation?: boolean;
     userId: string;
     exercises: ExerciseType[];
     parameters?: ParametersTrainingType;
+    id?: string;
 };
 
 export type ParametersTrainingType = {
     repeat: boolean;
-    period: number;
-    jointTraining: boolean;
-    participants: string[];
+    period?: number;
+    jointTraining?: boolean;
+    participants?: string[];
 };
 
 export type ExerciseType = {
@@ -86,7 +87,7 @@ export type AllowedTrainResponseType = {
 
 export type NewTrainRequestType = Pick<
     TrainingsResponseType,
-    'date' | 'exercises' | 'name' | 'isImplementation'
+    'date' | 'exercises' | 'name' | 'isImplementation' | 'parameters'
 >;
 
 export type ChangeFutureTrainRequestType = { body: NewTrainRequestType; id: string };
@@ -141,3 +142,48 @@ export type RequestChangeTariffType = {
     tariffId: string;
     days: number;
 };
+
+export type PartnersResponseType = {
+    id: string;
+    name: string;
+    trainingType: string;
+    imageSrc: string | null;
+    avgWeightInWeek: number;
+    inviteId: string;
+    status: InviteStatusType | null;
+};
+export type QueryPartnersTrainingType = {
+    trainingType: string;
+};
+
+export type InviteStatusType = 'accepted' | 'rejected' | 'pending' | null;
+
+export type RequestPartnersByInterestType = 'random' | 'similar';
+
+export type UserShortDataType = {
+    _id: string;
+    firstName: string | null;
+    lastName: string | null;
+    imageSrc: string | null;
+};
+
+export type InvitationResponseType = {
+    _id: string;
+    from: UserShortDataType;
+    training: TrainingsResponseType;
+    status: InviteStatusType;
+    createdAt: string;
+    to: UserShortDataType;
+};
+
+export type InvitationRequestType = {
+    to: string;
+    trainingId: string;
+};
+
+export type InvitationAnswerRequestType = {
+    id: string;
+    status: InviteStatusType;
+};
+
+export type AllInvitationsResponseType = Omit<InvitationResponseType, 'to'>;

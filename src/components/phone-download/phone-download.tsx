@@ -1,14 +1,14 @@
-import { FC, useContext } from 'react';
+import { FC } from 'react';
 import { AndroidFilled, AppleFilled } from '@ant-design/icons';
 import { Button, Divider } from 'antd';
 import classnames from 'classnames';
 
-import { CollapsedContext } from '../../react-contexts';
+import { useCollapseContext } from '../../react-contexts';
 
 import classes from './phone-download.module.css';
 
 export const PhoneDownload: FC = () => {
-    const { collapsed } = useContext(CollapsedContext);
+    const { collapsed } = useCollapseContext();
 
     return (
         <div className={classnames(classes.download, { [classes.collapsed]: collapsed })}>

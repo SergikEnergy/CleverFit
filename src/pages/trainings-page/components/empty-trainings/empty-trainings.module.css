@@ -1,0 +1,46 @@
+.empty {
+    align-self: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.title {
+    margin-top: 204px;
+    margin-bottom: 60px;
+
+    font-family: var(--main-font-family);
+    font-size: var(--font-size-tabs-trainings-main);
+    font-weight: var(--font-weight-medium);
+    line-height: var(--main-line-height);
+    text-align: center;
+}
+
+.action > button {
+    line-height: var(--main-line-height);
+    font-size: var(--button-font-size);
+    font-family: var(--main-font-family);
+    font-weight: var(--font-weight-normal);
+}
+
+@media screen and (max-width: 834px) {
+    .title {
+        width: 60%;
+    }
+}
+
+@media screen and (max-width: 500px) {
+    .title {
+        width: 85%;
+        margin-top: 130px;
+        text-align: center;
+    }
+    .empty {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        flex-direction: column;
+        height: calc(100% - 20px);
+    }
+}

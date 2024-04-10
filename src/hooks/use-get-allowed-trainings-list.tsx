@@ -1,17 +1,21 @@
-import { useCallback, useContext } from 'react';
+import { useCallback, useEffect } from 'react';
 import { ErrorShowAllowedTrainsList } from '@components/error-show-allowed-trains-list';
-import { useLazyGetAllowedTrainsListQuery } from '@redux/api/calendar-api';
 import { isFetchBaseQueryError } from '@redux/api/errors-catching';
+import { useLazyGetAllowedTrainsListQuery } from '@redux/api/trainings-api';
 
-import { DrawerTrainsContext, LoaderStateContext, ModalReportContext } from '../react-contexts';
+import {
+    useCalendarTrainingsDrawerContext,
+    useLoaderContext,
+    useModalReportContext,
+} from '../react-contexts';
 
 import { useResetUser } from './reset-user';
 
 export const useGetAllowedTrainingsLists = () => {
     const resetUser = useResetUser();
-    const { stopLoader } = useContext(LoaderStateContext);
-    const { setNode, setWidthModal, openModal, closeModal } = useContext(ModalReportContext);
-    const { updateAllowedTrains } = useContext(DrawerTrainsContext);
+    const { startLoader, stopLoader } = useLoaderContext();
+    const { setNode, setWidthModal, openModal, closeModal } = useModalReportContext();
+    const { updateAllowedTrains } = useCalendarTrainingsDrawerContext();
 
     const handlerErrorCloseAction = useCallback(() => {
         setNode(null);
@@ -49,11 +53,20 @@ export const useGetAllowedTrainingsLists = () => {
         } catch (error) {
             if (isFetchBaseQueryError(error)) {
                 handleErrorAllowedTrainings(error);
+                stopLoader();
             }
         } finally {
             stopLoader();
         }
     }, [getAllowedTrainingsList, handleErrorAllowedTrainings, stopLoader, updateAllowedTrains]);
+
+    useEffect(() => {
+        if (isLoading) {
+            startLoader();
+        } else {
+            stopLoader();
+        }
+    }, [isLoading, startLoader, stopLoader]);
 
     return { fetchAllowedTrainingsList, trainingsList, isLoading, isSuccessGettingList: isSuccess };
 };

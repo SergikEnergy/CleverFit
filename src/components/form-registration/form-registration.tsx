@@ -1,4 +1,4 @@
-import { FC, useCallback, useContext, useEffect, useState } from 'react';
+import { FC, useCallback, useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import { GooglePlusOutlined } from '@ant-design/icons';
 import { useAppDispatch } from '@hooks/typed-react-redux-hooks';
@@ -13,7 +13,7 @@ import classnames from 'classnames';
 
 import { ERRORS_MESSAGES } from '../../data/form-messages';
 import { getIconRender } from '../../helpers/get-password-icon';
-import { LoaderStateContext } from '../../react-contexts';
+import { useLoaderContext } from '../../react-contexts';
 import { Paths } from '../../routes/pathes';
 
 import classes from './form-registration.module.css';
@@ -32,7 +32,7 @@ export const FormRegistration: FC = () => {
     const [disabledSubmit, setDisabledSubmit] = useState(false);
     const [form] = Form.useForm();
     const [registerUser, { isLoading: isRTKLoading }] = useRegisterUserMutation();
-    const { startLoader, stopLoader } = useContext(LoaderStateContext);
+    const { startLoader, stopLoader } = useLoaderContext();
     const location = useLocation();
     const dispatch = useAppDispatch();
     const userData = useUserSelector();

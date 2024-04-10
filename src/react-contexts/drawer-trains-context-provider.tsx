@@ -14,21 +14,13 @@ export const DrawerTrainsContextProvider: FC<{ children: ReactNode }> = ({ child
     const [trainForEditID, setTrainForEditID] = useState('');
     const [trainForEditName, setTrainForEditName] = useState('');
 
-    const updateAllowedTrains = (trains: AllowedTrainResponseType[]) => {
-        setAllowedTrains(trains);
-    };
+    const updateAllowedTrains = (trains: AllowedTrainResponseType[]) => setAllowedTrains(trains);
 
-    const closeDrawer = () => {
-        setIsDrawerOpen(false);
-    };
+    const closeDrawer = () => setIsDrawerOpen(false);
 
-    const openDrawer = () => {
-        setIsDrawerOpen(true);
-    };
+    const openDrawer = () => setIsDrawerOpen(true);
 
-    const setTrainName = (newTrain: string) => {
-        setTrain(newTrain);
-    };
+    const setTrainName = (newTrain: string) => setTrain(newTrain);
 
     const setExercises = (list: ExerciseType[], nameTrain: string) => {
         setExercisesList((prev) => {
@@ -51,17 +43,11 @@ export const DrawerTrainsContextProvider: FC<{ children: ReactNode }> = ({ child
         });
     };
 
-    const resetExercises = () => {
-        setExercisesList([]);
-    };
+    const resetExercises = () => setExercisesList([]);
 
-    const updateDate = (newDate: Moment) => {
-        setDate(newDate);
-    };
+    const updateDate = (newDate: Moment) => setDate(newDate);
 
-    const setDrawerTitle = (title: string) => {
-        setDrawerHeader(title);
-    };
+    const setDrawerTitle = (title: string) => setDrawerHeader(title);
 
     const changeEditedTrainData = (id: string, newTrain: string) => {
         setTrainForEditID(id);

@@ -1,15 +1,15 @@
-import { FC, useContext } from 'react';
+import { FC } from 'react';
 import { Modal } from 'antd';
 import classnames from 'classnames';
 
-import { LoaderStateContext } from '../../react-contexts';
+import { useLoaderContext } from '../../react-contexts';
 
 import { LottieAuthSlider } from './lotties/lottie-slider-auth';
 
 import classes from './loader-auth.module.css';
 
 export const LoaderAuth: FC = () => {
-    const { isLoading } = useContext(LoaderStateContext);
+    const { isLoading } = useLoaderContext();
 
     return (
         <Modal

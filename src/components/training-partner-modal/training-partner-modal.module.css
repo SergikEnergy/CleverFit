@@ -1,0 +1,105 @@
+.modal {
+    display: flex;
+    flex-direction: column;
+    gap: var(--gap-small);
+    align-items: stretch;
+    justify-content: center;
+    padding: var(--padding-card-modal-partner-desktop);
+    position: relative;
+}
+
+button.close {
+    position: absolute;
+    right: 16px;
+    top: 14px;
+}
+
+.details {
+    margin-top: var(--margin-small-additional-size);
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.user {
+    width: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: var(--gap-small);
+}
+
+.avatar > span {
+    display: block;
+}
+
+.info {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    justify-content: center;
+    width: 50%;
+}
+
+.status {
+    margin: auto;
+    width: 98%;
+    margin-top: var(--margin-middle-size);
+    margin-bottom: var(--margin-small-size);
+    display: flex;
+    flex-direction: row-reverse;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.label :global(.anticon) {
+    margin-left: var(--margin-small-additional-size);
+}
+
+button.button {
+    border: 1px solid #d9d9d9;
+    color: var(--character-light-title-85);
+    font-family: var(--main-font-family);
+}
+
+@media screen and (max-width: 550px) {
+    .details {
+        margin-top: var(--margin-small-additional-size);
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: flex-start;
+        gap: var(--gap-small);
+    }
+    .info {
+        align-items: center;
+        justify-content: space-between;
+        width: 60%;
+    }
+    .line {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: flex-start;
+        gap: var(--gap-small);
+    }
+    .status {
+        display: flex;
+        flex-direction: column;
+        align-self: center;
+        justify-content: flex-start;
+        gap: var(--gap-small);
+        width: 100%;
+    }
+    .label {
+        margin: auto;
+    }
+}
+@media screen and (max-width: 550px) {
+    .info {
+        width: 100%;
+    }
+}

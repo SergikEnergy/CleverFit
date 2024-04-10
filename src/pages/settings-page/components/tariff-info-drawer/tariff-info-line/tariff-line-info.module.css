@@ -8,7 +8,7 @@
 
 .description {
     width: 60%;
-    font-family: var(--font-family);
+    font-family: var(--main-font-family);
     font-size: var(--font-size-main);
     color: var(--character-light-title-85);
     line-height: 130%;

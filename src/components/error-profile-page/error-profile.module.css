@@ -28,7 +28,7 @@
 }
 
 .result :global(.ant-result-title) {
-    font-family: var(--font-family);
+    font-family: var(--main-font-family);
     font-weight: 500;
     font-size: 1.6rem;
     line-height: var(--line-height-main);
@@ -38,7 +38,7 @@
 }
 
 .result :global(.ant-result-subtitle) {
-    font-family: var(--font-family);
+    font-family: var(--main-font-family);
     font-weight: var(--font-weight-normal);
     font-size: var(--font-size-main);
     line-height: var(--line-height-main);
@@ -51,7 +51,7 @@
 }
 
 .result :global(.ant-result-extra) button {
-    font-family: var(--font-family);
+    font-family: var(--main-font-family);
     font-weight: var(--font-weight-normal);
     font-size: var(--font-size-main);
     line-height: var(--line-height-main);

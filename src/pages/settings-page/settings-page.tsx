@@ -1,4 +1,4 @@
-import { FC, useContext, useEffect, useLayoutEffect } from 'react';
+import { FC, useEffect, useLayoutEffect, useRef } from 'react';
 import { Navigate, useNavigate } from 'react-router-dom';
 import { useAppDispatch } from '@hooks/typed-react-redux-hooks';
 import { useWindowWidth } from '@hooks/use-window-size';
@@ -10,18 +10,24 @@ import { useLazyGetTariffsListQuery } from '@redux/api/settings-api';
 import { saveAvailableTariffs } from '@redux/reducers/tariff-slice';
 import { useAuthSelector } from '@redux/selectors';
 
-import { CollapsedContext, TariffDrawerContextProvider } from '../../react-contexts';
+import { TariffDrawerContextProvider, useCollapseContext } from '../../react-contexts';
 import { Paths } from '../../routes/pathes';
 
 import classes from './settings-page.module.css';
 
 export const SettingsPage: FC = () => {
-    const { hideCollapsed } = useContext(CollapsedContext);
-    const innerWindowWidth = useWindowWidth();
+    const { hideCollapsed } = useCollapseContext();
 
-    if (innerWindowWidth < 500) {
-        hideCollapsed();
-    }
+    const innerWindowWidth = useWindowWidth();
+    const firstResize = useRef(true);
+
+    useEffect(() => {
+        if (innerWindowWidth < 500 && firstResize.current) {
+            hideCollapsed();
+            firstResize.current = false;
+        }
+    }, [hideCollapsed, innerWindowWidth]);
+
     const [getAllTariffs, { data: tariffs, isSuccess: isFetchedTariffs }] =
         useLazyGetTariffsListQuery();
     const dispatch = useAppDispatch();

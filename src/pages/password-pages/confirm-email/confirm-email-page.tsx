@@ -1,4 +1,4 @@
-import { FC, useContext, useState } from 'react';
+import { FC, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import VerificationInput from 'react-verification-input';
 import { useConfirmEmailMutation } from '@redux/api/auth-api';
@@ -8,14 +8,14 @@ import { useUserSelector } from '@redux/selectors';
 import { Result } from 'antd';
 import classnames from 'classnames';
 
-import { LoaderStateContext } from '../../../react-contexts';
+import { useLoaderContext } from '../../../react-contexts';
 import { Paths } from '../../../routes/pathes';
 
 import classes from './confirm-email-page.module.css';
 
 export const ConfirmEmailPage: FC = () => {
     const location = useLocation();
-    const { startLoader, stopLoader } = useContext(LoaderStateContext);
+    const { startLoader, stopLoader } = useLoaderContext();
     const [confirmEmailRequest, { isLoading }] = useConfirmEmailMutation();
     const [isCorrect, setIsCorrect] = useState(true);
     const [value, setValue] = useState('');

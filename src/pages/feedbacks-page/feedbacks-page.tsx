@@ -1,4 +1,4 @@
-import { FC, useContext, useEffect } from 'react';
+import { FC, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Feedbacks } from '@components/feedbacks';
 import { ShowFetchDataError } from '@components/show-fetch-data-error';
@@ -11,15 +11,15 @@ import { useGetAllFeedbacksQuery } from '@redux/api/feedbacks-api';
 import { resetCredentials } from '@redux/reducers/auth-slice';
 import { useAuthSelector } from '@redux/selectors';
 
-import { LoaderStateContext, ModalReportContext } from '../../react-contexts';
+import { useLoaderContext, useModalReportContext } from '../../react-contexts';
 import { Paths } from '../../routes/pathes';
 
 export const FeedbacksPage: FC = () => {
     const dispatch = useAppDispatch();
     const navigate = useNavigate();
     const { token } = useAuthSelector();
-    const { setNode, openModal, setWidthModal } = useContext(ModalReportContext);
-    const { startLoader, stopLoader } = useContext(LoaderStateContext);
+    const { setNode, openModal, setWidthModal } = useModalReportContext();
+    const { startLoader, stopLoader } = useLoaderContext();
     const { data, isLoading: isQueryLoading, error, isError } = useGetAllFeedbacksQuery();
 
     useEffect(() => {

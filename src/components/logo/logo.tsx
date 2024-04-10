@@ -1,7 +1,7 @@
-import { FC, useContext } from 'react';
+import { FC } from 'react';
 import classnames from 'classnames';
 
-import { CollapsedContext } from '../../react-contexts';
+import { useCollapseContext } from '../../react-contexts';
 
 import classes from './logo.module.css';
 
@@ -10,7 +10,7 @@ import LogoMobile from '/images/LogoMobile.svg';
 import LogoText from '/images/LogoText.svg';
 
 export const Logo: FC = () => {
-    const { collapsed } = useContext(CollapsedContext);
+    const { collapsed } = useCollapseContext();
 
     return (
         <div className={classnames(classes.logo, { [classes.collapsed]: collapsed })}>

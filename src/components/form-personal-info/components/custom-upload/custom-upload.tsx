@@ -1,4 +1,4 @@
-import { FC, Fragment, useContext, useEffect, useState } from 'react';
+import { FC, Fragment, useEffect, useState } from 'react';
 import { ErrorProfile } from '@components/error-profile-page';
 import { WRONG_SIZE_IMG } from '@components/error-profile-page/error-messages.data';
 import { FieldType } from '@components/form-personal-info/form-personal-info.types';
@@ -7,12 +7,13 @@ import { useWindowWidth } from '@hooks/use-window-size';
 import { API_BASE_URL, API_IMGS_BASE } from '@redux/api/api-data';
 import { resetImgUploadData, saveImgUploadData } from '@redux/reducers/personal-info-slice';
 import { useAuthSelector, usePersonalInfoSelector } from '@redux/selectors';
+import { UPLOAD_STATUSES, UploadStatusType } from '@utils/constants/statuses-upload';
 import { Form, Modal, Upload } from 'antd';
 import type { UploadChangeParam, UploadProps } from 'antd/es/upload';
 import type { UploadFile } from 'antd/es/upload/interface';
 
 import { DATA_TEST_ID } from '../../../../data/data-test-ids';
-import { ModalReportContext } from '../../../../react-contexts';
+import { useModalReportContext } from '../../../../react-contexts';
 import { NoAvatarButton } from '../no-avatar-button/no-avatar-button';
 
 import { errorFile, loaderProgressStyle } from './custom-upload.data';
@@ -21,14 +22,14 @@ import classes from './custom-upload.module.css';
 
 type CustomUploadPropsType = {
     setDisabledSaveButton: (value: boolean) => void;
-    setUploadStatus: (status: 'error' | 'done') => void;
+    setUploadStatus: (status: UploadStatusType) => void;
 };
 
 export const CustomUpload: FC<CustomUploadPropsType> = ({
     setDisabledSaveButton,
     setUploadStatus,
 }) => {
-    const { openModal, setNode, setWidthModal } = useContext(ModalReportContext);
+    const { openModal, setNode, setWidthModal } = useModalReportContext();
     const innerWindowWidth = useWindowWidth();
     const { imgSrc: imageSrc } = usePersonalInfoSelector();
     const dispatch = useAppDispatch();
@@ -82,15 +83,15 @@ export const CustomUpload: FC<CustomUploadPropsType> = ({
             setPreviewImage('');
             setFileList([{ ...errorFile, name: file.name }]);
             setDisabledSaveButton(true);
-            setUploadStatus('error');
+            setUploadStatus(UPLOAD_STATUSES.error);
         } else if (file && file.status !== 'removed') {
             setFileList(newFileList);
             setPreviewTitle(newFileList[0].name || 'Noname.jpg');
 
             if (file.response?.url) {
-                setUploadStatus('done');
+                setUploadStatus(UPLOAD_STATUSES.done);
                 setPreviewImage(`${API_IMGS_BASE}${file.response.url}`);
-                saveImgUploadData({ url: file.response.url, name: file.response.name });
+                dispatch(saveImgUploadData({ url: file.response.url, name: file.response.name }));
                 setDisabledSaveButton(false);
             }
         }

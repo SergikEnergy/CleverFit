@@ -1,9 +1,9 @@
-import { FC, useContext, useEffect, useRef, useState } from 'react';
-import { getColorTrainByName } from '@components/calendar-with-data/calendar-with-data.utils';
+import { FC, useEffect, useRef, useState } from 'react';
 import { dateDayMonthYearDotFormat } from '@utils/constants/date-formats';
+import { getColorTrainByName } from '@utils/get-color-badge-by-name';
 import { Badge, Drawer } from 'antd';
 
-import { DrawerTrainsContext } from '../../react-contexts';
+import { useCalendarTrainingsDrawerContext } from '../../react-contexts';
 
 import { DrawerHeader } from './components/drawer-header';
 import { FormDrawer } from './components/form-drawer';
@@ -12,7 +12,7 @@ import classes from './calendar-drawer.module.css';
 
 export const CalendarDrawer: FC = () => {
     const { isDrawerOpen, drawerTitle, closeDrawer, trainName, date, editedTrainID } =
-        useContext(DrawerTrainsContext);
+        useCalendarTrainingsDrawerContext();
     const [drawerWidth, setDrawerWidth] = useState(408);
     const submitRef = useRef<HTMLButtonElement | null>(null);
 

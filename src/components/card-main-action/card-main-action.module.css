@@ -1,6 +1,6 @@
 .body,
 .body.antFixed {
-    font-family: var(--font-family);
+    font-family: var(--main-font-family);
     font-weight: var(--font-weight-normal);
     font-size: var(--font-size-title);
     line-height: var(--line-height-main);
@@ -14,7 +14,7 @@
 }
 
 .action button {
-    font-family: var(--font-family);
+    font-family: var(--main-font-family);
     font-weight: var(--font-weight-normal);
     font-size: var(--font-size-main);
     line-height: var(--line-height-main);

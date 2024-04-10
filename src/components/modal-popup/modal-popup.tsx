@@ -1,12 +1,12 @@
-import { FC, useContext } from 'react';
+import { FC } from 'react';
 import { Modal } from 'antd';
 
-import { ModalReportContext } from '../../react-contexts';
+import { useModalReportContext } from '../../react-contexts';
 
 import classes from './modal-popup.module.css';
 
 export const ModalPopUp: FC = () => {
-    const { isOpenModal, node, widthModal } = useContext(ModalReportContext);
+    const { isOpenModal, node, widthModal } = useModalReportContext();
 
     return (
         <Modal

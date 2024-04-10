@@ -17,7 +17,8 @@ body {
 :root {
     font-family: Inter, Verdana, Arial, sans-serif;
 
-    --main-font-family: Inter, sans-serif;
+    --main-font-family: Inter, Verdana, Arial, sans-serif;
+
     line-height: 1.5;
     font-weight: normal;
     font-size: 10px;
@@ -128,20 +129,25 @@ body {
 
     /* fonts styling */
 
-    --font-family: 'Inter', Verdana, sans-serif;
+    --main-font-family: 'Inter', Verdana, sans-serif;
     --font-size-main: 1.4rem;
+    --button-font-size: 1.4rem;
     --line-height-main: 130%;
     --font-style-main: normal;
     --font-style-title: bold;
     --font-weight-normal: 400;
     --font-weight-medium: 500;
     --font-weight-title: 600;
+    --font-weight-message: 700;
     --font-weight-title-result: 500;
     --font-size-title: 1.6rem;
     --font-size-big-title: 2rem;
     --font-size-mobile: 1.2rem;
     --font-size-title-result-main: 2.4rem;
+    --font-size-tabs-trainings-main: 2.4rem;
     --second-family: 'Roboto', Verdana, sans-serif;
+    --header-line-height: 22px;
+    --main-line-height: 130%;
 
     /* margins and paddings */
 
@@ -152,10 +158,16 @@ body {
     --padding-big-top-bottom-frames: 64px 0;
     --padding-middle-top-bottom-frames: 32px 0;
     --padding-small-top-bottom-frames: 16px 0;
+    --padding-popup-card: 16px 12px;
+    --padding-popup-message-card: 12px 16px;
+    --padding-messages-group-desktop: 16px 24px;
+    --padding-messages-group-mobile: 16px 24px;
     --padding-modal-error-main: 32px 32px 24px;
     --padding-error-get-trains-main: 24px 16px;
+    --padding-card-modal-partner-desktop: 30px 16px;
     --label--padding: 4px 8px;
     --padding-small-size: 8px;
+    --padding-card-main: 12px;
     --padding-little-size: 16px;
     --padding-medium-size: 24px;
     --padding-middle-size: 32px;
@@ -163,8 +175,10 @@ body {
     --padding-big-size: 64px;
     --padding-calendar-page-main: 10px 24px 93px;
     --padding-calendar-page-tablet: 12px 24px 271px;
-    --padding-calendar-page-mobile: 19px 24px 23px;
+    --padding-trainings-page-desktop: 19px 24px 23px;
+    --padding-calendar-page-mobile: 24px 24px 42px;
     --padding-not-found-page-main: 24px 24px 42px;
+    --padding-message-card-desktop: 20px 20px 20px 12px;
     --margin-zero: 0;
     --margin-small-size: 8px;
     --margin-small-additional-size: 12px;
@@ -173,7 +187,9 @@ body {
     --margin-middle-size: 32px;
     --margin-extra-size: 42px;
     --margin-submit-profile-main: 54px;
+    --margin-trainings-page-main: 24px 24px 42px;
     --margin-big-size: 64px;
+    --margin-pagination-table-desktop: 20px 0 0 0;
 
     /* gaps */
 
@@ -192,11 +208,17 @@ body {
     --border-radius-big: 15px;
     --border-radius-small: 8px;
     --border-radius-zero: 0%;
+    --border-message-card-desktop: 2px 16px 16px 16px;
 
     /* box-shadows */
 
     --modal-box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.15);
     --card-main-page-box-shadow: 0 2px 0 0 rgba(0, 0, 0, 0.04);
+    --trainings-buttons-shadow: 0px 1px 0px 0px #f0f0f0 inset;
+
+    /* sizes */
+    --table-trainings-desktop-width: 555px;
+    --table-trainings-tablet-width: 530px;
 }
 
 html,

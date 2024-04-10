@@ -1,12 +1,12 @@
-import { FC, useContext } from 'react';
+import { FC } from 'react';
 import { Button, Result } from 'antd';
 
-import { ModalReportContext } from '../../react-contexts';
+import { useModalReportContext } from '../../react-contexts';
 
 import classes from './add-feedback-success.module.css';
 
 export const AddFeedbackSuccess: FC = () => {
-    const { closeModal, setNode } = useContext(ModalReportContext);
+    const { closeModal, setNode } = useModalReportContext();
     const handleClickButton = () => {
         closeModal();
         setNode(null);

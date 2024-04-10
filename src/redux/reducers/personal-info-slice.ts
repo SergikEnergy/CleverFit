@@ -37,7 +37,7 @@ const slice = createSlice({
                     readyForJointTraining,
                     sendNotification,
                 },
-            }: PayloadAction<Omit<PersonalUserInfoType, 'createdFrom'>>,
+            }: PayloadAction<ResponseUserInfoType>,
         ) => {
             state.email = email;
             if (birthday) state.birthday = birthday;
