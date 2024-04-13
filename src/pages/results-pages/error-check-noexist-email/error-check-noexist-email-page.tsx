@@ -1,6 +1,7 @@
 import { FC } from 'react';
 import { useLocation } from 'react-router-dom';
 import { history } from '@redux/configure-store';
+import { ERROR_CHECK_NO_EXIST_EMAIL } from '@utils/constants/errors-messages';
 import { ResultsWrapper } from '@view/results-wrapper';
 import { Button, Result } from 'antd';
 
@@ -12,18 +13,12 @@ export const ErrorCheckNoExistEmailPage: FC = () => {
         history.push(Paths.AUTH, { fromPath: location.pathname });
     };
 
-    const title = 'Такой e-mail не зарегистрирован';
-    const subTitle = 'Мы не нашли в базе вашего e-mail. Попробуйте войти с\u00A0другим e-mail.';
-    const buttonText = 'Попробовать снова';
-    const status = 'error';
-    const buttonKey = 'e-mail not found auth';
-
     return (
         <ResultsWrapper>
             <Result
-                status={status}
-                title={title}
-                subTitle={subTitle}
+                status={ERROR_CHECK_NO_EXIST_EMAIL.status}
+                title={ERROR_CHECK_NO_EXIST_EMAIL.title}
+                subTitle={ERROR_CHECK_NO_EXIST_EMAIL.subTitle}
                 extra={
                     <Button
                         data-test-id='check-retry-button'
@@ -31,10 +26,10 @@ export const ErrorCheckNoExistEmailPage: FC = () => {
                         size='large'
                         type='primary'
                         block={true}
-                        key={buttonKey}
+                        key={ERROR_CHECK_NO_EXIST_EMAIL.buttonKey}
                         htmlType='button'
                     >
-                        {buttonText}
+                        {ERROR_CHECK_NO_EXIST_EMAIL.buttonText}
                     </Button>
                 }
             />

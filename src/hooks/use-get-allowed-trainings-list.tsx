@@ -1,4 +1,4 @@
-import { useCallback, useEffect } from 'react';
+import { useCallback } from 'react';
 import { ErrorShowAllowedTrainsList } from '@components/error-show-allowed-trains-list';
 import { isFetchBaseQueryError } from '@redux/api/errors-catching';
 import { useLazyGetAllowedTrainsListQuery } from '@redux/api/trainings-api';
@@ -47,26 +47,24 @@ export const useGetAllowedTrainingsLists = () => {
 
     const fetchAllowedTrainingsList = useCallback(async () => {
         try {
+            startLoader();
             const trainingsAllowed = await getAllowedTrainingsList().unwrap();
 
+            stopLoader();
             updateAllowedTrains(trainingsAllowed);
         } catch (error) {
+            stopLoader();
             if (isFetchBaseQueryError(error)) {
                 handleErrorAllowedTrainings(error);
-                stopLoader();
             }
-        } finally {
-            stopLoader();
         }
-    }, [getAllowedTrainingsList, handleErrorAllowedTrainings, stopLoader, updateAllowedTrains]);
-
-    useEffect(() => {
-        if (isLoading) {
-            startLoader();
-        } else {
-            stopLoader();
-        }
-    }, [isLoading, startLoader, stopLoader]);
+    }, [
+        getAllowedTrainingsList,
+        handleErrorAllowedTrainings,
+        startLoader,
+        stopLoader,
+        updateAllowedTrains,
+    ]);
 
     return { fetchAllowedTrainingsList, trainingsList, isLoading, isSuccessGettingList: isSuccess };
 };

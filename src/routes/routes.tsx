@@ -1,5 +1,6 @@
 import { Navigate, Route, Routes } from 'react-router-dom';
 import { DummyRootElement } from '@components/dummy-root/dummy-root';
+import { AchievementsPage } from '@pages/achievements-page';
 import { CalendarPage } from '@pages/calendar-page';
 import { EntryPageLayout } from '@pages/entry-page';
 import { LoginPage } from '@pages/entry-page/login';
@@ -35,6 +36,7 @@ export const routes = (
         <Route path={Paths.TRAININGS_PAGE} element={<TrainingsPage />} />
         <Route path={Paths.PROFILE_PAGE} element={<ProfilePage />} />
         <Route path={Paths.SETTINGS_PAGE} element={<SettingsPage />} />
+        <Route path={Paths.ACHIEVEMENTS_PAGE} element={<AchievementsPage />} />
         <Route path={Paths.AUTH} element={<EntryPageLayout />}>
             <Route index={true} element={<LoginPage />} />
             <Route path={Paths.AUTH_REGISTRATION} element={<RegisterPage />} />

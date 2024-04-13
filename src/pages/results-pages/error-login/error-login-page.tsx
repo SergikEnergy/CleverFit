@@ -1,6 +1,7 @@
 import { FC } from 'react';
 import { useLocation } from 'react-router-dom';
 import { history } from '@redux/configure-store';
+import { ERROR_LOGIN_MESSAGES } from '@utils/constants/errors-messages';
 import { ResultsWrapper } from '@view/results-wrapper';
 import { Button, Result } from 'antd';
 
@@ -12,18 +13,12 @@ export const ErrorLoginPage: FC = () => {
         history.push(Paths.AUTH, { fromPath: location.pathname });
     };
 
-    const title = 'Вход не выполнен';
-    const subTitle = 'Что-то пошло не так. Попробуйте еще раз';
-    const buttonText = 'Повторить';
-    const status = 'warning';
-    const buttonKey = 'failed auth';
-
     return (
         <ResultsWrapper>
             <Result
-                status={status}
-                title={title}
-                subTitle={subTitle}
+                status={ERROR_LOGIN_MESSAGES.status}
+                title={ERROR_LOGIN_MESSAGES.title}
+                subTitle={ERROR_LOGIN_MESSAGES.subTitle}
                 extra={
                     <Button
                         data-test-id='login-retry-button'
@@ -31,10 +26,10 @@ export const ErrorLoginPage: FC = () => {
                         size='large'
                         type='primary'
                         block={true}
-                        key={buttonKey}
+                        key={ERROR_LOGIN_MESSAGES.buttonKey}
                         htmlType='button'
                     >
-                        {buttonText}
+                        {ERROR_LOGIN_MESSAGES.buttonText}
                     </Button>
                 }
             />

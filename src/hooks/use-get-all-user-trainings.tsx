@@ -1,4 +1,4 @@
-import { useCallback, useEffect } from 'react';
+import { useCallback } from 'react';
 import { ShowFetchDataError } from '@components/show-fetch-data-error';
 import { PagesVariantsType } from '@components/show-fetch-data-error/show-fetch-data-error';
 import { isFetchBaseQueryError } from '@redux/api/errors-catching';
@@ -15,15 +15,7 @@ export const useGetAllUserTrainings = (forPage: GetAllUserTrainingsArgumentsType
     const { startLoader, stopLoader } = useLoaderContext();
     const { setNode, setWidthModal, openModal } = useModalReportContext();
 
-    const [getAllTrainings, { isLoading }] = useLazyGetAllTrainingsQuery();
-
-    useEffect(() => {
-        if (isLoading) {
-            startLoader();
-        } else {
-            stopLoader();
-        }
-    }, [isLoading, startLoader, stopLoader]);
+    const [getAllTrainings] = useLazyGetAllTrainingsQuery();
 
     const handleGetTrainingsError = useCallback(
         (error: unknown) => {
@@ -40,17 +32,19 @@ export const useGetAllUserTrainings = (forPage: GetAllUserTrainingsArgumentsType
 
     const fetchAllTrainings = useCallback(async () => {
         try {
+            startLoader();
             const userTrainings = await getAllTrainings().unwrap();
+
+            stopLoader();
 
             return userTrainings;
         } catch (error) {
+            stopLoader();
             handleGetTrainingsError(error);
 
             return null;
-        } finally {
-            stopLoader();
         }
-    }, [getAllTrainings, handleGetTrainingsError, stopLoader]);
+    }, [getAllTrainings, handleGetTrainingsError, startLoader, stopLoader]);
 
     return fetchAllTrainings;
 };

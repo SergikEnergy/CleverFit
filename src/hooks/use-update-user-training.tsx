@@ -1,4 +1,4 @@
-import { useCallback, useEffect } from 'react';
+import { useCallback } from 'react';
 import { ErrorAddTrain } from '@components/error-add-train';
 import { NewTrainRequestType } from '@redux/api/api-types';
 import { isFetchBaseQueryError } from '@redux/api/errors-catching';
@@ -16,7 +16,7 @@ export const useUpdateUserTraining = () => {
     const { setNode, setWidthModal, openModal } = useModalReportContext();
     const { changeStatus } = useTrainingsDrawerContext();
 
-    const [updateTraining, { isLoading }] = useChangeTrainMutation();
+    const [updateTraining] = useChangeTrainMutation();
 
     const handleErrorUpdateUser = useCallback(
         (error: unknown) => {
@@ -32,27 +32,20 @@ export const useUpdateUserTraining = () => {
     const updateUserTraining = useCallback(
         async (body: NewTrainRequestType, id: string) => {
             try {
+                startLoader();
                 await updateTraining({ body, id }).unwrap();
+                stopLoader();
                 changeStatus(SUBMIT_TRAIN_SUCCESS);
             } catch (error) {
+                stopLoader();
                 if (isFetchBaseQueryError(error)) {
                     handleErrorUpdateUser(error);
-                    stopLoader();
                 }
-                stopLoader();
                 changeStatus(SUBMIT_TRAIN_ERROR);
             }
         },
-        [changeStatus, handleErrorUpdateUser, stopLoader, updateTraining],
+        [changeStatus, handleErrorUpdateUser, startLoader, stopLoader, updateTraining],
     );
-
-    useEffect(() => {
-        if (isLoading) {
-            startLoader();
-        } else {
-            stopLoader();
-        }
-    }, [isLoading, startLoader, stopLoader]);
 
     return updateUserTraining;
 };

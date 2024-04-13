@@ -1,4 +1,4 @@
-import { useCallback, useEffect } from 'react';
+import { useCallback } from 'react';
 import { ErrorShowPartners } from '@components/error-trainings-page';
 import { isFetchBaseQueryError } from '@redux/api/errors-catching';
 import { useLazyGetAllRandomPartnersQuery } from '@redux/api/trainings-api';
@@ -18,15 +18,7 @@ export const useGetRandomPartners = () => {
         setNode(null);
     }, [closeModal, setNode]);
 
-    const [getAllRandomPartners, { isLoading }] = useLazyGetAllRandomPartnersQuery();
-
-    useEffect(() => {
-        if (isLoading) {
-            startLoader();
-        } else {
-            stopLoader();
-        }
-    }, [isLoading, startLoader, stopLoader]);
+    const [getAllRandomPartners] = useLazyGetAllRandomPartnersQuery();
 
     const handleGetTrainingsError = useCallback(
         (error: unknown) => {
@@ -47,20 +39,20 @@ export const useGetRandomPartners = () => {
 
     const fetchRandomPartners = useCallback(async () => {
         try {
+            startLoader();
             const randomPartners = await getAllRandomPartners().unwrap();
 
-            dispatch(setRandomPartners(randomPartners));
-
             stopLoader();
+            dispatch(setRandomPartners(randomPartners));
 
             return true;
         } catch (error) {
-            handleGetTrainingsError(error);
             stopLoader();
+            handleGetTrainingsError(error);
 
             return false;
         }
-    }, [dispatch, getAllRandomPartners, handleGetTrainingsError, stopLoader]);
+    }, [dispatch, getAllRandomPartners, handleGetTrainingsError, startLoader, stopLoader]);
 
     return fetchRandomPartners;
 };

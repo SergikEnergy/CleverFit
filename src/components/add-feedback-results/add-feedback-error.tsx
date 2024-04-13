@@ -1,5 +1,6 @@
 import { FC } from 'react';
 import { NewFeedback } from '@components/new-feedback';
+import { ADD_FEEDBACK_ERROR_MESSAGES } from '@utils/constants/errors-messages';
 import { Button, Result } from 'antd';
 
 import { useModalReportContext } from '../../react-contexts';
@@ -19,19 +20,14 @@ export const AddFeedbackError: FC = () => {
         closeModal();
         setNode(null);
     };
-    const title = 'Данные не сохранились';
-    const subtitle = 'Что-то пошло не так. Попробуйте ещё раз.';
-    const buttonTexts = ['Написать отзыв', 'Закрыть'];
-    const status = 'error';
-    const buttonKeys = ['error write', 'error close'];
 
     return (
         <div className={classes.result}>
             <Result
                 className={classes.error}
-                status={status}
-                title={title}
-                subTitle={subtitle}
+                status={ADD_FEEDBACK_ERROR_MESSAGES.status}
+                title={ADD_FEEDBACK_ERROR_MESSAGES.title}
+                subTitle={ADD_FEEDBACK_ERROR_MESSAGES.subTitle}
                 extra={[
                     <Button
                         data-test-id='write-review-not-saved-modal'
@@ -41,19 +37,19 @@ export const AddFeedbackError: FC = () => {
                         size='large'
                         type='primary'
                         block={true}
-                        key={buttonKeys[0]}
+                        key='error write'
                         htmlType='button'
                     >
-                        {buttonTexts[0]}
+                        Написать отзыв
                     </Button>,
                     <Button
                         onClick={handleClickButtonClose}
                         size='large'
                         block={true}
-                        key={buttonKeys[1]}
+                        key='error close'
                         htmlType='button'
                     >
-                        {buttonTexts[1]}
+                        Закрыть
                     </Button>,
                 ]}
             />

@@ -1,5 +1,6 @@
 import { FC } from 'react';
 import { history } from '@redux/configure-store';
+import { ERROR_USER_EXIST_MESSAGES } from '@utils/constants/errors-messages';
 import { ResultsWrapper } from '@view/results-wrapper';
 import { Button, Result } from 'antd';
 
@@ -10,30 +11,23 @@ export const ErrorUserExistPage: FC = () => {
         history.push(Paths.AUTH_REGISTRATION);
     };
 
-    const title = 'Данные не сохранились';
-    const subTitle =
-        'Такой e-mail уже записан в системе. Попробуйте зарегистрироваться по другому e-mail.';
-    const buttonText = 'Назад к регистрации';
-    const status = 'error';
-    const buttonKey = 'user already exist auth';
-
     return (
         <ResultsWrapper>
             <Result
-                status={status}
-                title={title}
-                subTitle={subTitle}
+                status={ERROR_USER_EXIST_MESSAGES.status}
+                title={ERROR_USER_EXIST_MESSAGES.title}
+                subTitle={ERROR_USER_EXIST_MESSAGES.subTitle}
                 extra={
                     <Button
                         data-test-id='registration-back-button'
                         size='large'
                         type='primary'
                         block={true}
-                        key={buttonKey}
+                        key={ERROR_USER_EXIST_MESSAGES.buttonKey}
                         htmlType='button'
                         onClick={handleClickButton}
                     >
-                        {buttonText}
+                        {ERROR_USER_EXIST_MESSAGES.buttonText}
                     </Button>
                 }
             />

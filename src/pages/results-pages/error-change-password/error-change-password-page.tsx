@@ -1,6 +1,7 @@
 import { FC } from 'react';
 import { useLocation } from 'react-router-dom';
 import { history } from '@redux/configure-store';
+import { ERROR_CHANGE_PASSWORD_MESSAGES } from '@utils/constants/errors-messages';
 import { ResultsWrapper } from '@view/results-wrapper';
 import { Button, Result } from 'antd';
 
@@ -12,18 +13,12 @@ export const ErrorChangePasswordPage: FC = () => {
         history.push(Paths.AUTH_CHANGE_PASS, { fromPath: location.pathname });
     };
 
-    const title = 'Данные не сохранились';
-    const subTitle = 'Что-то пошло не так. Попробуйте еще раз.';
-    const buttonText = 'Повторить';
-    const status = 'error';
-    const buttonKey = 'error change password';
-
     return (
         <ResultsWrapper>
             <Result
-                status={status}
-                title={title}
-                subTitle={subTitle}
+                status={ERROR_CHANGE_PASSWORD_MESSAGES.status}
+                title={ERROR_CHANGE_PASSWORD_MESSAGES.title}
+                subTitle={ERROR_CHANGE_PASSWORD_MESSAGES.subTitle}
                 extra={
                     <Button
                         data-test-id='change-retry-button'
@@ -31,10 +26,10 @@ export const ErrorChangePasswordPage: FC = () => {
                         size='large'
                         type='primary'
                         block={true}
-                        key={buttonKey}
+                        key={ERROR_CHANGE_PASSWORD_MESSAGES.buttonKey}
                         htmlType='button'
                     >
-                        {buttonText}
+                        {ERROR_CHANGE_PASSWORD_MESSAGES.buttonText}
                     </Button>
                 }
             />

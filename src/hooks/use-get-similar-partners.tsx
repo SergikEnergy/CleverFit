@@ -1,4 +1,4 @@
-import { useCallback, useEffect } from 'react';
+import { useCallback } from 'react';
 import { ErrorShowPartners } from '@components/error-trainings-page';
 import { QueryPartnersTrainingType } from '@redux/api/api-types';
 import { isFetchBaseQueryError } from '@redux/api/errors-catching';
@@ -19,15 +19,7 @@ export const useGetSimilarPartners = () => {
         setNode(null);
     }, [closeModal, setNode]);
 
-    const [getAllSimilarPartners, { isLoading }] = useLazyGetAllSimilarPartnersQuery();
-
-    useEffect(() => {
-        if (isLoading) {
-            startLoader();
-        } else {
-            stopLoader();
-        }
-    }, [isLoading, startLoader, stopLoader]);
+    const [getAllSimilarPartners] = useLazyGetAllSimilarPartnersQuery();
 
     const handleGetTrainingsError = useCallback(
         (error: unknown) => {
@@ -43,21 +35,21 @@ export const useGetSimilarPartners = () => {
     const fetchSimilarPartners = useCallback(
         async (trainingType: QueryPartnersTrainingType) => {
             try {
+                startLoader();
                 const similarPartners = await getAllSimilarPartners(trainingType).unwrap();
 
-                dispatch(setSimilarPartners(similarPartners));
-
                 stopLoader();
+                dispatch(setSimilarPartners(similarPartners));
 
                 return true;
             } catch (error) {
-                handleGetTrainingsError(error);
                 stopLoader();
+                handleGetTrainingsError(error);
 
                 return false;
             }
         },
-        [dispatch, getAllSimilarPartners, handleGetTrainingsError, stopLoader],
+        [dispatch, getAllSimilarPartners, handleGetTrainingsError, startLoader, stopLoader],
     );
 
     return fetchSimilarPartners;

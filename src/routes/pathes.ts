@@ -4,6 +4,7 @@ export const enum Paths {
     AUTH_REGISTRATION = '/auth/registration',
     MAIN_PAGE = '/main',
     FEEDBACKS_PAGE = '/feedbacks',
+    ACHIEVEMENTS_PAGE = '/achievements',
     CALENDAR_PAGE = '/calendar',
     PROFILE_PAGE = '/profile',
     TRAININGS_PAGE = '/training',

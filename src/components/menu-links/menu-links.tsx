@@ -38,6 +38,14 @@ export const MenuLinks: FC = () => {
         }
     };
 
+    const handleMoveToAchievementsPage = async () => {
+        const result = await fetchAllTrainings();
+
+        if (result) {
+            history.push(Paths.ACHIEVEMENTS_PAGE, { allowRequest: true });
+        }
+    };
+
     const handleMoveToProfilePage = () => navigate(Paths.PROFILE_PAGE, { replace: true });
 
     return (
@@ -92,10 +100,12 @@ export const MenuLinks: FC = () => {
                 <Typography.Text className={classes.menu__item_text}>Тренировки</Typography.Text>
             </Menu.Item>
             <Menu.Item
+                data-test-id='sidebar-achievements'
                 style={{ paddingLeft: `${collapsed ? '24px' : '17px'}` }}
                 className={classnames(classes.menu__item, {
                     [classes.collapsed]: collapsed,
                 })}
+                onClick={handleMoveToAchievementsPage}
                 key={menuItemsKeys['/trophy']}
                 icon={
                     <TrophyFilled

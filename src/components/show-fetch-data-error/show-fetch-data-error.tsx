@@ -1,5 +1,6 @@
 import { FC } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { ERROR_FETCH_DATA_WITHOUT_UPDATE } from '@utils/constants/errors-messages';
 import { Button, Result } from 'antd';
 
 import { useModalReportContext } from '../../react-contexts';
@@ -16,37 +17,32 @@ type ShowFetchDataErrorPropsType = {
 export const ShowFetchDataError: FC<ShowFetchDataErrorPropsType> = ({ forPage }) => {
     const navigate = useNavigate();
     const { closeModal, setNode } = useModalReportContext();
+
     const handleClickButton = () => {
         closeModal();
         setNode(null);
-        if (forPage !== 'calendar') {
+        if (forPage === 'feedback') {
             navigate(Paths.MAIN_PAGE, { replace: true });
         }
     };
-
-    const title = 'Что-то пошло не так';
-    const subtitle = 'Произошла ошибка, попробуйте ещё раз.';
-    const buttonText = 'Назад';
-    const status = '500';
-    const buttonKey = 'error get feedback';
 
     return (
         <div className={classes.result} data-test-id='modal-no-review'>
             <Result
                 className={classes.error}
-                status={status}
-                title={title}
-                subTitle={subtitle}
+                status={ERROR_FETCH_DATA_WITHOUT_UPDATE.status}
+                title={ERROR_FETCH_DATA_WITHOUT_UPDATE.title}
+                subTitle={ERROR_FETCH_DATA_WITHOUT_UPDATE.subTitle}
                 extra={
                     <Button
                         color='#2f54eb'
                         onClick={handleClickButton}
                         size='large'
                         type='primary'
-                        key={buttonKey}
+                        key={ERROR_FETCH_DATA_WITHOUT_UPDATE.buttonKey}
                         htmlType='button'
                     >
-                        {buttonText}
+                        {ERROR_FETCH_DATA_WITHOUT_UPDATE.buttonText}
                     </Button>
                 }
             />

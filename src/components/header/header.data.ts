@@ -11,6 +11,7 @@ export const pathsNamesDescriptions: Record<string, string> = {
     [Paths.FEEDBACKS_PAGE]: 'Отзывы покупателей',
     [Paths.CALENDAR_PAGE]: 'Календарь',
     [Paths.TRAININGS_PAGE]: 'Тренировки',
+    [Paths.ACHIEVEMENTS_PAGE]: 'Достижения',
 };
 
 export const breadcrumbsInitialItems: BreadCrumbsType[] = [

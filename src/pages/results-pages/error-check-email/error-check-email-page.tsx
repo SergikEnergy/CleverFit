@@ -1,6 +1,7 @@
 import { FC } from 'react';
 import { useLocation } from 'react-router-dom';
 import { history } from '@redux/configure-store';
+import { ERROR_CHECK_EMAIL_MESSAGES } from '@utils/constants/errors-messages';
 import { Button, Result } from 'antd';
 
 import { Paths } from '../../../routes/pathes';
@@ -13,28 +14,22 @@ export const ErrorCheckEmailPage: FC = () => {
         history.push(Paths.AUTH, { fromPath: location.pathname });
     };
 
-    const title = 'Что-то пошло не так';
-    const subTitle = 'Произошла ошибка, попробуйте отправить форму ещё раз.';
-    const buttonText = 'Назад';
-    const status = '500';
-    const buttonKey = 'error500 e-mail auth';
-
     return (
         <div className={classes.statuses}>
             <Result
-                status={status}
-                title={title}
-                subTitle={subTitle}
+                status={ERROR_CHECK_EMAIL_MESSAGES.status}
+                title={ERROR_CHECK_EMAIL_MESSAGES.title}
+                subTitle={ERROR_CHECK_EMAIL_MESSAGES.subTitle}
                 extra={
                     <Button
                         data-test-id='check-back-button'
                         onClick={handleClickButton}
                         size='large'
                         type='primary'
-                        key={buttonKey}
+                        key={ERROR_CHECK_EMAIL_MESSAGES.buttonKey}
                         htmlType='button'
                     >
-                        {buttonText}
+                        {ERROR_CHECK_EMAIL_MESSAGES.buttonText}
                     </Button>
                 }
             />
