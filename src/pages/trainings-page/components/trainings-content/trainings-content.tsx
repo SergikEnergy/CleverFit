@@ -25,9 +25,7 @@ export const TrainingsContent: FC = () => {
     const [activeKey, setActiveKey] = useState('');
     const dispatch = useAppDispatch();
 
-    const onChange = (key: string) => {
-        setActiveKey(key);
-    };
+    const onChange = (key: string) => setActiveKey(key);
 
     useEffect(() => {
         if (activeKey === TOGETHER_TRAINING_KEY) {

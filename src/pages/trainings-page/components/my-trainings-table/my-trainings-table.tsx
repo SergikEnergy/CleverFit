@@ -73,6 +73,7 @@ export const MyTrainingsTable: FC = () => {
                 dataSource={tableData}
                 columns={MyCustomColumns}
                 pagination={{
+                    showSizeChanger: false,
                     size: 'small',
                     defaultCurrent: 1,
                     position: ['bottomLeft'],

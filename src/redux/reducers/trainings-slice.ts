@@ -1,15 +1,24 @@
+import { defaultAllTrainingKey } from '@components/tags-filter-block/tags-default.data';
 import { AllowedTrainResponseType, TrainingsResponseType } from '@redux/api/api-types';
 import type { PayloadAction } from '@reduxjs/toolkit';
 import { createSlice, current } from '@reduxjs/toolkit';
+import { dateFullStringFormat } from '@utils/constants/date-formats';
+import moment from 'moment';
+
+type FilterPeriodType = 'week' | 'month';
 
 type UserTrainingsPropsType = {
     userTrainings: TrainingsResponseType[];
     allowedTrainingsList: AllowedTrainResponseType[];
+    filteredTrainings: TrainingsResponseType[];
+    activeTrainings: string;
 };
 
 const initialTrainingsState: UserTrainingsPropsType = {
     userTrainings: [],
     allowedTrainingsList: [],
+    filteredTrainings: [],
+    activeTrainings: defaultAllTrainingKey,
 };
 
 const slice = createSlice({
@@ -43,6 +52,8 @@ const slice = createSlice({
         resetUserTrainingsFromServer: (state) => {
             state.userTrainings = [];
             state.allowedTrainingsList = [];
+            state.activeTrainings = '';
+            state.filteredTrainings = [];
         },
         setAllowedTrainingsList: (
             state,
@@ -50,6 +61,48 @@ const slice = createSlice({
         ) => {
             if (payload) {
                 state.allowedTrainingsList = payload;
+            }
+        },
+        changeActiveTraining: (state, { payload }: PayloadAction<string>) => {
+            state.activeTrainings = payload;
+        },
+        setFilteredTrainingsByPeriod: (state, { payload }: PayloadAction<FilterPeriodType>) => {
+            const currentDay = moment();
+            const lastWeekDate = currentDay.clone().subtract(1, 'week');
+            const lastMonthDate = currentDay.clone().subtract(1, 'month');
+
+            if (state.userTrainings.length === 0) {
+                state.filteredTrainings = [];
+            } else if (state.userTrainings.length > 0 && payload === 'week') {
+                state.filteredTrainings = state.userTrainings.filter((item) => {
+                    if (typeof item.date === 'number') {
+                        // case typeof number created for tests successfully only
+                        return (
+                            moment(item.date).isAfter(lastWeekDate) &&
+                            moment(item.date).isSameOrBefore(currentDay)
+                        );
+                    }
+
+                    return (
+                        moment(item.date, dateFullStringFormat).isAfter(lastWeekDate) &&
+                        moment(item.date, dateFullStringFormat).isSameOrBefore(currentDay)
+                    );
+                });
+            } else if (state.userTrainings.length > 0 && payload === 'month') {
+                state.filteredTrainings = state.userTrainings.filter((item) => {
+                    if (typeof item.date === 'number') {
+                        // case typeof number created for tests successfully only
+                        return (
+                            moment(item.date).isAfter(lastMonthDate) &&
+                            moment(item.date).isSameOrBefore(currentDay)
+                        );
+                    }
+
+                    return (
+                        moment(item.date, dateFullStringFormat).isAfter(lastMonthDate) &&
+                        moment(item.date, dateFullStringFormat).isSameOrBefore(currentDay)
+                    );
+                });
             }
         },
     },
@@ -60,5 +113,7 @@ export const {
     resetUserTrainingsFromServer,
     setAllowedTrainingsList,
     updateUserTrainings,
+    changeActiveTraining,
+    setFilteredTrainingsByPeriod,
 } = slice.actions;
 export const trainingsReducer = slice.reducer;

@@ -81,8 +81,8 @@ export type ExerciseType = {
 };
 
 export type AllowedTrainResponseType = {
-    name: 'string';
-    key: 'string';
+    name: string;
+    key: string;
 };
 
 export type NewTrainRequestType = Pick<

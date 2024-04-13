@@ -13,6 +13,8 @@ import { useAuthSelector } from '@redux/selectors';
 import { useCollapseContext, useLoaderContext } from '../../react-contexts';
 import { Paths } from '../../routes/pathes';
 
+import { AchievementsContent } from './components/achievements-content';
+
 import classes from './achievements-page.module.css';
 
 export const AchievementsPage: FC = () => {
@@ -65,7 +67,9 @@ export const AchievementsPage: FC = () => {
     return (
         <div className={classes.wrapper}>
             <BasePagesLayout isTrainingsPage={true}>
-                <div className={classes.achievements}>ff</div>
+                <div className={classes.achievements}>
+                    <AchievementsContent />
+                </div>
             </BasePagesLayout>
         </div>
     );
