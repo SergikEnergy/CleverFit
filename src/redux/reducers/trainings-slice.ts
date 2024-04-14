@@ -69,7 +69,7 @@ const slice = createSlice({
         setFilteredTrainingsByPeriod: (state, { payload }: PayloadAction<FilterPeriodType>) => {
             const currentDay = moment();
             const lastWeekDate = currentDay.clone().subtract(1, 'week');
-            const lastMonthDate = currentDay.clone().subtract(1, 'month');
+            const lastMonthDate = currentDay.clone().subtract(28, 'days');
 
             if (state.userTrainings.length === 0) {
                 state.filteredTrainings = [];

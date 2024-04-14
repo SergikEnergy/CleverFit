@@ -1,10 +1,6 @@
 import { FC, useEffect, useRef, useState } from 'react';
-import { defaultAllTrainingKey } from '@components/tags-filter-block/tags-default.data';
 import { useAppDispatch } from '@hooks/typed-react-redux-hooks';
-import {
-    changeActiveTraining,
-    setFilteredTrainingsByPeriod,
-} from '@redux/reducers/trainings-slice';
+import { setFilteredTrainingsByPeriod } from '@redux/reducers/trainings-slice';
 import { useUserTrainingsSelector } from '@redux/selectors';
 import { Tabs } from 'antd';
 
@@ -22,10 +18,7 @@ export const AchievementsContent: FC = () => {
     const firstRender = useRef(true);
     const { userTrainings } = useUserTrainingsSelector();
 
-    const onChange = (key: string) => {
-        dispatch(changeActiveTraining(defaultAllTrainingKey));
-        setActiveKey(key);
-    };
+    const onChange = (key: string) => setActiveKey(key);
 
     useEffect(() => {
         if (firstRender.current && userTrainings.length > 0) {

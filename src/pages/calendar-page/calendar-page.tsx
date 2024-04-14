@@ -25,6 +25,7 @@ export const CalendarPage: FC = () => {
     useEffect(() => {
         if (location.state && 'allowRequest' in location.state && location.state.allowRequest) {
             fetchAllowedTrainingsList();
+            location.state.allowRequest = false;
         }
     }, [fetchAllowedTrainingsList, location.state, userTrainingsData]);
 
