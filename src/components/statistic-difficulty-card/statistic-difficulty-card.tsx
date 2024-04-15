@@ -9,7 +9,7 @@ type StatisticDifficultyCardPropsType = {
 };
 
 export const StatisticDifficultyCard: FC<StatisticDifficultyCardPropsType> = ({ count, title }) => (
-    <Card style={{ width: 156, height: 140 }}>
+    <Card style={{ width: 156, height: 140 }} className={classes.card}>
         <div className={classes.count}>{count}</div>
         <div className={classes.title}>{title}</div>
     </Card>

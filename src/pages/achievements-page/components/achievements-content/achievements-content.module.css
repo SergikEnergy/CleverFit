@@ -39,3 +39,38 @@
 .tabs :global(.ant-tabs-tab-btn:focus) {
     color: inherit;
 }
+
+.tabs :global(.ant-tabs-content-holder) {
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
+.tabs :global(.ant-tabs-content-holder)::-webkit-scrollbar {
+    width: 2px;
+}
+
+.tabs :global(.ant-tabs-content-holder)::-webkit-scrollbar-thumb {
+    background-color: #888;
+    border-radius: 4px;
+}
+
+.tabs :global(.ant-tabs-content-holder)::-webkit-scrollbar-thumb:hover {
+    background-color: #555;
+}
+
+.tabs :global(.ant-tabs-content-holder) {
+    scrollbar-width: thin;
+    scrollbar-color: #888 #b4b4b4;
+}
+
+.tabs :global(.ant-tabs-content-holder)::-moz-scrollbar-thumb {
+    background-color: #888;
+    border-radius: 4px;
+}
+
+.tabs :global(.ant-tabs-content-holder)::-moz-scrollbar-thumb:hover {
+    background-color: #555;
+}
+
+.tabs :global(.ant-tabs-content-holder)::-moz-scrollbar-track {
+    background-color: #b4b4b4;
+}

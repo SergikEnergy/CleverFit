@@ -1,5 +1,6 @@
 import { FC } from 'react';
 import { ChartColumn } from '@components/chart-column/chart-column';
+import { StatisticsTextBlock } from '@components/statistics-text-block';
 import { TagsFilterBlock } from '@components/tags-filter-block';
 
 import { ListWeekExercises } from '../list-week-exercises';
@@ -13,7 +14,8 @@ export const WeekAchievementsBlock: FC = () => (
         <div className={classes.chart_list}>
             <ChartColumn />
             <ListWeekExercises />
-            <StatisticsCardsBlock />
         </div>
+        <StatisticsCardsBlock />
+        <StatisticsTextBlock />
     </div>
 );

@@ -23,10 +23,17 @@ export const getSummaryDifficulty = (trainings: TrainingsResponseType[]): number
     return difficulties.reduce((acc, curr) => acc + curr, 0);
 };
 
-export const getReplays = (trainings: TrainingsResponseType[]): number => {
+export const getReplaysAndApproaches = (trainings: TrainingsResponseType[]): [number, number] => {
     const data = trainings.map((elem) => ({
         replays: elem.exercises.reduce((acc, curr) => (curr.replays ? acc + curr.replays : acc), 0),
+        approaches: elem.exercises.reduce(
+            (acc, curr) => (curr.approaches ? acc + curr.approaches : acc),
+            0,
+        ),
     }));
 
-    return Math.ceil(data.reduce((acc, curr) => acc + curr.replays, 0));
+    return [
+        Math.ceil(data.reduce((acc, curr) => acc + curr.replays, 0)),
+        Math.ceil(data.reduce((acc, curr) => acc + curr.approaches, 0)),
+    ];
 };
