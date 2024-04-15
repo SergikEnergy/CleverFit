@@ -2,6 +2,7 @@ import { defaultAllTrainingKey } from '@components/tags-filter-block/tags-defaul
 import { AllowedTrainResponseType, TrainingsResponseType } from '@redux/api/api-types';
 import type { PayloadAction } from '@reduxjs/toolkit';
 import { createSlice, current } from '@reduxjs/toolkit';
+import { DAY_PER_MONTH, DAY_PER_WEEK } from '@utils/constants/achievements-data';
 import { dateFullStringFormat } from '@utils/constants/date-formats';
 import moment from 'moment';
 
@@ -68,8 +69,8 @@ const slice = createSlice({
         },
         setFilteredTrainingsByPeriod: (state, { payload }: PayloadAction<FilterPeriodType>) => {
             const currentDay = moment();
-            const lastWeekDate = currentDay.clone().subtract(1, 'week');
-            const lastMonthDate = currentDay.clone().subtract(28, 'days');
+            const lastWeekDate = currentDay.clone().subtract(DAY_PER_WEEK, 'days');
+            const lastMonthDate = currentDay.clone().subtract(DAY_PER_MONTH, 'days');
 
             if (state.userTrainings.length === 0) {
                 state.filteredTrainings = [];

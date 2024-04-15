@@ -1,0 +1,37 @@
+.item {
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+    width: 100%;
+    gap: var(--gap-medium);
+}
+
+.badge,
+.day,
+.weight {
+    display: inline-block;
+}
+
+.badge {
+    width: 10%;
+}
+
+.day {
+    font-family: var(--main-font-family);
+    font-size: var(--font-size-main);
+    font-weight: var(--font-weight-normal);
+    line-height: var(--main-line-height);
+    color: var(--character-light-secondary-45);
+    width: 50%;
+    text-align: left;
+}
+
+.weight {
+    display: inline-block;
+    font-family: var(--main-font-family);
+    font-size: var(--font-size-main);
+    font-weight: var(--font-weight-message);
+    line-height: var(--main-line-height);
+    color: var(--character-light-title-85);
+    text-align: left;
+}

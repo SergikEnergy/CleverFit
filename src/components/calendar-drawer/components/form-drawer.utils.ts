@@ -14,9 +14,9 @@ export const finishFormHandler = (
             const trainsCorrected = filteredResult.map((train) => {
                 const res: FormFieldType = { ...train };
 
-                if (!train.approaches) res.approaches = 1;
-                if (!train.replays) res.replays = 1;
-                if (!train.weight) res.weight = 0;
+                if (!train.approaches || Number.isNaN(train.approaches)) res.approaches = 1;
+                if (!train.replays || Number.isNaN(train.replays)) res.replays = 1;
+                if (!train.weight || Number.isNaN(train.weight)) res.weight = 0;
                 res.name = train.exercise;
 
                 return res;

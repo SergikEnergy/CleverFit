@@ -1,0 +1,6 @@
+.chart_list {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: var(--margin-middle-size);
+}

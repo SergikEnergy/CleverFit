@@ -76,6 +76,7 @@ export const ActionsButtons: FC<ActionsButtonsPropsType> = ({
             await updateTrainById({ body, id }).unwrap();
             resetExercises();
             changeEditedTrainData('', '');
+            changeMode();
         } catch (error) {
             if (error) {
                 resetExercises();
