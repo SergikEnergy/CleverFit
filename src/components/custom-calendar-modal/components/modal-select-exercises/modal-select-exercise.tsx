@@ -153,6 +153,7 @@ export const ModalSelectExercise: FC<ModalSelectExercisePropsType> = ({
                 openDrawerNewExercise={openDrawerNewExercise}
                 date={date}
                 closeTrainModal={closeTrainModal}
+                changeMode={() => changeMode()}
             />
         </Fragment>
     );

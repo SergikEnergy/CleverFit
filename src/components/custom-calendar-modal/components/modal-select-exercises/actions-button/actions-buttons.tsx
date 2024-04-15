@@ -18,6 +18,7 @@ type ActionsButtonsPropsType = {
     openDrawerNewExercise: () => void;
     date: Moment;
     closeTrainModal: () => void;
+    changeMode: () => void;
 };
 
 export const ActionsButtons: FC<ActionsButtonsPropsType> = ({
@@ -26,6 +27,7 @@ export const ActionsButtons: FC<ActionsButtonsPropsType> = ({
     openDrawerNewExercise,
     date,
     closeTrainModal,
+    changeMode,
 }) => {
     const isPastDate = date.isSameOrBefore(moment());
 
@@ -57,6 +59,7 @@ export const ActionsButtons: FC<ActionsButtonsPropsType> = ({
         try {
             await postNewTrain(bodyRequest).unwrap();
             resetExercises();
+            changeMode();
         } catch (error) {
             if (error) {
                 resetExercises();

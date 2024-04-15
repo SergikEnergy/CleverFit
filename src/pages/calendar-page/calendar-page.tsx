@@ -2,10 +2,12 @@ import { FC, Fragment, useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { CalendarDrawer } from '@components/calendar-drawer';
 import { CalenDarWithData } from '@components/calendar-with-data';
+import { useAppDispatch } from '@hooks/typed-react-redux-hooks';
 import { useGetAllowedTrainingsLists } from '@hooks/use-get-allowed-trainings-list';
 import { BasePagesLayout } from '@pages/base-pages-layout';
 import { useGetAllTrainingsQuery } from '@redux/api/trainings-api';
-import { useAuthSelector } from '@redux/selectors';
+import { setAllowedTrainingsList } from '@redux/reducers/trainings-slice';
+import { useAuthSelector, useUserTrainingsSelector } from '@redux/selectors';
 
 import { useLoaderContext } from '../../react-contexts';
 import { Paths } from '../../routes/pathes';
@@ -14,6 +16,8 @@ import classes from './calendar-page.module.css';
 
 export const CalendarPage: FC = () => {
     const navigate = useNavigate();
+    const dispatch = useAppDispatch();
+    const { allowedTrainingsList } = useUserTrainingsSelector();
     const { fetchAllowedTrainingsList, trainingsList, isLoading, isSuccessGettingList } =
         useGetAllowedTrainingsLists();
     const location = useLocation();
@@ -28,6 +32,19 @@ export const CalendarPage: FC = () => {
             location.state.allowRequest = false;
         }
     }, [fetchAllowedTrainingsList, location.state, userTrainingsData]);
+
+    useEffect(() => {
+        if (Array.isArray(trainingsList) && isSuccessGettingList) {
+            dispatch(setAllowedTrainingsList(trainingsList));
+        }
+    }, [
+        dispatch,
+        fetchAllowedTrainingsList,
+        isSuccessGettingList,
+        location.state,
+        trainingsList,
+        userTrainingsData,
+    ]);
 
     useEffect(() => {
         if (isLoading) {
@@ -49,9 +66,7 @@ export const CalendarPage: FC = () => {
                 <div className={classes.wrapper} id='modalWrapperCalendar'>
                     <CalenDarWithData
                         dataForRender={
-                            userTrainingsData && trainingsList && isSuccessGettingList
-                                ? userTrainingsData
-                                : []
+                            userTrainingsData && allowedTrainingsList ? userTrainingsData : []
                         }
                         allowedTrainsList={trainingsList || []}
                     />
