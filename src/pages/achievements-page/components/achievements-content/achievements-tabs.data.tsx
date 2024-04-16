@@ -20,6 +20,7 @@ export const dataForTabsAchievements: TabType[] = [
     {
         label: (
             <Title
+                className='achievements__tabs_title'
                 level={3}
                 style={{
                     color: 'inherit',
@@ -37,6 +38,7 @@ export const dataForTabsAchievements: TabType[] = [
     {
         label: (
             <Title
+                className='achievements__tabs_title'
                 level={3}
                 style={{
                     fontFamily: "'Inter', Verdana, sans-serif",
@@ -54,6 +56,7 @@ export const dataForTabsAchievements: TabType[] = [
     {
         label: (
             <Title
+                className='achievements__tabs_title'
                 level={3}
                 style={{
                     fontFamily: "'Inter', Verdana, sans-serif",

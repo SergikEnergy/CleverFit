@@ -36,6 +36,9 @@
     .antFixed li.menu__item {
         padding: var(--padding-zero);
     }
+    .menu__item_notification:global(.ant-menu-item) :global(.ant-badge) {
+        display: none;
+    }
 }
 @media screen and (max-width: 600px) {
     .antFixed li.menu__item:not(:last-child) {
@@ -49,7 +52,12 @@
 @media screen and (max-width: 500px) {
     :global(li.ant-menu-item),
     .menu__item {
-        margin-left: -3px !important;
         padding-left: var(--padding-zero) !important;
+        justify-content: flex-start;
+        align-self: flex-start;
+        text-align: left;
+    }
+    :global(li.ant-menu-item span.ant-menu-title-content) {
+        margin-left: 3px;
     }
 }

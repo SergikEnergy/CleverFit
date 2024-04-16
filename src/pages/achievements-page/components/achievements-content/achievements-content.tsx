@@ -1,6 +1,9 @@
 import { FC, useEffect, useRef, useState } from 'react';
 import { useAppDispatch } from '@hooks/typed-react-redux-hooks';
-import { setFilteredTrainingsByPeriod } from '@redux/reducers/trainings-slice';
+import {
+    changeSelectedPeriod,
+    setFilteredTrainingsByPeriod,
+} from '@redux/reducers/trainings-slice';
 import { useUserTrainingsSelector } from '@redux/selectors';
 import { Tabs } from 'antd';
 
@@ -23,6 +26,7 @@ export const AchievementsContent: FC = () => {
     useEffect(() => {
         if (firstRender.current && userTrainings.length > 0) {
             dispatch(setFilteredTrainingsByPeriod('week'));
+            dispatch(changeSelectedPeriod('week'));
             firstRender.current = false;
         }
     }, [dispatch, userTrainings.length]);
@@ -30,9 +34,11 @@ export const AchievementsContent: FC = () => {
     useEffect(() => {
         if (activeKey === WEEK_ACHIEVEMENTS_KEY) {
             dispatch(setFilteredTrainingsByPeriod('week'));
+            dispatch(changeSelectedPeriod('week'));
         }
         if (activeKey === MONTH_ACHIEVEMENTS_KEY) {
             dispatch(setFilteredTrainingsByPeriod('month'));
+            dispatch(changeSelectedPeriod('month'));
         }
     }, [activeKey, dispatch]);
 

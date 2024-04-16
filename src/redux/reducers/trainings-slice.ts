@@ -6,13 +6,14 @@ import { DAY_PER_MONTH, DAY_PER_WEEK } from '@utils/constants/achievements-data'
 import { dateFullStringFormat } from '@utils/constants/date-formats';
 import moment from 'moment';
 
-type FilterPeriodType = 'week' | 'month';
+export type FilterPeriodType = 'week' | 'month';
 
 type UserTrainingsPropsType = {
     userTrainings: TrainingsResponseType[];
     allowedTrainingsList: AllowedTrainResponseType[];
     filteredTrainings: TrainingsResponseType[];
     activeTrainings: string;
+    selectedPeriod: FilterPeriodType;
 };
 
 const initialTrainingsState: UserTrainingsPropsType = {
@@ -20,6 +21,7 @@ const initialTrainingsState: UserTrainingsPropsType = {
     allowedTrainingsList: [],
     filteredTrainings: [],
     activeTrainings: defaultAllTrainingKey,
+    selectedPeriod: 'week',
 };
 
 const slice = createSlice({
@@ -55,6 +57,10 @@ const slice = createSlice({
             state.allowedTrainingsList = [];
             state.activeTrainings = '';
             state.filteredTrainings = [];
+            state.selectedPeriod = 'week';
+        },
+        changeSelectedPeriod: (state, { payload }: PayloadAction<FilterPeriodType>) => {
+            state.selectedPeriod = payload;
         },
         setAllowedTrainingsList: (
             state,
@@ -116,6 +122,7 @@ export const {
     updateUserTrainings,
     changeActiveTraining,
     setFilteredTrainingsByPeriod,
+    changeSelectedPeriod,
 } = slice.actions;
 
 export const trainingsReducer = slice.reducer;

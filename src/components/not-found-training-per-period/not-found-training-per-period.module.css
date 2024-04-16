@@ -1,0 +1,18 @@
+.wrapper {
+    margin-top: var(--margin-not-found-achievements-desktop);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.result:global(.ant-result) {
+    padding: 0;
+}
+
+.result :global(.ant-result-title) {
+    font-family: var(--main-font-family);
+    font-size: var(--font-size-title-result-main);
+    font-weight: var(--font-weight-medium);
+    line-height: var(--main-line-height);
+    text-align: center;
+}

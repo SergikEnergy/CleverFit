@@ -50,14 +50,21 @@
     background-color: #b4b4b4;
 }
 
+@media screen and (max-width: 834px) {
+    .achievements {
+        height: 1032px;
+    }
+}
+
 @media screen and (max-width: 550px) {
     .achievements {
         margin: 0;
-        padding: var(--padding-small-size);
+        padding: var(--padding-page-wrapper-mobile);
         width: 100%;
         border-radius: 0;
         margin-top: var(--margin-medium-size);
         margin-bottom: var(--margin-extra-size);
         min-height: 492px;
+        height: calc(100% - var(--margin-extra-size));
     }
 }

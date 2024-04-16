@@ -40,3 +40,23 @@
 .tabs :global(.ant-tabs-tab-btn:focus) {
     color: inherit;
 }
+
+.tabs :global(.achievements__tabs_title) {
+    font-weight: var(--font-weight-medium);
+    line-height: var(--main-line-height);
+}
+
+@media screen and (max-width: 834px) {
+    .tabs :global(.achievements__tabs_title) {
+        font-size: var(--font-size-main);
+    }
+    .tabs :global(.ant-tabs-nav-list > .ant-tabs-tab) {
+        margin-left: 0;
+    }
+    .tabs :global(.ant-tabs-nav-list) {
+        margin-right: 0;
+    }
+    .tabs :global(.ant-tabs-tab) {
+        padding-bottom: var(--padding-little-size);
+    }
+}

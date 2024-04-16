@@ -78,7 +78,7 @@ export const MenuLinks: FC = () => {
             </Menu.Item>
             <Menu.Item
                 style={{ paddingLeft: `${collapsed ? '24px' : '17px'}` }}
-                className={classnames(classes.menu__item, {
+                className={classnames(classes.menu__item, classes.menu__item_notification, {
                     [classes.collapsed]: collapsed,
                 })}
                 data-test-id={WORKOUT_DATA_TEST_ID.menuButtonTraining}
