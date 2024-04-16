@@ -1,25 +1,39 @@
 import { FC } from 'react';
-import { Badge } from 'antd';
+import { Badge, BadgeProps } from 'antd';
 
 import classes from './exercise-day-list-item.module.css';
 
 type ExerciseDayListItemPropsType = {
     index: number;
     day: string;
-    weight?: number;
+    data?: number | string;
+    statusBadge?: BadgeProps['status'];
 };
 
-export const ExerciseDayListItem: FC<ExerciseDayListItemPropsType> = ({ index, day, weight }) => (
+export const ExerciseDayListItem: FC<ExerciseDayListItemPropsType> = ({
+    index,
+    day,
+    data,
+    statusBadge,
+}) => (
     <div className={classes.item}>
         <Badge
+            status={statusBadge || undefined}
             className={classes.badge}
             count={index}
-            style={{
-                color: weight ? '#fff' : '#2F54EB',
-                backgroundColor: weight ? '#2F54EB' : '#F0F5FF',
-            }}
+            style={
+                typeof data === 'number'
+                    ? {
+                          color: data ? '#fff' : '#2F54EB',
+                          backgroundColor: data ? '#2F54EB' : '#F0F5FF',
+                      }
+                    : undefined
+            }
         />
         <span className={classes.day}>{day}</span>
-        {!!weight && <span className={classes.weight}>{`${weight}\u00A0кг`}</span>}
+        {!!data && typeof data === 'number' && (
+            <span className={classes.data}>{`${data}\u00A0кг`}</span>
+        )}
+        {!!data && typeof data === 'string' && <span className={classes.data}>{data}</span>}
     </div>
 );

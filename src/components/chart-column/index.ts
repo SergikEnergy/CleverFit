@@ -1,1 +1,1 @@
-export { getStringFromDate } from './chart-column.utils';
+export { ChartColumn } from './chart-column';

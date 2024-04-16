@@ -4,3 +4,11 @@
     justify-content: space-between;
     margin-top: var(--margin-middle-size);
 }
+
+.diagram_list {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: var(--margin-extra-size);
+    padding-bottom: var(--padding-middle-size);
+}

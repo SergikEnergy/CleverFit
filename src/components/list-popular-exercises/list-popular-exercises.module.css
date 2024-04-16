@@ -8,7 +8,7 @@
 }
 
 .title {
-    width: 150px;
+    width: 250px;
     font-family: var(--main-font-family);
     font-size: var(--font-size-main);
     font-weight: var(--font-weight-normal);
@@ -19,7 +19,7 @@
 
 .list {
     width: 100%;
-    max-width: 220px;
+    max-width: 290px;
     display: flex;
     flex-direction: column;
     align-items: flex-start;

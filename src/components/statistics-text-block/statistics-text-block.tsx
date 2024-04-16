@@ -3,8 +3,9 @@ import { defaultAllTrainingKey } from '@components/tags-filter-block/tags-defaul
 import { useUserTrainingsSelector } from '@redux/selectors';
 import { dummyAllowedTrainings } from '@utils/constants/allowed-trainings';
 import { getFilteredTrainingsByName } from '@utils/get-filtered-trainings-by-name';
+import { getMoreOftenTraining } from '@utils/get-more-often-training';
 
-import { getMoreOftenExercise, getMoreOftenTraining } from './statistics-text.utils';
+import { getMoreOftenExercise } from './statistics-text.utils';
 
 import classes from './statistics-text-block.module.css';
 

@@ -117,4 +117,5 @@ export const {
     changeActiveTraining,
     setFilteredTrainingsByPeriod,
 } = slice.actions;
+
 export const trainingsReducer = slice.reducer;

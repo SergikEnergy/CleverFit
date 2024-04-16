@@ -1,14 +1,5 @@
 import { TrainingsResponseType } from '@redux/api/api-types';
-import { dateDayMonthFormat, dateFullStringFormat } from '@utils/constants/date-formats';
-import moment from 'moment';
-
-export const getStringFromDate = (date: string | number): string => {
-    if (typeof date === 'number') {
-        return moment(date).format(dateDayMonthFormat);
-    }
-
-    return moment(date, dateFullStringFormat).format(dateDayMonthFormat);
-};
+import { getStringFromDate } from '@utils/get-string-from-date';
 
 export const getTrainingsDifficulty = (
     trainings: TrainingsResponseType[],
