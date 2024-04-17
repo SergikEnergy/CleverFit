@@ -1,6 +1,7 @@
 import { ReactNode } from 'react';
 import { Typography } from 'antd';
 
+import { MonthAchievementsBlock } from '../month-achievement-block';
 import { WeekAchievementsBlock } from '../week-achievements-block';
 
 type TabType = {
@@ -51,7 +52,7 @@ export const dataForTabsAchievements: TabType[] = [
             </Title>
         ),
         key: MONTH_ACHIEVEMENTS_KEY,
-        children: 'месяц статка',
+        children: <MonthAchievementsBlock />,
     },
     {
         label: (

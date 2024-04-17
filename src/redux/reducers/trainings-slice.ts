@@ -74,9 +74,14 @@ const slice = createSlice({
             state.activeTrainings = payload;
         },
         setFilteredTrainingsByPeriod: (state, { payload }: PayloadAction<FilterPeriodType>) => {
-            const currentDay = moment();
+            let currentDay = moment();
             const lastWeekDate = currentDay.clone().subtract(DAY_PER_WEEK, 'days');
-            const lastMonthDate = currentDay.clone().subtract(DAY_PER_MONTH, 'days');
+            let lastMonthDate = currentDay.clone().subtract(DAY_PER_MONTH, 'days');
+            const currentWeekDay = lastMonthDate.weekday();
+
+            if (currentWeekDay !== 6) {
+                lastMonthDate = lastMonthDate.add(6 - currentWeekDay, 'days');
+            }
 
             if (state.userTrainings.length === 0) {
                 state.filteredTrainings = [];
@@ -96,6 +101,9 @@ const slice = createSlice({
                     );
                 });
             } else if (state.userTrainings.length > 0 && payload === 'month') {
+                if (currentWeekDay !== 6) {
+                    currentDay = currentDay.add(6 - currentWeekDay, 'days');
+                }
                 state.filteredTrainings = state.userTrainings.filter((item) => {
                     if (typeof item.date === 'number') {
                         // case typeof number created for tests successfully only

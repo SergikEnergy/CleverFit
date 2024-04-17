@@ -27,7 +27,7 @@ export const sortByDayLastWeekData = () => {
 };
 
 export const createLastMonth = (): string[] => {
-    const now = moment().subtract(DAY_PER_WEEK, 'days');
+    const now = moment();
     const currentWeekDay = now.weekday();
     let firstDay = now.clone();
 

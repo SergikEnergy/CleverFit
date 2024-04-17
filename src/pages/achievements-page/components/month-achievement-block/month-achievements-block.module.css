@@ -1,0 +1,32 @@
+.diagram_list {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: var(--margin-extra-size);
+    padding-bottom: var(--padding-middle-size);
+}
+
+@media screen and (max-width: 1100px) {
+    .diagram_list {
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: flex-start;
+        gap: var(--gap-middle);
+        padding-bottom: var(--padding-middle-size);
+    }
+    .diagram_list :global(.donut__chart) {
+        align-self: center;
+    }
+}
+
+@media screen and (max-width: 834px) {
+    .diagram_list {
+        margin-top: var(--margin-small-size);
+    }
+}
+
+@media screen and (max-width: 500px) {
+    .diagram_list {
+        margin-top: var(--margin-medium-size);
+    }
+}
