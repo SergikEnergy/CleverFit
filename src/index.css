@@ -194,6 +194,8 @@ body {
     --margin-trainings-page-main: 24px 24px 42px;
     --margin-big-size: 64px;
     --margin-pagination-table-desktop: 20px 0 0 0;
+    --statistics-container-desktop: 80px;
+    --statistics-container-tablet: 20px;
 
     /* gaps */
 
@@ -219,6 +221,7 @@ body {
     --modal-box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.15);
     --card-main-page-box-shadow: 0 2px 0 0 rgba(0, 0, 0, 0.04);
     --trainings-buttons-shadow: 0px 1px 0px 0px #f0f0f0 inset;
+    --card-achievements-mobile-shadow: 0px 2px 8px 0px #00000026;
 
     /* sizes */
     --table-trainings-desktop-width: 555px;

@@ -1,7 +1,10 @@
 import { FC } from 'react';
 import { defaultAllTrainingKey } from '@components/tags-filter-block/tags-default.data';
 import { useUserTrainingsSelector } from '@redux/selectors';
-import { dummyAllowedTrainings } from '@utils/constants/allowed-trainings';
+import {
+    dummyAllowedTrainings,
+    dummyAllowedTrainingsAccusative,
+} from '@utils/constants/allowed-trainings';
 import { getFilteredTrainingsByName } from '@utils/get-filtered-trainings-by-name';
 import { getMoreOftenTraining } from '@utils/get-more-often-training';
 
@@ -25,6 +28,9 @@ export const StatisticsTextBlock: FC = () => {
     const moreOftenExercise = getMoreOftenExercise(
         isSelectedAll ? filteredByMoreTraining : trainingsForTextBlock,
     );
+    const moreOftenExerciseText = isSelectedAll
+        ? 'Самое частое упражнение'
+        : `Самое частое упражнение ${dummyAllowedTrainingsAccusative[activeTrainings]}`;
 
     return (
         <div className={classes.container}>
@@ -35,7 +41,7 @@ export const StatisticsTextBlock: FC = () => {
                 </div>
             )}
             <div className={classes.line}>
-                <div className={classes.title}>Самое частое упражнение</div>
+                <div className={classes.title}>{moreOftenExerciseText}</div>
                 <div className={classes.name}>{moreOftenExercise}</div>
             </div>
         </div>

@@ -12,6 +12,7 @@ import classes from './chart-column.module.css';
 export const ChartColumn: FC = () => {
     const innerWindowWidth = useWindowWidth();
     const isMobileWidth = innerWindowWidth < 550;
+    const isTabletWidth = innerWindowWidth < 810;
     const { filteredTrainings, activeTrainings } = useUserTrainingsSelector();
     const lastWeekDays = createLastWeekData();
     const trainingsForChart = getFilteredTrainingsByName(filteredTrainings, activeTrainings);
@@ -29,15 +30,16 @@ export const ChartColumn: FC = () => {
         style: {
             fill: '#85A5FFFF',
         },
-        height: 374,
+        height: isMobileWidth ? 236 : 374,
+        width: (isMobileWidth && 328) || (isTabletWidth && 400) || 520,
         axis: {
             x: {
                 tick: false,
                 title: 'Нагрузка, кг',
-                titleSpacing: isMobileWidth ? 6 : 16,
+                titleSpacing: isMobileWidth ? 8 : 16,
                 titlePosition: 'bottom',
                 titleFontSize: isMobileWidth ? 10 : 14,
-                labelSpacing: isMobileWidth ? 6 : 16,
+                labelSpacing: isMobileWidth ? 8 : 16,
             },
             y: {
                 fontSize: 1,
@@ -47,12 +49,8 @@ export const ChartColumn: FC = () => {
             },
         },
 
-        sizeField: isMobileWidth ? 14 : 25,
+        sizeField: (isMobileWidth && 14) || (isTabletWidth && 20) || 25,
     };
 
-    return (
-        <div className={classes.wrapper}>
-            <Column {...configWeek} />
-        </div>
-    );
+    return <Column {...configWeek} />;
 };

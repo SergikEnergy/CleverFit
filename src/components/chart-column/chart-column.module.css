@@ -1,0 +1,12 @@
+.chart {
+    border: 1px solid var(--character-light-dividers);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+@media screen and (max-width: 600px) {
+    .chart {
+        align-self: center;
+    }
+}

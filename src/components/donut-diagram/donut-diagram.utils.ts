@@ -1,6 +1,6 @@
 import { TrainingsResponseType } from '@redux/api/api-types';
 
-type DiagramDataType = { type: string; quantity: number };
+type DiagramDataType = { type: string; percentage: number };
 
 export const createDataForDiagram = (trainings: TrainingsResponseType[]) => {
     if (trainings.length === 0) return null;
@@ -29,7 +29,7 @@ export const createDataForDiagram = (trainings: TrainingsResponseType[]) => {
         const [key, value] = entries[i];
         const roundedQuantity = Math.round((100 * value) / summaryValues);
 
-        dataForDiagram.push({ type: key, quantity: roundedQuantity });
+        dataForDiagram.push({ type: key, percentage: roundedQuantity });
     }
 
     return dataForDiagram;

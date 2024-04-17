@@ -40,3 +40,13 @@
     background-color: var(--primary-light-1);
     color: var(--primary-light-6);
 }
+
+@media screen and (max-width: 500px) {
+    .tag:global(.ant-tag) {
+        margin-right: 0;
+    }
+    .list {
+        gap: var(--gap-middle);
+        row-gap: var(--gap-little);
+    }
+}

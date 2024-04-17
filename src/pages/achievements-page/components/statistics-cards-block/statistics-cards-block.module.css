@@ -2,5 +2,17 @@
     display: flex;
     align-items: center;
     justify-content: flex-start;
+    flex-wrap: wrap;
     gap: var(--gap-cards);
+}
+
+@media screen and (max-width: 834px) {
+    .statistics {
+        width: 75%;
+    }
+}
+@media screen and (max-width: 700px) {
+    .statistics {
+        width: 100%;
+    }
 }
