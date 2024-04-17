@@ -1,6 +1,6 @@
 import { TrainingsResponseType } from '@redux/api/api-types';
 
-type DiagramDataType = { type: string; percentage: number };
+export type DiagramDataType = { type: string; percentage: number };
 
 export const createDataForDiagram = (trainings: TrainingsResponseType[]) => {
     if (trainings.length === 0) return null;
@@ -12,10 +12,10 @@ export const createDataForDiagram = (trainings: TrainingsResponseType[]) => {
     const namesQuantity: Record<string, number> = allExercisesNames.reduce((acc, curr) => {
         const temp: Record<string, number> = acc;
 
-        if (curr in temp) {
-            temp[curr] += 1;
+        if (curr.toLowerCase() in temp) {
+            temp[curr.toLowerCase()] += 1;
         } else {
-            temp[curr] = 1;
+            temp[curr.toLowerCase()] = 1;
         }
 
         return temp;
@@ -28,8 +28,9 @@ export const createDataForDiagram = (trainings: TrainingsResponseType[]) => {
     for (let i = 0; i < entries.length; i++) {
         const [key, value] = entries[i];
         const roundedQuantity = Math.round((100 * value) / summaryValues);
+        const firstLetterCapitalizedKey = key.charAt(0).toUpperCase() + key.substring(1);
 
-        dataForDiagram.push({ type: key, percentage: roundedQuantity });
+        dataForDiagram.push({ type: firstLetterCapitalizedKey, percentage: roundedQuantity });
     }
 
     return dataForDiagram;

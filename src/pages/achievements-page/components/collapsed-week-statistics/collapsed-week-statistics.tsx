@@ -28,6 +28,10 @@ export const CollapsedWeekStatistics: FC<CollapsedWeekStatisticsPropsType> = ({ 
         indexWeek * DAY_IN_WEEK,
         indexWeek * DAY_IN_WEEK + DAY_IN_WEEK,
     );
+    const [firstWeekDay, finalWeekDay] = [
+        indexedWeekData[0],
+        indexedWeekData[indexedWeekData.length - 1],
+    ];
 
     const trainingsForList = getFilteredTrainingsByName(filteredTrainings, activeTrainings);
 
@@ -50,7 +54,7 @@ export const CollapsedWeekStatistics: FC<CollapsedWeekStatisticsPropsType> = ({ 
     return (
         <div className={classes.container}>
             <div className={classes.collapsed}>
-                <div className={classes.title}>{`Неделя `}</div>
+                <div className={classes.title}>{`Неделя ${firstWeekDay}-${finalWeekDay}`}</div>
                 {isMobileWidth && (
                     <Button
                         onClick={toggleCollapsed}

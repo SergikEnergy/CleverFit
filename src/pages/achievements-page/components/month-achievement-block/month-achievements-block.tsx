@@ -8,7 +8,6 @@ import { TagsFilterBlock } from '@components/tags-filter-block';
 import { useUserTrainingsSelector } from '@redux/selectors';
 import { getFilteredTrainingsByName } from '@utils/get-filtered-trainings-by-name';
 
-import { ListWeekExercises } from '../list-week-exercises';
 import { StatisticsCardsBlock } from '../statistics-cards-block';
 import { WeeksStatisticsBlock } from '../weeks-statistics-block';
 
@@ -26,14 +25,12 @@ export const MonthAchievementsBlock: FC = () => {
                 <Fragment>
                     <ChartColumnMonth />
                     <WeeksStatisticsBlock />
-                    {/* <ListWeekExercises /> */}
-
-                    {/* <StatisticsCardsBlock />
-                    <StatisticsTextBlock /> */}
-                    {/* <div className={classes.diagram_list}>
+                    <StatisticsCardsBlock period='month' />
+                    <StatisticsTextBlock />
+                    <div className={classes.diagram_list}>
                         <DonutDiagram />
-                        <ListPopularExercises />
-                    </div> */}
+                        {/* <ListPopularExercises /> */}
+                    </div>
                 </Fragment>
             )}
             {isNotFoundShowed && <NotFoundTrainingPerPeriod />}

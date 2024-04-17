@@ -1,0 +1,8 @@
+.wrapper {
+    width: 80%;
+    margin-top: var(--margin-medium-size);
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    margin-bottom: var(--margin-medium-size);
+}
