@@ -12,4 +12,5 @@ export const dummyAllowedTrainingsAccusative: Record<string, string> = {
     strength: 'силовой',
     back: 'спины',
     chest: 'груди',
+    strenght: 'силовой', //for wrong in test case
 };

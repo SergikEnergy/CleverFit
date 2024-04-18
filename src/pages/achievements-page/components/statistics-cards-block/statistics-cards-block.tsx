@@ -4,6 +4,7 @@ import { FilterPeriodType } from '@redux/reducers/trainings-slice';
 import { useUserTrainingsSelector } from '@redux/selectors';
 import { DAY_PER_MONTH, DAY_PER_WEEK } from '@utils/constants/achievements-data';
 import { getFilteredTrainingsByName } from '@utils/get-filtered-trainings-by-name';
+import { transformAllowedTrainingsToObject } from '@utils/transform-allowed-trainings-to-object';
 
 import { getReplaysAndApproaches, getSummaryDifficulty } from './statistics-cards.utils';
 
@@ -14,9 +15,13 @@ type StatisticsCardsBlockType = {
 };
 
 export const StatisticsCardsBlock: FC<StatisticsCardsBlockType> = ({ period }) => {
-    const { filteredTrainings, activeTrainings } = useUserTrainingsSelector();
-
-    const trainingsForStatistic = getFilteredTrainingsByName(filteredTrainings, activeTrainings);
+    const { filteredTrainings, activeTrainings, allowedTrainingsList } = useUserTrainingsSelector();
+    const allowedListObject = transformAllowedTrainingsToObject(allowedTrainingsList);
+    const trainingsForStatistic = getFilteredTrainingsByName(
+        filteredTrainings,
+        activeTrainings,
+        allowedListObject,
+    );
 
     const summaryDifficulty = getSummaryDifficulty(trainingsForStatistic);
     const difficultyPerWeek = Math.ceil((summaryDifficulty / DAY_PER_WEEK) * 10) / 10;

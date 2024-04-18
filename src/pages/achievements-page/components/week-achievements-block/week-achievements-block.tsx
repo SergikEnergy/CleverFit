@@ -7,6 +7,7 @@ import { StatisticsTextBlock } from '@components/statistics-text-block';
 import { TagsFilterBlock } from '@components/tags-filter-block';
 import { useUserTrainingsSelector } from '@redux/selectors';
 import { getFilteredTrainingsByName } from '@utils/get-filtered-trainings-by-name';
+import { transformAllowedTrainingsToObject } from '@utils/transform-allowed-trainings-to-object';
 
 import { ListWeekExercises } from '../list-week-exercises';
 import { StatisticsCardsBlock } from '../statistics-cards-block';
@@ -14,8 +15,13 @@ import { StatisticsCardsBlock } from '../statistics-cards-block';
 import classes from './week-achievements-block.module.css';
 
 export const WeekAchievementsBlock: FC = () => {
-    const { filteredTrainings, activeTrainings } = useUserTrainingsSelector();
-    const filteredTrainingsByName = getFilteredTrainingsByName(filteredTrainings, activeTrainings);
+    const { filteredTrainings, activeTrainings, allowedTrainingsList } = useUserTrainingsSelector();
+    const allowedListObject = transformAllowedTrainingsToObject(allowedTrainingsList);
+    const filteredTrainingsByName = getFilteredTrainingsByName(
+        filteredTrainings,
+        activeTrainings,
+        allowedListObject,
+    );
     const isNotFoundShowed = filteredTrainingsByName.length === 0;
 
     return (

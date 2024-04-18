@@ -5,6 +5,7 @@ import { useUserTrainingsSelector } from '@redux/selectors';
 import { WEEK_DAYS } from '@utils/constants/week-days';
 import { sortByDayLastWeekData } from '@utils/create-last-period-data';
 import { getFilteredTrainingsByName } from '@utils/get-filtered-trainings-by-name';
+import { transformAllowedTrainingsToObject } from '@utils/transform-allowed-trainings-to-object';
 
 import { getMoreOftenExerciseByDay } from './list-popular-exercises.utils';
 
@@ -15,10 +16,14 @@ type ListPopularExercisesPropsType = {
 };
 
 export const ListPopularExercises: FC<ListPopularExercisesPropsType> = ({ period }) => {
-    const { filteredTrainings, activeTrainings } = useUserTrainingsSelector();
+    const { filteredTrainings, activeTrainings, allowedTrainingsList } = useUserTrainingsSelector();
     const lastWeekDays = sortByDayLastWeekData();
-
-    const trainingsForList = getFilteredTrainingsByName(filteredTrainings, activeTrainings);
+    const allowedListObject = transformAllowedTrainingsToObject(allowedTrainingsList);
+    const trainingsForList = getFilteredTrainingsByName(
+        filteredTrainings,
+        activeTrainings,
+        allowedListObject,
+    );
 
     const listDifficulties = lastWeekDays.map((day, index) => ({
         key: `${day}`,

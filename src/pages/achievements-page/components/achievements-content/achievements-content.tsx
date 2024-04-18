@@ -46,6 +46,7 @@ export const AchievementsContent: FC = () => {
         <Tabs
             size='middle'
             defaultActiveKey={activeKey}
+            destroyInactiveTabPane={true}
             className={classes.tabs}
             onChange={onChange}
             items={dataForTabsAchievements}

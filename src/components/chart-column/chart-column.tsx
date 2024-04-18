@@ -4,6 +4,7 @@ import { useWindowWidth } from '@hooks/use-window-size';
 import { useUserTrainingsSelector } from '@redux/selectors';
 import { createLastWeekData } from '@utils/create-last-period-data';
 import { getFilteredTrainingsByName } from '@utils/get-filtered-trainings-by-name';
+import { transformAllowedTrainingsToObject } from '@utils/transform-allowed-trainings-to-object';
 
 import { getTrainingsDifficulty } from './chart-column.utils';
 
@@ -13,9 +14,14 @@ export const ChartColumn: FC = () => {
     const innerWindowWidth = useWindowWidth();
     const isMobileWidth = innerWindowWidth < 550;
     const isTabletWidth = innerWindowWidth < 810;
-    const { filteredTrainings, activeTrainings } = useUserTrainingsSelector();
+    const { filteredTrainings, activeTrainings, allowedTrainingsList } = useUserTrainingsSelector();
     const lastWeekDays = createLastWeekData();
-    const trainingsForChart = getFilteredTrainingsByName(filteredTrainings, activeTrainings);
+    const allowedListObject = transformAllowedTrainingsToObject(allowedTrainingsList);
+    const trainingsForChart = getFilteredTrainingsByName(
+        filteredTrainings,
+        activeTrainings,
+        allowedListObject,
+    );
 
     const chartData = lastWeekDays.map((date) => ({
         date,

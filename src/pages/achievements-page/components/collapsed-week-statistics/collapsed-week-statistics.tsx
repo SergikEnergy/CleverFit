@@ -7,6 +7,7 @@ import { useUserTrainingsSelector } from '@redux/selectors';
 import { WEEK_DAYS } from '@utils/constants/week-days';
 import { createLastMonth } from '@utils/create-last-period-data';
 import { getFilteredTrainingsByName } from '@utils/get-filtered-trainings-by-name';
+import { transformAllowedTrainingsToObject } from '@utils/transform-allowed-trainings-to-object';
 import { Button } from 'antd';
 
 import classes from './collapsed-week-statistics.module.css';
@@ -19,7 +20,8 @@ const DAY_IN_WEEK = 7;
 
 export const CollapsedWeekStatistics: FC<CollapsedWeekStatisticsPropsType> = ({ indexWeek }) => {
     const innerWindowWidth = useWindowWidth();
-    const { filteredTrainings, activeTrainings } = useUserTrainingsSelector();
+    const { filteredTrainings, activeTrainings, allowedTrainingsList } = useUserTrainingsSelector();
+    const allowedListObject = transformAllowedTrainingsToObject(allowedTrainingsList);
     const firstChanging = useRef(true);
     const isMobileWidth = innerWindowWidth < 550;
     const [isCollapsed, setIsCollapsed] = useState(isMobileWidth);
@@ -33,7 +35,11 @@ export const CollapsedWeekStatistics: FC<CollapsedWeekStatisticsPropsType> = ({ 
         indexedWeekData[indexedWeekData.length - 1],
     ];
 
-    const trainingsForList = getFilteredTrainingsByName(filteredTrainings, activeTrainings);
+    const trainingsForList = getFilteredTrainingsByName(
+        filteredTrainings,
+        activeTrainings,
+        allowedListObject,
+    );
 
     const listDifficulties = indexedWeekData.map((day, index) => ({
         key: `${day}`,
@@ -42,12 +48,13 @@ export const CollapsedWeekStatistics: FC<CollapsedWeekStatisticsPropsType> = ({ 
     }));
 
     useEffect(() => {
-        if (isMobileWidth && firstChanging.current) {
+        console.log(isMobileWidth, 'USE_EFFECT-window-width-worked');
+        if (innerWindowWidth < 550 && firstChanging.current) {
             setIsCollapsed(true);
             firstChanging.current = false;
         }
-        if (!isMobileWidth) setIsCollapsed(false);
-    }, [isMobileWidth]);
+        if (innerWindowWidth > 550) setIsCollapsed(false);
+    }, [innerWindowWidth, isMobileWidth]);
 
     const toggleCollapsed = () => setIsCollapsed((prev) => !prev);
 

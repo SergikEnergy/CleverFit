@@ -5,6 +5,7 @@ import { useWindowWidth } from '@hooks/use-window-size';
 import { useUserTrainingsSelector } from '@redux/selectors';
 import { createLastMonth } from '@utils/create-last-period-data';
 import { getFilteredTrainingsByName } from '@utils/get-filtered-trainings-by-name';
+import { transformAllowedTrainingsToObject } from '@utils/transform-allowed-trainings-to-object';
 
 import classes from './chart-column-month.module.css';
 
@@ -12,9 +13,14 @@ export const ChartColumnMonth: FC = () => {
     const innerWindowWidth = useWindowWidth();
     const isMobileWidth = innerWindowWidth < 550;
     const isTabletWidth = innerWindowWidth < 810;
-    const { filteredTrainings, activeTrainings } = useUserTrainingsSelector();
+    const { filteredTrainings, activeTrainings, allowedTrainingsList } = useUserTrainingsSelector();
     const lastMonthDays = createLastMonth();
-    const trainingsForChart = getFilteredTrainingsByName(filteredTrainings, activeTrainings);
+    const allowedListObject = transformAllowedTrainingsToObject(allowedTrainingsList);
+    const trainingsForChart = getFilteredTrainingsByName(
+        filteredTrainings,
+        activeTrainings,
+        allowedListObject,
+    );
 
     const chartData = lastMonthDays.map((date) => ({
         date,
@@ -46,7 +52,6 @@ export const ChartColumnMonth: FC = () => {
                 titleSpacing: isMobileWidth ? 6 : 14,
                 titlePosition: 'bottom',
                 titleFontSize: isMobileWidth ? 12 : 14,
-                // labelSpacing: isMobileWidth ? 6 : 14,
                 label: {
                     style: {
                         textAlign: 'center',

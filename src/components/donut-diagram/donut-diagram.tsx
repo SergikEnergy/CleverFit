@@ -3,14 +3,20 @@ import { Datum, Pie, PieConfig } from '@ant-design/charts';
 import { useWindowWidth } from '@hooks/use-window-size';
 import { useUserTrainingsSelector } from '@redux/selectors';
 import { getFilteredTrainingsByName } from '@utils/get-filtered-trainings-by-name';
+import { transformAllowedTrainingsToObject } from '@utils/transform-allowed-trainings-to-object';
 
 import { createDataForDiagram } from './donut-diagram.utils';
 
 export const DonutDiagram: FC = () => {
     const innerWindowWidth = useWindowWidth();
     const isMobileWidth = innerWindowWidth < 500;
-    const { filteredTrainings, activeTrainings } = useUserTrainingsSelector();
-    const trainingsForDiagram = getFilteredTrainingsByName(filteredTrainings, activeTrainings);
+    const { filteredTrainings, activeTrainings, allowedTrainingsList } = useUserTrainingsSelector();
+    const allowedListObject = transformAllowedTrainingsToObject(allowedTrainingsList);
+    const trainingsForDiagram = getFilteredTrainingsByName(
+        filteredTrainings,
+        activeTrainings,
+        allowedListObject,
+    );
 
     const dataForDiagram = createDataForDiagram(trainingsForDiagram);
 
