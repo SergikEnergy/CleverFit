@@ -27,7 +27,7 @@ export const createDataForDiagram = (trainings: TrainingsResponseType[]) => {
 
     for (let i = 0; i < entries.length; i++) {
         const [key, value] = entries[i];
-        const roundedQuantity = Math.round((100 * value) / summaryValues);
+        const roundedQuantity = Math.round((value * 100) / summaryValues);
         const firstLetterCapitalizedKey = key.charAt(0).toUpperCase() + key.substring(1);
 
         dataForDiagram.push({ type: firstLetterCapitalizedKey, percentage: roundedQuantity });

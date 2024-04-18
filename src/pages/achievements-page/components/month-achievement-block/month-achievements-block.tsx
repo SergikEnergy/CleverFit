@@ -29,7 +29,7 @@ export const MonthAchievementsBlock: FC = () => {
                     <StatisticsTextBlock />
                     <div className={classes.diagram_list}>
                         <DonutDiagram />
-                        {/* <ListPopularExercises /> */}
+                        <ListPopularExercises period='month' />
                     </div>
                 </Fragment>
             )}

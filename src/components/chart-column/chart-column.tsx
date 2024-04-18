@@ -24,6 +24,10 @@ export const ChartColumn: FC = () => {
 
     const configWeek: ColumnConfig = {
         className: classes.chart,
+        tooltip: (_elem, index: number, data, column) => ({
+            name: 'Нагрузка',
+            value: `${column.y.value[index]} кг`,
+        }),
         data: chartData,
         xField: 'date',
         yField: 'weight',

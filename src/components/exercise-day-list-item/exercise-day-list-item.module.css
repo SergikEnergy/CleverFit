@@ -22,12 +22,13 @@
     font-weight: var(--font-weight-normal);
     line-height: var(--main-line-height);
     color: var(--character-light-secondary-45);
-    width: 50%;
+    width: 48%;
     text-align: left;
 }
 
 .data {
     display: inline-block;
+    flex-grow: 1;
     font-family: var(--main-font-family);
     font-size: var(--font-size-main);
     font-weight: var(--font-weight-message);

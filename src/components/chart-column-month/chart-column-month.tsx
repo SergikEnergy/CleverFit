@@ -24,38 +24,46 @@ export const ChartColumnMonth: FC = () => {
     const configMonth: ColumnConfig = {
         className: classes.chart,
         data: chartData,
+        autoFit: true,
         xField: 'date',
         yField: 'weight',
         style: {
             fill: '#85A5FFFF',
+            width: 30,
         },
-        height: isMobileWidth ? 236 : 374,
+        height: isMobileWidth ? 240 : 374,
+        tooltip: (_elem, index: number, data, column) => ({
+            name: 'Нагрузка',
+            value: `${column.y.value[index]} кг`,
+        }),
         axis: {
             x: {
+                labelAutoRotate: false,
+                labelAutoHide: false,
+                labelLineWidth: isMobileWidth ? 12 : 15,
                 tick: false,
                 title: 'Нагрузка, кг',
-                titleSpacing: isMobileWidth ? 8 : 16,
+                titleSpacing: isMobileWidth ? 6 : 14,
                 titlePosition: 'bottom',
                 titleFontSize: isMobileWidth ? 12 : 14,
-                labelSpacing: isMobileWidth ? 8 : 16,
+                // labelSpacing: isMobileWidth ? 6 : 14,
                 label: {
-                    autoRotate: false,
                     style: {
                         textAlign: 'center',
+                        fontSize: isMobileWidth ? 12 : 14,
                     },
                 },
             },
             y: {
-                fontSize: 1,
                 labelSpacing: isMobileWidth ? 8 : 16,
                 tick: false,
                 labelFormatter: (val: number) => `${val} кг`,
             },
         },
         scrollbar: {
-            x: { ratio: isMobileWidth ? 0.5 : 0.65 },
+            x: { ratio: isTabletWidth ? 0.15 : 0.5 },
         },
-        sizeField: (isMobileWidth && 15) || (isTabletWidth && 20) || 25,
+        sizeField: (isMobileWidth && 16) || (isTabletWidth && 20) || 25,
     };
 
     return <Column {...configMonth} />;
