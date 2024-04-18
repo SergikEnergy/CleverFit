@@ -19,8 +19,6 @@ import { RandomPartnersBlock } from '../random-partners-block';
 import { SimilarPartnersBlock } from '../similar-partners-block';
 import { UserMessagesBlock } from '../user-messages-block/user-messages-block';
 
-import classes from './together-trainings-content.module.css';
-
 export const TogetherTrainingsContent: FC = () => {
     const dispatch = useAppDispatch();
     const { data: randomPartners, isSuccess } = useGetAllRandomPartnersQuery();
@@ -49,7 +47,7 @@ export const TogetherTrainingsContent: FC = () => {
     }, [dispatch, isSuccessFetchedAllPartners, allUserPartners]);
 
     return (
-        <div className={classes.content}>
+        <div>
             {togetherMode === 'user' && userInvitations.length > 0 && <UserMessagesBlock />}
             {togetherMode === 'user' && (
                 <BaseLayoutTogether>

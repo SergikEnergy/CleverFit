@@ -8,8 +8,6 @@ import { useCollapseContext } from '../../../../react-contexts';
 import { EmptyPartnersBlock } from '../empty-partners-block';
 import { PartnersCards } from '../partners-cards';
 
-import classes from './random-partners-block.module.css';
-
 export const RandomPartnersBlock: FC = () => {
     const { randomPartners } = usePartnersSelector();
     const [currentPage, setCurrentPage] = useState(1);
@@ -42,12 +40,11 @@ export const RandomPartnersBlock: FC = () => {
     }
 
     return (
-        <div className={classes.wrapper}>
+        <div>
             <SearchByNameBlock action={() => {}} changeSelection={changeSelection} />
             <PartnersCards partners={currentPartners} selectedPhrase={selectedName} />
             <Pagination
                 style={{ textAlign: 'left', marginTop: 16 }}
-                className={classes.pagination}
                 current={currentPage}
                 pageSize={pageSize}
                 total={filteredPartners.length}

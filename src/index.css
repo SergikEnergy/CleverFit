@@ -220,8 +220,8 @@ body {
 
     --modal-box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.15);
     --card-main-page-box-shadow: 0 2px 0 0 rgba(0, 0, 0, 0.04);
-    --trainings-buttons-shadow: 0px 1px 0px 0px #f0f0f0 inset;
-    --card-achievements-mobile-shadow: 0px 2px 8px 0px #00000026;
+    --trainings-buttons-shadow: 0 1px 0 0 #f0f0f0 inset;
+    --card-achievements-mobile-shadow: 0 2px 8px 0 #00000026;
 
     /* sizes */
     --table-trainings-desktop-width: 555px;

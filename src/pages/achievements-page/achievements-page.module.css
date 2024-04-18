@@ -34,11 +34,11 @@
 
 .achievements {
     scrollbar-width: thin;
-    scrollbar-color: #bbbbbb #ebebeb;
+    scrollbar-color: #bbb #ebebeb;
 }
 
 .achievements::-moz-scrollbar-thumb {
-    background-color: #cccccc;
+    background-color: #ccc;
     border-radius: 4px;
 }
 
