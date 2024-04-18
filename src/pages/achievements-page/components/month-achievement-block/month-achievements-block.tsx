@@ -22,12 +22,11 @@ export const MonthAchievementsBlock: FC = () => {
         activeTrainings,
         allowedListObject,
     );
-    const isNotFoundShowed = filteredTrainingsByName.length === 0;
 
     return (
         <div className={classes.wrapper}>
             <TagsFilterBlock />
-            {!isNotFoundShowed && (
+            {filteredTrainingsByName.length !== 0 && (
                 <Fragment>
                     <ChartColumnMonth />
                     <WeeksStatisticsBlock />
@@ -39,7 +38,7 @@ export const MonthAchievementsBlock: FC = () => {
                     </div>
                 </Fragment>
             )}
-            {isNotFoundShowed && <NotFoundTrainingPerPeriod />}
+            {filteredTrainingsByName.length === 0 && <NotFoundTrainingPerPeriod />}
         </div>
     );
 };

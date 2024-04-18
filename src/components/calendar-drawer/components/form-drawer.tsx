@@ -32,7 +32,6 @@ export const FormDrawer = forwardRef<HTMLButtonElement, FormDrawerPropsType>(
                 : [emptyFields];
 
         const finishFunc = (values: FormFieldsType) => {
-            console.log(values, 'values');
             finishFormHandler(values, trainName, setExercises);
             form.resetFields();
         };

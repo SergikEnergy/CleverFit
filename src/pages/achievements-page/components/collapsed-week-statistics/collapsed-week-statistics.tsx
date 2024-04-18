@@ -48,7 +48,6 @@ export const CollapsedWeekStatistics: FC<CollapsedWeekStatisticsPropsType> = ({ 
     }));
 
     useEffect(() => {
-        console.log(isMobileWidth, 'USE_EFFECT-window-width-worked');
         if (innerWindowWidth < 550 && firstChanging.current) {
             setIsCollapsed(true);
             firstChanging.current = false;

@@ -16,7 +16,7 @@ export const getTrainingsDifficulty = (
             let sum = acc;
 
             const approaches =
-                !exercise.approaches && exercise.approaches !== 0 ? 1 : exercise.approaches;
+                !exercise.approaches && exercise.approaches !== 0 ? 0 : exercise.approaches;
             const weight = exercise.weight ? exercise.weight : 0;
             const replays = exercise.replays ? exercise.replays : 0;
 
