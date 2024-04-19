@@ -1,5 +1,5 @@
-import { defaultAllTrainingKey } from '@components/tags-filter-block/tags-default.data';
 import { TrainingsResponseType } from '@redux/api/api-types';
+import { defaultAllTrainingKey } from '@redux/reducers/trainings-slice';
 
 export const getFilteredTrainingsByName = (
     trainings: TrainingsResponseType[],

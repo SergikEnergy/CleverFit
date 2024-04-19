@@ -1,5 +1,5 @@
 import { FC } from 'react';
-import { defaultAllTrainingKey } from '@components/tags-filter-block/tags-default.data';
+import { defaultAllTrainingKey } from '@redux/reducers/trainings-slice';
 import { useUserTrainingsSelector } from '@redux/selectors';
 import { dummyAllowedTrainingsAccusative } from '@utils/constants/allowed-trainings';
 import { getFilteredTrainingsByName } from '@utils/get-filtered-trainings-by-name';

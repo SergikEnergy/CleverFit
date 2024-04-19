@@ -1,6 +1,5 @@
 import { AllowedTrainResponseType } from '@redux/api/api-types';
-
-export const defaultAllTrainingKey = 'all';
+import { defaultAllTrainingKey } from '@redux/reducers/trainings-slice';
 
 export const defaultTagsData: AllowedTrainResponseType[] = [
     {

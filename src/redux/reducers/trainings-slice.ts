@@ -1,4 +1,3 @@
-import { defaultAllTrainingKey } from '@components/tags-filter-block/tags-default.data';
 import { AllowedTrainResponseType, TrainingsResponseType } from '@redux/api/api-types';
 import type { PayloadAction } from '@reduxjs/toolkit';
 import { createSlice, current } from '@reduxjs/toolkit';
@@ -7,6 +6,7 @@ import { dateFullStringFormat } from '@utils/constants/date-formats';
 import moment from 'moment';
 
 export type FilterPeriodType = 'week' | 'month';
+export const defaultAllTrainingKey = 'all';
 
 type UserTrainingsPropsType = {
     userTrainings: TrainingsResponseType[];
