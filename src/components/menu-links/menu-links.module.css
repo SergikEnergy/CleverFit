@@ -30,6 +30,11 @@
 }
 
 @media screen and (max-width: 780px) {
+    :global(li.ant-menu-item),
+    .menu__item {
+        padding-left: var(--padding-small-size) !important;
+    }
+
     .menu__item_icon.antFixed {
         display: none;
     }
@@ -48,12 +53,14 @@
     .antFixed li.menu__item {
         margin-left: 3px;
     }
+    .menu__item {
+        padding-left: var(--padding-zero) !important;
+    }
 }
 
 @media screen and (max-width: 500px) {
     :global(li.ant-menu-item),
     .menu__item {
-        padding-left: var(--padding-zero) !important;
         justify-content: flex-start;
         align-self: flex-start;
         text-align: left;

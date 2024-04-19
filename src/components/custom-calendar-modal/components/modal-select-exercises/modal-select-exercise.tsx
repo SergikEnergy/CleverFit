@@ -1,4 +1,4 @@
-import { FC, Fragment, useEffect, useState } from 'react';
+import { FC, Fragment, useEffect, useState, useRef } from 'react';
 import { ArrowLeftOutlined } from '@ant-design/icons';
 import { Divider, Empty, Select } from 'antd';
 import moment from 'moment';
@@ -32,16 +32,16 @@ export const ModalSelectExercise: FC<ModalSelectExercisePropsType> = ({
         openDrawer,
         setExercises,
     } = useCalendarTrainingsDrawerContext();
-
+    const firstRender = useRef(true);
     const isPastDate = date.isSameOrBefore(moment());
     const [isEditDisabled, setIsEditDisabled] = useState(false);
     const [trainSelect, setTrainSelect] = useState(trainForEdit.length > 0 ? trainForEdit : '');
 
     useEffect(() => {
-        if (date) {
+        if (date && firstRender.current) {
             updateDate(date);
         }
-        if (trainForEdit && trains.length > 0) {
+        if (trainForEdit && trains.length > 0 && firstRender.current) {
             const trainsOnThisDate = trains.filter((elem) => elem.name === trainForEdit);
 
             if (Array.isArray(trainsOnThisDate) && trainsOnThisDate.length > 0) {
@@ -49,6 +49,7 @@ export const ModalSelectExercise: FC<ModalSelectExercisePropsType> = ({
                 setIsEditDisabled(trainsOnThisDate[0].isImplementation ?? false);
             }
         }
+        firstRender.current = false;
     }, [trainForEdit, trains, date, updateDate, setExercises]);
 
     const onSelectChange = (value: string) => {

@@ -42,6 +42,12 @@ header.trainings-header {
     height: 96px;
 }
 
+@media screen and (max-width: 1200px) {
+    .wrapper {
+        width: 94.5%;
+    }
+}
+
 @media screen and (max-width: 834px) {
     header.header {
         height: 194px;
@@ -60,6 +66,9 @@ header.trainings-header {
     header.header.collapsed {
         height: 132px;
         min-height: 100px;
+    }
+    .wrapper {
+        width: 96.2%;
     }
 }
 

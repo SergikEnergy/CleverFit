@@ -18,9 +18,18 @@
     right: -29%;
 }
 
+@media screen and (max-width: 800px) {
+    .collapsed {
+        right: -20px;
+    }
+    .switcher {
+        right: -18px;
+    }
+}
+
 @media screen and (max-width: 710px) {
     .switcher {
-        right: -18%;
+        right: -18px;
     }
     .collapsed {
         right: -20px;
@@ -31,7 +40,7 @@
     .switcher {
         width: 32px;
         height: 48px;
-        right: -29%;
+        right: -30px;
         top: 9.5%;
     }
     .collapsed {
@@ -41,7 +50,7 @@
 
 @media screen and (max-width: 400px) {
     .switcher {
-        right: -16%;
+        right: -16px;
         top: 9.5%;
     }
     .collapsed {
